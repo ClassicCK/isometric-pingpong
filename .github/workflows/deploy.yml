@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,74 +42,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build-and-deploy
+    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-```
-
-4. Click **Commit changes** → **Commit changes**
-
-### Step 6: Enable GitHub Pages
-
-1. In your repository, click **Settings** (top menu)
-2. In the left sidebar, scroll down and click **Pages**
-3. Under "Build and deployment":
-   - **Source**: Select **GitHub Actions** from the dropdown
-4. That's it! No need to click save, it's automatic.
-
-### Step 7: Watch the Deployment
-
-1. Click on the **Actions** tab (top of your repository)
-2. You should see a workflow running called "Deploy to GitHub Pages"
-3. Click on it to watch the progress
-4. It will take 2-3 minutes to complete
-5. When it's done, you'll see a green checkmark ✅
-
-### Step 8: Find Your Site URL
-
-1. Go back to **Settings** → **Pages**
-2. At the top, you'll see: **"Your site is live at https://YOUR_USERNAME.github.io/isometric-pingpong/"**
-3. Click that link!
-
-### Step 9: Create Personal Access Token (For Data Writing)
-
-For the app to write data back to GitHub:
-
-1. Click your profile picture (top right) → **Settings**
-2. Scroll down to **Developer settings** (bottom of left sidebar)
-3. Click **Personal access tokens** → **Tokens (classic)**
-4. Click **Generate new token** → **Generate new token (classic)**
-5. Note: "Isometric Ping Pong Data"
-6. Expiration: Choose "No expiration" or "1 year"
-7. Select scopes:
-   - ✅ Check **repo** (this checks all sub-items)
-8. Scroll down and click **Generate token**
-9. **COPY THE TOKEN** - you won't be able to see it again!
-
-### Step 10: Add Token as Repository Secret
-
-1. Go back to your repository `isometric-pingpong`
-2. Click **Settings** → **Secrets and variables** → **Actions**
-3. Click **New repository secret**
-4. Name: `GH_TOKEN`
-5. Secret: Paste your token
-6. Click **Add secret**
-
-## Your File Structure Should Look Like:
-```
-isometric-pingpong/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml
-├── data/
-│   └── pingpong.json
-├── src/
-│   ├── App.jsx
-│   └── main.jsx
-├── .gitignore
-├── index.html
-├── package.json
-├── README.md
-└── vite.config.js
