@@ -75,6 +75,29 @@ const OFFICES = ['NYC', 'LON'];
 const LS_PLAYERS = 'pingpong:players_v4';
 const LS_MATCHES = 'pingpong:matches_v4';
 
+// ---- Bracket sizing constants (must match Region widths) ----
+const BRACKET = {
+  W_R64: 260,
+  W_R32: 160,
+  W_S16: 160,
+  W_E8: 160,
+  GAP: 18,
+  CENTER_W: 420,
+  GRID_GAP: 56,
+  UNIT_H: 16, // must match Region's UNIT_H
+  ROWS: 32
+};
+
+const REGION_W =
+  BRACKET.W_R64 + BRACKET.W_R32 + BRACKET.W_S16 + BRACKET.W_E8 + (BRACKET.GAP * 3);
+
+const BRACKET_W =
+  (REGION_W * 2) + BRACKET.CENTER_W + (BRACKET.GRID_GAP * 2);
+
+const REGION_GRID_H = BRACKET.ROWS * BRACKET.UNIT_H;
+const REGION_TOP_EXTRA = 74; // title + column headers allowance (tuned)
+const REGION_SLOT_H = REGION_GRID_H + REGION_TOP_EXTRA;
+
 // ------------------------
 // Probability Cell
 // ------------------------
@@ -241,8 +264,8 @@ function Region({ regionName, players, flip = false }) {
   }
 
   // 32-row grid = "half rows" for perfect centering
-  const ROWS = 32;
-  const UNIT_H = 16; // tweak if desired
+  const ROWS = BRACKET.ROWS;
+  const UNIT_H = BRACKET.UNIT_H; // keep in sync with BRACKET constants
   const gridStyle = { gridTemplateRows: `repeat(${ROWS}, ${UNIT_H}px)` };
 
   // placements: start row + span
@@ -250,13 +273,6 @@ function Region({ regionName, players, flip = false }) {
   const r32Starts = [1, 9, 17, 25];                // span 8
   const s16Starts = [1, 17];                       // span 16
   const e8Starts = [1];                            // span 32
-
-  // Fixed widths to prevent horizontal "stretch"
-  const W_R64 = 260;
-  const W_R32 = 160;
-  const W_S16 = 160;
-  const W_E8  = 160;
-  const GAP = 18;
 
   const Cell = ({ rowStart, rowSpan, children }) => (
     <div style={{ gridRow: `${rowStart} / span ${rowSpan}` }} className="h-full flex items-center">
@@ -284,8 +300,8 @@ function Region({ regionName, players, flip = false }) {
         {regionName}
       </h3>
 
-      <div className={`flex ${flip ? 'flex-row-reverse' : ''}`} style={{ gap: GAP }}>
-        <RoundColumn title="Round of 64" width={W_R64}>
+      <div className={`flex ${flip ? 'flex-row-reverse' : ''}`} style={{ gap: BRACKET.GAP }}>
+        <RoundColumn title="Round of 64" width={BRACKET.W_R64}>
           {round64.map((m, i) => (
             <Cell key={i} rowStart={r64Starts[i]} rowSpan={4}>
               <Matchup
@@ -300,7 +316,7 @@ function Region({ regionName, players, flip = false }) {
           ))}
         </RoundColumn>
 
-        <RoundColumn title="Round of 32" width={W_R32}>
+        <RoundColumn title="Round of 32" width={BRACKET.W_R32}>
           {r32Starts.map((start, i) => (
             <Cell key={i} rowStart={start} rowSpan={8}>
               <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
@@ -308,7 +324,7 @@ function Region({ regionName, players, flip = false }) {
           ))}
         </RoundColumn>
 
-        <RoundColumn title="Sweet 16" width={W_S16}>
+        <RoundColumn title="Sweet 16" width={BRACKET.W_S16}>
           {s16Starts.map((start, i) => (
             <Cell key={i} rowStart={start} rowSpan={16}>
               <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
@@ -316,7 +332,7 @@ function Region({ regionName, players, flip = false }) {
           ))}
         </RoundColumn>
 
-        <RoundColumn title="Elite 8" width={W_E8}>
+        <RoundColumn title="Elite 8" width={BRACKET.W_E8}>
           {e8Starts.map((start, i) => (
             <Cell key={i} rowStart={start} rowSpan={32}>
               <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
@@ -361,6 +377,20 @@ export default function PingPongELO() {
     loadDataLocal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // IMPORTANT: hooks must be top-level. This keeps bracket scaling stable.
+  useEffect(() => {
+    if (currentView !== 'bracket') return;
+
+    const onResize = () => {
+      const available = Math.max(320, window.innerWidth - 64);
+      setBracketScale(Math.min(1, available / BRACKET_W));
+    };
+
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [currentView]);
 
   const loadDataLocal = async () => {
     try {
@@ -656,9 +686,6 @@ export default function PingPongELO() {
     </th>
   );
 
-  // ------------------------
-  // Loading
-  // ------------------------
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
@@ -722,31 +749,6 @@ export default function PingPongELO() {
     const region3 = makeRegion(top64.slice(32, 48));
     const region4 = makeRegion(top64.slice(48, 64));
 
-    // ---- Fixed widths (match Region component) ----
-    const W_R64 = 260, W_R32 = 160, W_S16 = 160, W_E8 = 160, GAP = 18;
-    const REGION_W = W_R64 + W_R32 + W_S16 + W_E8 + (GAP * 3);
-
-    const CENTER_W = 420;
-    const GRID_GAP = 56;
-    const BRACKET_W = (REGION_W * 2) + CENTER_W + (GRID_GAP * 2);
-
-    // Center vertical sizing (based on region grid: 32 * 16 = 512)
-    // This doesn't have to be perfect; it keeps Final Four visually centered in each half.
-    const REGION_GRID_H = 32 * 16; // must match UNIT_H in Region
-    const REGION_TOP_EXTRA = 74;   // title + column headers spacing (tuned)
-    const REGION_SLOT_H = REGION_GRID_H + REGION_TOP_EXTRA;
-
-    useEffect(() => {
-      const onResize = () => {
-        const available = Math.max(320, window.innerWidth - 64);
-        setBracketScale(Math.min(1, available / BRACKET_W));
-      };
-      onResize();
-      window.addEventListener('resize', onResize);
-      return () => window.removeEventListener('resize', onResize);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [BRACKET_W]);
-
     return (
       <div className="min-h-screen bg-white">
         <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -792,8 +794,8 @@ export default function PingPongELO() {
               <div
                 className="grid items-start"
                 style={{
-                  gridTemplateColumns: `${REGION_W}px ${CENTER_W}px ${REGION_W}px`,
-                  columnGap: GRID_GAP
+                  gridTemplateColumns: `${REGION_W}px ${BRACKET.CENTER_W}px ${REGION_W}px`,
+                  columnGap: BRACKET.GRID_GAP
                 }}
               >
                 {/* LEFT */}
@@ -1014,41 +1016,6 @@ export default function PingPongELO() {
           </table>
         </div>
 
-        {/* Recent Matches */}
-        {matches.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'sans-serif' }}>Recent Matches</h2>
-            <div className="space-y-3">
-              {matches.slice(0, 15).map((match) => (
-                <div key={match.id} className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded">
-                  <div className="flex items-center gap-3" style={{ fontFamily: 'sans-serif' }}>
-                    <span className="text-sm text-gray-500">{formatDate(match.timestamp)}</span>
-                    <span className="font-semibold text-gray-900">{match.winner}</span>
-                    {match.winnerScore !== null && match.loserScore !== null && (
-                      <span className="text-gray-600">({match.winnerScore}-{match.loserScore})</span>
-                    )}
-                    <span className="text-gray-500">def.</span>
-                    <span className="text-gray-700">{match.loser}</span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <span className="text-sm text-green-600 font-semibold">+{match.winnerEloChange}</span>
-                    <span className="text-sm text-red-600 font-semibold">{match.loserEloChange}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Footer */}
-      <div className="border-t border-gray-200 mt-20">
-        <div className="max-w-7xl mx-auto px-8 py-8">
-          <div className="text-sm text-gray-500" style={{ fontFamily: 'sans-serif' }}>
-            <p>Isometric Ping Pong ELO System</p>
-            <p className="mt-1">© 2026 Isometric</p>
-          </div>
-        </div>
       </div>
 
       {/* Sidebar */}
@@ -1132,55 +1099,6 @@ export default function PingPongELO() {
                       </option>
                     ))}
                   </select>
-                </div>
-
-                <div className="border-t border-gray-200 pt-4">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>
-                    Score (Optional)
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-xs text-gray-500 mb-1">Winner Score</label>
-                      <input
-                        type="number"
-                        min="0"
-                        value={winnerScore}
-                        onChange={(e) => setWinnerScore(e.target.value)}
-                        placeholder="21"
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
-                        style={{ fontFamily: 'sans-serif' }}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs text-gray-500 mb-1">Loser Score</label>
-                      <input
-                        type="number"
-                        min="0"
-                        value={loserScore}
-                        onChange={(e) => setLoserScore(e.target.value)}
-                        placeholder="19"
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
-                        style={{ fontFamily: 'sans-serif' }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-t border-gray-200 pt-4">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>
-                    Match Date (Optional)
-                  </label>
-                  <input
-                    type="date"
-                    value={matchDate}
-                    onChange={(e) => setMatchDate(e.target.value)}
-                    max={new Date().toISOString().split('T')[0]}
-                    className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
-                    style={{ fontFamily: 'sans-serif' }}
-                  />
-                  <p className="text-xs text-gray-500 mt-2">
-                    Leave blank to use today's date. Use this to add past matches.
-                  </p>
                 </div>
 
                 <button
