@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { X, ChevronUp, ChevronDown, Edit2, ArrowLeft, KeyRound, Settings2 } from 'lucide-react';
+import { X, ChevronUp, ChevronDown, Edit2, ArrowLeft } from 'lucide-react';
 
 // All countries with their ISO codes for flat flags
 const COUNTRIES = [
@@ -72,20 +72,12 @@ const COUNTRIES = [
 
 const OFFICES = ['NYC', 'LON'];
 
-// GitHub configuration
-const GITHUB_CONFIG = {
-  owner: 'ClassicCK',
-  repo: 'isometric-pingpong',
-  branch: 'main',
-  filePath: 'data/pingpong.json'
-};
-
-// Local storage keys
 const LS_PLAYERS = 'pingpong:players_v4';
 const LS_MATCHES = 'pingpong:matches_v4';
-const LS_GH_TOKEN = 'pingpong:github_token';
 
-// Probability Cell Component
+// ------------------------
+// Probability Cell
+// ------------------------
 function ProbabilityCell({ probability }) {
   const getBackgroundColor = (prob) => {
     if (prob === 0) return '#ffffff';
@@ -132,7 +124,9 @@ function ProbabilityCell({ probability }) {
   );
 }
 
-// Bracket Player Component
+// ------------------------
+// Bracket Player
+// ------------------------
 function BracketPlayer({ player, seed, probability, showProbability = true }) {
   if (!player) {
     return (
@@ -178,7 +172,7 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
 
   return (
     <div
-      className="flex items-center justify-between h-8 px-2 border border-gray-300 relative"
+      className="flex items-center justify-between h-8 px-2 border border-gray-300"
       style={{ backgroundColor: bgColor }}
     >
       <div className="flex items-center gap-2 flex-1 min-w-0" style={{ color: textColor }}>
@@ -203,7 +197,9 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
   );
 }
 
-// Matchup Component
+// ------------------------
+// Matchup
+// ------------------------
 function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability = true }) {
   return (
     <div className="relative">
@@ -214,20 +210,24 @@ function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability
   );
 }
 
-// Region Component (true March Madness seeding)
+// ------------------------
+// Region (Aligned + Fixed Widths)
+// 32-row grid fixes half-row centering drift.
+// Fixed widths fix horizontal stretching.
+// ------------------------
 function Region({ regionName, players, flip = false }) {
   const playerArray = Array.isArray(players) ? players : [];
 
-  // Standard 16-team bracket seeding order
+  // March Madness seed pairing order
   const SEED_ORDER = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
 
-  // Map players by seed 1..16
+  // Map players by regional seed 1..16
   const bySeed = Array.from({ length: 17 }, () => null);
   for (const p of playerArray) {
     if (p?.seed >= 1 && p?.seed <= 16) bySeed[p.seed] = p;
   }
 
-  // First round matchups in proper order
+  // Round of 64 matchups in bracket order
   const round64 = [];
   for (let i = 0; i < SEED_ORDER.length; i += 2) {
     const s1 = SEED_ORDER[i];
@@ -240,19 +240,23 @@ function Region({ regionName, players, flip = false }) {
     });
   }
 
-  // ---- 32-row grid (half-rows) ----
-  // Think of it as: each "team line" is 2 rows.
-  // So a 2-team matchup spans 4 rows.
+  // 32-row grid = "half rows" for perfect centering
   const ROWS = 32;
-  const UNIT_H = 16; // adjust slightly if you want tighter/looser vertical spacing
-
+  const UNIT_H = 16; // tweak if desired
   const gridStyle = { gridTemplateRows: `repeat(${ROWS}, ${UNIT_H}px)` };
 
-  // Placement (start row, span) for each round
-  const r64Starts = [1, 5, 9, 13, 17, 21, 25, 29];   // span 4
-  const r32Starts = [1, 9, 17, 25];                 // span 8
-  const s16Starts = [1, 17];                        // span 16
-  const e8Starts = [1];                             // span 32
+  // placements: start row + span
+  const r64Starts = [1, 5, 9, 13, 17, 21, 25, 29]; // span 4
+  const r32Starts = [1, 9, 17, 25];                // span 8
+  const s16Starts = [1, 17];                       // span 16
+  const e8Starts = [1];                            // span 32
+
+  // Fixed widths to prevent horizontal "stretch"
+  const W_R64 = 260;
+  const W_R32 = 160;
+  const W_S16 = 160;
+  const W_E8  = 160;
+  const GAP = 18;
 
   const Cell = ({ rowStart, rowSpan, children }) => (
     <div style={{ gridRow: `${rowStart} / span ${rowSpan}` }} className="h-full flex items-center">
@@ -260,8 +264,8 @@ function Region({ regionName, players, flip = false }) {
     </div>
   );
 
-  const RoundColumn = ({ title, children }) => (
-    <div className="flex-1 min-w-0">
+  const RoundColumn = ({ title, width, children }) => (
+    <div className="flex-none" style={{ width }}>
       <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
         {title}
       </div>
@@ -280,9 +284,8 @@ function Region({ regionName, players, flip = false }) {
         {regionName}
       </h3>
 
-      <div className={`flex gap-6 ${flip ? 'flex-row-reverse' : ''}`}>
-        {/* Round of 64 */}
-        <RoundColumn title="Round of 64">
+      <div className={`flex ${flip ? 'flex-row-reverse' : ''}`} style={{ gap: GAP }}>
+        <RoundColumn title="Round of 64" width={W_R64}>
           {round64.map((m, i) => (
             <Cell key={i} rowStart={r64Starts[i]} rowSpan={4}>
               <Matchup
@@ -297,8 +300,7 @@ function Region({ regionName, players, flip = false }) {
           ))}
         </RoundColumn>
 
-        {/* Round of 32 */}
-        <RoundColumn title="Round of 32">
+        <RoundColumn title="Round of 32" width={W_R32}>
           {r32Starts.map((start, i) => (
             <Cell key={i} rowStart={start} rowSpan={8}>
               <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
@@ -306,8 +308,7 @@ function Region({ regionName, players, flip = false }) {
           ))}
         </RoundColumn>
 
-        {/* Sweet 16 */}
-        <RoundColumn title="Sweet 16">
+        <RoundColumn title="Sweet 16" width={W_S16}>
           {s16Starts.map((start, i) => (
             <Cell key={i} rowStart={start} rowSpan={16}>
               <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
@@ -315,8 +316,7 @@ function Region({ regionName, players, flip = false }) {
           ))}
         </RoundColumn>
 
-        {/* Elite 8 */}
-        <RoundColumn title="Elite 8">
+        <RoundColumn title="Elite 8" width={W_E8}>
           {e8Starts.map((start, i) => (
             <Cell key={i} rowStart={start} rowSpan={32}>
               <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
@@ -331,7 +331,7 @@ function Region({ regionName, players, flip = false }) {
 export default function PingPongELO() {
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
-  const [currentView, setCurrentView] = useState('rankings'); // 'rankings' or 'bracket'
+  const [currentView, setCurrentView] = useState('rankings'); // 'rankings' | 'bracket'
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [selectedWinner, setSelectedWinner] = useState('');
@@ -345,163 +345,38 @@ export default function PingPongELO() {
   const [newPlayerCountry, setNewPlayerCountry] = useState('');
   const [newPlayerOffice, setNewPlayerOffice] = useState('');
 
-  const [activeTab, setActiveTab] = useState('match'); // match | player | edit | settings
+  const [activeTab, setActiveTab] = useState('match'); // match | player | edit
   const [sortColumn, setSortColumn] = useState('rank');
   const [sortDirection, setSortDirection] = useState('asc');
-
-  const [fileSha, setFileSha] = useState(null);
 
   const [editingPlayer, setEditingPlayer] = useState(null);
   const [editName, setEditName] = useState('');
   const [editCountry, setEditCountry] = useState('');
   const [editOffice, setEditOffice] = useState('');
 
-  // GitHub token stored locally (not in bundle)
-  const [githubToken, setGithubToken] = useState(() => localStorage.getItem(LS_GH_TOKEN) || '');
-  const [syncStatus, setSyncStatus] = useState({ ok: null, message: '' });
-
-  // Bracket scale so it fits on one page
+  // Bracket scale to fit viewport but never stretch larger than 1
   const [bracketScale, setBracketScale] = useState(1);
 
   useEffect(() => {
-    loadData();
+    loadDataLocal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (currentView !== 'bracket') return;
-
-    const BASE_WIDTH = 2100; // adjust if you want it larger/smaller
-    const onResize = () => {
-      const available = Math.max(320, window.innerWidth - 64);
-      setBracketScale(Math.min(1, available / BASE_WIDTH));
-    };
-
-    onResize();
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [currentView]);
-
-  const getAuthHeaders = () => {
-    const token = (githubToken || '').trim();
-    if (!token) return null;
-    return {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28'
-    };
-  };
-
-  const loadData = async () => {
+  const loadDataLocal = async () => {
     try {
       setLoading(true);
-
-      // Always try GitHub first (public read works without auth)
-      const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}?ref=${GITHUB_CONFIG.branch}`;
-      const response = await fetch(url);
-
-      if (response.ok) {
-        const fileData = await response.json();
-        setFileSha(fileData.sha);
-
-        const content = atob(fileData.content);
-        const data = JSON.parse(content);
-
-        const loadedPlayers = data.players || [];
-        const loadedMatches = data.matches || [];
-
-        setPlayers(loadedPlayers);
-        setMatches(loadedMatches);
-
-        // keep local mirror
-        localStorage.setItem(LS_PLAYERS, JSON.stringify(loadedPlayers));
-        localStorage.setItem(LS_MATCHES, JSON.stringify(loadedMatches));
-
-        setSyncStatus({ ok: true, message: 'Loaded from GitHub.' });
-        return;
-      }
-
-      // If GitHub load fails, fall back to local
       const localPlayers = localStorage.getItem(LS_PLAYERS);
       const localMatches = localStorage.getItem(LS_MATCHES);
-
       if (localPlayers) setPlayers(JSON.parse(localPlayers));
       if (localMatches) setMatches(JSON.parse(localMatches));
-
-      setSyncStatus({ ok: false, message: `GitHub load failed (${response.status}). Using local data.` });
-    } catch (error) {
-      console.error('Error loading data:', error);
-
-      const localPlayers = localStorage.getItem(LS_PLAYERS);
-      const localMatches = localStorage.getItem(LS_MATCHES);
-
-      if (localPlayers) setPlayers(JSON.parse(localPlayers));
-      if (localMatches) setMatches(JSON.parse(localMatches));
-
-      setSyncStatus({ ok: false, message: 'Load error. Using local data.' });
     } finally {
       setLoading(false);
     }
   };
 
-  const saveData = async (newPlayers, newMatches) => {
-    // Always save locally as a backup
+  const saveDataLocal = async (newPlayers, newMatches) => {
     localStorage.setItem(LS_PLAYERS, JSON.stringify(newPlayers));
     localStorage.setItem(LS_MATCHES, JSON.stringify(newMatches));
-
-    const authHeaders = getAuthHeaders();
-    if (!authHeaders) {
-      setSyncStatus({
-        ok: false,
-        message: 'Saved locally. Add a GitHub token in Settings to sync to GitHub.'
-      });
-      return;
-    }
-
-    try {
-      const data = {
-        players: newPlayers,
-        matches: newMatches,
-        lastUpdated: new Date().toISOString()
-      };
-
-      const content = btoa(JSON.stringify(data, null, 2));
-
-      const body = {
-        message: `Update ping pong data - ${new Date().toLocaleString()}`,
-        content,
-        branch: GITHUB_CONFIG.branch
-      };
-
-      if (fileSha) body.sha = fileSha;
-
-      const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}`;
-
-      const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          ...authHeaders
-        },
-        body: JSON.stringify(body)
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        setFileSha(result.content.sha);
-        setSyncStatus({ ok: true, message: 'Synced to GitHub successfully.' });
-      } else {
-        const text = await response.text();
-        console.error('Failed to save to GitHub:', text);
-        setSyncStatus({
-          ok: false,
-          message: `Saved locally, GitHub sync failed (${response.status}). Check token permissions.`
-        });
-      }
-    } catch (error) {
-      console.error('Error saving data:', error);
-      setSyncStatus({ ok: false, message: 'Saved locally, GitHub sync error.' });
-    }
   };
 
   const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
@@ -552,6 +427,31 @@ export default function PingPongELO() {
     return { playoff, round32, round16, quarterfinals, semifinals, finals, champ };
   };
 
+  const calculateRankChanges = (updatedPlayers) => {
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+    return updatedPlayers.map(player => {
+      const weekAgoHistory = player.eloHistory.filter(h => new Date(h.timestamp) <= oneWeekAgo);
+      const weekAgoELO = weekAgoHistory.length > 0
+        ? weekAgoHistory[weekAgoHistory.length - 1].elo
+        : player.eloHistory[0]?.elo || 1500;
+
+      const weekAgoRankings = updatedPlayers
+        .map(p => {
+          const pWeekAgoHistory = p.eloHistory.filter(h => new Date(h.timestamp) <= oneWeekAgo);
+          const pWeekAgoELO = pWeekAgoHistory.length > 0
+            ? pWeekAgoHistory[pWeekAgoHistory.length - 1].elo
+            : p.eloHistory[0]?.elo || 1500;
+          return { id: p.id, elo: pWeekAgoELO };
+        })
+        .sort((a, b) => b.elo - a.elo);
+
+      const weekAgoRank = weekAgoRankings.findIndex(p => p.id === player.id) + 1;
+      return { ...player, lastWeekRank: weekAgoRank };
+    });
+  };
+
   const addPlayer = () => {
     if (!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice) return;
 
@@ -570,7 +470,7 @@ export default function PingPongELO() {
 
     const updatedPlayers = [...players, newPlayer];
     setPlayers(updatedPlayers);
-    saveData(updatedPlayers, matches);
+    saveDataLocal(updatedPlayers, matches);
 
     setNewPlayerName('');
     setNewPlayerCountry('');
@@ -596,7 +496,7 @@ export default function PingPongELO() {
     );
 
     setPlayers(updatedPlayers);
-    saveData(updatedPlayers, matches);
+    saveDataLocal(updatedPlayers, matches);
 
     setEditingPlayer(null);
     setEditName('');
@@ -611,31 +511,6 @@ export default function PingPongELO() {
     setEditCountry('');
     setEditOffice('');
     setActiveTab('match');
-  };
-
-  const calculateRankChanges = (updatedPlayers) => {
-    const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-
-    return updatedPlayers.map(player => {
-      const weekAgoHistory = player.eloHistory.filter(h => new Date(h.timestamp) <= oneWeekAgo);
-      const weekAgoELO = weekAgoHistory.length > 0
-        ? weekAgoHistory[weekAgoHistory.length - 1].elo
-        : player.eloHistory[0]?.elo || 1500;
-
-      const weekAgoRankings = updatedPlayers
-        .map(p => {
-          const pWeekAgoHistory = p.eloHistory.filter(h => new Date(h.timestamp) <= oneWeekAgo);
-          const pWeekAgoELO = pWeekAgoHistory.length > 0
-            ? pWeekAgoHistory[pWeekAgoHistory.length - 1].elo
-            : p.eloHistory[0]?.elo || 1500;
-          return { id: p.id, elo: pWeekAgoELO };
-        })
-        .sort((a, b) => b.elo - a.elo);
-
-      const weekAgoRank = weekAgoRankings.findIndex(p => p.id === player.id) + 1;
-      return { ...player, lastWeekRank: weekAgoRank };
-    });
   };
 
   const recordMatch = () => {
@@ -704,7 +579,7 @@ export default function PingPongELO() {
     const updatedMatches = [newMatch, ...matches];
     setPlayers(playersWithRanks);
     setMatches(updatedMatches);
-    saveData(playersWithRanks, updatedMatches);
+    saveDataLocal(playersWithRanks, updatedMatches);
 
     setSelectedWinner('');
     setSelectedLoser('');
@@ -739,28 +614,17 @@ export default function PingPongELO() {
       let compareA, compareB;
 
       switch (sortColumn) {
-        case 'rank':
-          compareA = a.rank; compareB = b.rank; break;
-        case 'name':
-          compareA = a.name.toLowerCase(); compareB = b.name.toLowerCase(); break;
-        case 'elo':
-          compareA = a.elo; compareB = b.elo; break;
-        case 'playoff':
-          compareA = a.probabilities.playoff; compareB = b.probabilities.playoff; break;
-        case 'round32':
-          compareA = a.probabilities.round32; compareB = b.probabilities.round32; break;
-        case 'round16':
-          compareA = a.probabilities.round16; compareB = b.probabilities.round16; break;
-        case 'quarterfinals':
-          compareA = a.probabilities.quarterfinals; compareB = b.probabilities.quarterfinals; break;
-        case 'semifinals':
-          compareA = a.probabilities.semifinals; compareB = b.probabilities.semifinals; break;
-        case 'finals':
-          compareA = a.probabilities.finals; compareB = b.probabilities.finals; break;
-        case 'champ':
-          compareA = a.probabilities.champ; compareB = b.probabilities.champ; break;
-        default:
-          return 0;
+        case 'rank': compareA = a.rank; compareB = b.rank; break;
+        case 'name': compareA = a.name.toLowerCase(); compareB = b.name.toLowerCase(); break;
+        case 'elo': compareA = a.elo; compareB = b.elo; break;
+        case 'playoff': compareA = a.probabilities.playoff; compareB = b.probabilities.playoff; break;
+        case 'round32': compareA = a.probabilities.round32; compareB = b.probabilities.round32; break;
+        case 'round16': compareA = a.probabilities.round16; compareB = b.probabilities.round16; break;
+        case 'quarterfinals': compareA = a.probabilities.quarterfinals; compareB = b.probabilities.quarterfinals; break;
+        case 'semifinals': compareA = a.probabilities.semifinals; compareB = b.probabilities.semifinals; break;
+        case 'finals': compareA = a.probabilities.finals; compareB = b.probabilities.finals; break;
+        case 'champ': compareA = a.probabilities.champ; compareB = b.probabilities.champ; break;
+        default: return 0;
       }
 
       if (sortDirection === 'asc') return compareA > compareB ? 1 : compareA < compareB ? -1 : 0;
@@ -792,6 +656,9 @@ export default function PingPongELO() {
     </th>
   );
 
+  // ------------------------
+  // Loading
+  // ------------------------
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
@@ -800,9 +667,9 @@ export default function PingPongELO() {
     );
   }
 
-  // =========================
+  // ------------------------
   // Bracket View
-  // =========================
+  // ------------------------
   if (currentView === 'bracket') {
     if (sortedPlayers.length < 64) {
       return (
@@ -840,7 +707,7 @@ export default function PingPongELO() {
       );
     }
 
-    // Top 64 seeded by ELO (overall), then re-seeded 1–16 inside each region
+    // Top 64 seeded by ELO, then re-seeded 1–16 per region
     const top64 = [...sortedPlayers]
       .sort((a, b) => (b.elo || 0) - (a.elo || 0))
       .slice(0, 64)
@@ -854,6 +721,31 @@ export default function PingPongELO() {
     const region2 = makeRegion(top64.slice(16, 32));
     const region3 = makeRegion(top64.slice(32, 48));
     const region4 = makeRegion(top64.slice(48, 64));
+
+    // ---- Fixed widths (match Region component) ----
+    const W_R64 = 260, W_R32 = 160, W_S16 = 160, W_E8 = 160, GAP = 18;
+    const REGION_W = W_R64 + W_R32 + W_S16 + W_E8 + (GAP * 3);
+
+    const CENTER_W = 420;
+    const GRID_GAP = 56;
+    const BRACKET_W = (REGION_W * 2) + CENTER_W + (GRID_GAP * 2);
+
+    // Center vertical sizing (based on region grid: 32 * 16 = 512)
+    // This doesn't have to be perfect; it keeps Final Four visually centered in each half.
+    const REGION_GRID_H = 32 * 16; // must match UNIT_H in Region
+    const REGION_TOP_EXTRA = 74;   // title + column headers spacing (tuned)
+    const REGION_SLOT_H = REGION_GRID_H + REGION_TOP_EXTRA;
+
+    useEffect(() => {
+      const onResize = () => {
+        const available = Math.max(320, window.innerWidth - 64);
+        setBracketScale(Math.min(1, available / BRACKET_W));
+      };
+      onResize();
+      window.addEventListener('resize', onResize);
+      return () => window.removeEventListener('resize', onResize);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [BRACKET_W]);
 
     return (
       <div className="min-h-screen bg-white">
@@ -875,12 +767,6 @@ export default function PingPongELO() {
                   UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
                 </div>
               </div>
-
-              <div className="text-right">
-                <div className={`text-sm ${syncStatus.ok ? 'text-green-700' : 'text-gray-500'}`} style={{ fontFamily: 'sans-serif' }}>
-                  {syncStatus.message}
-                </div>
-              </div>
             </div>
 
             <h1 className="text-6xl font-black mb-4" style={{ fontFamily: 'Figtree, sans-serif', letterSpacing: '-0.02em' }}>
@@ -888,23 +774,29 @@ export default function PingPongELO() {
             </h1>
 
             <p className="text-xl text-gray-700" style={{ fontFamily: 'Figtree, sans-serif' }}>
-              Top 64 players seeded by ELO rating • March Madness matchups • Auto-fit single page
+              Top 64 players seeded by ELO rating • March Madness matchups • Fixed layout (no stretch)
             </p>
           </div>
         </div>
 
         <div className="max-w-full mx-auto px-8 py-10">
-          {/* Single-page bracket (auto scales) */}
           <div className="w-full overflow-hidden">
             <div
               className="mx-auto"
               style={{
+                width: BRACKET_W,
                 transform: `scale(${bracketScale})`,
                 transformOrigin: 'top center'
               }}
             >
-              <div className="grid grid-cols-[1fr_420px_1fr] gap-10 items-start">
-                {/* LEFT SIDE */}
+              <div
+                className="grid items-start"
+                style={{
+                  gridTemplateColumns: `${REGION_W}px ${CENTER_W}px ${REGION_W}px`,
+                  columnGap: GRID_GAP
+                }}
+              >
+                {/* LEFT */}
                 <div className="space-y-16">
                   <Region regionName="Region 1" players={region1} />
                   <Region regionName="Region 3" players={region3} />
@@ -912,36 +804,36 @@ export default function PingPongELO() {
 
                 {/* CENTER */}
                 <div className="flex flex-col items-center">
-  {/* Top half (between Region 1 and Region 2) */}
-  <div className="flex items-center justify-center" style={{ height: 720 }}>
-    <div className="w-full">
-      <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
-        Final Four
-      </div>
-      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-    </div>
-  </div>
+                  {/* Top Final Four slot */}
+                  <div className="w-full flex items-center justify-center" style={{ height: REGION_SLOT_H }}>
+                    <div className="w-full">
+                      <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+                        Final Four
+                      </div>
+                      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+                    </div>
+                  </div>
 
-  {/* Championship centered between halves */}
-  <div className="py-10 w-full">
-    <div className="text-sm font-bold uppercase mb-4 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
-      Championship
-    </div>
-    <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-  </div>
+                  {/* Championship */}
+                  <div className="w-full py-12">
+                    <div className="text-sm font-bold uppercase mb-4 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
+                      Championship
+                    </div>
+                    <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+                  </div>
 
-  {/* Bottom half (between Region 3 and Region 4) */}
-  <div className="flex items-center justify-center" style={{ height: 720 }}>
-    <div className="w-full">
-      <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
-        Final Four
-      </div>
-      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-    </div>
-  </div>
-</div>
+                  {/* Bottom Final Four slot */}
+                  <div className="w-full flex items-center justify-center" style={{ height: REGION_SLOT_H }}>
+                    <div className="w-full">
+                      <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+                        Final Four
+                      </div>
+                      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+                    </div>
+                  </div>
+                </div>
 
-                {/* RIGHT SIDE (mirrored) */}
+                {/* RIGHT */}
                 <div className="space-y-16">
                   <Region regionName="Region 2" players={region2} flip />
                   <Region regionName="Region 4" players={region4} flip />
@@ -950,26 +842,7 @@ export default function PingPongELO() {
             </div>
           </div>
 
-          <div className="mt-10 max-w-5xl mx-auto">
-            <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'Figtree, sans-serif' }}>
-              Notes
-            </h3>
-            <div className="grid grid-cols-2 gap-6 text-sm" style={{ fontFamily: 'sans-serif' }}>
-              <div>
-                <p className="text-gray-700">
-                  <strong>Seeding:</strong> Within each region, seeds are 1–16. First round matchups are 1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15.
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-700">
-                  <strong>Shading:</strong> Color intensity is each player’s probability of advancing to the next round (based on current ELO).
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="border-t border-gray-200 mt-20">
+          <div className="border-t border-gray-200 mt-16">
             <div className="max-w-7xl mx-auto px-8 py-8">
               <div className="text-sm text-gray-500" style={{ fontFamily: 'sans-serif' }}>
                 <p>Isometric Ping Pong ELO System</p>
@@ -982,9 +855,9 @@ export default function PingPongELO() {
     );
   }
 
-  // =========================
+  // ------------------------
   // Rankings View
-  // =========================
+  // ------------------------
   return (
     <div className="min-h-screen bg-white">
       <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -993,15 +866,9 @@ export default function PingPongELO() {
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-8 py-8">
           <div className="flex items-start justify-between mb-6">
-            <div>
-              <div className="text-sm text-gray-500 uppercase tracking-wider" style={{ fontFamily: 'sans-serif', letterSpacing: '0.1em' }}>
-                UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
-              </div>
-              <div className={`mt-2 text-sm ${syncStatus.ok ? 'text-green-700' : 'text-gray-500'}`} style={{ fontFamily: 'sans-serif' }}>
-                {syncStatus.message}
-              </div>
+            <div className="text-sm text-gray-500 uppercase tracking-wider" style={{ fontFamily: 'sans-serif', letterSpacing: '0.1em' }}>
+              UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
             </div>
-
             <div className="flex gap-3">
               <button
                 onClick={() => setCurrentView('bracket')}
@@ -1217,19 +1084,6 @@ export default function PingPongELO() {
             >
               Add Player
             </button>
-            <button
-              onClick={() => { setActiveTab('settings'); setEditingPlayer(null); }}
-              className={`flex-1 px-6 py-4 font-semibold transition-colors ${
-                activeTab === 'settings' ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'
-              }`}
-              style={{ fontFamily: 'sans-serif' }}
-              title="Settings"
-            >
-              <div className="flex items-center justify-center gap-2">
-                <Settings2 size={16} />
-                <span>Settings</span>
-              </div>
-            </button>
             {editingPlayer && (
               <button
                 onClick={() => setActiveTab('edit')}
@@ -1329,15 +1183,6 @@ export default function PingPongELO() {
                   </p>
                 </div>
 
-                {selectedWinner && selectedLoser && selectedWinner !== selectedLoser && (
-                  <div className="bg-gray-100 p-4 rounded border border-gray-300">
-                    <div className="text-sm text-gray-700" style={{ fontFamily: 'sans-serif' }}>
-                      <strong>Preview:</strong> This match will update both players' ELO ratings
-                      {winnerScore && loserScore ? ' with score-adjusted calculation' : ''}.
-                    </div>
-                  </div>
-                )}
-
                 <button
                   onClick={recordMatch}
                   disabled={!selectedWinner || !selectedLoser || selectedWinner === selectedLoser}
@@ -1412,61 +1257,6 @@ export default function PingPongELO() {
                   </button>
                 </div>
               </div>
-            ) : activeTab === 'settings' ? (
-              <div className="space-y-6">
-                <div className="bg-gray-50 border border-gray-200 rounded p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <KeyRound size={16} />
-                    <h3 className="font-semibold" style={{ fontFamily: 'sans-serif' }}>GitHub Sync Token</h3>
-                  </div>
-                  <p className="text-xs text-gray-600 mb-3" style={{ fontFamily: 'sans-serif' }}>
-                    To write updates to <code className="px-1 bg-white border rounded">data/pingpong.json</code>, you need a GitHub fine-grained PAT with
-                    <strong> Contents: Read and write</strong> on this repo.
-                  </p>
-
-                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>
-                    Token (stored locally in your browser)
-                  </label>
-                  <input
-                    type="password"
-                    value={githubToken}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      setGithubToken(val);
-                      localStorage.setItem(LS_GH_TOKEN, val);
-                      setSyncStatus({ ok: null, message: 'Token updated locally.' });
-                    }}
-                    placeholder="github_pat_..."
-                    className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
-                    style={{ fontFamily: 'sans-serif' }}
-                  />
-
-                  <div className="flex gap-3 mt-3">
-                    <button
-                      onClick={() => loadData()}
-                      className="flex-1 px-4 py-2 border border-black text-black font-semibold hover:bg-gray-100 transition-colors"
-                      style={{ fontFamily: 'sans-serif' }}
-                    >
-                      Re-load from GitHub
-                    </button>
-                    <button
-                      onClick={() => {
-                        setGithubToken('');
-                        localStorage.removeItem(LS_GH_TOKEN);
-                        setSyncStatus({ ok: false, message: 'Token cleared. Will save locally only.' });
-                      }}
-                      className="px-4 py-2 border border-gray-300 font-semibold hover:bg-gray-100 transition-colors"
-                      style={{ fontFamily: 'sans-serif' }}
-                    >
-                      Clear
-                    </button>
-                  </div>
-                </div>
-
-                <div className="text-xs text-gray-500" style={{ fontFamily: 'sans-serif' }}>
-                  <p><strong>Why this is needed:</strong> GitHub blocks anonymous writes. Without a token, the app can only keep local changes.</p>
-                </div>
-              </div>
             ) : (
               <div className="space-y-6">
                 <div>
@@ -1513,12 +1303,6 @@ export default function PingPongELO() {
                       </option>
                     ))}
                   </select>
-                </div>
-
-                <div className="bg-gray-100 p-4 rounded border border-gray-300">
-                  <div className="text-sm text-gray-700" style={{ fontFamily: 'sans-serif' }}>
-                    <strong>Note:</strong> New players start with an ELO rating of 1500.
-                  </div>
                 </div>
 
                 <button
