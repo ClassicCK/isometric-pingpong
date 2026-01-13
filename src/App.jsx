@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, X, Menu, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown, Edit2, ArrowLeft } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { X, ChevronUp, ChevronDown, Edit2, ArrowLeft, KeyRound, Settings2 } from 'lucide-react';
 
 // All countries with their ISO codes for flat flags
 const COUNTRIES = [
@@ -80,15 +80,20 @@ const GITHUB_CONFIG = {
   filePath: 'data/pingpong.json'
 };
 
+// Local storage keys
+const LS_PLAYERS = 'pingpong:players_v4';
+const LS_MATCHES = 'pingpong:matches_v4';
+const LS_GH_TOKEN = 'pingpong:github_token';
+
 // Probability Cell Component
 function ProbabilityCell({ probability }) {
   const getBackgroundColor = (prob) => {
     if (prob === 0) return '#ffffff';
-    
+
     const white = { r: 255, g: 255, b: 255 };
     const middle = { r: 249, g: 223, b: 226 };
     const dark = { r: 233, g: 30, b: 99 };
-    
+
     let color;
     if (prob <= 50) {
       const t = prob / 50;
@@ -105,7 +110,7 @@ function ProbabilityCell({ probability }) {
         b: Math.round(middle.b + (dark.b - middle.b) * t)
       };
     }
-    
+
     return `rgb(${color.r}, ${color.g}, ${color.b})`;
   };
 
@@ -113,9 +118,9 @@ function ProbabilityCell({ probability }) {
   const textColor = probability > 60 ? '#ffffff' : '#000000';
 
   return (
-    <div 
+    <div
       className="w-full h-full flex items-center justify-center py-5"
-      style={{ 
+      style={{
         backgroundColor: bgColor,
         color: textColor,
         fontFamily: 'monospace',
@@ -142,11 +147,11 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
 
   const getBackgroundColor = (prob) => {
     if (prob === 0 || !showProbability) return '#ffffff';
-    
+
     const white = { r: 255, g: 255, b: 255 };
     const middle = { r: 249, g: 223, b: 226 };
     const dark = { r: 233, g: 30, b: 99 };
-    
+
     let color;
     if (prob <= 50) {
       const t = prob / 50;
@@ -163,7 +168,7 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
         b: Math.round(middle.b + (dark.b - middle.b) * t)
       };
     }
-    
+
     return `rgb(${color.r}, ${color.g}, ${color.b})`;
   };
 
@@ -172,13 +177,13 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
   const countryData = COUNTRIES.find(c => c.code === player.countryCode);
 
   return (
-    <div 
+    <div
       className="flex items-center justify-between h-8 px-2 border border-gray-300 relative"
       style={{ backgroundColor: bgColor }}
     >
       <div className="flex items-center gap-2 flex-1 min-w-0" style={{ color: textColor }}>
         <span className="text-xs font-semibold w-4 flex-shrink-0">{seed}</span>
-        <img 
+        <img
           src={`https://flagcdn.com/16x12/${player.countryCode}.png`}
           srcSet={`https://flagcdn.com/32x24/${player.countryCode}.png 2x`}
           width="16"
@@ -190,7 +195,9 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
         <span className="text-xs uppercase opacity-70 flex-shrink-0">{player.office}</span>
       </div>
       {showProbability && probability > 0 && (
-        <span className="text-xs ml-2 opacity-70 flex-shrink-0" style={{ color: textColor }}>{probability}%</span>
+        <span className="text-xs ml-2 opacity-70 flex-shrink-0" style={{ color: textColor }}>
+          {probability}%
+        </span>
       )}
     </div>
   );
@@ -207,15 +214,13 @@ function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability
   );
 }
 
-// Region Component
-// Region Component (March Madness seeding: 1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15)
+// Region Component (true March Madness seeding)
 function Region({ regionName, players, flip = false }) {
   const playerArray = Array.isArray(players) ? players : [];
 
-  // Standard 16-team bracket pairing order
+  // Standard pairing order for a 16-team region
   const SEED_ORDER = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
 
-  // Index players by their *regional* seed (1..16)
   const bySeed = Array.from({ length: 17 }, () => null);
   for (const p of playerArray) {
     if (p?.seed >= 1 && p?.seed <= 16) bySeed[p.seed] = p;
@@ -302,87 +307,132 @@ export default function PingPongELO() {
   const [matches, setMatches] = useState([]);
   const [currentView, setCurrentView] = useState('rankings'); // 'rankings' or 'bracket'
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const [selectedWinner, setSelectedWinner] = useState('');
   const [selectedLoser, setSelectedLoser] = useState('');
   const [winnerScore, setWinnerScore] = useState('');
   const [loserScore, setLoserScore] = useState('');
   const [matchDate, setMatchDate] = useState('');
+
   const [loading, setLoading] = useState(true);
   const [newPlayerName, setNewPlayerName] = useState('');
   const [newPlayerCountry, setNewPlayerCountry] = useState('');
   const [newPlayerOffice, setNewPlayerOffice] = useState('');
-  const [activeTab, setActiveTab] = useState('match');
+
+  const [activeTab, setActiveTab] = useState('match'); // match | player | edit | settings
   const [sortColumn, setSortColumn] = useState('rank');
   const [sortDirection, setSortDirection] = useState('asc');
+
   const [fileSha, setFileSha] = useState(null);
+
   const [editingPlayer, setEditingPlayer] = useState(null);
   const [editName, setEditName] = useState('');
   const [editCountry, setEditCountry] = useState('');
   const [editOffice, setEditOffice] = useState('');
+
+  // GitHub token stored locally (not in bundle)
+  const [githubToken, setGithubToken] = useState(() => localStorage.getItem(LS_GH_TOKEN) || '');
+  const [syncStatus, setSyncStatus] = useState({ ok: null, message: '' });
+
+  // Bracket scale so it fits on one page
   const [bracketScale, setBracketScale] = useState(1);
-
-useEffect(() => {
-  if (currentView !== 'bracket') return;
-
-  const BASE_WIDTH = 2100; // tweak if you want slightly bigger/smaller
-  const onResize = () => {
-    const available = Math.max(320, window.innerWidth - 64); // padding buffer
-    setBracketScale(Math.min(1, available / BASE_WIDTH));
-  };
-
-  onResize();
-  window.addEventListener('resize', onResize);
-  return () => window.removeEventListener('resize', onResize);
-}, [currentView]);
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (currentView !== 'bracket') return;
+
+    const BASE_WIDTH = 2100; // adjust if you want it larger/smaller
+    const onResize = () => {
+      const available = Math.max(320, window.innerWidth - 64);
+      setBracketScale(Math.min(1, available / BASE_WIDTH));
+    };
+
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [currentView]);
+
+  const getAuthHeaders = () => {
+    const token = (githubToken || '').trim();
+    if (!token) return null;
+    return {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    };
+  };
 
   const loadData = async () => {
     try {
       setLoading(true);
-      
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        const localPlayers = localStorage.getItem('pingpong:players_v4');
-        const localMatches = localStorage.getItem('pingpong:matches_v4');
-        
-        if (localPlayers) setPlayers(JSON.parse(localPlayers));
-        if (localMatches) setMatches(JSON.parse(localMatches));
-        setLoading(false);
-        return;
-      }
 
+      // Always try GitHub first (public read works without auth)
       const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}?ref=${GITHUB_CONFIG.branch}`;
       const response = await fetch(url);
-      
+
       if (response.ok) {
         const fileData = await response.json();
         setFileSha(fileData.sha);
-        
+
         const content = atob(fileData.content);
         const data = JSON.parse(content);
-        
-        setPlayers(data.players || []);
-        setMatches(data.matches || []);
-      } else if (response.status === 404) {
-        console.log('No data file found, starting fresh');
+
+        const loadedPlayers = data.players || [];
+        const loadedMatches = data.matches || [];
+
+        setPlayers(loadedPlayers);
+        setMatches(loadedMatches);
+
+        // keep local mirror
+        localStorage.setItem(LS_PLAYERS, JSON.stringify(loadedPlayers));
+        localStorage.setItem(LS_MATCHES, JSON.stringify(loadedMatches));
+
+        setSyncStatus({ ok: true, message: 'Loaded from GitHub.' });
+        return;
       }
+
+      // If GitHub load fails, fall back to local
+      const localPlayers = localStorage.getItem(LS_PLAYERS);
+      const localMatches = localStorage.getItem(LS_MATCHES);
+
+      if (localPlayers) setPlayers(JSON.parse(localPlayers));
+      if (localMatches) setMatches(JSON.parse(localMatches));
+
+      setSyncStatus({ ok: false, message: `GitHub load failed (${response.status}). Using local data.` });
     } catch (error) {
       console.error('Error loading data:', error);
+
+      const localPlayers = localStorage.getItem(LS_PLAYERS);
+      const localMatches = localStorage.getItem(LS_MATCHES);
+
+      if (localPlayers) setPlayers(JSON.parse(localPlayers));
+      if (localMatches) setMatches(JSON.parse(localMatches));
+
+      setSyncStatus({ ok: false, message: 'Load error. Using local data.' });
     } finally {
       setLoading(false);
     }
   };
 
   const saveData = async (newPlayers, newMatches) => {
-    try {
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        localStorage.setItem('pingpong:players_v4', JSON.stringify(newPlayers));
-        localStorage.setItem('pingpong:matches_v4', JSON.stringify(newMatches));
-        return;
-      }
+    // Always save locally as a backup
+    localStorage.setItem(LS_PLAYERS, JSON.stringify(newPlayers));
+    localStorage.setItem(LS_MATCHES, JSON.stringify(newMatches));
 
+    const authHeaders = getAuthHeaders();
+    if (!authHeaders) {
+      setSyncStatus({
+        ok: false,
+        message: 'Saved locally. Add a GitHub token in Settings to sync to GitHub.'
+      });
+      return;
+    }
+
+    try {
       const data = {
         players: newPlayers,
         matches: newMatches,
@@ -393,19 +443,19 @@ useEffect(() => {
 
       const body = {
         message: `Update ping pong data - ${new Date().toLocaleString()}`,
-        content: content,
+        content,
         branch: GITHUB_CONFIG.branch
       };
 
-      if (fileSha) {
-        body.sha = fileSha;
-      }
+      if (fileSha) body.sha = fileSha;
 
       const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}`;
+
       const response = await fetch(url, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          ...authHeaders
         },
         body: JSON.stringify(body)
       });
@@ -413,19 +463,25 @@ useEffect(() => {
       if (response.ok) {
         const result = await response.json();
         setFileSha(result.content.sha);
-        console.log('Data saved to GitHub successfully');
+        setSyncStatus({ ok: true, message: 'Synced to GitHub successfully.' });
       } else {
-        console.error('Failed to save to GitHub:', await response.text());
+        const text = await response.text();
+        console.error('Failed to save to GitHub:', text);
+        setSyncStatus({
+          ok: false,
+          message: `Saved locally, GitHub sync failed (${response.status}). Check token permissions.`
+        });
       }
     } catch (error) {
       console.error('Error saving data:', error);
+      setSyncStatus({ ok: false, message: 'Saved locally, GitHub sync error.' });
     }
   };
 
   const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
     const expectedLoser = 1 / (1 + Math.pow(10, (winnerELO - loserELO) / 400));
-    
+
     let adjustedK = K;
     if (winnerScoreVal !== null && loserScoreVal !== null) {
       const scoreDiff = winnerScoreVal - loserScoreVal;
@@ -434,7 +490,7 @@ useEffect(() => {
       adjustedK = Math.min(adjustedK, K * 1.75);
       adjustedK = Math.max(adjustedK, K * 0.5);
     }
-    
+
     return {
       winnerNew: Math.round(winnerELO + adjustedK * (1 - expectedWinner)),
       loserNew: Math.round(loserELO + adjustedK * (0 - expectedLoser)),
@@ -450,29 +506,29 @@ useEffect(() => {
     const sortedByELO = [...allPlayers].sort((a, b) => b.elo - a.elo);
     const playerRank = sortedByELO.findIndex(p => p.elo === playerELO) + 1;
     const totalPlayers = sortedByELO.length;
-    
+
     const avgOpponentELO = allPlayers
       .filter(p => p.elo !== playerELO)
       .reduce((sum, p) => sum + p.elo, 0) / (allPlayers.length - 1);
-    
+
     const avgWinProb = 1 / (1 + Math.pow(10, (avgOpponentELO - playerELO) / 400));
     const rankFactor = 1 - ((playerRank - 1) / totalPlayers) * 0.4;
-    
+
     const playoff = playerRank <= 64 ? Math.min(100, Math.round((64 - playerRank + 10) / 64 * 100)) : Math.round(avgWinProb * 50 * rankFactor);
-    
+
     const round32 = Math.min(100, Math.round(Math.pow(avgWinProb, 1) * 100 * rankFactor));
     const round16 = Math.min(100, Math.round(Math.pow(avgWinProb, 1.3) * 100 * rankFactor));
     const quarterfinals = Math.min(100, Math.round(Math.pow(avgWinProb, 1.6) * 100 * rankFactor));
     const semifinals = Math.min(100, Math.round(Math.pow(avgWinProb, 2) * 100 * rankFactor));
     const finals = Math.min(100, Math.round(Math.pow(avgWinProb, 2.5) * 100 * rankFactor));
     const champ = Math.min(100, Math.round(Math.pow(avgWinProb, 3) * 100 * rankFactor));
-    
+
     return { playoff, round32, round16, quarterfinals, semifinals, finals, champ };
   };
 
   const addPlayer = () => {
     if (!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice) return;
-    
+
     const newPlayer = {
       id: Date.now().toString(),
       name: newPlayerName.trim(),
@@ -485,10 +541,11 @@ useEffect(() => {
       joinedAt: new Date().toISOString(),
       lastWeekRank: null
     };
-    
+
     const updatedPlayers = [...players, newPlayer];
     setPlayers(updatedPlayers);
     saveData(updatedPlayers, matches);
+
     setNewPlayerName('');
     setNewPlayerCountry('');
     setNewPlayerOffice('');
@@ -506,7 +563,7 @@ useEffect(() => {
   const saveEditPlayer = () => {
     if (!editName.trim() || !editCountry || !editOffice) return;
 
-    const updatedPlayers = players.map(p => 
+    const updatedPlayers = players.map(p =>
       p.id === editingPlayer
         ? { ...p, name: editName.trim(), countryCode: editCountry, office: editOffice }
         : p
@@ -514,6 +571,7 @@ useEffect(() => {
 
     setPlayers(updatedPlayers);
     saveData(updatedPlayers, matches);
+
     setEditingPlayer(null);
     setEditName('');
     setEditCountry('');
@@ -532,28 +590,24 @@ useEffect(() => {
   const calculateRankChanges = (updatedPlayers) => {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-    
+
     return updatedPlayers.map(player => {
       const weekAgoHistory = player.eloHistory.filter(h => new Date(h.timestamp) <= oneWeekAgo);
-      const weekAgoELO = weekAgoHistory.length > 0 
-        ? weekAgoHistory[weekAgoHistory.length - 1].elo 
+      const weekAgoELO = weekAgoHistory.length > 0
+        ? weekAgoHistory[weekAgoHistory.length - 1].elo
         : player.eloHistory[0]?.elo || 1500;
-      
+
       const weekAgoRankings = updatedPlayers
         .map(p => {
           const pWeekAgoHistory = p.eloHistory.filter(h => new Date(h.timestamp) <= oneWeekAgo);
-          const pWeekAgoELO = pWeekAgoHistory.length > 0 
-            ? pWeekAgoHistory[pWeekAgoHistory.length - 1].elo 
+          const pWeekAgoELO = pWeekAgoHistory.length > 0
+            ? pWeekAgoHistory[pWeekAgoHistory.length - 1].elo
             : p.eloHistory[0]?.elo || 1500;
-          return {
-            id: p.id,
-            elo: pWeekAgoELO
-          };
+          return { id: p.id, elo: pWeekAgoELO };
         })
         .sort((a, b) => b.elo - a.elo);
-      
+
       const weekAgoRank = weekAgoRankings.findIndex(p => p.id === player.id) + 1;
-      
       return { ...player, lastWeekRank: weekAgoRank };
     });
   };
@@ -569,10 +623,10 @@ useEffect(() => {
       return;
     }
 
-    const winnerScoreNum = winnerScore ? parseInt(winnerScore) : null;
-    const loserScoreNum = loserScore ? parseInt(loserScore) : null;
+    const winnerScoreNum = winnerScore ? parseInt(winnerScore, 10) : null;
+    const loserScoreNum = loserScore ? parseInt(loserScore, 10) : null;
 
-    if ((winnerScoreNum !== null && loserScoreNum !== null)) {
+    if (winnerScoreNum !== null && loserScoreNum !== null) {
       if (winnerScoreNum <= loserScoreNum) {
         alert('Winner score must be greater than loser score');
         return;
@@ -584,28 +638,26 @@ useEffect(() => {
     }
 
     const { winnerNew, loserNew } = calculateELO(winner.elo, loser.elo, winnerScoreNum, loserScoreNum);
-    
     const timestamp = matchDate ? new Date(matchDate).toISOString() : new Date().toISOString();
 
-    // FIXED: Create completely new player objects to prevent mutation
     const updatedPlayers = players.map(p => {
       if (p.id === selectedWinner) {
-        return { 
-          ...p, 
-          elo: winnerNew, 
+        return {
+          ...p,
+          elo: winnerNew,
           wins: p.wins + 1,
           eloHistory: [...p.eloHistory, { elo: winnerNew, timestamp }]
         };
       }
       if (p.id === selectedLoser) {
-        return { 
-          ...p, 
-          elo: loserNew, 
+        return {
+          ...p,
+          elo: loserNew,
           losses: p.losses + 1,
           eloHistory: [...p.eloHistory, { elo: loserNew, timestamp }]
         };
       }
-      return { ...p }; // Return copy of unchanged players too
+      return { ...p };
     });
 
     const playersWithRanks = calculateRankChanges(updatedPlayers);
@@ -627,7 +679,7 @@ useEffect(() => {
     setPlayers(playersWithRanks);
     setMatches(updatedMatches);
     saveData(playersWithRanks, updatedMatches);
-    
+
     setSelectedWinner('');
     setSelectedLoser('');
     setWinnerScore('');
@@ -646,98 +698,70 @@ useEffect(() => {
   };
 
   const getSortedPlayers = () => {
-    // FIXED: Create fresh copy and avoid mutations
     const playersCopy = players.map(p => ({ ...p }));
     const playersWithRanks = calculateRankChanges(playersCopy);
-    
-    // Calculate ranks without mutating
+
     const rankedPlayers = [...playersWithRanks].sort((a, b) => b.elo - a.elo);
-    
+
     const playersWithData = playersWithRanks.map((player) => {
       const rank = rankedPlayers.findIndex(p => p.id === player.id) + 1;
       const probabilities = calculateTournamentProbabilities(player.elo, playersWithRanks);
       return { ...player, rank, probabilities };
     });
 
-    // Final sort based on selected column
     return [...playersWithData].sort((a, b) => {
       let compareA, compareB;
-      
+
       switch (sortColumn) {
         case 'rank':
-          compareA = a.rank;
-          compareB = b.rank;
-          break;
+          compareA = a.rank; compareB = b.rank; break;
         case 'name':
-          compareA = a.name.toLowerCase();
-          compareB = b.name.toLowerCase();
-          break;
+          compareA = a.name.toLowerCase(); compareB = b.name.toLowerCase(); break;
         case 'elo':
-          compareA = a.elo;
-          compareB = b.elo;
-          break;
+          compareA = a.elo; compareB = b.elo; break;
         case 'playoff':
-          compareA = a.probabilities.playoff;
-          compareB = b.probabilities.playoff;
-          break;
+          compareA = a.probabilities.playoff; compareB = b.probabilities.playoff; break;
         case 'round32':
-          compareA = a.probabilities.round32;
-          compareB = b.probabilities.round32;
-          break;
+          compareA = a.probabilities.round32; compareB = b.probabilities.round32; break;
         case 'round16':
-          compareA = a.probabilities.round16;
-          compareB = b.probabilities.round16;
-          break;
+          compareA = a.probabilities.round16; compareB = b.probabilities.round16; break;
         case 'quarterfinals':
-          compareA = a.probabilities.quarterfinals;
-          compareB = b.probabilities.quarterfinals;
-          break;
+          compareA = a.probabilities.quarterfinals; compareB = b.probabilities.quarterfinals; break;
         case 'semifinals':
-          compareA = a.probabilities.semifinals;
-          compareB = b.probabilities.semifinals;
-          break;
+          compareA = a.probabilities.semifinals; compareB = b.probabilities.semifinals; break;
         case 'finals':
-          compareA = a.probabilities.finals;
-          compareB = b.probabilities.finals;
-          break;
+          compareA = a.probabilities.finals; compareB = b.probabilities.finals; break;
         case 'champ':
-          compareA = a.probabilities.champ;
-          compareB = b.probabilities.champ;
-          break;
+          compareA = a.probabilities.champ; compareB = b.probabilities.champ; break;
         default:
           return 0;
       }
-      
-      if (sortDirection === 'asc') {
-        return compareA > compareB ? 1 : compareA < compareB ? -1 : 0;
-      } else {
-        return compareA < compareB ? 1 : compareA > compareB ? -1 : 0;
-      }
+
+      if (sortDirection === 'asc') return compareA > compareB ? 1 : compareA < compareB ? -1 : 0;
+      return compareA < compareB ? 1 : compareA > compareB ? -1 : 0;
     });
   };
 
-  const sortedPlayers = getSortedPlayers();
-  
+  const sortedPlayers = useMemo(() => getSortedPlayers(), [players, sortColumn, sortDirection]);
+
   const formatDate = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   };
-  
+
   const formatTime = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase();
   };
 
   const SortableHeader = ({ column, children, align = 'left' }) => (
-    <th 
+    <th
       className={`py-4 ${align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left'} ${column === 'playoff' ? 'border-l-2 border-gray-300' : ''} ${column === 'rank' ? 'pr-6' : 'px-6 px-0'} text-sm font-normal text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-50 transition-colors select-none`}
       onClick={() => handleSort(column)}
     >
       <div className={`flex items-center gap-2 ${align === 'right' ? 'justify-end' : align === 'center' ? 'justify-center' : 'justify-start'}`}>
         {children}
-        {sortColumn === column && (
-          sortDirection === 'asc' ? <ChevronUp size={14} /> : <ChevronDown size={14} />
-        )}
+        {sortColumn === column && (sortDirection === 'asc' ? <ChevronUp size={14} /> : <ChevronDown size={14} />)}
       </div>
     </th>
   );
@@ -750,29 +774,15 @@ useEffect(() => {
     );
   }
 
+  // =========================
   // Bracket View
+  // =========================
   if (currentView === 'bracket') {
-    const top64 = [...sortedPlayers]
-      .sort((a, b) => (b.elo || 0) - (a.elo || 0))
-      .slice(0, 64)
-      .map((p, index) => ({
-        ...p,
-        seed: index + 1,
-        probabilities: p.probabilities || {}
-      }));
-
-  const makeRegion = (slice) => slice.map((p, i) => ({ ...p, seed: i + 1 }));
-
-  const region1 = makeRegion(top64.slice(0, 16));
-  const region2 = makeRegion(top64.slice(16, 32));
-  const region3 = makeRegion(top64.slice(32, 48));
-  const region4 = makeRegion(top64.slice(48, 64));
-
     if (sortedPlayers.length < 64) {
       return (
         <div className="min-h-screen bg-white">
           <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
-          
+
           <div className="border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-8 py-8">
               <button
@@ -783,7 +793,7 @@ useEffect(() => {
                 <ArrowLeft size={20} />
                 <span>Back to Rankings</span>
               </button>
-              
+
               <h1 className="text-6xl font-black mb-4" style={{ fontFamily: 'Figtree, sans-serif', letterSpacing: '-0.02em' }}>
                 EOY Tournament Bracket
               </h1>
@@ -804,10 +814,25 @@ useEffect(() => {
       );
     }
 
+    // Top 64 seeded by ELO (overall), then re-seeded 1–16 inside each region
+    const top64 = [...sortedPlayers]
+      .sort((a, b) => (b.elo || 0) - (a.elo || 0))
+      .slice(0, 64)
+      .map((p) => ({
+        ...p,
+        probabilities: p.probabilities || {}
+      }));
+
+    const makeRegion = (slice) => slice.map((p, i) => ({ ...p, seed: i + 1 }));
+    const region1 = makeRegion(top64.slice(0, 16));
+    const region2 = makeRegion(top64.slice(16, 32));
+    const region3 = makeRegion(top64.slice(32, 48));
+    const region4 = makeRegion(top64.slice(48, 64));
+
     return (
       <div className="min-h-screen bg-white">
         <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
-        
+
         <div className="border-b border-gray-200">
           <div className="max-w-full mx-auto px-8 py-8">
             <div className="flex items-start justify-between mb-6">
@@ -824,89 +849,95 @@ useEffect(() => {
                   UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
                 </div>
               </div>
+
+              <div className="text-right">
+                <div className={`text-sm ${syncStatus.ok ? 'text-green-700' : 'text-gray-500'}`} style={{ fontFamily: 'sans-serif' }}>
+                  {syncStatus.message}
+                </div>
+              </div>
             </div>
-            
+
             <h1 className="text-6xl font-black mb-4" style={{ fontFamily: 'Figtree, sans-serif', letterSpacing: '-0.02em' }}>
               EOY Tournament Bracket
             </h1>
-            
+
             <p className="text-xl text-gray-700" style={{ fontFamily: 'Figtree, sans-serif' }}>
-              Top 64 players seeded by ELO rating • Probabilities based on current standings
+              Top 64 players seeded by ELO rating • March Madness matchups • Auto-fit single page
             </p>
           </div>
         </div>
 
-        <div className="max-w-full mx-auto px-8 py-12">
+        <div className="max-w-full mx-auto px-8 py-10">
+          {/* Single-page bracket (auto scales) */}
           <div className="w-full overflow-hidden">
-  <div
-    className="mx-auto"
-    style={{
-      transform: `scale(${bracketScale})`,
-      transformOrigin: 'top center'
-    }}
-  >
-    <div className="grid grid-cols-[1fr_420px_1fr] gap-10 items-start">
-      {/* LEFT SIDE (two regions) */}
-      <div className="space-y-16">
-        <Region regionName="Region 1" players={region1} />
-        <Region regionName="Region 3" players={region3} />
-      </div>
+            <div
+              className="mx-auto"
+              style={{
+                transform: `scale(${bracketScale})`,
+                transformOrigin: 'top center'
+              }}
+            >
+              <div className="grid grid-cols-[1fr_420px_1fr] gap-10 items-start">
+                {/* LEFT SIDE */}
+                <div className="space-y-16">
+                  <Region regionName="Region 1" players={region1} />
+                  <Region regionName="Region 3" players={region3} />
+                </div>
 
-      {/* CENTER (Final Four + Championship) */}
-      <div className="flex flex-col items-center pt-28">
-        <div className="w-full mb-14">
-          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
-            Final Four
-          </div>
-          <div className="space-y-10">
-            <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-            <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-          </div>
-        </div>
+                {/* CENTER */}
+                <div className="flex flex-col items-center pt-28">
+                  <div className="w-full mb-14">
+                    <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+                      Final Four
+                    </div>
+                    <div className="space-y-10">
+                      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+                      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+                    </div>
+                  </div>
 
-        <div className="w-full">
-          <div className="text-sm font-bold uppercase mb-4 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
-            Championship
-          </div>
-          <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-        </div>
-      </div>
+                  <div className="w-full">
+                    <div className="text-sm font-bold uppercase mb-4 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
+                      Championship
+                    </div>
+                    <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+                  </div>
+                </div>
 
-      {/* RIGHT SIDE (two regions, mirrored) */}
-      <div className="space-y-16">
-        <Region regionName="Region 2" players={region2} flip />
-        <Region regionName="Region 4" players={region4} flip />
-      </div>
-    </div>
-  </div>
-</div>
-
-          </div>
-
-          <div className="mt-12 max-w-4xl mx-auto">
-            <h3 className="text-lg font-bold mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>How to Read the Bracket</h3>
-            <div className="grid grid-cols-2 gap-6 text-sm" style={{ fontFamily: 'sans-serif' }}>
-              <div>
-                <p className="text-gray-700 mb-2"><strong>Seeding:</strong> Players are seeded 1-64 based on their current ELO rating. Higher seeds (1-16) are matched against lower seeds (49-64) in the first round.</p>
-              </div>
-              <div>
-                <p className="text-gray-700 mb-2"><strong>Probability Shading:</strong> Background color intensity shows each player's probability of advancing to the next round. Darker pink = higher probability.</p>
-              </div>
-              <div>
-                <p className="text-gray-700 mb-2"><strong>Regions:</strong> The bracket is divided into 4 regions of 16 players each. Winners from each region advance to the Final Four.</p>
-              </div>
-              <div>
-                <p className="text-gray-700 mb-2"><strong>Advancement:</strong> This is a projected bracket based on current ratings. Actual tournament results will differ as matches are played.</p>
+                {/* RIGHT SIDE (mirrored) */}
+                <div className="space-y-16">
+                  <Region regionName="Region 2" players={region2} flip />
+                  <Region regionName="Region 4" players={region4} flip />
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="border-t border-gray-200 mt-20">
-          <div className="max-w-7xl mx-auto px-8 py-8">
-            <div className="text-sm text-gray-500" style={{ fontFamily: 'sans-serif' }}>
-              <p>Isometric Ping Pong ELO System</p>
-              <p className="mt-1">© 2026 Isometric</p>
+          <div className="mt-10 max-w-5xl mx-auto">
+            <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'Figtree, sans-serif' }}>
+              Notes
+            </h3>
+            <div className="grid grid-cols-2 gap-6 text-sm" style={{ fontFamily: 'sans-serif' }}>
+              <div>
+                <p className="text-gray-700">
+                  <strong>Seeding:</strong> Within each region, seeds are 1–16. First round matchups are 1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15.
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-700">
+                  <strong>Shading:</strong> Color intensity is each player’s probability of advancing to the next round (based on current ELO).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="border-t border-gray-200 mt-20">
+            <div className="max-w-7xl mx-auto px-8 py-8">
+              <div className="text-sm text-gray-500" style={{ fontFamily: 'sans-serif' }}>
+                <p>Isometric Ping Pong ELO System</p>
+                <p className="mt-1">© 2026 Isometric</p>
+              </div>
             </div>
           </div>
         </div>
@@ -914,18 +945,26 @@ useEffect(() => {
     );
   }
 
-  // Rankings View (existing rankings page continues...)
+  // =========================
+  // Rankings View
+  // =========================
   return (
     <div className="min-h-screen bg-white">
       <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
-      
+
       {/* Header */}
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-8 py-8">
           <div className="flex items-start justify-between mb-6">
-            <div className="text-sm text-gray-500 uppercase tracking-wider" style={{ fontFamily: 'sans-serif', letterSpacing: '0.1em' }}>
-              UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
+            <div>
+              <div className="text-sm text-gray-500 uppercase tracking-wider" style={{ fontFamily: 'sans-serif', letterSpacing: '0.1em' }}>
+                UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
+              </div>
+              <div className={`mt-2 text-sm ${syncStatus.ok ? 'text-green-700' : 'text-gray-500'}`} style={{ fontFamily: 'sans-serif' }}>
+                {syncStatus.message}
+              </div>
             </div>
+
             <div className="flex gap-3">
               <button
                 onClick={() => setCurrentView('bracket')}
@@ -943,11 +982,11 @@ useEffect(() => {
               </button>
             </div>
           </div>
-          
+
           <h1 className="text-6xl font-black mb-4" style={{ fontFamily: 'Figtree, sans-serif', letterSpacing: '-0.02em' }}>
             Isometric Ping Pong Rankings
           </h1>
-          
+
           <p className="text-xl text-gray-700" style={{ fontFamily: 'Figtree, sans-serif' }}>
             How {players.length} players compare by ELO rating, updated after each match.
           </p>
@@ -972,7 +1011,7 @@ useEffect(() => {
                 <SortableHeader column="name">Name</SortableHeader>
                 <SortableHeader column="elo" align="right">ELO</SortableHeader>
                 <SortableHeader column="playoff" align="center">Playoff</SortableHeader>
-                <SortableHeader column="round32" align="center">Rd. of 32</SortableHeader>
+                <SortableHeader column="round32" align="center">RD. OF 32</SortableHeader>
                 <SortableHeader column="round16" align="center">SWEET 16</SortableHeader>
                 <SortableHeader column="quarterfinals" align="center">ELITE 8</SortableHeader>
                 <SortableHeader column="semifinals" align="center">FINAL 4</SortableHeader>
@@ -991,7 +1030,7 @@ useEffect(() => {
                 sortedPlayers.map((player) => {
                   const rankChange = player.lastWeekRank ? player.lastWeekRank - player.rank : 0;
                   const countryData = COUNTRIES.find(c => c.code === player.countryCode);
-                  
+
                   return (
                     <tr key={player.id} className="border-b border-gray-200 hover:bg-gray-50 transition-colors group">
                       <td className="py-5 pr-6">
@@ -1011,9 +1050,10 @@ useEffect(() => {
                           )}
                         </div>
                       </td>
+
                       <td className="py-5 px-6">
                         <div className="flex items-center gap-3">
-                          <img 
+                          <img
                             src={`https://flagcdn.com/24x18/${player.countryCode}.png`}
                             srcSet={`https://flagcdn.com/48x36/${player.countryCode}.png 2x,
                                      https://flagcdn.com/72x54/${player.countryCode}.png 3x`}
@@ -1036,9 +1076,11 @@ useEffect(() => {
                           </button>
                         </div>
                       </td>
+
                       <td className="py-5 px-6 text-right">
                         <span className="text-xl font-normal text-gray-900">{player.elo}</span>
                       </td>
+
                       <td className="px-0 border-l-2 border-gray-300">
                         <ProbabilityCell probability={player.probabilities.playoff} />
                       </td>
@@ -1114,10 +1156,7 @@ useEffect(() => {
         <div className="h-full flex flex-col">
           <div className="px-6 py-6 border-b border-gray-200 flex items-center justify-between">
             <h2 className="text-xl font-bold text-gray-900" style={{ fontFamily: 'sans-serif' }}>Actions</h2>
-            <button
-              onClick={() => setSidebarOpen(false)}
-              className="p-2 hover:bg-gray-100 rounded transition-colors"
-            >
+            <button onClick={() => setSidebarOpen(false)} className="p-2 hover:bg-gray-100 rounded transition-colors">
               <X size={20} />
             </button>
           </div>
@@ -1126,9 +1165,7 @@ useEffect(() => {
             <button
               onClick={() => { setActiveTab('match'); setEditingPlayer(null); }}
               className={`flex-1 px-6 py-4 font-semibold transition-colors ${
-                activeTab === 'match'
-                  ? 'text-black border-b-2 border-black'
-                  : 'text-gray-400 hover:text-gray-700'
+                activeTab === 'match' ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'
               }`}
               style={{ fontFamily: 'sans-serif' }}
             >
@@ -1137,21 +1174,30 @@ useEffect(() => {
             <button
               onClick={() => { setActiveTab('player'); setEditingPlayer(null); }}
               className={`flex-1 px-6 py-4 font-semibold transition-colors ${
-                activeTab === 'player'
-                  ? 'text-black border-b-2 border-black'
-                  : 'text-gray-400 hover:text-gray-700'
+                activeTab === 'player' ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'
               }`}
               style={{ fontFamily: 'sans-serif' }}
             >
               Add Player
             </button>
+            <button
+              onClick={() => { setActiveTab('settings'); setEditingPlayer(null); }}
+              className={`flex-1 px-6 py-4 font-semibold transition-colors ${
+                activeTab === 'settings' ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'
+              }`}
+              style={{ fontFamily: 'sans-serif' }}
+              title="Settings"
+            >
+              <div className="flex items-center justify-center gap-2">
+                <Settings2 size={16} />
+                <span>Settings</span>
+              </div>
+            </button>
             {editingPlayer && (
               <button
                 onClick={() => setActiveTab('edit')}
                 className={`flex-1 px-6 py-4 font-semibold transition-colors ${
-                  activeTab === 'edit'
-                    ? 'text-black border-b-2 border-black'
-                    : 'text-gray-400 hover:text-gray-700'
+                  activeTab === 'edit' ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'
                 }`}
                 style={{ fontFamily: 'sans-serif' }}
               >
@@ -1329,6 +1375,61 @@ useEffect(() => {
                   </button>
                 </div>
               </div>
+            ) : activeTab === 'settings' ? (
+              <div className="space-y-6">
+                <div className="bg-gray-50 border border-gray-200 rounded p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <KeyRound size={16} />
+                    <h3 className="font-semibold" style={{ fontFamily: 'sans-serif' }}>GitHub Sync Token</h3>
+                  </div>
+                  <p className="text-xs text-gray-600 mb-3" style={{ fontFamily: 'sans-serif' }}>
+                    To write updates to <code className="px-1 bg-white border rounded">data/pingpong.json</code>, you need a GitHub fine-grained PAT with
+                    <strong> Contents: Read and write</strong> on this repo.
+                  </p>
+
+                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>
+                    Token (stored locally in your browser)
+                  </label>
+                  <input
+                    type="password"
+                    value={githubToken}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setGithubToken(val);
+                      localStorage.setItem(LS_GH_TOKEN, val);
+                      setSyncStatus({ ok: null, message: 'Token updated locally.' });
+                    }}
+                    placeholder="github_pat_..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
+                    style={{ fontFamily: 'sans-serif' }}
+                  />
+
+                  <div className="flex gap-3 mt-3">
+                    <button
+                      onClick={() => loadData()}
+                      className="flex-1 px-4 py-2 border border-black text-black font-semibold hover:bg-gray-100 transition-colors"
+                      style={{ fontFamily: 'sans-serif' }}
+                    >
+                      Re-load from GitHub
+                    </button>
+                    <button
+                      onClick={() => {
+                        setGithubToken('');
+                        localStorage.removeItem(LS_GH_TOKEN);
+                        setSyncStatus({ ok: false, message: 'Token cleared. Will save locally only.' });
+                      }}
+                      className="px-4 py-2 border border-gray-300 font-semibold hover:bg-gray-100 transition-colors"
+                      style={{ fontFamily: 'sans-serif' }}
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </div>
+
+                <div className="text-xs text-gray-500" style={{ fontFamily: 'sans-serif' }}>
+                  <p><strong>Why this is needed:</strong> GitHub blocks anonymous writes. Without a token, the app can only keep local changes.</p>
+                </div>
+              </div>
             ) : (
               <div className="space-y-6">
                 <div>
@@ -1407,3 +1508,4 @@ useEffect(() => {
     </div>
   );
 }
+
