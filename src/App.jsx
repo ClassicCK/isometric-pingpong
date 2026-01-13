@@ -74,7 +74,7 @@ const OFFICES = ['NYC', 'LON'];
 
 // GitHub configuration
 const GITHUB_CONFIG = {
-  owner: 'YOUR_GITHUB_USERNAME',
+  owner: 'ClassicCK',
   repo: 'isometric-pingpong',
   branch: 'main',
   filePath: 'data/pingpong.json'
