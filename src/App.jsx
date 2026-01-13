@@ -208,28 +208,45 @@ function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability
 }
 
 // Region Component
-function Region({ regionName, players, startSeed = 1 }) {
+// Region Component (March Madness seeding: 1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15)
+function Region({ regionName, players, flip = false }) {
   const playerArray = Array.isArray(players) ? players : [];
-  
+
+  // Standard 16-team bracket pairing order
+  const SEED_ORDER = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
+
+  // Index players by their *regional* seed (1..16)
+  const bySeed = Array.from({ length: 17 }, () => null);
+  for (const p of playerArray) {
+    if (p?.seed >= 1 && p?.seed <= 16) bySeed[p.seed] = p;
+  }
+
   const round64Matchups = [];
-  for (let i = 0; i < 16; i += 2) {
+  for (let i = 0; i < SEED_ORDER.length; i += 2) {
+    const seed1 = SEED_ORDER[i];
+    const seed2 = SEED_ORDER[i + 1];
     round64Matchups.push({
-      player1: playerArray[i] || null,
-      player2: playerArray[i + 1] || null,
-      seed1: startSeed + i,
-      seed2: startSeed + i + 1
+      seed1,
+      seed2,
+      player1: bySeed[seed1] || null,
+      player2: bySeed[seed2] || null
     });
   }
 
   return (
     <div className="flex-1">
-      <h3 className="text-lg font-bold mb-4 uppercase tracking-wide text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
+      <h3
+        className="text-lg font-bold mb-4 uppercase tracking-wide text-center"
+        style={{ fontFamily: 'Figtree, sans-serif' }}
+      >
         {regionName}
       </h3>
-      
-      <div className="flex gap-6">
+
+      <div className={`flex gap-6 ${flip ? 'flex-row-reverse' : ''}`}>
         <div className="flex-1">
-          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Round of 64</div>
+          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+            Round of 64
+          </div>
           <div className="space-y-4">
             {round64Matchups.map((matchup, idx) => (
               <Matchup
@@ -246,7 +263,9 @@ function Region({ regionName, players, startSeed = 1 }) {
         </div>
 
         <div className="flex-1">
-          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Round of 32</div>
+          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+            Round of 32
+          </div>
           <div className="space-y-10" style={{ marginTop: '20px' }}>
             {Array.from({ length: 4 }).map((_, idx) => (
               <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
@@ -255,7 +274,9 @@ function Region({ regionName, players, startSeed = 1 }) {
         </div>
 
         <div className="flex-1">
-          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Sweet 16</div>
+          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+            Sweet 16
+          </div>
           <div className="space-y-24" style={{ marginTop: '48px' }}>
             {Array.from({ length: 2 }).map((_, idx) => (
               <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
@@ -264,7 +285,9 @@ function Region({ regionName, players, startSeed = 1 }) {
         </div>
 
         <div className="flex-1">
-          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Elite 8</div>
+          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+            Elite 8
+          </div>
           <div style={{ marginTop: '104px' }}>
             <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
           </div>
@@ -296,6 +319,21 @@ export default function PingPongELO() {
   const [editName, setEditName] = useState('');
   const [editCountry, setEditCountry] = useState('');
   const [editOffice, setEditOffice] = useState('');
+  const [bracketScale, setBracketScale] = useState(1);
+
+useEffect(() => {
+  if (currentView !== 'bracket') return;
+
+  const BASE_WIDTH = 2100; // tweak if you want slightly bigger/smaller
+  const onResize = () => {
+    const available = Math.max(320, window.innerWidth - 64); // padding buffer
+    setBracketScale(Math.min(1, available / BASE_WIDTH));
+  };
+
+  onResize();
+  window.addEventListener('resize', onResize);
+  return () => window.removeEventListener('resize', onResize);
+}, [currentView]);
 
   useEffect(() => {
     loadData();
@@ -723,10 +761,12 @@ export default function PingPongELO() {
         probabilities: p.probabilities || {}
       }));
 
-    const region1 = top64.slice(0, 16);
-    const region2 = top64.slice(16, 32);
-    const region3 = top64.slice(32, 48);
-    const region4 = top64.slice(48, 64);
+  const makeRegion = (slice) => slice.map((p, i) => ({ ...p, seed: i + 1 }));
+
+  const region1 = makeRegion(top64.slice(0, 16));
+  const region2 = makeRegion(top64.slice(16, 32));
+  const region3 = makeRegion(top64.slice(32, 48));
+  const region4 = makeRegion(top64.slice(48, 64));
 
     if (sortedPlayers.length < 64) {
       return (
@@ -797,43 +837,50 @@ export default function PingPongELO() {
         </div>
 
         <div className="max-w-full mx-auto px-8 py-12">
-          <div className="overflow-x-auto">
-            <div className="min-w-[2400px]">
-              <div className="mb-16">
-                <div className="flex gap-8 mb-8">
-                  <Region regionName="Region 1" players={region1} startSeed={1} />
-                  <Region regionName="Region 2" players={region2} startSeed={17} />
-                </div>
-                
-                <div className="flex justify-center">
-                  <div className="w-96">
-                    <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Final Four</div>
-                    <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-                  </div>
-                </div>
-              </div>
+          <div className="w-full overflow-hidden">
+  <div
+    className="mx-auto"
+    style={{
+      transform: `scale(${bracketScale})`,
+      transformOrigin: 'top center'
+    }}
+  >
+    <div className="grid grid-cols-[1fr_420px_1fr] gap-10 items-start">
+      {/* LEFT SIDE (two regions) */}
+      <div className="space-y-16">
+        <Region regionName="Region 1" players={region1} />
+        <Region regionName="Region 3" players={region3} />
+      </div>
 
-              <div className="flex justify-center mb-16">
-                <div className="w-96">
-                  <div className="text-sm font-bold uppercase mb-4 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>Championship</div>
-                  <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-                </div>
-              </div>
+      {/* CENTER (Final Four + Championship) */}
+      <div className="flex flex-col items-center pt-28">
+        <div className="w-full mb-14">
+          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+            Final Four
+          </div>
+          <div className="space-y-10">
+            <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+            <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+          </div>
+        </div>
 
-              <div>
-                <div className="flex justify-center mb-8">
-                  <div className="w-96">
-                    <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Final Four</div>
-                    <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-                  </div>
-                </div>
+        <div className="w-full">
+          <div className="text-sm font-bold uppercase mb-4 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
+            Championship
+          </div>
+          <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+        </div>
+      </div>
 
-                <div className="flex gap-8">
-                  <Region regionName="Region 3" players={region3} startSeed={33} />
-                  <Region regionName="Region 4" players={region4} startSeed={49} />
-                </div>
-              </div>
-            </div>
+      {/* RIGHT SIDE (two regions, mirrored) */}
+      <div className="space-y-16">
+        <Region regionName="Region 2" players={region2} flip />
+        <Region regionName="Region 4" players={region4} flip />
+      </div>
+    </div>
+  </div>
+</div>
+
           </div>
 
           <div className="mt-12 max-w-4xl mx-auto">
@@ -926,11 +973,11 @@ export default function PingPongELO() {
                 <SortableHeader column="elo" align="right">ELO</SortableHeader>
                 <SortableHeader column="playoff" align="center">Playoff</SortableHeader>
                 <SortableHeader column="round32" align="center">Rd. of 32</SortableHeader>
-                <SortableHeader column="round16" align="center">Rd. of 16</SortableHeader>
-                <SortableHeader column="quarterfinals" align="center">Quarters</SortableHeader>
-                <SortableHeader column="semifinals" align="center">Semis</SortableHeader>
-                <SortableHeader column="finals" align="center">Finals</SortableHeader>
-                <SortableHeader column="champ" align="center">Champ</SortableHeader>
+                <SortableHeader column="round16" align="center">SWEET 16</SortableHeader>
+                <SortableHeader column="quarterfinals" align="center">ELITE 8</SortableHeader>
+                <SortableHeader column="semifinals" align="center">FINAL 4</SortableHeader>
+                <SortableHeader column="finals" align="center">FINALS</SortableHeader>
+                <SortableHeader column="champ" align="center">CHAMP</SortableHeader>
               </tr>
             </thead>
             <tbody>
