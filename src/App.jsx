@@ -1,34 +1,93 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, X, Menu, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown } from 'lucide-react';
 
-// Country flag emoji mapping
-const COUNTRY_FLAGS = {
-  'USA': '🇺🇸', 'UK': '🇬🇧', 'Canada': '🇨🇦', 'Germany': '🇩🇪', 'France': '🇫🇷',
-  'Japan': '🇯🇵', 'China': '🇨🇳', 'South Korea': '🇰🇷', 'Australia': '🇦🇺', 'Brazil': '🇧🇷',
-  'India': '🇮🇳', 'Mexico': '🇲🇽', 'Spain': '🇪🇸', 'Italy': '🇮🇹', 'Netherlands': '🇳🇱',
-  'Sweden': '🇸🇪', 'Switzerland': '🇨🇭', 'Poland': '🇵🇱', 'Belgium': '🇧🇪', 'Denmark': '🇩🇰',
-  'Norway': '🇳🇴', 'Finland': '🇫🇮', 'Russia': '🇷🇺', 'Singapore': '🇸🇬', 'Taiwan': '🇹🇼',
-  'Hong Kong': '🇭🇰', 'Israel': '🇮🇱', 'Argentina': '🇦🇷', 'Chile': '🇨🇱', 'Portugal': '🇵🇹'
-};
+// All countries with their ISO codes for flat flags
+const COUNTRIES = [
+  { name: 'Afghanistan', code: 'af' }, { name: 'Albania', code: 'al' }, { name: 'Algeria', code: 'dz' },
+  { name: 'Andorra', code: 'ad' }, { name: 'Angola', code: 'ao' }, { name: 'Argentina', code: 'ar' },
+  { name: 'Armenia', code: 'am' }, { name: 'Australia', code: 'au' }, { name: 'Austria', code: 'at' },
+  { name: 'Azerbaijan', code: 'az' }, { name: 'Bahamas', code: 'bs' }, { name: 'Bahrain', code: 'bh' },
+  { name: 'Bangladesh', code: 'bd' }, { name: 'Barbados', code: 'bb' }, { name: 'Belarus', code: 'by' },
+  { name: 'Belgium', code: 'be' }, { name: 'Belize', code: 'bz' }, { name: 'Benin', code: 'bj' },
+  { name: 'Bhutan', code: 'bt' }, { name: 'Bolivia', code: 'bo' }, { name: 'Bosnia', code: 'ba' },
+  { name: 'Botswana', code: 'bw' }, { name: 'Brazil', code: 'br' }, { name: 'Brunei', code: 'bn' },
+  { name: 'Bulgaria', code: 'bg' }, { name: 'Burkina Faso', code: 'bf' }, { name: 'Burundi', code: 'bi' },
+  { name: 'Cambodia', code: 'kh' }, { name: 'Cameroon', code: 'cm' }, { name: 'Canada', code: 'ca' },
+  { name: 'Cape Verde', code: 'cv' }, { name: 'Central African Republic', code: 'cf' },
+  { name: 'Chad', code: 'td' }, { name: 'Chile', code: 'cl' }, { name: 'China', code: 'cn' },
+  { name: 'Colombia', code: 'co' }, { name: 'Comoros', code: 'km' }, { name: 'Congo', code: 'cg' },
+  { name: 'Costa Rica', code: 'cr' }, { name: 'Croatia', code: 'hr' }, { name: 'Cuba', code: 'cu' },
+  { name: 'Cyprus', code: 'cy' }, { name: 'Czech Republic', code: 'cz' }, { name: 'Denmark', code: 'dk' },
+  { name: 'Djibouti', code: 'dj' }, { name: 'Dominica', code: 'dm' }, { name: 'Dominican Republic', code: 'do' },
+  { name: 'Ecuador', code: 'ec' }, { name: 'Egypt', code: 'eg' }, { name: 'El Salvador', code: 'sv' },
+  { name: 'England', code: 'gb-eng' }, { name: 'Equatorial Guinea', code: 'gq' }, { name: 'Eritrea', code: 'er' },
+  { name: 'Estonia', code: 'ee' }, { name: 'Ethiopia', code: 'et' }, { name: 'Fiji', code: 'fj' },
+  { name: 'Finland', code: 'fi' }, { name: 'France', code: 'fr' }, { name: 'Gabon', code: 'ga' },
+  { name: 'Gambia', code: 'gm' }, { name: 'Georgia', code: 'ge' }, { name: 'Germany', code: 'de' },
+  { name: 'Ghana', code: 'gh' }, { name: 'Greece', code: 'gr' }, { name: 'Grenada', code: 'gd' },
+  { name: 'Guatemala', code: 'gt' }, { name: 'Guinea', code: 'gn' }, { name: 'Guinea-Bissau', code: 'gw' },
+  { name: 'Guyana', code: 'gy' }, { name: 'Haiti', code: 'ht' }, { name: 'Honduras', code: 'hn' },
+  { name: 'Hong Kong', code: 'hk' }, { name: 'Hungary', code: 'hu' }, { name: 'Iceland', code: 'is' },
+  { name: 'India', code: 'in' }, { name: 'Indonesia', code: 'id' }, { name: 'Iran', code: 'ir' },
+  { name: 'Iraq', code: 'iq' }, { name: 'Ireland', code: 'ie' }, { name: 'Israel', code: 'il' },
+  { name: 'Italy', code: 'it' }, { name: 'Jamaica', code: 'jm' }, { name: 'Japan', code: 'jp' },
+  { name: 'Jordan', code: 'jo' }, { name: 'Kazakhstan', code: 'kz' }, { name: 'Kenya', code: 'ke' },
+  { name: 'Kiribati', code: 'ki' }, { name: 'Kosovo', code: 'xk' }, { name: 'Kuwait', code: 'kw' },
+  { name: 'Kyrgyzstan', code: 'kg' }, { name: 'Laos', code: 'la' }, { name: 'Latvia', code: 'lv' },
+  { name: 'Lebanon', code: 'lb' }, { name: 'Lesotho', code: 'ls' }, { name: 'Liberia', code: 'lr' },
+  { name: 'Libya', code: 'ly' }, { name: 'Liechtenstein', code: 'li' }, { name: 'Lithuania', code: 'lt' },
+  { name: 'Luxembourg', code: 'lu' }, { name: 'Madagascar', code: 'mg' }, { name: 'Malawi', code: 'mw' },
+  { name: 'Malaysia', code: 'my' }, { name: 'Maldives', code: 'mv' }, { name: 'Mali', code: 'ml' },
+  { name: 'Malta', code: 'mt' }, { name: 'Marshall Islands', code: 'mh' }, { name: 'Mauritania', code: 'mr' },
+  { name: 'Mauritius', code: 'mu' }, { name: 'Mexico', code: 'mx' }, { name: 'Micronesia', code: 'fm' },
+  { name: 'Moldova', code: 'md' }, { name: 'Monaco', code: 'mc' }, { name: 'Mongolia', code: 'mn' },
+  { name: 'Montenegro', code: 'me' }, { name: 'Morocco', code: 'ma' }, { name: 'Mozambique', code: 'mz' },
+  { name: 'Myanmar', code: 'mm' }, { name: 'Namibia', code: 'na' }, { name: 'Nauru', code: 'nr' },
+  { name: 'Nepal', code: 'np' }, { name: 'Netherlands', code: 'nl' }, { name: 'New Zealand', code: 'nz' },
+  { name: 'Nicaragua', code: 'ni' }, { name: 'Niger', code: 'ne' }, { name: 'Nigeria', code: 'ng' },
+  { name: 'North Korea', code: 'kp' }, { name: 'North Macedonia', code: 'mk' }, { name: 'Norway', code: 'no' },
+  { name: 'Oman', code: 'om' }, { name: 'Pakistan', code: 'pk' }, { name: 'Palau', code: 'pw' },
+  { name: 'Palestine', code: 'ps' }, { name: 'Panama', code: 'pa' }, { name: 'Papua New Guinea', code: 'pg' },
+  { name: 'Paraguay', code: 'py' }, { name: 'Peru', code: 'pe' }, { name: 'Philippines', code: 'ph' },
+  { name: 'Poland', code: 'pl' }, { name: 'Portugal', code: 'pt' }, { name: 'Qatar', code: 'qa' },
+  { name: 'Romania', code: 'ro' }, { name: 'Russia', code: 'ru' }, { name: 'Rwanda', code: 'rw' },
+  { name: 'Saint Lucia', code: 'lc' }, { name: 'Samoa', code: 'ws' }, { name: 'San Marino', code: 'sm' },
+  { name: 'Saudi Arabia', code: 'sa' }, { name: 'Scotland', code: 'gb-sct' }, { name: 'Senegal', code: 'sn' },
+  { name: 'Serbia', code: 'rs' }, { name: 'Seychelles', code: 'sc' }, { name: 'Sierra Leone', code: 'sl' },
+  { name: 'Singapore', code: 'sg' }, { name: 'Slovakia', code: 'sk' }, { name: 'Slovenia', code: 'si' },
+  { name: 'Solomon Islands', code: 'sb' }, { name: 'Somalia', code: 'so' }, { name: 'South Africa', code: 'za' },
+  { name: 'South Korea', code: 'kr' }, { name: 'South Sudan', code: 'ss' }, { name: 'Spain', code: 'es' },
+  { name: 'Sri Lanka', code: 'lk' }, { name: 'Sudan', code: 'sd' }, { name: 'Suriname', code: 'sr' },
+  { name: 'Sweden', code: 'se' }, { name: 'Switzerland', code: 'ch' }, { name: 'Syria', code: 'sy' },
+  { name: 'Taiwan', code: 'tw' }, { name: 'Tajikistan', code: 'tj' }, { name: 'Tanzania', code: 'tz' },
+  { name: 'Thailand', code: 'th' }, { name: 'Timor-Leste', code: 'tl' }, { name: 'Togo', code: 'tg' },
+  { name: 'Tonga', code: 'to' }, { name: 'Trinidad and Tobago', code: 'tt' }, { name: 'Tunisia', code: 'tn' },
+  { name: 'Turkey', code: 'tr' }, { name: 'Turkmenistan', code: 'tm' }, { name: 'Tuvalu', code: 'tv' },
+  { name: 'Uganda', code: 'ug' }, { name: 'Ukraine', code: 'ua' }, { name: 'United Arab Emirates', code: 'ae' },
+  { name: 'United Kingdom', code: 'gb' }, { name: 'United States', code: 'us' }, { name: 'Uruguay', code: 'uy' },
+  { name: 'Uzbekistan', code: 'uz' }, { name: 'Vanuatu', code: 'vu' }, { name: 'Vatican City', code: 'va' },
+  { name: 'Venezuela', code: 've' }, { name: 'Vietnam', code: 'vn' }, { name: 'Wales', code: 'gb-wls' },
+  { name: 'Yemen', code: 'ye' }, { name: 'Zambia', code: 'zm' }, { name: 'Zimbabwe', code: 'zw' }
+];
 
-const COUNTRY_LIST = Object.keys(COUNTRY_FLAGS).sort();
+const OFFICES = ['NYC', 'LON'];
 
-// GitHub configuration - update these with your values
+// GitHub configuration
 const GITHUB_CONFIG = {
-  owner: 'YOUR_GITHUB_USERNAME',  // e.g., 'christopherkilner'
-  repo: 'isometric-pingpong',      // your repository name
-  branch: 'main',                  // branch name
-  filePath: 'data/pingpong.json'   // path to data file in repo
+  owner: 'YOUR_GITHUB_USERNAME',
+  repo: 'isometric-pingpong',
+  branch: 'main',
+  filePath: 'data/pingpong.json'
 };
 
-// Probability Cell Component - Full width shaded box
+// Probability Cell Component
 function ProbabilityCell({ probability }) {
   const getBackgroundColor = (prob) => {
     if (prob === 0) return '#ffffff';
     
     const white = { r: 255, g: 255, b: 255 };
-    const middle = { r: 249, g: 223, b: 226 }; // #f9dfe2
-    const dark = { r: 233, g: 30, b: 99 }; // #e91e63
+    const middle = { r: 249, g: 223, b: 226 };
+    const dark = { r: 233, g: 30, b: 99 };
     
     let color;
     if (prob <= 50) {
@@ -60,8 +119,7 @@ function ProbabilityCell({ probability }) {
         backgroundColor: bgColor,
         color: textColor,
         fontFamily: 'monospace',
-        fontSize: '14px',
-        fontWeight: probability > 0 ? 'normal' : 'normal'
+        fontSize: '14px'
       }}
     >
       {probability > 0 ? `${probability}%` : '—'}
@@ -75,9 +133,12 @@ export default function PingPongELO() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedWinner, setSelectedWinner] = useState('');
   const [selectedLoser, setSelectedLoser] = useState('');
+  const [winnerScore, setWinnerScore] = useState('');
+  const [loserScore, setLoserScore] = useState('');
   const [loading, setLoading] = useState(true);
   const [newPlayerName, setNewPlayerName] = useState('');
   const [newPlayerCountry, setNewPlayerCountry] = useState('');
+  const [newPlayerOffice, setNewPlayerOffice] = useState('');
   const [activeTab, setActiveTab] = useState('match');
   const [sortColumn, setSortColumn] = useState('rank');
   const [sortDirection, setSortDirection] = useState('asc');
@@ -87,12 +148,10 @@ export default function PingPongELO() {
     loadData();
   }, []);
 
-  // Load data from GitHub
   const loadData = async () => {
     try {
       setLoading(true);
       
-      // For local development, use localStorage as fallback
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         const localPlayers = localStorage.getItem('pingpong:players_local');
         const localMatches = localStorage.getItem('pingpong:matches_local');
@@ -103,7 +162,6 @@ export default function PingPongELO() {
         return;
       }
 
-      // Fetch from GitHub
       const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}?ref=${GITHUB_CONFIG.branch}`;
       const response = await fetch(url);
       
@@ -111,14 +169,12 @@ export default function PingPongELO() {
         const fileData = await response.json();
         setFileSha(fileData.sha);
         
-        // Decode base64 content
         const content = atob(fileData.content);
         const data = JSON.parse(content);
         
         setPlayers(data.players || []);
         setMatches(data.matches || []);
       } else if (response.status === 404) {
-        // File doesn't exist yet, start with empty data
         console.log('No data file found, starting fresh');
       }
     } catch (error) {
@@ -128,10 +184,8 @@ export default function PingPongELO() {
     }
   };
 
-  // Save data to GitHub
   const saveData = async (newPlayers, newMatches) => {
     try {
-      // For local development, use localStorage
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         localStorage.setItem('pingpong:players_local', JSON.stringify(newPlayers));
         localStorage.setItem('pingpong:matches_local', JSON.stringify(newMatches));
@@ -144,29 +198,23 @@ export default function PingPongELO() {
         lastUpdated: new Date().toISOString()
       };
 
-      // Convert data to base64
       const content = btoa(JSON.stringify(data, null, 2));
 
-      // Prepare request body
       const body = {
         message: `Update ping pong data - ${new Date().toLocaleString()}`,
         content: content,
         branch: GITHUB_CONFIG.branch
       };
 
-      // Include SHA if we're updating existing file
       if (fileSha) {
         body.sha = fileSha;
       }
 
-      // Update file in GitHub
       const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}`;
       const response = await fetch(url, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          // Note: For production, you'll need to use GitHub Actions or a backend API
-          // to handle authentication securely
         },
         body: JSON.stringify(body)
       });
@@ -183,13 +231,32 @@ export default function PingPongELO() {
     }
   };
 
-  const calculateELO = (winnerELO, loserELO, K = 32) => {
+  // Enhanced ELO calculation with optional score
+  const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
     const expectedLoser = 1 / (1 + Math.pow(10, (winnerELO - loserELO) / 400));
     
+    // If scores are provided, adjust K factor based on margin of victory
+    let adjustedK = K;
+    if (winnerScoreVal !== null && loserScoreVal !== null) {
+      const totalPoints = winnerScoreVal + loserScoreVal;
+      const scoreDiff = winnerScoreVal - loserScoreVal;
+      
+      // Margin of victory multiplier (closer games = less K adjustment)
+      // Blowouts increase K factor, close games decrease it
+      const movMultiplier = Math.log(Math.abs(scoreDiff) + 1) * (2.2 / ((winnerELO - loserELO) * 0.001 + 2.2));
+      
+      adjustedK = K * (1 + movMultiplier * 0.5);
+      
+      // Cap the adjustment to prevent extreme swings
+      adjustedK = Math.min(adjustedK, K * 1.75);
+      adjustedK = Math.max(adjustedK, K * 0.5);
+    }
+    
     return {
-      winnerNew: Math.round(winnerELO + K * (1 - expectedWinner)),
-      loserNew: Math.round(loserELO + K * (0 - expectedLoser))
+      winnerNew: Math.round(winnerELO + adjustedK * (1 - expectedWinner)),
+      loserNew: Math.round(loserELO + adjustedK * (0 - expectedLoser)),
+      kFactorUsed: adjustedK
     };
   };
 
@@ -218,12 +285,13 @@ export default function PingPongELO() {
   };
 
   const addPlayer = () => {
-    if (!newPlayerName.trim() || !newPlayerCountry) return;
+    if (!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice) return;
     
     const newPlayer = {
       id: Date.now().toString(),
       name: newPlayerName.trim(),
-      country: newPlayerCountry,
+      countryCode: newPlayerCountry,
+      office: newPlayerOffice,
       elo: 1500,
       wins: 0,
       losses: 0,
@@ -237,6 +305,7 @@ export default function PingPongELO() {
     saveData(updatedPlayers, matches);
     setNewPlayerName('');
     setNewPlayerCountry('');
+    setNewPlayerOffice('');
   };
 
   const calculateRankChanges = (updatedPlayers) => {
@@ -274,7 +343,23 @@ export default function PingPongELO() {
     const winner = players.find(p => p.id === selectedWinner);
     const loser = players.find(p => p.id === selectedLoser);
 
-    const { winnerNew, loserNew } = calculateELO(winner.elo, loser.elo);
+    // Parse scores if provided
+    const winnerScoreNum = winnerScore ? parseInt(winnerScore) : null;
+    const loserScoreNum = loserScore ? parseInt(loserScore) : null;
+
+    // Validate scores if both are provided
+    if ((winnerScoreNum !== null && loserScoreNum !== null)) {
+      if (winnerScoreNum <= loserScoreNum) {
+        alert('Winner score must be greater than loser score');
+        return;
+      }
+      if (winnerScoreNum < 0 || loserScoreNum < 0) {
+        alert('Scores must be positive numbers');
+        return;
+      }
+    }
+
+    const { winnerNew, loserNew } = calculateELO(winner.elo, loser.elo, winnerScoreNum, loserScoreNum);
     const timestamp = new Date().toISOString();
 
     const updatedPlayers = players.map(p => {
@@ -305,6 +390,8 @@ export default function PingPongELO() {
       loserId: selectedLoser,
       winner: winner.name,
       loser: loser.name,
+      winnerScore: winnerScoreNum,
+      loserScore: loserScoreNum,
       winnerEloChange: winnerNew - winner.elo,
       loserEloChange: loserNew - loser.elo,
       timestamp
@@ -317,6 +404,8 @@ export default function PingPongELO() {
     
     setSelectedWinner('');
     setSelectedLoser('');
+    setWinnerScore('');
+    setLoserScore('');
     setSidebarOpen(false);
   };
 
@@ -344,10 +433,6 @@ export default function PingPongELO() {
         case 'rank':
           compareA = a.rank;
           compareB = b.rank;
-          break;
-        case 'country':
-          compareA = a.country;
-          compareB = b.country;
           break;
         case 'name':
           compareA = a.name.toLowerCase();
@@ -398,7 +483,7 @@ export default function PingPongELO() {
 
   const SortableHeader = ({ column, children, align = 'left' }) => (
     <th 
-      className={`py-4 ${align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left'} ${column === 'playoff' ? 'border-l-2 border-gray-300' : ''} ${column === 'rank' ? 'pr-6' : column === 'country' || column === 'name' || column === 'elo' ? 'px-6' : 'px-0'} text-sm font-normal text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-50 transition-colors select-none`}
+      className={`py-4 ${align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left'} ${column === 'playoff' ? 'border-l-2 border-gray-300' : ''} ${column === 'rank' ? 'pr-6' : 'px-6 px-0'} text-sm font-normal text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-50 transition-colors select-none`}
       onClick={() => handleSort(column)}
     >
       <div className={`flex items-center gap-2 ${align === 'right' ? 'justify-end' : align === 'center' ? 'justify-center' : 'justify-start'}`}>
@@ -461,7 +546,6 @@ export default function PingPongELO() {
             <thead>
               <tr className="border-b border-gray-300">
                 <SortableHeader column="rank">↑ Rank</SortableHeader>
-                <SortableHeader column="country">Country</SortableHeader>
                 <SortableHeader column="name">Name</SortableHeader>
                 <SortableHeader column="elo" align="right">ELO</SortableHeader>
                 <SortableHeader column="playoff" align="center">Playoff</SortableHeader>
@@ -473,13 +557,14 @@ export default function PingPongELO() {
             <tbody>
               {sortedPlayers.length === 0 ? (
                 <tr>
-                  <td colSpan="8" className="text-center py-16 text-gray-400">
+                  <td colSpan="7" className="text-center py-16 text-gray-400">
                     No players registered yet. Add a player to get started.
                   </td>
                 </tr>
               ) : (
                 sortedPlayers.map((player) => {
                   const rankChange = player.lastWeekRank ? player.lastWeekRank - player.rank : 0;
+                  const countryData = COUNTRIES.find(c => c.code === player.countryCode);
                   
                   return (
                     <tr key={player.id} className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
@@ -501,12 +586,22 @@ export default function PingPongELO() {
                         </div>
                       </td>
                       <td className="py-5 px-6">
-                        <span className="text-3xl" title={player.country}>
-                          {COUNTRY_FLAGS[player.country] || '🏳️'}
-                        </span>
-                      </td>
-                      <td className="py-5 px-6">
-                        <span className="text-base text-gray-900">{player.name}</span>
+                        <div className="flex items-center gap-3">
+                          <img 
+                            src={`https://flagcdn.com/24x18/${player.countryCode}.png`}
+                            srcSet={`https://flagcdn.com/48x36/${player.countryCode}.png 2x,
+                                     https://flagcdn.com/72x54/${player.countryCode}.png 3x`}
+                            width="24"
+                            height="18"
+                            alt={countryData?.name || 'Flag'}
+                            title={countryData?.name || ''}
+                            className="flex-shrink-0"
+                          />
+                          <div className="flex flex-col">
+                            <span className="text-base text-gray-900">{player.name}</span>
+                            <span className="text-xs text-gray-400 uppercase tracking-wider">{player.office}</span>
+                          </div>
+                        </div>
                       </td>
                       <td className="py-5 px-6 text-right">
                         <span className="text-xl font-normal text-gray-900">{player.elo}</span>
@@ -541,6 +636,9 @@ export default function PingPongELO() {
                   <div className="flex items-center gap-3" style={{ fontFamily: 'sans-serif' }}>
                     <span className="text-sm text-gray-500">{formatDate(match.timestamp)}</span>
                     <span className="font-semibold text-gray-900">{match.winner}</span>
+                    {match.winnerScore !== null && match.loserScore !== null && (
+                      <span className="text-gray-600">({match.winnerScore}-{match.loserScore})</span>
+                    )}
                     <span className="text-gray-500">def.</span>
                     <span className="text-gray-700">{match.loser}</span>
                   </div>
@@ -621,7 +719,7 @@ export default function PingPongELO() {
                     <option value="">Select winner...</option>
                     {players.map(player => (
                       <option key={player.id} value={player.id}>
-                        {COUNTRY_FLAGS[player.country]} {player.name} (ELO: {player.elo})
+                        {player.name} ({player.office}) - ELO: {player.elo}
                       </option>
                     ))}
                   </select>
@@ -638,16 +736,52 @@ export default function PingPongELO() {
                     <option value="">Select loser...</option>
                     {players.map(player => (
                       <option key={player.id} value={player.id}>
-                        {COUNTRY_FLAGS[player.country]} {player.name} (ELO: {player.elo})
+                        {player.name} ({player.office}) - ELO: {player.elo}
                       </option>
                     ))}
                   </select>
                 </div>
 
+                <div className="border-t border-gray-200 pt-4">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>
+                    Score (Optional)
+                  </label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1">Winner Score</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={winnerScore}
+                        onChange={(e) => setWinnerScore(e.target.value)}
+                        placeholder="21"
+                        className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                        style={{ fontFamily: 'sans-serif' }}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-gray-500 mb-1">Loser Score</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={loserScore}
+                        onChange={(e) => setLoserScore(e.target.value)}
+                        placeholder="19"
+                        className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                        style={{ fontFamily: 'sans-serif' }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Adding scores adjusts ELO change based on margin of victory. Leave blank to use default calculation.
+                  </p>
+                </div>
+
                 {selectedWinner && selectedLoser && selectedWinner !== selectedLoser && (
                   <div className="bg-gray-100 p-4 rounded border border-gray-300">
                     <div className="text-sm text-gray-700" style={{ fontFamily: 'sans-serif' }}>
-                      <strong>Preview:</strong> This match will update both players' ELO ratings and tournament probabilities.
+                      <strong>Preview:</strong> This match will update both players' ELO ratings
+                      {winnerScore && loserScore ? ' with score-adjusted calculation' : ''}.
                     </div>
                   </div>
                 )}
@@ -684,9 +818,26 @@ export default function PingPongELO() {
                     style={{ fontFamily: 'sans-serif' }}
                   >
                     <option value="">Select country...</option>
-                    {COUNTRY_LIST.map(country => (
-                      <option key={country} value={country}>
-                        {COUNTRY_FLAGS[country]} {country}
+                    {COUNTRIES.map(country => (
+                      <option key={country.code} value={country.code}>
+                        {country.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>Office</label>
+                  <select
+                    value={newPlayerOffice}
+                    onChange={(e) => setNewPlayerOffice(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
+                    style={{ fontFamily: 'sans-serif' }}
+                  >
+                    <option value="">Select office...</option>
+                    {OFFICES.map(office => (
+                      <option key={office} value={office}>
+                        {office}
                       </option>
                     ))}
                   </select>
@@ -700,7 +851,7 @@ export default function PingPongELO() {
 
                 <button
                   onClick={addPlayer}
-                  disabled={!newPlayerName.trim() || !newPlayerCountry}
+                  disabled={!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice}
                   className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                   style={{ fontFamily: 'sans-serif' }}
                 >
