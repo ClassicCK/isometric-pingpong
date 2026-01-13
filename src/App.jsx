@@ -218,25 +218,58 @@ function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability
 function Region({ regionName, players, flip = false }) {
   const playerArray = Array.isArray(players) ? players : [];
 
-  // Standard pairing order for a 16-team region
+  // Standard 16-team seed pairing order
   const SEED_ORDER = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
 
+  // Map players by regional seed 1..16
   const bySeed = Array.from({ length: 17 }, () => null);
   for (const p of playerArray) {
     if (p?.seed >= 1 && p?.seed <= 16) bySeed[p.seed] = p;
   }
 
-  const round64Matchups = [];
+  // Build first-round matchups in proper bracket order
+  const round64 = [];
   for (let i = 0; i < SEED_ORDER.length; i += 2) {
-    const seed1 = SEED_ORDER[i];
-    const seed2 = SEED_ORDER[i + 1];
-    round64Matchups.push({
-      seed1,
-      seed2,
-      player1: bySeed[seed1] || null,
-      player2: bySeed[seed2] || null
+    const s1 = SEED_ORDER[i];
+    const s2 = SEED_ORDER[i + 1];
+    round64.push({
+      seed1: s1,
+      seed2: s2,
+      player1: bySeed[s1] || null,
+      player2: bySeed[s2] || null
     });
   }
+
+  // Grid constants
+  const ROWS = 16;
+  const ROW_H = 34; // px; 2 rows ≈ one matchup height (2*34 = 68)
+
+  const gridStyle = {
+    gridTemplateRows: `repeat(${ROWS}, ${ROW_H}px)`
+  };
+
+  // Helpers to place boxes aligned to centers of previous rounds
+  const r64Starts = [1, 3, 5, 7, 9, 11, 13, 15]; // span 2
+  const r32Starts = [1, 5, 9, 13];               // span 4
+  const s16Starts = [1, 9];                      // span 8
+  const e8Starts  = [1];                         // span 16
+
+  const Cell = ({ rowStart, rowSpan, children }) => (
+    <div style={{ gridRow: `${rowStart} / span ${rowSpan}` }} className="h-full flex items-center">
+      <div className="w-full">{children}</div>
+    </div>
+  );
+
+  const RoundColumn = ({ title, children }) => (
+    <div className="flex-1 min-w-0">
+      <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+        {title}
+      </div>
+      <div className="grid gap-0" style={gridStyle}>
+        {children}
+      </div>
+    </div>
+  );
 
   return (
     <div className="flex-1">
@@ -248,55 +281,48 @@ function Region({ regionName, players, flip = false }) {
       </h3>
 
       <div className={`flex gap-6 ${flip ? 'flex-row-reverse' : ''}`}>
-        <div className="flex-1">
-          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
-            Round of 64
-          </div>
-          <div className="space-y-4">
-            {round64Matchups.map((matchup, idx) => (
+        {/* Round of 64 */}
+        <RoundColumn title="Round of 64">
+          {round64.map((m, i) => (
+            <Cell key={i} rowStart={r64Starts[i]} rowSpan={2}>
               <Matchup
-                key={idx}
-                player1={matchup.player1}
-                player2={matchup.player2}
-                seed1={matchup.seed1}
-                seed2={matchup.seed2}
-                prob1={matchup.player1?.probabilities?.round32 || 0}
-                prob2={matchup.player2?.probabilities?.round32 || 0}
+                player1={m.player1}
+                player2={m.player2}
+                seed1={m.seed1}
+                seed2={m.seed2}
+                prob1={m.player1?.probabilities?.round32 || 0}
+                prob2={m.player2?.probabilities?.round32 || 0}
               />
-            ))}
-          </div>
-        </div>
+            </Cell>
+          ))}
+        </RoundColumn>
 
-        <div className="flex-1">
-          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
-            Round of 32
-          </div>
-          <div className="space-y-10" style={{ marginTop: '20px' }}>
-            {Array.from({ length: 4 }).map((_, idx) => (
-              <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-            ))}
-          </div>
-        </div>
+        {/* Round of 32 */}
+        <RoundColumn title="Round of 32">
+          {r32Starts.map((start, i) => (
+            <Cell key={i} rowStart={start} rowSpan={4}>
+              <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+            </Cell>
+          ))}
+        </RoundColumn>
 
-        <div className="flex-1">
-          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
-            Sweet 16
-          </div>
-          <div className="space-y-24" style={{ marginTop: '48px' }}>
-            {Array.from({ length: 2 }).map((_, idx) => (
-              <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-            ))}
-          </div>
-        </div>
+        {/* Sweet 16 */}
+        <RoundColumn title="Sweet 16">
+          {s16Starts.map((start, i) => (
+            <Cell key={i} rowStart={start} rowSpan={8}>
+              <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+            </Cell>
+          ))}
+        </RoundColumn>
 
-        <div className="flex-1">
-          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
-            Elite 8
-          </div>
-          <div style={{ marginTop: '104px' }}>
-            <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-          </div>
-        </div>
+        {/* Elite 8 */}
+        <RoundColumn title="Elite 8">
+          {e8Starts.map((start, i) => (
+            <Cell key={i} rowStart={start} rowSpan={16}>
+              <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+            </Cell>
+          ))}
+        </RoundColumn>
       </div>
     </div>
   );
@@ -885,24 +911,35 @@ export default function PingPongELO() {
                 </div>
 
                 {/* CENTER */}
-                <div className="flex flex-col items-center pt-28">
-                  <div className="w-full mb-14">
-                    <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
-                      Final Four
-                    </div>
-                    <div className="space-y-10">
-                      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-                      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-                    </div>
-                  </div>
+                <div className="flex flex-col items-center">
+  {/* Top half (between Region 1 and Region 2) */}
+  <div className="flex items-center justify-center" style={{ height: 720 }}>
+    <div className="w-full">
+      <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+        Final Four
+      </div>
+      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+    </div>
+  </div>
 
-                  <div className="w-full">
-                    <div className="text-sm font-bold uppercase mb-4 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
-                      Championship
-                    </div>
-                    <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
-                  </div>
-                </div>
+  {/* Championship centered between halves */}
+  <div className="py-10 w-full">
+    <div className="text-sm font-bold uppercase mb-4 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
+      Championship
+    </div>
+    <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+  </div>
+
+  {/* Bottom half (between Region 3 and Region 4) */}
+  <div className="flex items-center justify-center" style={{ height: 720 }}>
+    <div className="w-full">
+      <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
+        Final Four
+      </div>
+      <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+    </div>
+  </div>
+</div>
 
                 {/* RIGHT SIDE (mirrored) */}
                 <div className="space-y-16">
