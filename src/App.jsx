@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, X, Menu, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown } from 'lucide-react';
+import { Plus, X, Menu, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown, Edit2 } from 'lucide-react';
 
 // All countries with their ISO codes for flat flags
 const COUNTRIES = [
@@ -72,6 +72,84 @@ const COUNTRIES = [
 
 const OFFICES = ['NYC', 'LON'];
 
+// Pre-loaded Isometric team members - default to GB for UK names, US otherwise
+const INITIAL_PLAYERS = [
+  { name: 'David Lankes', countryCode: 'us', office: 'NYC' },
+  { name: 'Seb Green', countryCode: 'gb', office: 'LON' },
+  { name: 'George Robinson', countryCode: 'gb', office: 'LON' },
+  { name: 'Kevin Grathwohl', countryCode: 'us', office: 'NYC' },
+  { name: 'Sophie Harris', countryCode: 'gb', office: 'LON' },
+  { name: 'Kelley MacDonald', countryCode: 'us', office: 'NYC' },
+  { name: 'Rob Brown', countryCode: 'gb', office: 'LON' },
+  { name: 'Clare Joy', countryCode: 'gb', office: 'LON' },
+  { name: 'David Armstrong', countryCode: 'gb', office: 'LON' },
+  { name: 'Cassie Beyfuss', countryCode: 'us', office: 'NYC' },
+  { name: 'Paul Puget', countryCode: 'fr', office: 'LON' },
+  { name: 'Ewan Stephens', countryCode: 'gb', office: 'LON' },
+  { name: 'Adithya Pradeep', countryCode: 'in', office: 'NYC' },
+  { name: 'Christopher Kilner', countryCode: 'us', office: 'NYC' },
+  { name: 'London Clark', countryCode: 'us', office: 'NYC' },
+  { name: 'Katie Earl', countryCode: 'gb', office: 'LON' },
+  { name: 'Kate Rodger', countryCode: 'gb', office: 'LON' },
+  { name: 'Alex Steene', countryCode: 'gb', office: 'LON' },
+  { name: 'Neil Hacker', countryCode: 'gb', office: 'LON' },
+  { name: 'Charlie Parkin', countryCode: 'gb', office: 'LON' },
+  { name: 'Beth Weed', countryCode: 'us', office: 'NYC' },
+  { name: 'Chris Podgorney', countryCode: 'us', office: 'NYC' },
+  { name: 'Emma Marsland', countryCode: 'gb', office: 'LON' },
+  { name: 'George Pool', countryCode: 'gb', office: 'LON' },
+  { name: 'Tajo Oja', countryCode: 'ee', office: 'LON' },
+  { name: 'Murtz Abidi', countryCode: 'gb', office: 'LON' },
+  { name: 'Mark Pullin', countryCode: 'gb', office: 'LON' },
+  { name: 'Konrad Komorowski', countryCode: 'pl', office: 'LON' },
+  { name: 'Vid Palčar', countryCode: 'si', office: 'LON' },
+  { name: 'Helen Durrant', countryCode: 'gb', office: 'LON' },
+  { name: 'Emily Mears', countryCode: 'gb', office: 'LON' },
+  { name: 'Terrence Chung', countryCode: 'us', office: 'NYC' },
+  { name: 'Madi Berman', countryCode: 'us', office: 'NYC' },
+  { name: 'Tomek Paczkowski', countryCode: 'pl', office: 'LON' },
+  { name: 'Briony Goldsack', countryCode: 'gb', office: 'LON' },
+  { name: 'Eamon Jubbawy', countryCode: 'us', office: 'NYC' },
+  { name: 'Jeannie Wilkening', countryCode: 'us', office: 'NYC' },
+  { name: 'Jing He', countryCode: 'cn', office: 'NYC' },
+  { name: 'Anisha Joseph', countryCode: 'in', office: 'NYC' },
+  { name: 'Chris Pollard', countryCode: 'gb', office: 'LON' },
+  { name: 'Clare Leckie', countryCode: 'gb', office: 'LON' },
+  { name: 'Rhys Savage', countryCode: 'gb', office: 'LON' },
+  { name: 'Ben Drawer', countryCode: 'gb', office: 'LON' },
+  { name: 'Cai Green', countryCode: 'gb', office: 'LON' },
+  { name: 'Ola Sitarska', countryCode: 'pl', office: 'LON' },
+  { name: 'Jenn Yin', countryCode: 'us', office: 'NYC' },
+  { name: 'Joel Robinson', countryCode: 'gb', office: 'LON' },
+  { name: 'Lawrence Holmes', countryCode: 'gb', office: 'LON' },
+  { name: 'Lukas May', countryCode: 'de', office: 'LON' },
+  { name: 'Lucy Huckle', countryCode: 'gb', office: 'LON' },
+  { name: 'Ryan Huang', countryCode: 'us', office: 'NYC' },
+  { name: 'Saadat Nursultan', countryCode: 'kz', office: 'NYC' },
+  { name: 'Izzy Piper', countryCode: 'gb', office: 'LON' },
+  { name: 'Dria Wheatley', countryCode: 'us', office: 'NYC' },
+  { name: 'Jeni Reeve', countryCode: 'gb', office: 'LON' },
+  { name: 'Jon Finerty', countryCode: 'gb', office: 'LON' },
+  { name: 'Luke Harry', countryCode: 'gb', office: 'LON' },
+  { name: 'Stacy Kauk', countryCode: 'us', office: 'NYC' },
+  { name: 'James Atkin', countryCode: 'gb', office: 'LON' },
+  { name: 'Xueya Lu', countryCode: 'cn', office: 'NYC' },
+  { name: 'Michael Shell', countryCode: 'us', office: 'NYC' },
+  { name: 'Sophie Gill', countryCode: 'gb', office: 'LON' },
+  { name: 'Ryan Penney', countryCode: 'gb', office: 'LON' },
+  { name: 'Tom Sellers', countryCode: 'gb', office: 'LON' },
+  { name: 'Jay Kazazi', countryCode: 'gb', office: 'LON' },
+  { name: 'Marya Matlin-Wainer', countryCode: 'us', office: 'NYC' },
+  { name: 'Ed Long', countryCode: 'gb', office: 'LON' },
+  { name: 'Peteris Bikis', countryCode: 'lv', office: 'LON' },
+  { name: 'Neef Rehman', countryCode: 'gb', office: 'LON' },
+  { name: 'Jamie Atkinson', countryCode: 'gb', office: 'LON' },
+  { name: 'Kevin Sutherland', countryCode: 'gb', office: 'LON' },
+  { name: 'Alex Wright', countryCode: 'gb', office: 'LON' },
+  { name: 'Christie Patel', countryCode: 'gb', office: 'LON' },
+  { name: 'Ellie Romer-Lee', countryCode: 'gb', office: 'LON' }
+];
+
 // GitHub configuration
 const GITHUB_CONFIG = {
   owner: 'YOUR_GITHUB_USERNAME',
@@ -135,6 +213,7 @@ export default function PingPongELO() {
   const [selectedLoser, setSelectedLoser] = useState('');
   const [winnerScore, setWinnerScore] = useState('');
   const [loserScore, setLoserScore] = useState('');
+  const [matchDate, setMatchDate] = useState('');
   const [loading, setLoading] = useState(true);
   const [newPlayerName, setNewPlayerName] = useState('');
   const [newPlayerCountry, setNewPlayerCountry] = useState('');
@@ -143,6 +222,10 @@ export default function PingPongELO() {
   const [sortColumn, setSortColumn] = useState('rank');
   const [sortDirection, setSortDirection] = useState('asc');
   const [fileSha, setFileSha] = useState(null);
+  const [editingPlayer, setEditingPlayer] = useState(null);
+  const [editName, setEditName] = useState('');
+  const [editCountry, setEditCountry] = useState('');
+  const [editOffice, setEditOffice] = useState('');
 
   useEffect(() => {
     loadData();
@@ -153,10 +236,14 @@ export default function PingPongELO() {
       setLoading(true);
       
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        const localPlayers = localStorage.getItem('pingpong:players_local');
-        const localMatches = localStorage.getItem('pingpong:matches_local');
+        const localPlayers = localStorage.getItem('pingpong:players_v3');
+        const localMatches = localStorage.getItem('pingpong:matches_v3');
         
-        if (localPlayers) setPlayers(JSON.parse(localPlayers));
+        if (localPlayers) {
+          setPlayers(JSON.parse(localPlayers));
+        } else {
+          initializePlayers();
+        }
         if (localMatches) setMatches(JSON.parse(localMatches));
         setLoading(false);
         return;
@@ -175,20 +262,39 @@ export default function PingPongELO() {
         setPlayers(data.players || []);
         setMatches(data.matches || []);
       } else if (response.status === 404) {
-        console.log('No data file found, starting fresh');
+        console.log('No data file found, initializing with pre-loaded players');
+        initializePlayers();
       }
     } catch (error) {
       console.error('Error loading data:', error);
+      initializePlayers();
     } finally {
       setLoading(false);
     }
   };
 
+  const initializePlayers = () => {
+    const initialPlayers = INITIAL_PLAYERS.map((p, index) => ({
+      id: `initial-${index}`,
+      name: p.name,
+      countryCode: p.countryCode,
+      office: p.office,
+      elo: 1500,
+      wins: 0,
+      losses: 0,
+      eloHistory: [{ elo: 1500, timestamp: new Date().toISOString() }],
+      joinedAt: new Date().toISOString(),
+      lastWeekRank: null
+    }));
+    setPlayers(initialPlayers);
+    saveData(initialPlayers, []);
+  };
+
   const saveData = async (newPlayers, newMatches) => {
     try {
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        localStorage.setItem('pingpong:players_local', JSON.stringify(newPlayers));
-        localStorage.setItem('pingpong:matches_local', JSON.stringify(newMatches));
+        localStorage.setItem('pingpong:players_v3', JSON.stringify(newPlayers));
+        localStorage.setItem('pingpong:matches_v3', JSON.stringify(newMatches));
         return;
       }
 
@@ -231,24 +337,15 @@ export default function PingPongELO() {
     }
   };
 
-  // Enhanced ELO calculation with optional score
   const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
     const expectedLoser = 1 / (1 + Math.pow(10, (winnerELO - loserELO) / 400));
     
-    // If scores are provided, adjust K factor based on margin of victory
     let adjustedK = K;
     if (winnerScoreVal !== null && loserScoreVal !== null) {
-      const totalPoints = winnerScoreVal + loserScoreVal;
       const scoreDiff = winnerScoreVal - loserScoreVal;
-      
-      // Margin of victory multiplier (closer games = less K adjustment)
-      // Blowouts increase K factor, close games decrease it
       const movMultiplier = Math.log(Math.abs(scoreDiff) + 1) * (2.2 / ((winnerELO - loserELO) * 0.001 + 2.2));
-      
       adjustedK = K * (1 + movMultiplier * 0.5);
-      
-      // Cap the adjustment to prevent extreme swings
       adjustedK = Math.min(adjustedK, K * 1.75);
       adjustedK = Math.max(adjustedK, K * 0.5);
     }
@@ -308,6 +405,41 @@ export default function PingPongELO() {
     setNewPlayerOffice('');
   };
 
+  const startEditPlayer = (player) => {
+    setEditingPlayer(player.id);
+    setEditName(player.name);
+    setEditCountry(player.countryCode);
+    setEditOffice(player.office);
+    setActiveTab('edit');
+    setSidebarOpen(true);
+  };
+
+  const saveEditPlayer = () => {
+    if (!editName.trim() || !editCountry || !editOffice) return;
+
+    const updatedPlayers = players.map(p => 
+      p.id === editingPlayer
+        ? { ...p, name: editName.trim(), countryCode: editCountry, office: editOffice }
+        : p
+    );
+
+    setPlayers(updatedPlayers);
+    saveData(updatedPlayers, matches);
+    setEditingPlayer(null);
+    setEditName('');
+    setEditCountry('');
+    setEditOffice('');
+    setActiveTab('match');
+  };
+
+  const cancelEdit = () => {
+    setEditingPlayer(null);
+    setEditName('');
+    setEditCountry('');
+    setEditOffice('');
+    setActiveTab('match');
+  };
+
   const calculateRankChanges = (updatedPlayers) => {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
@@ -343,11 +475,9 @@ export default function PingPongELO() {
     const winner = players.find(p => p.id === selectedWinner);
     const loser = players.find(p => p.id === selectedLoser);
 
-    // Parse scores if provided
     const winnerScoreNum = winnerScore ? parseInt(winnerScore) : null;
     const loserScoreNum = loserScore ? parseInt(loserScore) : null;
 
-    // Validate scores if both are provided
     if ((winnerScoreNum !== null && loserScoreNum !== null)) {
       if (winnerScoreNum <= loserScoreNum) {
         alert('Winner score must be greater than loser score');
@@ -360,7 +490,9 @@ export default function PingPongELO() {
     }
 
     const { winnerNew, loserNew } = calculateELO(winner.elo, loser.elo, winnerScoreNum, loserScoreNum);
-    const timestamp = new Date().toISOString();
+    
+    // Use custom date if provided, otherwise current date
+    const timestamp = matchDate ? new Date(matchDate).toISOString() : new Date().toISOString();
 
     const updatedPlayers = players.map(p => {
       if (p.id === selectedWinner) {
@@ -406,6 +538,7 @@ export default function PingPongELO() {
     setSelectedLoser('');
     setWinnerScore('');
     setLoserScore('');
+    setMatchDate('');
     setSidebarOpen(false);
   };
 
@@ -505,6 +638,9 @@ export default function PingPongELO() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Load Figtree font */}
+      <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+      
       {/* Header */}
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-8 py-8">
@@ -521,11 +657,11 @@ export default function PingPongELO() {
             </button>
           </div>
           
-          <h1 className="text-6xl font-black mb-4" style={{ fontFamily: 'sans-serif', letterSpacing: '-0.02em' }}>
+          <h1 className="text-6xl font-black mb-4" style={{ fontFamily: 'Figtree, sans-serif', letterSpacing: '-0.02em' }}>
             Isometric Ping Pong Rankings
           </h1>
           
-          <p className="text-xl text-gray-700" style={{ fontFamily: 'sans-serif' }}>
+          <p className="text-xl text-gray-700" style={{ fontFamily: 'Figtree, sans-serif' }}>
             How {players.length} players compare by ELO rating, updated after each match.
           </p>
         </div>
@@ -567,7 +703,7 @@ export default function PingPongELO() {
                   const countryData = COUNTRIES.find(c => c.code === player.countryCode);
                   
                   return (
-                    <tr key={player.id} className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                    <tr key={player.id} className="border-b border-gray-200 hover:bg-gray-50 transition-colors group">
                       <td className="py-5 pr-6">
                         <div className="flex items-center gap-3">
                           <span className="text-2xl font-normal text-gray-900 w-8">{player.rank}</span>
@@ -597,10 +733,17 @@ export default function PingPongELO() {
                             title={countryData?.name || ''}
                             className="flex-shrink-0"
                           />
-                          <div className="flex flex-col">
+                          <div className="flex items-center gap-2">
                             <span className="text-base text-gray-900">{player.name}</span>
-                            <span className="text-xs text-gray-400 uppercase tracking-wider">{player.office}</span>
+                            <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">{player.office}</span>
                           </div>
+                          <button
+                            onClick={() => startEditPlayer(player)}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-200 rounded"
+                            title="Edit player"
+                          >
+                            <Edit2 size={14} className="text-gray-500" />
+                          </button>
                         </div>
                       </td>
                       <td className="py-5 px-6 text-right">
@@ -682,7 +825,7 @@ export default function PingPongELO() {
 
           <div className="flex border-b border-gray-200">
             <button
-              onClick={() => setActiveTab('match')}
+              onClick={() => { setActiveTab('match'); setEditingPlayer(null); }}
               className={`flex-1 px-6 py-4 font-semibold transition-colors ${
                 activeTab === 'match'
                   ? 'text-black border-b-2 border-black'
@@ -693,7 +836,7 @@ export default function PingPongELO() {
               Record Match
             </button>
             <button
-              onClick={() => setActiveTab('player')}
+              onClick={() => { setActiveTab('player'); setEditingPlayer(null); }}
               className={`flex-1 px-6 py-4 font-semibold transition-colors ${
                 activeTab === 'player'
                   ? 'text-black border-b-2 border-black'
@@ -703,6 +846,19 @@ export default function PingPongELO() {
             >
               Add Player
             </button>
+            {editingPlayer && (
+              <button
+                onClick={() => setActiveTab('edit')}
+                className={`flex-1 px-6 py-4 font-semibold transition-colors ${
+                  activeTab === 'edit'
+                    ? 'text-black border-b-2 border-black'
+                    : 'text-gray-400 hover:text-gray-700'
+                }`}
+                style={{ fontFamily: 'sans-serif' }}
+              >
+                Edit Player
+              </button>
+            )}
           </div>
 
           <div className="flex-1 overflow-y-auto p-6">
@@ -772,8 +928,22 @@ export default function PingPongELO() {
                       />
                     </div>
                   </div>
+                </div>
+
+                <div className="border-t border-gray-200 pt-4">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>
+                    Match Date (Optional)
+                  </label>
+                  <input
+                    type="date"
+                    value={matchDate}
+                    onChange={(e) => setMatchDate(e.target.value)}
+                    max={new Date().toISOString().split('T')[0]}
+                    className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                    style={{ fontFamily: 'sans-serif' }}
+                  />
                   <p className="text-xs text-gray-500 mt-2">
-                    Adding scores adjusts ELO change based on margin of victory. Leave blank to use default calculation.
+                    Leave blank to use today's date. Use this to add past matches.
                   </p>
                 </div>
 
@@ -794,6 +964,71 @@ export default function PingPongELO() {
                 >
                   Record Match
                 </button>
+              </div>
+            ) : activeTab === 'edit' ? (
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>Player Name</label>
+                  <input
+                    type="text"
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
+                    style={{ fontFamily: 'sans-serif' }}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>Country</label>
+                  <select
+                    value={editCountry}
+                    onChange={(e) => setEditCountry(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
+                    style={{ fontFamily: 'sans-serif' }}
+                  >
+                    <option value="">Select country...</option>
+                    {COUNTRIES.map(country => (
+                      <option key={country.code} value={country.code}>
+                        {country.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: 'sans-serif' }}>Office</label>
+                  <select
+                    value={editOffice}
+                    onChange={(e) => setEditOffice(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
+                    style={{ fontFamily: 'sans-serif' }}
+                  >
+                    <option value="">Select office...</option>
+                    {OFFICES.map(office => (
+                      <option key={office} value={office}>
+                        {office}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={saveEditPlayer}
+                    disabled={!editName.trim() || !editCountry || !editOffice}
+                    className="flex-1 px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                    style={{ fontFamily: 'sans-serif' }}
+                  >
+                    Save Changes
+                  </button>
+                  <button
+                    onClick={cancelEdit}
+                    className="px-6 py-3 border-2 border-gray-300 font-semibold hover:bg-gray-100 transition-colors"
+                    style={{ fontFamily: 'sans-serif' }}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="space-y-6">
