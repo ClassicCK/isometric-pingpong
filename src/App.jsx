@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, X, Menu, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown, Edit2 } from 'lucide-react';
+import { Plus, X, Menu, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown, Edit2, ArrowLeft } from 'lucide-react';
 
 // All countries with their ISO codes for flat flags
 const COUNTRIES = [
@@ -72,87 +72,9 @@ const COUNTRIES = [
 
 const OFFICES = ['NYC', 'LON'];
 
-// Pre-loaded Isometric team members - default to GB for UK names, US otherwise
-const INITIAL_PLAYERS = [
-  { name: 'David Lankes', countryCode: 'us', office: 'NYC' },
-  { name: 'Seb Green', countryCode: 'gb', office: 'LON' },
-  { name: 'George Robinson', countryCode: 'gb', office: 'LON' },
-  { name: 'Kevin Grathwohl', countryCode: 'us', office: 'NYC' },
-  { name: 'Sophie Harris', countryCode: 'gb', office: 'LON' },
-  { name: 'Kelley MacDonald', countryCode: 'us', office: 'NYC' },
-  { name: 'Rob Brown', countryCode: 'gb', office: 'LON' },
-  { name: 'Clare Joy', countryCode: 'gb', office: 'LON' },
-  { name: 'David Armstrong', countryCode: 'gb', office: 'LON' },
-  { name: 'Cassie Beyfuss', countryCode: 'us', office: 'NYC' },
-  { name: 'Paul Puget', countryCode: 'fr', office: 'LON' },
-  { name: 'Ewan Stephens', countryCode: 'gb', office: 'LON' },
-  { name: 'Adithya Pradeep', countryCode: 'in', office: 'NYC' },
-  { name: 'Christopher Kilner', countryCode: 'us', office: 'NYC' },
-  { name: 'London Clark', countryCode: 'us', office: 'NYC' },
-  { name: 'Katie Earl', countryCode: 'gb', office: 'LON' },
-  { name: 'Kate Rodger', countryCode: 'gb', office: 'LON' },
-  { name: 'Alex Steene', countryCode: 'gb', office: 'LON' },
-  { name: 'Neil Hacker', countryCode: 'gb', office: 'LON' },
-  { name: 'Charlie Parkin', countryCode: 'gb', office: 'LON' },
-  { name: 'Beth Weed', countryCode: 'us', office: 'NYC' },
-  { name: 'Chris Podgorney', countryCode: 'us', office: 'NYC' },
-  { name: 'Emma Marsland', countryCode: 'gb', office: 'LON' },
-  { name: 'George Pool', countryCode: 'gb', office: 'LON' },
-  { name: 'Tajo Oja', countryCode: 'ee', office: 'LON' },
-  { name: 'Murtz Abidi', countryCode: 'gb', office: 'LON' },
-  { name: 'Mark Pullin', countryCode: 'gb', office: 'LON' },
-  { name: 'Konrad Komorowski', countryCode: 'pl', office: 'LON' },
-  { name: 'Vid Palčar', countryCode: 'si', office: 'LON' },
-  { name: 'Helen Durrant', countryCode: 'gb', office: 'LON' },
-  { name: 'Emily Mears', countryCode: 'gb', office: 'LON' },
-  { name: 'Terrence Chung', countryCode: 'us', office: 'NYC' },
-  { name: 'Madi Berman', countryCode: 'us', office: 'NYC' },
-  { name: 'Tomek Paczkowski', countryCode: 'pl', office: 'LON' },
-  { name: 'Briony Goldsack', countryCode: 'gb', office: 'LON' },
-  { name: 'Eamon Jubbawy', countryCode: 'us', office: 'NYC' },
-  { name: 'Jeannie Wilkening', countryCode: 'us', office: 'NYC' },
-  { name: 'Jing He', countryCode: 'cn', office: 'NYC' },
-  { name: 'Anisha Joseph', countryCode: 'in', office: 'NYC' },
-  { name: 'Chris Pollard', countryCode: 'gb', office: 'LON' },
-  { name: 'Clare Leckie', countryCode: 'gb', office: 'LON' },
-  { name: 'Rhys Savage', countryCode: 'gb', office: 'LON' },
-  { name: 'Ben Drawer', countryCode: 'gb', office: 'LON' },
-  { name: 'Cai Green', countryCode: 'gb', office: 'LON' },
-  { name: 'Ola Sitarska', countryCode: 'pl', office: 'LON' },
-  { name: 'Jenn Yin', countryCode: 'us', office: 'NYC' },
-  { name: 'Joel Robinson', countryCode: 'gb', office: 'LON' },
-  { name: 'Lawrence Holmes', countryCode: 'gb', office: 'LON' },
-  { name: 'Lukas May', countryCode: 'de', office: 'LON' },
-  { name: 'Lucy Huckle', countryCode: 'gb', office: 'LON' },
-  { name: 'Ryan Huang', countryCode: 'us', office: 'NYC' },
-  { name: 'Saadat Nursultan', countryCode: 'kz', office: 'NYC' },
-  { name: 'Izzy Piper', countryCode: 'gb', office: 'LON' },
-  { name: 'Dria Wheatley', countryCode: 'us', office: 'NYC' },
-  { name: 'Jeni Reeve', countryCode: 'gb', office: 'LON' },
-  { name: 'Jon Finerty', countryCode: 'gb', office: 'LON' },
-  { name: 'Luke Harry', countryCode: 'gb', office: 'LON' },
-  { name: 'Stacy Kauk', countryCode: 'us', office: 'NYC' },
-  { name: 'James Atkin', countryCode: 'gb', office: 'LON' },
-  { name: 'Xueya Lu', countryCode: 'cn', office: 'NYC' },
-  { name: 'Michael Shell', countryCode: 'us', office: 'NYC' },
-  { name: 'Sophie Gill', countryCode: 'gb', office: 'LON' },
-  { name: 'Ryan Penney', countryCode: 'gb', office: 'LON' },
-  { name: 'Tom Sellers', countryCode: 'gb', office: 'LON' },
-  { name: 'Jay Kazazi', countryCode: 'gb', office: 'LON' },
-  { name: 'Marya Matlin-Wainer', countryCode: 'us', office: 'NYC' },
-  { name: 'Ed Long', countryCode: 'gb', office: 'LON' },
-  { name: 'Peteris Bikis', countryCode: 'lv', office: 'LON' },
-  { name: 'Neef Rehman', countryCode: 'gb', office: 'LON' },
-  { name: 'Jamie Atkinson', countryCode: 'gb', office: 'LON' },
-  { name: 'Kevin Sutherland', countryCode: 'gb', office: 'LON' },
-  { name: 'Alex Wright', countryCode: 'gb', office: 'LON' },
-  { name: 'Christie Patel', countryCode: 'gb', office: 'LON' },
-  { name: 'Ellie Romer-Lee', countryCode: 'gb', office: 'LON' }
-];
-
 // GitHub configuration
 const GITHUB_CONFIG = {
-  owner: 'ClassicCK',
+  owner: 'YOUR_GITHUB_USERNAME',
   repo: 'isometric-pingpong',
   branch: 'main',
   filePath: 'data/pingpong.json'
@@ -205,9 +127,157 @@ function ProbabilityCell({ probability }) {
   );
 }
 
+// Bracket Player Component
+function BracketPlayer({ player, seed, probability, showProbability = true }) {
+  if (!player) {
+    return (
+      <div className="flex items-center justify-between h-8 px-2 bg-white border border-gray-300">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold text-gray-400 w-4">{seed}</span>
+          <span className="text-xs text-gray-400">TBD</span>
+        </div>
+      </div>
+    );
+  }
+
+  const getBackgroundColor = (prob) => {
+    if (prob === 0 || !showProbability) return '#ffffff';
+    
+    const white = { r: 255, g: 255, b: 255 };
+    const middle = { r: 249, g: 223, b: 226 };
+    const dark = { r: 233, g: 30, b: 99 };
+    
+    let color;
+    if (prob <= 50) {
+      const t = prob / 50;
+      color = {
+        r: Math.round(white.r + (middle.r - white.r) * t),
+        g: Math.round(white.g + (middle.g - white.g) * t),
+        b: Math.round(white.b + (middle.b - white.b) * t)
+      };
+    } else {
+      const t = (prob - 50) / 50;
+      color = {
+        r: Math.round(middle.r + (dark.r - middle.r) * t),
+        g: Math.round(middle.g + (dark.g - middle.g) * t),
+        b: Math.round(middle.b + (dark.b - middle.b) * t)
+      };
+    }
+    
+    return `rgb(${color.r}, ${color.g}, ${color.b})`;
+  };
+
+  const bgColor = getBackgroundColor(probability);
+  const textColor = probability > 60 && showProbability ? '#ffffff' : '#000000';
+  const countryData = COUNTRIES.find(c => c.code === player.countryCode);
+
+  return (
+    <div 
+      className="flex items-center justify-between h-8 px-2 border border-gray-300 relative"
+      style={{ backgroundColor: bgColor }}
+    >
+      <div className="flex items-center gap-2 flex-1 min-w-0" style={{ color: textColor }}>
+        <span className="text-xs font-semibold w-4 flex-shrink-0">{seed}</span>
+        <img 
+          src={`https://flagcdn.com/16x12/${player.countryCode}.png`}
+          srcSet={`https://flagcdn.com/32x24/${player.countryCode}.png 2x`}
+          width="16"
+          height="12"
+          alt={countryData?.name || 'Flag'}
+          className="flex-shrink-0"
+        />
+        <span className="text-xs font-medium truncate">{player.name}</span>
+        <span className="text-xs uppercase opacity-70 flex-shrink-0">{player.office}</span>
+      </div>
+      {showProbability && probability > 0 && (
+        <span className="text-xs ml-2 opacity-70 flex-shrink-0" style={{ color: textColor }}>{probability}%</span>
+      )}
+    </div>
+  );
+}
+
+// Matchup Component
+function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability = true }) {
+  return (
+    <div className="relative">
+      <BracketPlayer player={player1} seed={seed1} probability={prob1} showProbability={showProbability} />
+      <div className="h-px bg-gray-300"></div>
+      <BracketPlayer player={player2} seed={seed2} probability={prob2} showProbability={showProbability} />
+    </div>
+  );
+}
+
+// Region Component
+function Region({ regionName, players, startSeed = 1 }) {
+  const playerArray = Array.isArray(players) ? players : [];
+  
+  const round64Matchups = [];
+  for (let i = 0; i < 16; i += 2) {
+    round64Matchups.push({
+      player1: playerArray[i] || null,
+      player2: playerArray[i + 1] || null,
+      seed1: startSeed + i,
+      seed2: startSeed + i + 1
+    });
+  }
+
+  return (
+    <div className="flex-1">
+      <h3 className="text-lg font-bold mb-4 uppercase tracking-wide text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
+        {regionName}
+      </h3>
+      
+      <div className="flex gap-6">
+        <div className="flex-1">
+          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Round of 64</div>
+          <div className="space-y-4">
+            {round64Matchups.map((matchup, idx) => (
+              <Matchup
+                key={idx}
+                player1={matchup.player1}
+                player2={matchup.player2}
+                seed1={matchup.seed1}
+                seed2={matchup.seed2}
+                prob1={matchup.player1?.probabilities?.round32 || 0}
+                prob2={matchup.player2?.probabilities?.round32 || 0}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex-1">
+          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Round of 32</div>
+          <div className="space-y-10" style={{ marginTop: '20px' }}>
+            {Array.from({ length: 4 }).map((_, idx) => (
+              <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex-1">
+          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Sweet 16</div>
+          <div className="space-y-24" style={{ marginTop: '48px' }}>
+            {Array.from({ length: 2 }).map((_, idx) => (
+              <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex-1">
+          <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Elite 8</div>
+          <div style={{ marginTop: '104px' }}>
+            <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PingPongELO() {
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
+  const [currentView, setCurrentView] = useState('rankings'); // 'rankings' or 'bracket'
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedWinner, setSelectedWinner] = useState('');
   const [selectedLoser, setSelectedLoser] = useState('');
@@ -236,14 +306,10 @@ export default function PingPongELO() {
       setLoading(true);
       
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        const localPlayers = localStorage.getItem('pingpong:players_v3');
-        const localMatches = localStorage.getItem('pingpong:matches_v3');
+        const localPlayers = localStorage.getItem('pingpong:players_v4');
+        const localMatches = localStorage.getItem('pingpong:matches_v4');
         
-        if (localPlayers) {
-          setPlayers(JSON.parse(localPlayers));
-        } else {
-          initializePlayers();
-        }
+        if (localPlayers) setPlayers(JSON.parse(localPlayers));
         if (localMatches) setMatches(JSON.parse(localMatches));
         setLoading(false);
         return;
@@ -262,39 +328,20 @@ export default function PingPongELO() {
         setPlayers(data.players || []);
         setMatches(data.matches || []);
       } else if (response.status === 404) {
-        console.log('No data file found, initializing with pre-loaded players');
-        initializePlayers();
+        console.log('No data file found, starting fresh');
       }
     } catch (error) {
       console.error('Error loading data:', error);
-      initializePlayers();
     } finally {
       setLoading(false);
     }
   };
 
-  const initializePlayers = () => {
-    const initialPlayers = INITIAL_PLAYERS.map((p, index) => ({
-      id: `initial-${index}`,
-      name: p.name,
-      countryCode: p.countryCode,
-      office: p.office,
-      elo: 1500,
-      wins: 0,
-      losses: 0,
-      eloHistory: [{ elo: 1500, timestamp: new Date().toISOString() }],
-      joinedAt: new Date().toISOString(),
-      lastWeekRank: null
-    }));
-    setPlayers(initialPlayers);
-    saveData(initialPlayers, []);
-  };
-
   const saveData = async (newPlayers, newMatches) => {
     try {
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        localStorage.setItem('pingpong:players_v3', JSON.stringify(newPlayers));
-        localStorage.setItem('pingpong:matches_v3', JSON.stringify(newMatches));
+        localStorage.setItem('pingpong:players_v4', JSON.stringify(newPlayers));
+        localStorage.setItem('pingpong:matches_v4', JSON.stringify(newMatches));
         return;
       }
 
@@ -359,7 +406,7 @@ export default function PingPongELO() {
 
   const calculateTournamentProbabilities = (playerELO, allPlayers) => {
     if (allPlayers.length < 2) {
-      return { playoff: 0, quarterfinals: 0, semifinals: 0, finals: 0 };
+      return { playoff: 0, round32: 0, round16: 0, quarterfinals: 0, semifinals: 0, finals: 0, champ: 0 };
     }
 
     const sortedByELO = [...allPlayers].sort((a, b) => b.elo - a.elo);
@@ -371,14 +418,18 @@ export default function PingPongELO() {
       .reduce((sum, p) => sum + p.elo, 0) / (allPlayers.length - 1);
     
     const avgWinProb = 1 / (1 + Math.pow(10, (avgOpponentELO - playerELO) / 400));
-    const rankFactor = 1 - ((playerRank - 1) / totalPlayers) * 0.3;
+    const rankFactor = 1 - ((playerRank - 1) / totalPlayers) * 0.4;
     
-    const playoff = Math.min(100, Math.round(avgWinProb * 100 * rankFactor));
-    const quarterfinals = Math.min(100, Math.round(Math.pow(avgWinProb, 1.5) * 100 * rankFactor));
+    const playoff = playerRank <= 64 ? Math.min(100, Math.round((64 - playerRank + 10) / 64 * 100)) : Math.round(avgWinProb * 50 * rankFactor);
+    
+    const round32 = Math.min(100, Math.round(Math.pow(avgWinProb, 1) * 100 * rankFactor));
+    const round16 = Math.min(100, Math.round(Math.pow(avgWinProb, 1.3) * 100 * rankFactor));
+    const quarterfinals = Math.min(100, Math.round(Math.pow(avgWinProb, 1.6) * 100 * rankFactor));
     const semifinals = Math.min(100, Math.round(Math.pow(avgWinProb, 2) * 100 * rankFactor));
     const finals = Math.min(100, Math.round(Math.pow(avgWinProb, 2.5) * 100 * rankFactor));
+    const champ = Math.min(100, Math.round(Math.pow(avgWinProb, 3) * 100 * rankFactor));
     
-    return { playoff, quarterfinals, semifinals, finals };
+    return { playoff, round32, round16, quarterfinals, semifinals, finals, champ };
   };
 
   const addPlayer = () => {
@@ -475,6 +526,11 @@ export default function PingPongELO() {
     const winner = players.find(p => p.id === selectedWinner);
     const loser = players.find(p => p.id === selectedLoser);
 
+    if (!winner || !loser) {
+      alert('Selected players not found');
+      return;
+    }
+
     const winnerScoreNum = winnerScore ? parseInt(winnerScore) : null;
     const loserScoreNum = loserScore ? parseInt(loserScore) : null;
 
@@ -491,9 +547,9 @@ export default function PingPongELO() {
 
     const { winnerNew, loserNew } = calculateELO(winner.elo, loser.elo, winnerScoreNum, loserScoreNum);
     
-    // Use custom date if provided, otherwise current date
     const timestamp = matchDate ? new Date(matchDate).toISOString() : new Date().toISOString();
 
+    // FIXED: Create completely new player objects to prevent mutation
     const updatedPlayers = players.map(p => {
       if (p.id === selectedWinner) {
         return { 
@@ -511,7 +567,7 @@ export default function PingPongELO() {
           eloHistory: [...p.eloHistory, { elo: loserNew, timestamp }]
         };
       }
-      return p;
+      return { ...p }; // Return copy of unchanged players too
     });
 
     const playersWithRanks = calculateRankChanges(updatedPlayers);
@@ -552,14 +608,21 @@ export default function PingPongELO() {
   };
 
   const getSortedPlayers = () => {
-    const playersWithRanks = calculateRankChanges([...players]);
-    const playersWithData = playersWithRanks.map((player, index) => {
-      const rank = playersWithRanks.sort((a, b) => b.elo - a.elo).findIndex(p => p.id === player.id) + 1;
+    // FIXED: Create fresh copy and avoid mutations
+    const playersCopy = players.map(p => ({ ...p }));
+    const playersWithRanks = calculateRankChanges(playersCopy);
+    
+    // Calculate ranks without mutating
+    const rankedPlayers = [...playersWithRanks].sort((a, b) => b.elo - a.elo);
+    
+    const playersWithData = playersWithRanks.map((player) => {
+      const rank = rankedPlayers.findIndex(p => p.id === player.id) + 1;
       const probabilities = calculateTournamentProbabilities(player.elo, playersWithRanks);
       return { ...player, rank, probabilities };
     });
 
-    return playersWithData.sort((a, b) => {
+    // Final sort based on selected column
+    return [...playersWithData].sort((a, b) => {
       let compareA, compareB;
       
       switch (sortColumn) {
@@ -579,6 +642,14 @@ export default function PingPongELO() {
           compareA = a.probabilities.playoff;
           compareB = b.probabilities.playoff;
           break;
+        case 'round32':
+          compareA = a.probabilities.round32;
+          compareB = b.probabilities.round32;
+          break;
+        case 'round16':
+          compareA = a.probabilities.round16;
+          compareB = b.probabilities.round16;
+          break;
         case 'quarterfinals':
           compareA = a.probabilities.quarterfinals;
           compareB = b.probabilities.quarterfinals;
@@ -590,6 +661,10 @@ export default function PingPongELO() {
         case 'finals':
           compareA = a.probabilities.finals;
           compareB = b.probabilities.finals;
+          break;
+        case 'champ':
+          compareA = a.probabilities.champ;
+          compareB = b.probabilities.champ;
           break;
         default:
           return 0;
@@ -609,6 +684,7 @@ export default function PingPongELO() {
     const date = new Date(isoString);
     return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   };
+  
   const formatTime = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase();
@@ -636,9 +712,164 @@ export default function PingPongELO() {
     );
   }
 
+  // Bracket View
+  if (currentView === 'bracket') {
+    const top64 = [...sortedPlayers]
+      .sort((a, b) => (b.elo || 0) - (a.elo || 0))
+      .slice(0, 64)
+      .map((p, index) => ({
+        ...p,
+        seed: index + 1,
+        probabilities: p.probabilities || {}
+      }));
+
+    const region1 = top64.slice(0, 16);
+    const region2 = top64.slice(16, 32);
+    const region3 = top64.slice(32, 48);
+    const region4 = top64.slice(48, 64);
+
+    if (sortedPlayers.length < 64) {
+      return (
+        <div className="min-h-screen bg-white">
+          <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+          
+          <div className="border-b border-gray-200">
+            <div className="max-w-7xl mx-auto px-8 py-8">
+              <button
+                onClick={() => setCurrentView('rankings')}
+                className="flex items-center gap-2 text-gray-600 hover:text-black mb-6"
+                style={{ fontFamily: 'sans-serif' }}
+              >
+                <ArrowLeft size={20} />
+                <span>Back to Rankings</span>
+              </button>
+              
+              <h1 className="text-6xl font-black mb-4" style={{ fontFamily: 'Figtree, sans-serif', letterSpacing: '-0.02em' }}>
+                EOY Tournament Bracket
+              </h1>
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-8 py-12">
+            <div className="bg-gray-100 border border-gray-300 rounded p-8 text-center">
+              <p className="text-xl text-gray-700 mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>
+                Not enough players for bracket
+              </p>
+              <p className="text-gray-600" style={{ fontFamily: 'sans-serif' }}>
+                The tournament bracket requires at least 64 players. Currently: {sortedPlayers.length} players registered.
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="min-h-screen bg-white">
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+        
+        <div className="border-b border-gray-200">
+          <div className="max-w-full mx-auto px-8 py-8">
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <button
+                  onClick={() => setCurrentView('rankings')}
+                  className="flex items-center gap-2 text-gray-600 hover:text-black mb-4"
+                  style={{ fontFamily: 'sans-serif' }}
+                >
+                  <ArrowLeft size={20} />
+                  <span>Back to Rankings</span>
+                </button>
+                <div className="text-sm text-gray-500 uppercase tracking-wider" style={{ fontFamily: 'sans-serif', letterSpacing: '0.1em' }}>
+                  UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
+                </div>
+              </div>
+            </div>
+            
+            <h1 className="text-6xl font-black mb-4" style={{ fontFamily: 'Figtree, sans-serif', letterSpacing: '-0.02em' }}>
+              EOY Tournament Bracket
+            </h1>
+            
+            <p className="text-xl text-gray-700" style={{ fontFamily: 'Figtree, sans-serif' }}>
+              Top 64 players seeded by ELO rating • Probabilities based on current standings
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-full mx-auto px-8 py-12">
+          <div className="overflow-x-auto">
+            <div className="min-w-[2400px]">
+              <div className="mb-16">
+                <div className="flex gap-8 mb-8">
+                  <Region regionName="Region 1" players={region1} startSeed={1} />
+                  <Region regionName="Region 2" players={region2} startSeed={17} />
+                </div>
+                
+                <div className="flex justify-center">
+                  <div className="w-96">
+                    <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Final Four</div>
+                    <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-center mb-16">
+                <div className="w-96">
+                  <div className="text-sm font-bold uppercase mb-4 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>Championship</div>
+                  <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-center mb-8">
+                  <div className="w-96">
+                    <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>Final Four</div>
+                    <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
+                  </div>
+                </div>
+
+                <div className="flex gap-8">
+                  <Region regionName="Region 3" players={region3} startSeed={33} />
+                  <Region regionName="Region 4" players={region4} startSeed={49} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 max-w-4xl mx-auto">
+            <h3 className="text-lg font-bold mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>How to Read the Bracket</h3>
+            <div className="grid grid-cols-2 gap-6 text-sm" style={{ fontFamily: 'sans-serif' }}>
+              <div>
+                <p className="text-gray-700 mb-2"><strong>Seeding:</strong> Players are seeded 1-64 based on their current ELO rating. Higher seeds (1-16) are matched against lower seeds (49-64) in the first round.</p>
+              </div>
+              <div>
+                <p className="text-gray-700 mb-2"><strong>Probability Shading:</strong> Background color intensity shows each player's probability of advancing to the next round. Darker pink = higher probability.</p>
+              </div>
+              <div>
+                <p className="text-gray-700 mb-2"><strong>Regions:</strong> The bracket is divided into 4 regions of 16 players each. Winners from each region advance to the Final Four.</p>
+              </div>
+              <div>
+                <p className="text-gray-700 mb-2"><strong>Advancement:</strong> This is a projected bracket based on current ratings. Actual tournament results will differ as matches are played.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-200 mt-20">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <div className="text-sm text-gray-500" style={{ fontFamily: 'sans-serif' }}>
+              <p>Isometric Ping Pong ELO System</p>
+              <p className="mt-1">© 2026 Isometric</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Rankings View (existing rankings page continues...)
   return (
     <div className="min-h-screen bg-white">
-      {/* Load Figtree font */}
       <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
       
       {/* Header */}
@@ -648,13 +879,22 @@ export default function PingPongELO() {
             <div className="text-sm text-gray-500 uppercase tracking-wider" style={{ fontFamily: 'sans-serif', letterSpacing: '0.1em' }}>
               UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
             </div>
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="px-5 py-2 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors"
-              style={{ fontFamily: 'sans-serif' }}
-            >
-              + Record Match
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setCurrentView('bracket')}
+                className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors"
+                style={{ fontFamily: 'sans-serif' }}
+              >
+                View Bracket
+              </button>
+              <button
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="px-5 py-2 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors"
+                style={{ fontFamily: 'sans-serif' }}
+              >
+                + Record Match
+              </button>
+            </div>
           </div>
           
           <h1 className="text-6xl font-black mb-4" style={{ fontFamily: 'Figtree, sans-serif', letterSpacing: '-0.02em' }}>
@@ -667,12 +907,12 @@ export default function PingPongELO() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-8 py-12">
+      {/* Main Content - Rankings Table */}
+      <div className="max-w-full mx-auto px-8 py-12">
         <div className="flex items-end justify-end mb-3">
           <div className="text-right">
             <div className="text-sm text-gray-500 uppercase tracking-wide mb-2" style={{ fontFamily: 'sans-serif' }}>
-              Probability of Winning Tournament
+              Probability of Winning EOY Tournament
             </div>
           </div>
         </div>
@@ -685,15 +925,18 @@ export default function PingPongELO() {
                 <SortableHeader column="name">Name</SortableHeader>
                 <SortableHeader column="elo" align="right">ELO</SortableHeader>
                 <SortableHeader column="playoff" align="center">Playoff</SortableHeader>
+                <SortableHeader column="round32" align="center">Rd. of 32</SortableHeader>
+                <SortableHeader column="round16" align="center">Rd. of 16</SortableHeader>
                 <SortableHeader column="quarterfinals" align="center">Quarters</SortableHeader>
                 <SortableHeader column="semifinals" align="center">Semis</SortableHeader>
                 <SortableHeader column="finals" align="center">Finals</SortableHeader>
+                <SortableHeader column="champ" align="center">Champ</SortableHeader>
               </tr>
             </thead>
             <tbody>
               {sortedPlayers.length === 0 ? (
                 <tr>
-                  <td colSpan="7" className="text-center py-16 text-gray-400">
+                  <td colSpan="10" className="text-center py-16 text-gray-400">
                     No players registered yet. Add a player to get started.
                   </td>
                 </tr>
@@ -753,6 +996,12 @@ export default function PingPongELO() {
                         <ProbabilityCell probability={player.probabilities.playoff} />
                       </td>
                       <td className="px-0">
+                        <ProbabilityCell probability={player.probabilities.round32} />
+                      </td>
+                      <td className="px-0">
+                        <ProbabilityCell probability={player.probabilities.round16} />
+                      </td>
+                      <td className="px-0">
                         <ProbabilityCell probability={player.probabilities.quarterfinals} />
                       </td>
                       <td className="px-0">
@@ -760,6 +1009,9 @@ export default function PingPongELO() {
                       </td>
                       <td className="px-0">
                         <ProbabilityCell probability={player.probabilities.finals} />
+                      </td>
+                      <td className="px-0">
+                        <ProbabilityCell probability={player.probabilities.champ} />
                       </td>
                     </tr>
                   );
