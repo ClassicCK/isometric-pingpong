@@ -218,16 +218,16 @@ function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability
 function Region({ regionName, players, flip = false }) {
   const playerArray = Array.isArray(players) ? players : [];
 
-  // Standard 16-team seed pairing order
+  // Standard 16-team bracket seeding order
   const SEED_ORDER = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15];
 
-  // Map players by regional seed 1..16
+  // Map players by seed 1..16
   const bySeed = Array.from({ length: 17 }, () => null);
   for (const p of playerArray) {
     if (p?.seed >= 1 && p?.seed <= 16) bySeed[p.seed] = p;
   }
 
-  // Build first-round matchups in proper bracket order
+  // First round matchups in proper order
   const round64 = [];
   for (let i = 0; i < SEED_ORDER.length; i += 2) {
     const s1 = SEED_ORDER[i];
@@ -240,19 +240,19 @@ function Region({ regionName, players, flip = false }) {
     });
   }
 
-  // Grid constants
-  const ROWS = 16;
-  const ROW_H = 34; // px; 2 rows ≈ one matchup height (2*34 = 68)
+  // ---- 32-row grid (half-rows) ----
+  // Think of it as: each "team line" is 2 rows.
+  // So a 2-team matchup spans 4 rows.
+  const ROWS = 32;
+  const UNIT_H = 16; // adjust slightly if you want tighter/looser vertical spacing
 
-  const gridStyle = {
-    gridTemplateRows: `repeat(${ROWS}, ${ROW_H}px)`
-  };
+  const gridStyle = { gridTemplateRows: `repeat(${ROWS}, ${UNIT_H}px)` };
 
-  // Helpers to place boxes aligned to centers of previous rounds
-  const r64Starts = [1, 3, 5, 7, 9, 11, 13, 15]; // span 2
-  const r32Starts = [1, 5, 9, 13];               // span 4
-  const s16Starts = [1, 9];                      // span 8
-  const e8Starts  = [1];                         // span 16
+  // Placement (start row, span) for each round
+  const r64Starts = [1, 5, 9, 13, 17, 21, 25, 29];   // span 4
+  const r32Starts = [1, 9, 17, 25];                 // span 8
+  const s16Starts = [1, 17];                        // span 16
+  const e8Starts = [1];                             // span 32
 
   const Cell = ({ rowStart, rowSpan, children }) => (
     <div style={{ gridRow: `${rowStart} / span ${rowSpan}` }} className="h-full flex items-center">
@@ -265,7 +265,7 @@ function Region({ regionName, players, flip = false }) {
       <div className="text-xs text-gray-500 uppercase mb-2 text-center" style={{ fontFamily: 'sans-serif' }}>
         {title}
       </div>
-      <div className="grid gap-0" style={gridStyle}>
+      <div className="grid" style={gridStyle}>
         {children}
       </div>
     </div>
@@ -284,7 +284,7 @@ function Region({ regionName, players, flip = false }) {
         {/* Round of 64 */}
         <RoundColumn title="Round of 64">
           {round64.map((m, i) => (
-            <Cell key={i} rowStart={r64Starts[i]} rowSpan={2}>
+            <Cell key={i} rowStart={r64Starts[i]} rowSpan={4}>
               <Matchup
                 player1={m.player1}
                 player2={m.player2}
@@ -300,7 +300,7 @@ function Region({ regionName, players, flip = false }) {
         {/* Round of 32 */}
         <RoundColumn title="Round of 32">
           {r32Starts.map((start, i) => (
-            <Cell key={i} rowStart={start} rowSpan={4}>
+            <Cell key={i} rowStart={start} rowSpan={8}>
               <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
             </Cell>
           ))}
@@ -309,7 +309,7 @@ function Region({ regionName, players, flip = false }) {
         {/* Sweet 16 */}
         <RoundColumn title="Sweet 16">
           {s16Starts.map((start, i) => (
-            <Cell key={i} rowStart={start} rowSpan={8}>
+            <Cell key={i} rowStart={start} rowSpan={16}>
               <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
             </Cell>
           ))}
@@ -318,7 +318,7 @@ function Region({ regionName, players, flip = false }) {
         {/* Elite 8 */}
         <RoundColumn title="Elite 8">
           {e8Starts.map((start, i) => (
-            <Cell key={i} rowStart={start} rowSpan={16}>
+            <Cell key={i} rowStart={start} rowSpan={32}>
               <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
             </Cell>
           ))}
