@@ -129,14 +129,70 @@ function ProbabilityCell({ probability }) {
 function BracketPlayer({ player, seed, probability, showProbability = true }) {
   if (!player) {
     return (
-      <div className="flex items-center justify-between h-6 px-2 bg-white border border-gray-300 text-xs">
-        <div className="flex items-center gap-1.5">
-          <span className="font-semibold text-gray-400 w-3">{seed}</span>
-          <span className="text-gray-400">TBD</span>
+      <div className="flex items-center justify-between h-5 px-1.5 bg-white border border-gray-300 text-xs">
+        <div className="flex items-center gap-1">
+          <span className="font-semibold text-gray-400 w-2 text-[10px]">{seed}</span>
+          <span className="text-gray-400 text-[10px]">TBD</span>
         </div>
       </div>
     );
   }
+
+  const getBackgroundColor = (prob) => {
+    if (prob === 0 || !showProbability) return '#ffffff';
+    
+    const white = { r: 255, g: 255, b: 255 };
+    const middle = { r: 249, g: 223, b: 226 };
+    const dark = { r: 233, g: 30, b: 99 };
+    
+    let color;
+    if (prob <= 50) {
+      const t = prob / 50;
+      color = {
+        r: Math.round(white.r + (middle.r - white.r) * t),
+        g: Math.round(white.g + (middle.g - white.g) * t),
+        b: Math.round(white.b + (middle.b - white.b) * t)
+      };
+    } else {
+      const t = (prob - 50) / 50;
+      color = {
+        r: Math.round(middle.r + (dark.r - middle.r) * t),
+        g: Math.round(middle.g + (dark.g - middle.g) * t),
+        b: Math.round(middle.b + (dark.b - middle.b) * t)
+      };
+    }
+    
+    return `rgb(${color.r}, ${color.g}, ${color.b})`;
+  };
+
+  const bgColor = getBackgroundColor(probability);
+  const textColor = probability > 60 && showProbability ? '#ffffff' : '#000000';
+  const countryData = COUNTRIES.find(c => c.code === player.countryCode);
+
+  return (
+    <div 
+      className="flex items-center justify-between h-5 px-1.5 border border-gray-300"
+      style={{ backgroundColor: bgColor }}
+    >
+      <div className="flex items-center gap-1 flex-1 min-w-0" style={{ color: textColor }}>
+        <span className="font-semibold w-2 flex-shrink-0 text-[10px]">{seed}</span>
+        <img 
+          src={`https://flagcdn.com/12x9/${player.countryCode}.png`}
+          srcSet={`https://flagcdn.com/24x18/${player.countryCode}.png 2x`}
+          width="10"
+          height="7"
+          alt={countryData?.name || 'Flag'}
+          className="flex-shrink-0"
+        />
+        <span className="font-medium truncate text-[10px]">{player.name}</span>
+        <span className="uppercase opacity-70 flex-shrink-0 text-[8px]">{player.office}</span>
+      </div>
+      {showProbability && probability > 0 && (
+        <span className="ml-1 opacity-70 flex-shrink-0 text-[9px]" style={{ color: textColor }}>{probability}%</span>
+      )}
+    </div>
+  );
+}
 
   const getBackgroundColor = (prob) => {
     if (prob === 0 || !showProbability) return '#ffffff';
@@ -199,7 +255,7 @@ function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability
   return (
     <div className="relative">
       <BracketPlayer player={player1} seed={seed1} probability={prob1} showProbability={showProbability} />
-      <div className="h-px bg-gray-300"></div>
+      <div className="h-[0.5px] bg-gray-300"></div>
       <BracketPlayer player={player2} seed={seed2} probability={prob2} showProbability={showProbability} />
     </div>
   );
@@ -1040,23 +1096,34 @@ export default function PingPongELO() {
   }
 
   // Bracket View
-  if (currentView === 'bracket') {
-    const top64 = [...sortedPlayers]
-      .sort((a, b) => (b.elo || 0) - (a.elo || 0))
-      .slice(0, 64)
-      .map((p, index) => ({
-        ...p,
-        seed: index + 1,
-        probabilities: p.probabilities || {}
-      }));
+if (currentView === 'bracket') {
+  const top64 = [...sortedPlayers]
+    .sort((a, b) => (b.elo || 0) - (a.elo || 0))
+    .slice(0, 64)
+    .map((p, index) => ({
+      ...p,
+      globalRank: index + 1,
+      // Calculate regional seed: players 1-4 are all seed 1, players 5-8 are all seed 2, etc.
+      seed: Math.floor(index / 4) + 1,
+      // Calculate which region (0-3)
+      regionIndex: index % 4,
+      probabilities: p.probabilities || {}
+    }));
 
-    const region1 = top64.slice(0, 16);
-    const region2 = top64.slice(16, 32);
-    const region3 = top64.slice(32, 48);
-    const region4 = top64.slice(48, 64);
+  // Add probabilities
+  const top64WithProbs = top64.map(player => ({
+    ...player,
+    probabilities: calculateTournamentProbabilities(player.elo, top64)
+  }));
 
-    // Fill the bracket with most probable outcomes
-    const filledBracket = fillBracket(top64);
+  // Split into 4 regions based on regionIndex
+  const region1 = top64WithProbs.filter(p => p.regionIndex === 0).sort((a, b) => a.seed - b.seed); // East
+  const region2 = top64WithProbs.filter(p => p.regionIndex === 1).sort((a, b) => a.seed - b.seed); // West
+  const region3 = top64WithProbs.filter(p => p.regionIndex === 2).sort((a, b) => a.seed - b.seed); // South
+  const region4 = top64WithProbs.filter(p => p.regionIndex === 3).sort((a, b) => a.seed - b.seed); // Midwest
+
+  // Fill the bracket with most probable outcomes
+  const filledBracket = fillBracket(top64WithProbs);
 
     if (sortedPlayers.length < 64) {
       return (
