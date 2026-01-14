@@ -1130,183 +1130,182 @@ if (currentView === 'bracket') {
       );
     }
 
-    return (
-      <div className="min-h-screen bg-white">
-        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
-        
-        <div className="border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-8 py-8">
-            <div className="flex items-start justify-between mb-6">
-              <div>
-                <button
-                  onClick={() => setCurrentView('rankings')}
-                  className="flex items-center gap-2 text-gray-600 hover:text-black mb-4"
-                  style={{ fontFamily: 'sans-serif' }}
-                >
-                  <ArrowLeft size={20} />
-                  <span>Back to Rankings</span>
-                </button>
-                <div className="text-sm text-gray-500 uppercase tracking-wider" style={{ fontFamily: 'sans-serif', letterSpacing: '0.1em' }}>
-                  UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
-                </div>
-              </div>
+return (
+  <div className="min-h-screen bg-white">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <div className="border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-8 py-8">
+        <div className="flex items-start justify-between mb-6">
+          <div>
+            <button
+              onClick={() => setCurrentView("rankings")}
+              className="flex items-center gap-2 text-gray-600 hover:text-black mb-4"
+              style={{ fontFamily: "sans-serif" }}
+            >
+              <ArrowLeft size={20} />
+              <span>Back to Rankings</span>
+            </button>
+            <div
+              className="text-sm text-gray-500 uppercase tracking-wider"
+              style={{ fontFamily: "sans-serif", letterSpacing: "0.1em" }}
+            >
+              UPDATED {formatDate(new Date().toISOString())}, AT{" "}
+              {formatTime(new Date().toISOString())}
             </div>
-            
-            <h1 className="text-5xl font-black mb-4" style={{ fontFamily: 'Figtree, sans-serif', letterSpacing: '-0.02em' }}>
-              EOY Tournament Bracket
-            </h1>
-            
-            <p className="text-lg text-gray-700" style={{ fontFamily: 'Figtree, sans-serif' }}>
-              Top 64 players seeded by ELO • Probabilities from 1,000 simulated tournaments
-            </p>
           </div>
         </div>
 
-        <div className="w-full max-w-screen-xl mx-auto px-4 py-8">
-          {/* Top Half */}
-<div className="grid grid-cols-2 gap-16 mb-4">
-  <div className="pr-16">
-    <RegionLeft regionName="East" players={region1} startSeed={1} filledData={filledBracket} />
-  </div>
-  <div className="pl-16">
-    <RegionRight regionName="West" players={region2} startSeed={17} filledData={filledBracket} />
-  </div>
-</div>
+        <h1
+          className="text-5xl font-black mb-4"
+          style={{ fontFamily: "Figtree, sans-serif", letterSpacing: "-0.02em" }}
+        >
+          EOY Tournament Bracket
+        </h1>
 
-          {/* Final Four Top */}
-          <div className="flex justify-center my-3">
-            <div className="w-64">
-              <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">Final Four</div>
-              {filledBracket.final4[0] && filledBracket.final4[1] ? (
-<Matchup
-  player1={filledBracket.final4[0]}
-  player2={filledBracket.final4[1]}
-  seed1={filledBracket.final4[0].seed}
-  seed2={filledBracket.final4[1].seed}
-  showProbability={true}
-/>
-              ) : (
-                <div className="space-y-0.5">
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                </div>
-              )}
-            </div>
-          </div>
-
- {/* Championship */}
-<div className="flex justify-center my-6">
-  <div className="w-64">
-    <div
-      className="text-sm font-bold uppercase mb-2 text-center"
-      style={{ fontFamily: "Figtree, sans-serif" }}
-    >
-      Championship
+        <p className="text-lg text-gray-700" style={{ fontFamily: "Figtree, sans-serif" }}>
+          Top 64 players seeded by ELO • Matchup win odds from ELO
+        </p>
+      </div>
     </div>
 
-    {filledBracket.finals[0] && filledBracket.finals[1] ? (
-      <Matchup
-        player1={filledBracket.finals[0]}
-        player2={filledBracket.finals[1]}
-        seed1={filledBracket.finals[0].seed}
-        seed2={filledBracket.finals[1].seed}
-        showProbability={true}
-      />
-    ) : (
-      <div className="space-y-0.5">
-        <BracketPlayer player={null} seed="—" showProbability={false} />
-        <BracketPlayer player={null} seed="—" showProbability={false} />
-      </div>
-    )}
-  </div>
-</div>
-
-
-          {/* Final Four Bottom */}
-          <div className="flex justify-center my-3">
-            <div className="w-64">
-              <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">Final Four</div>
-              {filledBracket.final4[2] && filledBracket.final4[3] ? (
-<Matchup
-  player1={filledBracket.final4[2]}
-  player2={filledBracket.final4[3]}
-  seed1={filledBracket.final4[2].seed}
-  seed2={filledBracket.final4[3].seed}
-  showProbability={true}
-/>
-              ) : (
-                <div className="space-y-0.5">
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Bottom Half */}
-<div className="grid grid-cols-2 gap-16 mt-4">
-  <div className="pr-16">
-    <RegionLeft regionName="South" players={region3} startSeed={33} filledData={filledBracket} />
-  </div>
-  <div className="pl-16">
-    <RegionRight regionName="Midwest" players={region4} startSeed={49} filledData={filledBracket} />
-  </div>
-</div>
-
-</div> {/* CLOSE max-w-screen-xl bracket container */}
-
-{/* Explainer Section for Bracket */}
-<div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200 mt-8">
-
-
-        {/* Explainer Section for Bracket */}
-        <div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200 mt-8">
-          <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: 'Figtree, sans-serif' }}>How This Works</h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'Figtree, sans-serif' }}>
-                Bracket Predictions
-              </h3>
-              <p className="text-gray-700 leading-relaxed mb-3" style={{ fontFamily: 'sans-serif' }}>
-                This bracket shows the most likely outcome based on current ELO ratings. At each matchup, the player 
-                with the higher ELO advances. The probabilities shown are each player's chance of reaching the next round, 
-                calculated from 1,000 tournament simulations.
-              </p>
-              <p className="text-gray-700 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
-                The predicted champion ({filledBracket.champion?.name || 'TBD'}) has a {filledBracket.champion?.probabilities?.win || 0}% 
-                chance of winning based on simulations, but upsets happen—especially in ping pong!
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: 'Figtree, sans-serif' }}>
-                Tournament Format
-              </h3>
-              <p className="text-gray-700 leading-relaxed mb-3" style={{ fontFamily: 'sans-serif' }}>
-                The top 64 players by ELO rating qualify for the tournament. Seeding follows March Madness format: 
-                #1 plays #16, #2 plays #15, and so on. This gives top seeds easier first-round matchups while creating 
-                potential for dramatic upsets.
-              </p>
-              <p className="text-gray-700 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
-                The bracket is divided into four regions (East, West, South, Midwest) of 16 players each. Winners 
-                advance through six rounds: Round of 64 → Round of 32 → Sweet 16 → Elite 8 → Final Four → Championship.
-              </p>
-            </div>
-          </div>
+    {/* BRACKET BODY */}
+    <div className="w-full max-w-screen-xl mx-auto px-4 py-8">
+      {/* Top Half */}
+      <div className="grid grid-cols-2 gap-16 mb-4">
+        <div className="pr-16">
+          <RegionLeft regionName="East" players={region1} startSeed={1} filledData={filledBracket} />
         </div>
-
-        <div className="border-t border-gray-200 mt-12">
-          <div className="max-w-7xl mx-auto px-8 py-8">
-            <div className="text-sm text-gray-500" style={{ fontFamily: 'sans-serif' }}>
-              <p>Isometric Ping Pong ELO System</p>
-              <p className="mt-1">© 2026 Isometric</p>
-            </div>
-          </div>
+        <div className="pl-16">
+          <RegionRight regionName="West" players={region2} startSeed={17} filledData={filledBracket} />
         </div>
       </div>
-    );
-  }
+
+      {/* Final Four Top */}
+      <div className="flex justify-center my-3">
+        <div className="w-64">
+          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">
+            Final Four
+          </div>
+          {filledBracket.final4[0] && filledBracket.final4[1] ? (
+            <Matchup
+              player1={filledBracket.final4[0]}
+              player2={filledBracket.final4[1]}
+              seed1={filledBracket.final4[0].seed}
+              seed2={filledBracket.final4[1].seed}
+              showProbability={true}
+            />
+          ) : (
+            <div className="space-y-0.5">
+              <BracketPlayer player={null} seed="—" showProbability={false} />
+              <BracketPlayer player={null} seed="—" showProbability={false} />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Championship */}
+      <div className="flex justify-center my-6">
+        <div className="w-64">
+          <div
+            className="text-sm font-bold uppercase mb-2 text-center"
+            style={{ fontFamily: "Figtree, sans-serif" }}
+          >
+            Championship
+          </div>
+
+          {filledBracket.finals[0] && filledBracket.finals[1] ? (
+            <Matchup
+              player1={filledBracket.finals[0]}
+              player2={filledBracket.finals[1]}
+              seed1={filledBracket.finals[0].seed}
+              seed2={filledBracket.finals[1].seed}
+              showProbability={true}
+            />
+          ) : (
+            <div className="space-y-0.5">
+              <BracketPlayer player={null} seed="—" showProbability={false} />
+              <BracketPlayer player={null} seed="—" showProbability={false} />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Final Four Bottom */}
+      <div className="flex justify-center my-3">
+        <div className="w-64">
+          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">
+            Final Four
+          </div>
+          {filledBracket.final4[2] && filledBracket.final4[3] ? (
+            <Matchup
+              player1={filledBracket.final4[2]}
+              player2={filledBracket.final4[3]}
+              seed1={filledBracket.final4[2].seed}
+              seed2={filledBracket.final4[3].seed}
+              showProbability={true}
+            />
+          ) : (
+            <div className="space-y-0.5">
+              <BracketPlayer player={null} seed="—" showProbability={false} />
+              <BracketPlayer player={null} seed="—" showProbability={false} />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Bottom Half */}
+      <div className="grid grid-cols-2 gap-16 mt-4">
+        <div className="pr-16">
+          <RegionLeft regionName="South" players={region3} startSeed={33} filledData={filledBracket} />
+        </div>
+        <div className="pl-16">
+          <RegionRight regionName="Midwest" players={region4} startSeed={49} filledData={filledBracket} />
+        </div>
+      </div>
+    </div>
+    {/* END BRACKET BODY */}
+
+    {/* Explainer Section for Bracket */}
+    <div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200 mt-8">
+      <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "Figtree, sans-serif" }}>
+        How This Works
+      </h2>
+
+      <div className="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+            Matchup Win Odds
+          </h3>
+          <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+            Each matchup shows the win probability for that game based on the two players’ ELO ratings.
+          </p>
+        </div>
+
+        <div>
+          <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+            Seeding
+          </h3>
+          <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+            Seeds are assigned once (1–16 per region) and stay with the player throughout the bracket.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div className="border-t border-gray-200 mt-12">
+      <div className="max-w-7xl mx-auto px-8 py-8">
+        <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
+          <p>Isometric Ping Pong ELO System</p>
+          <p className="mt-1">© 2026 Isometric</p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
   // Rankings View
   return (
