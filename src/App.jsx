@@ -267,8 +267,8 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
   const round64Matchups = seedPairs.map(([idx1, idx2]) => ({
     player1: playerArray[idx1] || null,
     player2: playerArray[idx2] || null,
-    seed1: startSeed + idx1,
-    seed2: startSeed + idx2,
+    seed1: idx1 + 1,
+    seed2: idx2 + 1,
   }));
 
   const regionIndex = Math.floor((startSeed - 1) / 16);
@@ -379,8 +379,8 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
   const round64Matchups = seedPairs.map(([idx1, idx2]) => ({
     player1: playerArray[idx1] || null,
     player2: playerArray[idx2] || null,
-    seed1: startSeed + idx1,
-    seed2: startSeed + idx2,
+    seed1: idx1 + 1,
+    seed2: idx2 + 1,
   }));
 
   const regionIndex = Math.floor((startSeed - 1) / 16);
@@ -1164,10 +1164,14 @@ if (currentView === 'bracket') {
 
         <div className="w-full max-w-screen-xl mx-auto px-4 py-8">
           {/* Top Half */}
-          <div className="grid grid-cols-2 gap-24 mb-4">
-            <RegionLeft regionName="East" players={region1} startSeed={1} filledData={filledBracket} />
-            <RegionRight regionName="West" players={region2} startSeed={17} filledData={filledBracket} />
-          </div>
+<div className="grid grid-cols-2 gap-16 mb-4">
+  <div className="pr-16">
+    <RegionLeft regionName="East" players={region1} startSeed={1} filledData={filledBracket} />
+  </div>
+  <div className="pl-16">
+    <RegionRight regionName="West" players={region2} startSeed={17} filledData={filledBracket} />
+  </div>
+</div>
 
           {/* Final Four Top */}
           <div className="flex justify-center my-3">
@@ -1240,11 +1244,14 @@ if (currentView === 'bracket') {
           </div>
 
           {/* Bottom Half */}
-          <div className="grid grid-cols-2 gap-24 mt-4">
-            <RegionLeft regionName="South" players={region3} startSeed={33} filledData={filledBracket} />
-            <RegionRight regionName="Midwest" players={region4} startSeed={49} filledData={filledBracket} />
-          </div>
-        </div>
+<div className="grid grid-cols-2 gap-16 mt-4">
+  <div className="pr-16">
+    <RegionLeft regionName="South" players={region3} startSeed={33} filledData={filledBracket} />
+  </div>
+  <div className="pl-16">
+    <RegionRight regionName="Midwest" players={region4} startSeed={49} filledData={filledBracket} />
+  </div>
+</div>
 
         {/* Explainer Section for Bracket */}
         <div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200 mt-8">
