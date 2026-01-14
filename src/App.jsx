@@ -1306,6 +1306,7 @@ return (
     </div>
   </div>
 );
+}  
 
   // Rankings View
   return (
