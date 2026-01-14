@@ -230,11 +230,11 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
 
   // Get data from filled bracket for this region
   const regionIndex = Math.floor((startSeed - 1) / 16); // 0, 1, 2, or 3
-  const r32Start = regionIndex * 4;
-  const s16Start = regionIndex * 2;
+  const r32Start = regionIndex * 8;
+  const s16Start = regionIndex * 4;
 
-  const round32Players = filledData?.round32?.slice(r32Start, r32Start + 4) || [];
-  const sweet16Players = filledData?.sweet16?.slice(s16Start, s16Start + 2) || [];
+  const round32Players = filledData?.round32?.slice(r32Start, r32Start + 8) || [];
+  const sweet16Players = filledData?.sweet16?.slice(s16Start, s16Start + 4) || [];
   const elite8Player = filledData?.elite8?.[regionIndex] || null;
 
   return (
@@ -354,11 +354,11 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
 
   // Get data from filled bracket for this region
   const regionIndex = Math.floor((startSeed - 1) / 16); // 0, 1, 2, or 3
-  const r32Start = regionIndex * 4;
-  const s16Start = regionIndex * 2;
+  const r32Start = regionIndex * 8;
+  const s16Start = regionIndex * 4;
 
-  const round32Players = filledData?.round32?.slice(r32Start, r32Start + 4) || [];
-  const sweet16Players = filledData?.sweet16?.slice(s16Start, s16Start + 2) || [];
+  const round32Players = filledData?.round32?.slice(r32Start, r32Start + 8) || [];
+  const sweet16Players = filledData?.sweet16?.slice(s16Start, s16Start + 4) || [];
   const elite8Player = filledData?.elite8?.[regionIndex] || null;
 
   return (
@@ -600,117 +600,101 @@ export default function PingPongELO() {
   };
 
   // Function to fill bracket with most probable outcomes
-  const fillBracket = (seededPlayers) => {
-    // Initialize bracket structure
-    const bracket = {
-      round64: seededPlayers,
-      round32: [],
-      sweet16: [],
-      elite8: [],
-      final4: [],
-      finals: [],
-      champion: null
-    };
+ const fillBracket = (seededPlayers) => {
+  const seedPairs = [
+    [0, 15],  // 1 vs 16
+    [7, 8],   // 8 vs 9
+    [4, 11],  // 5 vs 12
+    [3, 12],  // 4 vs 13
+    [5, 10],  // 6 vs 11
+    [2, 13],  // 3 vs 14
+    [6, 9],   // 7 vs 10
+    [1, 14]   // 2 vs 15
+  ];
 
-    // Round of 64 -> Round of 32 (64 players -> 32 players)
-    for (let i = 0; i < bracket.round64.length; i += 2) {
-      bracket.round32.push(getMostLikely(bracket.round64[i], bracket.round64[i + 1]));
-    }
-
-    // Round of 32 -> Sweet 16 (32 players -> 16 players)
-    for (let i = 0; i < bracket.round32.length; i += 2) {
-      bracket.sweet16.push(getMostLikely(bracket.round32[i], bracket.round32[i + 1]));
-    }
-
-    // Sweet 16 -> Elite 8 (16 players -> 8 players)
-    for (let i = 0; i < bracket.sweet16.length; i += 2) {
-      bracket.elite8.push(getMostLikely(bracket.sweet16[i], bracket.sweet16[i + 1]));
-    }
-
-    // Elite 8 -> Final 4 (8 players -> 4 players)
-    for (let i = 0; i < bracket.elite8.length; i += 2) {
-      bracket.final4.push(getMostLikely(bracket.elite8[i], bracket.elite8[i + 1]));
-    }
-
-    // Final 4 -> Finals (4 players -> 2 players)
-    for (let i = 0; i < bracket.final4.length; i += 2) {
-      bracket.finals.push(getMostLikely(bracket.final4[i], bracket.final4[i + 1]));
-    }
-
-    // Finals -> Champion (2 players -> 1 player)
-    if (bracket.finals.length >= 2) {
-      bracket.champion = getMostLikely(bracket.finals[0], bracket.finals[1]);
-    }
-
-    return bracket;
+  const bracket = {
+    round64: seededPlayers,
+    round32: [],
+    sweet16: [],
+    elite8: [],
+    final4: [],
+    finals: [],
+    champion: null
   };
 
-  const calculateTournamentProbabilities = (playerELO, allPlayers) => {
-    if (allPlayers.length < 2) {
-      return { round64: 0, round32: 0, sweet16: 0, elite8: 0, final4: 0, finals: 0, win: 0 };
-    }
-
-    const numSimulations = 1000;
-    const results = {
-      round64: 0,
-      round32: 0,
-      sweet16: 0,
-      elite8: 0,
-      final4: 0,
-      finals: 0,
-      win: 0
-    };
-
-    const player = allPlayers.find(p => p.elo === playerELO);
-    if (!player) return results;
-
-    for (let sim = 0; sim < numSimulations; sim++) {
-      const seededPlayers = [...allPlayers]
-        .sort((a, b) => b.elo - a.elo)
-        .slice(0, 64)
-        .map(p => ({ ...p }));
-
-      const playerInTournament = seededPlayers.find(p => p.id === player.id);
-      if (!playerInTournament) continue;
-
-      results.round64++;
-
-      let currentRound = [...seededPlayers];
-      
-      currentRound = simulateRound(currentRound);
-      if (currentRound.find(p => p.id === player.id)) results.round32++;
-      else continue;
-
-      currentRound = simulateRound(currentRound);
-      if (currentRound.find(p => p.id === player.id)) results.sweet16++;
-      else continue;
-
-      currentRound = simulateRound(currentRound);
-      if (currentRound.find(p => p.id === player.id)) results.elite8++;
-      else continue;
-
-      currentRound = simulateRound(currentRound);
-      if (currentRound.find(p => p.id === player.id)) results.final4++;
-      else continue;
-
-      currentRound = simulateRound(currentRound);
-      if (currentRound.find(p => p.id === player.id)) results.finals++;
-      else continue;
-
-      currentRound = simulateRound(currentRound);
-      if (currentRound.find(p => p.id === player.id)) results.win++;
-    }
-
-    return {
-      round64: Math.round((results.round64 / numSimulations) * 100),
-      round32: Math.round((results.round32 / numSimulations) * 100),
-      sweet16: Math.round((results.sweet16 / numSimulations) * 100),
-      elite8: Math.round((results.elite8 / numSimulations) * 100),
-      final4: Math.round((results.final4 / numSimulations) * 100),
-      finals: Math.round((results.finals / numSimulations) * 100),
-      win: Math.round((results.win / numSimulations) * 100)
-    };
+  // Helper: given 16 players in a region, return the ordered R64 list in matchup order (p1,p2,p1,p2,...)
+  const buildRegionRound64Ordered = (region16) => {
+    const ordered = [];
+    seedPairs.forEach(([a, b]) => {
+      ordered.push(region16[a] || null);
+      ordered.push(region16[b] || null);
+    });
+    return ordered;
   };
+
+  // Split into 4 regions of 16
+  const regions = [
+    seededPlayers.slice(0, 16),
+    seededPlayers.slice(16, 32),
+    seededPlayers.slice(32, 48),
+    seededPlayers.slice(48, 64)
+  ];
+
+  // Build bracket winners region-by-region so indexing aligns with RegionLeft/RegionRight expectations
+  const regionRound32 = [];
+  const regionSweet16 = [];
+  const regionElite8 = [];
+
+  regions.forEach((region16) => {
+    const r64Ordered = buildRegionRound64Ordered(region16);
+
+    // R64 -> R32 (16 -> 8)
+    const r32 = [];
+    for (let i = 0; i < r64Ordered.length; i += 2) {
+      r32.push(getMostLikely(r64Ordered[i], r64Ordered[i + 1]));
+    }
+
+    // R32 -> S16 (8 -> 4)
+    const s16 = [];
+    for (let i = 0; i < r32.length; i += 2) {
+      s16.push(getMostLikely(r32[i], r32[i + 1]));
+    }
+
+    // S16 -> E8 (4 -> 2)
+    const e8 = [];
+    for (let i = 0; i < s16.length; i += 2) {
+      e8.push(getMostLikely(s16[i], s16[i + 1]));
+    }
+
+    // E8 -> region champ (2 -> 1)
+    const champ = getMostLikely(e8[0], e8[1]);
+
+    regionRound32.push(...r32);
+    regionSweet16.push(...s16);
+    regionElite8.push(champ);
+  });
+
+  bracket.round32 = regionRound32;
+  bracket.sweet16 = regionSweet16;
+  bracket.elite8 = regionElite8;
+
+  // Elite 8 -> Final 4
+  for (let i = 0; i < bracket.elite8.length; i += 2) {
+    bracket.final4.push(getMostLikely(bracket.elite8[i], bracket.elite8[i + 1]));
+  }
+
+  // Final 4 -> Finals
+  for (let i = 0; i < bracket.final4.length; i += 2) {
+    bracket.finals.push(getMostLikely(bracket.final4[i], bracket.final4[i + 1]));
+  }
+
+  // Finals -> Champion
+  if (bracket.finals.length >= 2) {
+    bracket.champion = getMostLikely(bracket.finals[0], bracket.finals[1]);
+  }
+
+  return bracket;
+};
 
   const addPlayer = () => {
     if (!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice) return;
