@@ -248,7 +248,6 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
       )}
     </div>
   );
-}
 
 // Matchup Component
 function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability = true }) {
