@@ -696,17 +696,6 @@ const calculateTournamentProbabilities = (playerId, allPlayers) => {
 
   // Function to fill bracket with most probable outcomes
  const fillBracket = (seededPlayers) => {
-  const seedPairs = [
-    [0, 15],  // 1 vs 16
-    [7, 8],   // 8 vs 9
-    [4, 11],  // 5 vs 12
-    [3, 12],  // 4 vs 13
-    [5, 10],  // 6 vs 11
-    [2, 13],  // 3 vs 14
-    [6, 9],   // 7 vs 10
-    [1, 14]   // 2 vs 15
-  ];
-
   const bracket = {
     round64: seededPlayers,
     round32: [],
@@ -714,10 +703,11 @@ const calculateTournamentProbabilities = (playerId, allPlayers) => {
     elite8: [],
     final4: [],
     finals: [],
-    champion: null
+    champion: null,
+    regionElite8Finalists: [], // NEW
   };
 
-  // Helper: given 16 players in a region, return the ordered R64 list in matchup order (p1,p2,p1,p2,...)
+  // Helper: given 16 players in a region, return ordered R64 list (p1,p2,p1,p2,...)
   const buildRegionRound64Ordered = (region16) => {
     const ordered = [];
     seedPairs.forEach(([a, b]) => {
@@ -732,13 +722,12 @@ const calculateTournamentProbabilities = (playerId, allPlayers) => {
     seededPlayers.slice(0, 16),
     seededPlayers.slice(16, 32),
     seededPlayers.slice(32, 48),
-    seededPlayers.slice(48, 64)
+    seededPlayers.slice(48, 64),
   ];
 
-  // Build bracket winners region-by-region so indexing aligns with RegionLeft/RegionRight expectations
   const regionRound32 = [];
   const regionSweet16 = [];
-  const regionElite8 = [];
+  const regionElite8Champs = [];
   const regionElite8Finalists = [];
 
   regions.forEach((region16) => {
@@ -756,23 +745,25 @@ const calculateTournamentProbabilities = (playerId, allPlayers) => {
       s16.push(getMostLikely(r32[i], r32[i + 1]));
     }
 
-// S16 -> E8 finalists (4 -> 2)
-const e8Finalists = [];
-for (let i = 0; i < s16.length; i += 2) {
-  e8Finalists.push(getMostLikely(s16[i], s16[i + 1]));
-}
+    // S16 -> E8 finalists (4 -> 2)
+    const e8Finalists = [];
+    for (let i = 0; i < s16.length; i += 2) {
+      e8Finalists.push(getMostLikely(s16[i], s16[i + 1]));
+    }
 
-// E8 -> region champ (2 -> 1)
-const champ = getMostLikely(e8Finalists[0], e8Finalists[1]);
+    // E8 -> region champ (2 -> 1)
+    const champ = getMostLikely(e8Finalists[0], e8Finalists[1]);
 
-regionRound32.push(...r32);
-regionSweet16.push(...s16);
-regionElite8Finalists.push(e8Finalists); // NEW
-regionElite8.push(champ);
+    regionRound32.push(...r32);
+    regionSweet16.push(...s16);
+    regionElite8Finalists.push(e8Finalists);
+    regionElite8Champs.push(champ);
+  });
 
   bracket.round32 = regionRound32;
   bracket.sweet16 = regionSweet16;
-  bracket.elite8 = regionElite8;
+  bracket.elite8 = regionElite8Champs;
+  bracket.regionElite8Finalists = regionElite8Finalists;
 
   // Elite 8 -> Final 4
   for (let i = 0; i < bracket.elite8.length; i += 2) {
@@ -788,9 +779,7 @@ regionElite8.push(champ);
   if (bracket.finals.length >= 2) {
     bracket.champion = getMostLikely(bracket.finals[0], bracket.finals[1]);
   }
- 
-  bracket.regionElite8Finalists = regionElite8Finalists;
-  
+
   return bracket;
 };
 
