@@ -1253,6 +1253,12 @@ if (currentView === 'bracket') {
   </div>
 </div>
 
+</div> {/* CLOSE max-w-screen-xl bracket container */}
+
+{/* Explainer Section for Bracket */}
+<div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200 mt-8">
+
+
         {/* Explainer Section for Bracket */}
         <div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200 mt-8">
           <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: 'Figtree, sans-serif' }}>How This Works</h2>
