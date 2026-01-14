@@ -499,7 +499,7 @@ export default function PingPongELO() {
     loadData();
   }, []);
 
-  const calculateTournamentProbabilities = (playerELO, allPlayers) => {
+const calculateTournamentProbabilities = (playerId, allPlayers) => {
   if (allPlayers.length < 2) {
     return { round64: 0, round32: 0, sweet16: 0, elite8: 0, final4: 0, finals: 0, win: 0 };
   }
@@ -512,59 +512,57 @@ export default function PingPongELO() {
     elite8: 0,
     final4: 0,
     finals: 0,
-    win: 0
+    win: 0,
   };
 
-  const player = allPlayers.find(p => p.elo === playerELO);
+  const player = allPlayers.find((p) => p.id === playerId);
   if (!player) return results;
 
   for (let sim = 0; sim < numSimulations; sim++) {
     const seededPlayers = [...allPlayers]
-  .sort((a, b) => b.elo - a.elo)
-  .slice(0, 64)
-  .map(p => ({ ...p }));
+      .sort((a, b) => b.elo - a.elo)
+      .slice(0, 64)
+      .map((p) => ({ ...p }));
 
-const playerInTournament = seededPlayers.find(p => p.id === player.id);
-if (!playerInTournament) continue;
+    if (!seededPlayers.some((p) => p.id === player.id)) continue;
 
-results.round64++;
+    results.round64++;
 
-// split into 4 regions of 16 (already seed-sorted: 1-16, 17-32, ...)
-const regions = [
-  seededPlayers.slice(0, 16),
-  seededPlayers.slice(16, 32),
-  seededPlayers.slice(32, 48),
-  seededPlayers.slice(48, 64)
-];
+    const regions = [
+      seededPlayers.slice(0, 16),
+      seededPlayers.slice(16, 32),
+      seededPlayers.slice(32, 48),
+      seededPlayers.slice(48, 64),
+    ];
 
-const regionSims = regions.map(simulateRegion);
+    const regionSims = regions.map(simulateRegion);
 
-// Did player survive to Round 32?
-const allR32 = regionSims.flatMap(r => r.r32);
-if (allR32.some(p => p?.id === player.id)) results.round32++; else continue;
+    const allR32 = regionSims.flatMap((r) => r.r32);
+    if (allR32.some((p) => p?.id === player.id)) results.round32++;
+    else continue;
 
-// Sweet 16?
-const allS16 = regionSims.flatMap(r => r.s16);
-if (allS16.some(p => p?.id === player.id)) results.sweet16++; else continue;
+    const allS16 = regionSims.flatMap((r) => r.s16);
+    if (allS16.some((p) => p?.id === player.id)) results.sweet16++;
+    else continue;
 
-// Elite 8 finalists?
-const allE8Finalists = regionSims.flatMap(r => r.e8Finalists);
-if (allE8Finalists.some(p => p?.id === player.id)) results.elite8++; else continue;
+    const allE8Finalists = regionSims.flatMap((r) => r.e8Finalists);
+    if (allE8Finalists.some((p) => p?.id === player.id)) results.elite8++;
+    else continue;
 
-// Final Four (region champs)
-const final4 = regionSims.map(r => r.champ);
-if (final4.some(p => p?.id === player.id)) results.final4++; else continue;
+    const final4 = regionSims.map((r) => r.champ);
+    if (final4.some((p) => p?.id === player.id)) results.final4++;
+    else continue;
 
-// Finals
-const finals = [
-  simulateMatch(final4[0], final4[1]),
-  simulateMatch(final4[2], final4[3])
-];
-if (finals.some(p => p?.id === player.id)) results.finals++; else continue;
+    const finals = [
+      simulateMatch(final4[0], final4[1]),
+      simulateMatch(final4[2], final4[3]),
+    ];
+    if (finals.some((p) => p?.id === player.id)) results.finals++;
+    else continue;
 
-// Champion
-const champ = simulateMatch(finals[0], finals[1]);
-if (champ?.id === player.id) results.win++;
+    const champ = simulateMatch(finals[0], finals[1]);
+    if (champ?.id === player.id) results.win++;
+  }
 
   return {
     round64: Math.round((results.round64 / numSimulations) * 100),
@@ -573,7 +571,7 @@ if (champ?.id === player.id) results.win++;
     elite8: Math.round((results.elite8 / numSimulations) * 100),
     final4: Math.round((results.final4 / numSimulations) * 100),
     finals: Math.round((results.finals / numSimulations) * 100),
-    win: Math.round((results.win / numSimulations) * 100)
+    win: Math.round((results.win / numSimulations) * 100),
   };
 };
 
@@ -741,6 +739,7 @@ if (champ?.id === player.id) results.win++;
   const regionRound32 = [];
   const regionSweet16 = [];
   const regionElite8 = [];
+  const regionElite8Finalists = [];
 
   regions.forEach((region16) => {
     const r64Ordered = buildRegionRound64Ordered(region16);
@@ -757,19 +756,19 @@ if (champ?.id === player.id) results.win++;
       s16.push(getMostLikely(r32[i], r32[i + 1]));
     }
 
-    // S16 -> E8 (4 -> 2)
-    const e8 = [];
-    for (let i = 0; i < s16.length; i += 2) {
-      e8.push(getMostLikely(s16[i], s16[i + 1]));
-    }
+// S16 -> E8 finalists (4 -> 2)
+const e8Finalists = [];
+for (let i = 0; i < s16.length; i += 2) {
+  e8Finalists.push(getMostLikely(s16[i], s16[i + 1]));
+}
 
-    // E8 -> region champ (2 -> 1)
-    const champ = getMostLikely(e8[0], e8[1]);
+// E8 -> region champ (2 -> 1)
+const champ = getMostLikely(e8Finalists[0], e8Finalists[1]);
 
-    regionRound32.push(...r32);
-    regionSweet16.push(...s16);
-    regionElite8.push(champ);
-  });
+regionRound32.push(...r32);
+regionSweet16.push(...s16);
+regionElite8Finalists.push(e8Finalists); // NEW
+regionElite8.push(champ);
 
   bracket.round32 = regionRound32;
   bracket.sweet16 = regionSweet16;
@@ -789,7 +788,9 @@ if (champ?.id === player.id) results.win++;
   if (bracket.finals.length >= 2) {
     bracket.champion = getMostLikely(bracket.finals[0], bracket.finals[1]);
   }
-
+ 
+  bracket.regionElite8Finalists = regionElite8Finalists;
+  
   return bracket;
 };
 
@@ -1085,10 +1086,10 @@ if (currentView === 'bracket') {
     }));
 
   // Add probabilities
-  const top64WithProbs = top64.map(player => ({
-    ...player,
-    probabilities: calculateTournamentProbabilities(player.elo, top64)
-  }));
+const top64WithProbs = top64.map((player) => ({
+  ...player,
+  probabilities: calculateTournamentProbabilities(player.id, top64),
+}));
 
   // Split into 4 regions based on regionIndex
   const region1 = top64WithProbs.filter(p => p.regionIndex === 0).sort((a, b) => a.seed - b.seed); // East
