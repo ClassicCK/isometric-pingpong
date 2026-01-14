@@ -129,7 +129,7 @@ function ProbabilityCell({ probability }) {
 function BracketPlayer({ player, seed, probability, showProbability = true }) {
   if (!player) {
     return (
-      <div className="flex items-center justify-between h-5 px-1.5 bg-white border border-gray-300 text-xs">
+      <div className="flex items-center justify-between h-5 px-1.5 bg-white border border-gray-300">
         <div className="flex items-center gap-1">
           <span className="font-semibold text-gray-400 w-2 text-[10px]">{seed}</span>
           <span className="text-gray-400 text-[10px]">TBD</span>
@@ -167,7 +167,6 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
 
   const bgColor = getBackgroundColor(probability);
   const textColor = probability > 60 && showProbability ? '#ffffff' : '#000000';
-  const countryData = COUNTRIES.find(c => c.code === player.countryCode);
 
   return (
     <div 
@@ -176,14 +175,6 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
     >
       <div className="flex items-center gap-1 flex-1 min-w-0" style={{ color: textColor }}>
         <span className="font-semibold w-2 flex-shrink-0 text-[10px]">{seed}</span>
-        <img 
-          src={`https://flagcdn.com/12x9/${player.countryCode}.png`}
-          srcSet={`https://flagcdn.com/24x18/${player.countryCode}.png 2x`}
-          width="10"
-          height="7"
-          alt={countryData?.name || 'Flag'}
-          className="flex-shrink-0"
-        />
         <span className="font-medium truncate text-[10px]">{player.name}</span>
         <span className="uppercase opacity-70 flex-shrink-0 text-[8px]">{player.office}</span>
       </div>
@@ -309,19 +300,26 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
         </div>
 
         {/* Elite 8 */}
-        <div className="flex-1">
+          <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
           <div className="flex flex-col justify-center h-[520px]">
-            {elite8Player ? (
-              <BracketPlayer 
-                player={elite8Player} 
-                seed={elite8Player.seed}
-                probability={elite8Player.probabilities?.final4 || 0}
-                showProbability={true}
-              />
-            ) : (
-              <BracketPlayer player={null} seed="—" showProbability={false} />
-            )}
+            {/* Elite 8 winners (2 players from Sweet 16) */}
+            {[0].map((idx) => {
+              const p1 = sweet16Players[idx * 2];
+              const p2 = sweet16Players[idx * 2 + 1];
+              return (
+                <Matchup 
+                  key={idx} 
+                  player1={p1} 
+                  player2={p2} 
+                  seed1={p1?.seed || "—"} 
+                  seed2={p2?.seed || "—"}
+                  prob1={p1?.probabilities?.elite8 || 0}
+                  prob2={p2?.probabilities?.elite8 || 0}
+                  showProbability={!!(p1 && p2)}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
@@ -433,22 +431,27 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
         </div>
 
         {/* Elite 8 (on left side) */}
-        <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
           <div className="flex flex-col justify-center h-[520px]">
-            {elite8Player ? (
-              <BracketPlayer 
-                player={elite8Player} 
-                seed={elite8Player.seed}
-                probability={elite8Player.probabilities?.final4 || 0}
-                showProbability={true}
-              />
-            ) : (
-              <BracketPlayer player={null} seed="—" showProbability={false} />
-            )}
+            {/* Elite 8 winners (2 players from Sweet 16) */}
+            {[0].map((idx) => {
+              const p1 = sweet16Players[idx * 2];
+              const p2 = sweet16Players[idx * 2 + 1];
+              return (
+                <Matchup 
+                  key={idx} 
+                  player1={p1} 
+                  player2={p2} 
+                  seed1={p1?.seed || "—"} 
+                  seed2={p2?.seed || "—"}
+                  prob1={p1?.probabilities?.elite8 || 0}
+                  prob2={p2?.probabilities?.elite8 || 0}
+                  showProbability={!!(p1 && p2)}
+                />
+              );
+            })}
           </div>
         </div>
-      </div>
     </div>
   );
 }
