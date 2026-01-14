@@ -226,12 +226,31 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
 }
 
 // Matchup Component
-function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability = true }) {
+function Matchup({ player1, player2, seed1, seed2, showProbability = true }) {
+  const getWinProb = (a, b) => {
+    if (!a || !b) return { a: 0, b: 0 };
+    const aWin = 1 / (1 + Math.pow(10, (b.elo - a.elo) / 400));
+    const aPct = Math.round(aWin * 100);
+    return { a: aPct, b: 100 - aPct };
+  };
+
+  const { a: p1Win, b: p2Win } = getWinProb(player1, player2);
+
   return (
     <div className="relative">
-      <BracketPlayer player={player1} seed={seed1} probability={prob1} showProbability={showProbability} />
+      <BracketPlayer
+        player={player1}
+        seed={seed1}
+        probability={showProbability && player1 && player2 ? p1Win : 0}
+        showProbability={showProbability}
+      />
       <div className="h-[0.5px] bg-gray-300"></div>
-      <BracketPlayer player={player2} seed={seed2} probability={prob2} showProbability={showProbability} />
+      <BracketPlayer
+        player={player2}
+        seed={seed2}
+        probability={showProbability && player1 && player2 ? p2Win : 0}
+        showProbability={showProbability}
+      />
     </div>
   );
 }
@@ -274,17 +293,16 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R64</div>
           <div className="flex flex-col justify-around h-[520px]">
-            {round64Matchups.map((matchup, idx) => (
-              <Matchup
-                key={idx}
-                player1={matchup.player1}
-                player2={matchup.player2}
-                seed1={matchup.seed1}
-                seed2={matchup.seed2}
-                prob1={matchup.player1?.probabilities?.round32 || 0}
-                prob2={matchup.player2?.probabilities?.round32 || 0}
-              />
-            ))}
+{round64Matchups.map((matchup, idx) => (
+  <Matchup
+    key={idx}
+    player1={matchup.player1}
+    player2={matchup.player2}
+    seed1={matchup.seed1}
+    seed2={matchup.seed2}
+    showProbability={!!(matchup.player1 && matchup.player2)}
+  />
+))}
           </div>
         </div>
 
@@ -295,18 +313,16 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
             {[0, 1, 2, 3].map((idx) => {
               const p1 = round32Players[idx * 2];
               const p2 = round32Players[idx * 2 + 1];
-              return (
-                <Matchup
-                  key={idx}
-                  player1={p1}
-                  player2={p2}
-                  seed1={p1?.seed || "—"}
-                  seed2={p2?.seed || "—"}
-                  prob1={p1?.probabilities?.sweet16 || 0}
-                  prob2={p2?.probabilities?.sweet16 || 0}
-                  showProbability={!!(p1 && p2)}
-                />
-              );
+return (
+  <Matchup
+    key={idx}
+    player1={p1}
+    player2={p2}
+    seed1={p1?.seed || "—"}
+    seed2={p2?.seed || "—"}
+    showProbability={!!(p1 && p2)}
+  />
+);
             })}
           </div>
         </div>
@@ -318,18 +334,17 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
             {[0, 1].map((idx) => {
               const p1 = sweet16Players[idx * 2];
               const p2 = sweet16Players[idx * 2 + 1];
-              return (
-                <Matchup
-                  key={idx}
-                  player1={p1}
-                  player2={p2}
-                  seed1={p1?.seed || "—"}
-                  seed2={p2?.seed || "—"}
-                  prob1={p1?.probabilities?.elite8 || 0}
-                  prob2={p2?.probabilities?.elite8 || 0}
-                  showProbability={!!(p1 && p2)}
-                />
-              );
+return (
+  <Matchup
+    key={idx}
+    player1={p1}
+    player2={p2}
+    seed1={p1?.seed || "—"}
+    seed2={p2?.seed || "—"}
+    showProbability={!!(p1 && p2)}
+  />
+);
+
             })}
           </div>
         </div>
@@ -338,15 +353,13 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
           <div className="flex flex-col justify-center h-[520px]">
-            <Matchup
-              player1={e8Finalists[0] || null}
-              player2={e8Finalists[1] || null}
-              seed1={e8Finalists[0]?.seed ?? "—"}
-              seed2={e8Finalists[1]?.seed ?? "—"}
-              prob1={e8Finalists[0]?.probabilities?.final4 || 0}
-              prob2={e8Finalists[1]?.probabilities?.final4 || 0}
-              showProbability={!!(e8Finalists[0] && e8Finalists[1])}
-            />
+<Matchup
+  player1={e8Finalists[0] || null}
+  player2={e8Finalists[1] || null}
+  seed1={e8Finalists[0]?.seed ?? "—"}
+  seed2={e8Finalists[1]?.seed ?? "—"}
+  showProbability={!!(e8Finalists[0] && e8Finalists[1])}
+/>
           </div>
         </div>
       </div>
@@ -392,17 +405,16 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R64</div>
           <div className="flex flex-col justify-around h-[520px]">
-            {round64Matchups.map((matchup, idx) => (
-              <Matchup
-                key={idx}
-                player1={matchup.player1}
-                player2={matchup.player2}
-                seed1={matchup.seed1}
-                seed2={matchup.seed2}
-                prob1={matchup.player1?.probabilities?.round32 || 0}
-                prob2={matchup.player2?.probabilities?.round32 || 0}
-              />
-            ))}
+{round64Matchups.map((matchup, idx) => (
+  <Matchup
+    key={idx}
+    player1={matchup.player1}
+    player2={matchup.player2}
+    seed1={matchup.seed1}
+    seed2={matchup.seed2}
+    showProbability={!!(matchup.player1 && matchup.player2)}
+  />
+))}
           </div>
         </div>
 
@@ -413,18 +425,16 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
             {[0, 1, 2, 3].map((idx) => {
               const p1 = round32Players[idx * 2];
               const p2 = round32Players[idx * 2 + 1];
-              return (
-                <Matchup
-                  key={idx}
-                  player1={p1}
-                  player2={p2}
-                  seed1={p1?.seed || "—"}
-                  seed2={p2?.seed || "—"}
-                  prob1={p1?.probabilities?.sweet16 || 0}
-                  prob2={p2?.probabilities?.sweet16 || 0}
-                  showProbability={!!(p1 && p2)}
-                />
-              );
+return (
+  <Matchup
+    key={idx}
+    player1={p1}
+    player2={p2}
+    seed1={p1?.seed || "—"}
+    seed2={p2?.seed || "—"}
+    showProbability={!!(p1 && p2)}
+  />
+);
             })}
           </div>
         </div>
@@ -436,18 +446,16 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
             {[0, 1].map((idx) => {
               const p1 = sweet16Players[idx * 2];
               const p2 = sweet16Players[idx * 2 + 1];
-              return (
-                <Matchup
-                  key={idx}
-                  player1={p1}
-                  player2={p2}
-                  seed1={p1?.seed || "—"}
-                  seed2={p2?.seed || "—"}
-                  prob1={p1?.probabilities?.elite8 || 0}
-                  prob2={p2?.probabilities?.elite8 || 0}
-                  showProbability={!!(p1 && p2)}
-                />
-              );
+return (
+  <Matchup
+    key={idx}
+    player1={p1}
+    player2={p2}
+    seed1={p1?.seed || "—"}
+    seed2={p2?.seed || "—"}
+    showProbability={!!(p1 && p2)}
+  />
+);
             })}
           </div>
         </div>
@@ -456,15 +464,13 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
           <div className="flex flex-col justify-center h-[520px]">
-            <Matchup
-              player1={e8Finalists[0] || null}
-              player2={e8Finalists[1] || null}
-              seed1={e8Finalists[0]?.seed ?? "—"}
-              seed2={e8Finalists[1]?.seed ?? "—"}
-              prob1={e8Finalists[0]?.probabilities?.final4 || 0}
-              prob2={e8Finalists[1]?.probabilities?.final4 || 0}
-              showProbability={!!(e8Finalists[0] && e8Finalists[1])}
-            />
+<Matchup
+  player1={e8Finalists[0] || null}
+  player2={e8Finalists[1] || null}
+  seed1={e8Finalists[0]?.seed ?? "—"}
+  seed2={e8Finalists[1]?.seed ?? "—"}
+  showProbability={!!(e8Finalists[0] && e8Finalists[1])}
+/>
           </div>
         </div>
       </div>
@@ -520,9 +526,13 @@ const calculateTournamentProbabilities = (playerId, allPlayers) => {
 
   for (let sim = 0; sim < numSimulations; sim++) {
     const seededPlayers = [...allPlayers]
-      .sort((a, b) => b.elo - a.elo)
-      .slice(0, 64)
-      .map((p) => ({ ...p }));
+  .sort((a, b) => b.elo - a.elo)
+  .slice(0, 64)
+  .map((p, index) => ({
+    ...p,
+    seed: Math.floor(index / 4) + 1,
+    regionIndex: index % 4,
+  }));
 
     if (!seededPlayers.some((p) => p.id === player.id)) continue;
 
@@ -695,19 +705,31 @@ const calculateTournamentProbabilities = (playerId, allPlayers) => {
   };
 
   // Function to fill bracket with most probable outcomes
- const fillBracket = (seededPlayers) => {
+ const fillBracket = (top64) => {
   const bracket = {
-    round64: seededPlayers,
+    round64: top64,
     round32: [],
     sweet16: [],
-    elite8: [],
+    elite8: [], // region champs (4)
     final4: [],
     finals: [],
     champion: null,
-    regionElite8Finalists: [], // NEW
+    regionElite8Finalists: [], // [[p1,p2],[p1,p2],[p1,p2],[p1,p2]]
   };
 
-  // Helper: given 16 players in a region, return ordered R64 list (p1,p2,p1,p2,...)
+  // Build 4 regions by regionIndex, sorted by seed 1..16
+  const regions = [0, 1, 2, 3].map((i) =>
+    top64
+      .filter((p) => p.regionIndex === i)
+      .sort((a, b) => a.seed - b.seed)
+      .slice(0, 16)
+  );
+
+  const regionRound32 = [];
+  const regionSweet16 = [];
+  const regionChamps = [];
+  const regionElite8Finalists = [];
+
   const buildRegionRound64Ordered = (region16) => {
     const ordered = [];
     seedPairs.forEach(([a, b]) => {
@@ -717,68 +739,53 @@ const calculateTournamentProbabilities = (playerId, allPlayers) => {
     return ordered;
   };
 
-  // Split into 4 regions of 16
-  const regions = [
-    seededPlayers.slice(0, 16),
-    seededPlayers.slice(16, 32),
-    seededPlayers.slice(32, 48),
-    seededPlayers.slice(48, 64),
-  ];
-
-  const regionRound32 = [];
-  const regionSweet16 = [];
-  const regionElite8Champs = [];
-  const regionElite8Finalists = [];
-
   regions.forEach((region16) => {
     const r64Ordered = buildRegionRound64Ordered(region16);
 
-    // R64 -> R32 (16 -> 8)
+    // R64 -> R32
     const r32 = [];
     for (let i = 0; i < r64Ordered.length; i += 2) {
       r32.push(getMostLikely(r64Ordered[i], r64Ordered[i + 1]));
     }
 
-    // R32 -> S16 (8 -> 4)
+    // R32 -> S16
     const s16 = [];
     for (let i = 0; i < r32.length; i += 2) {
       s16.push(getMostLikely(r32[i], r32[i + 1]));
     }
 
-    // S16 -> E8 finalists (4 -> 2)
+    // S16 -> Elite 8 finalists (2)
     const e8Finalists = [];
     for (let i = 0; i < s16.length; i += 2) {
       e8Finalists.push(getMostLikely(s16[i], s16[i + 1]));
     }
 
-    // E8 -> region champ (2 -> 1)
+    // Elite 8 -> Region champ
     const champ = getMostLikely(e8Finalists[0], e8Finalists[1]);
 
     regionRound32.push(...r32);
     regionSweet16.push(...s16);
     regionElite8Finalists.push(e8Finalists);
-    regionElite8Champs.push(champ);
+    regionChamps.push(champ);
   });
 
   bracket.round32 = regionRound32;
   bracket.sweet16 = regionSweet16;
-  bracket.elite8 = regionElite8Champs;
+  bracket.elite8 = regionChamps;
   bracket.regionElite8Finalists = regionElite8Finalists;
 
-  // Elite 8 -> Final 4
+  // Region champs -> Final Four
   for (let i = 0; i < bracket.elite8.length; i += 2) {
     bracket.final4.push(getMostLikely(bracket.elite8[i], bracket.elite8[i + 1]));
   }
 
-  // Final 4 -> Finals
+  // Final Four -> Finals
   for (let i = 0; i < bracket.final4.length; i += 2) {
     bracket.finals.push(getMostLikely(bracket.final4[i], bracket.final4[i + 1]));
   }
 
   // Finals -> Champion
-  if (bracket.finals.length >= 2) {
-    bracket.champion = getMostLikely(bracket.finals[0], bracket.finals[1]);
-  }
+  bracket.champion = getMostLikely(bracket.finals[0], bracket.finals[1]);
 
   return bracket;
 };
@@ -1159,7 +1166,7 @@ const top64WithProbs = top64.map((player) => ({
 
         <div className="w-full max-w-screen-xl mx-auto px-4 py-8">
           {/* Top Half */}
-          <div className="grid grid-cols-2 gap-6 mb-4">
+          <div className="grid grid-cols-2 gap-24 mb-4">
             <RegionLeft regionName="East" players={region1} startSeed={1} filledData={filledBracket} />
             <RegionRight regionName="West" players={region2} startSeed={17} filledData={filledBracket} />
           </div>
@@ -1169,15 +1176,13 @@ const top64WithProbs = top64.map((player) => ({
             <div className="w-64">
               <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">Final Four</div>
               {filledBracket.final4[0] && filledBracket.final4[1] ? (
-                <Matchup 
-                  player1={filledBracket.final4[0]} 
-                  player2={filledBracket.final4[1]} 
-                  seed1={filledBracket.final4[0].seed} 
-                  seed2={filledBracket.final4[1].seed}
-                  prob1={filledBracket.final4[0].probabilities?.finals || 0}
-                  prob2={filledBracket.final4[1].probabilities?.finals || 0}
-                  showProbability={true}
-                />
+<Matchup
+  player1={filledBracket.final4[0]}
+  player2={filledBracket.final4[1]}
+  seed1={filledBracket.final4[0].seed}
+  seed2={filledBracket.final4[1].seed}
+  showProbability={true}
+/>
               ) : (
                 <div className="space-y-0.5">
                   <BracketPlayer player={null} seed="—" showProbability={false} />
@@ -1202,10 +1207,13 @@ const top64WithProbs = top64.map((player) => ({
                   showProbability={true}
                 />
               ) : (
-                <div className="space-y-0.5">
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                </div>
+<Matchup
+  player1={filledBracket.finals[0]}
+  player2={filledBracket.finals[1]}
+  seed1={filledBracket.finals[0].seed}
+  seed2={filledBracket.finals[1].seed}
+  showProbability={true}
+/>
               )}
             </div>
           </div>
@@ -1215,15 +1223,13 @@ const top64WithProbs = top64.map((player) => ({
             <div className="w-64">
               <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">Final Four</div>
               {filledBracket.final4[2] && filledBracket.final4[3] ? (
-                <Matchup 
-                  player1={filledBracket.final4[2]} 
-                  player2={filledBracket.final4[3]} 
-                  seed1={filledBracket.final4[2].seed} 
-                  seed2={filledBracket.final4[3].seed}
-                  prob1={filledBracket.final4[2].probabilities?.finals || 0}
-                  prob2={filledBracket.final4[3].probabilities?.finals || 0}
-                  showProbability={true}
-                />
+<Matchup
+  player1={filledBracket.final4[2]}
+  player2={filledBracket.final4[3]}
+  seed1={filledBracket.final4[2].seed}
+  seed2={filledBracket.final4[3].seed}
+  showProbability={true}
+/>
               ) : (
                 <div className="space-y-0.5">
                   <BracketPlayer player={null} seed="—" showProbability={false} />
@@ -1234,7 +1240,7 @@ const top64WithProbs = top64.map((player) => ({
           </div>
 
           {/* Bottom Half */}
-          <div className="grid grid-cols-2 gap-6 mt-4">
+          <div className="grid grid-cols-2 gap-24 mt-4">
             <RegionLeft regionName="South" players={region3} startSeed={33} filledData={filledBracket} />
             <RegionRight regionName="Midwest" players={region4} startSeed={49} filledData={filledBracket} />
           </div>
