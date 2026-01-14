@@ -1411,8 +1411,8 @@ export default function PingPongELO() {
                       {isRank64 && (
                         <tr>
                           <td colSpan="10" className="p-0">
-                            <div className="border-t-4 border-red-500 relative">
-                              <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-1 border-2 border-red-500 rounded text-xs font-bold text-red-600 uppercase tracking-wider">
+                            <div className="border-t-4 border-red-500 relative z-10">
+                              <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-1 border-2 border-red-500 rounded text-xs font-bold text-red-600 uppercase tracking-wider z-20">
                                 Tournament Cutoff
                               </div>
                             </div>
