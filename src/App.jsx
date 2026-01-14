@@ -74,7 +74,7 @@ const OFFICES = ['NYC', 'LON'];
 
 // GitHub configuration
 const GITHUB_CONFIG = {
-  owner: 'YOUR_GITHUB_USERNAME',
+  owner: 'ClassicCK',
   repo: 'isometric-pingpong',
   branch: 'main',
   filePath: 'data/pingpong.json'
@@ -516,48 +516,37 @@ export default function PingPongELO() {
 
   const saveData = async (newPlayers, newMatches) => {
     try {
+      // For local development, use localStorage
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         localStorage.setItem('pingpong:players_v4', JSON.stringify(newPlayers));
         localStorage.setItem('pingpong:matches_v4', JSON.stringify(newMatches));
         return;
       }
 
-      const data = {
-        players: newPlayers,
-        matches: newMatches,
-        lastUpdated: new Date().toISOString()
-      };
-
-      const content = btoa(JSON.stringify(data, null, 2));
-
-      const body = {
-        message: `Update ping pong data - ${new Date().toLocaleString()}`,
-        content: content,
-        branch: GITHUB_CONFIG.branch
-      };
-
-      if (fileSha) {
-        body.sha = fileSha;
-      }
-
-      const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}`;
-      const response = await fetch(url, {
-        method: 'PUT',
+      // For production, use Vercel serverless function
+      const response = await fetch('/api/save-data', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify({
+          players: newPlayers,
+          matches: newMatches
+        })
       });
 
       if (response.ok) {
         const result = await response.json();
-        setFileSha(result.content.sha);
-        console.log('Data saved to GitHub successfully');
+        setFileSha(result.sha);
+        console.log('Data saved successfully');
       } else {
-        console.error('Failed to save to GitHub:', await response.text());
+        const error = await response.json();
+        console.error('Failed to save:', error);
+        alert('Failed to save data. Please try again.');
       }
     } catch (error) {
       console.error('Error saving data:', error);
+      alert('Failed to save data. Please try again.');
     }
   };
 
