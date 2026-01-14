@@ -72,6 +72,44 @@ const COUNTRIES = [
 
 const OFFICES = ['NYC', 'LON'];
 
+const seedPairs = [
+  [0, 15], [7, 8], [4, 11], [3, 12],
+  [5, 10], [2, 13], [6, 9], [1, 14]
+];
+
+const simulateMatch = (p1, p2) => {
+  if (!p1) return p2;
+  if (!p2) return p1;
+  const p1WinProb = 1 / (1 + Math.pow(10, (p2.elo - p1.elo) / 400));
+  return Math.random() < p1WinProb ? p1 : p2;
+};
+
+const simulateRegion = (region16) => {
+  // Order into Round-of-64 matchup order
+  const r64Ordered = [];
+  seedPairs.forEach(([a, b]) => {
+    r64Ordered.push(region16[a] || null);
+    r64Ordered.push(region16[b] || null);
+  });
+
+  // R64 -> R32 (8 winners)
+  const r32 = [];
+  for (let i = 0; i < r64Ordered.length; i += 2) r32.push(simulateMatch(r64Ordered[i], r64Ordered[i + 1]));
+
+  // R32 -> S16 (4 winners)
+  const s16 = [];
+  for (let i = 0; i < r32.length; i += 2) s16.push(simulateMatch(r32[i], r32[i + 1]));
+
+  // S16 -> E8 finalists (2 winners)
+  const e8Finalists = [];
+  for (let i = 0; i < s16.length; i += 2) e8Finalists.push(simulateMatch(s16[i], s16[i + 1]));
+
+  // E8 -> region champ (1 winner)
+  const champ = simulateMatch(e8Finalists[0], e8Finalists[1]);
+
+  return { r32, s16, e8Finalists, champ };
+};
+
 // GitHub configuration
 const GITHUB_CONFIG = {
   owner: 'ClassicCK',
@@ -130,7 +168,7 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
   if (!player) {
     return (
       <div className="flex items-center justify-between h-5 px-1.5 bg-white border border-gray-300">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2 flex-1 min-w-0" style={{ color: textColor }}>
           <span className="font-semibold text-gray-400 w-2 text-[10px]">{seed}</span>
           <span className="text-gray-400 text-[10px]">TBD</span>
         </div>
@@ -330,19 +368,12 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
 // Right Region Component (E8 ← S16 ← R32 ← R64, right to left, mirrored)
 function RegionRight({ regionName, players, startSeed = 1, filledData }) {
   const playerArray = Array.isArray(players) ? players : [];
-  
-  // March Madness seeding: 1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15
+
   const seedPairs = [
-    [0, 15],  // 1 vs 16
-    [7, 8],   // 8 vs 9
-    [4, 11],  // 5 vs 12
-    [3, 12],  // 4 vs 13
-    [5, 10],  // 6 vs 11
-    [2, 13],  // 3 vs 14
-    [6, 9],   // 7 vs 10
-    [1, 14]   // 2 vs 15
+    [0, 15], [7, 8], [4, 11], [3, 12],
+    [5, 10], [2, 13], [6, 9], [1, 14]
   ];
-  
+
   const round64Matchups = seedPairs.map(([idx1, idx2]) => ({
     player1: playerArray[idx1] || null,
     player2: playerArray[idx2] || null,
@@ -350,23 +381,22 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
     seed2: startSeed + idx2
   }));
 
-  // Get data from filled bracket for this region
-  const regionIndex = Math.floor((startSeed - 1) / 16); // 0, 1, 2, or 3
+  const regionIndex = Math.floor((startSeed - 1) / 16);
   const r32Start = regionIndex * 8;
   const s16Start = regionIndex * 4;
 
   const round32Players = filledData?.round32?.slice(r32Start, r32Start + 8) || [];
   const sweet16Players = filledData?.sweet16?.slice(s16Start, s16Start + 4) || [];
-  const elite8Player = filledData?.elite8?.[regionIndex] || null;
+  const e8Finalists = filledData?.regionElite8Finalists?.[regionIndex] || [];
 
   return (
     <div className="flex-1">
       <h3 className="text-sm font-bold mb-2 uppercase tracking-wide text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>
         {regionName}
       </h3>
-      
+
       <div className="flex gap-3 flex-row-reverse">
-        {/* Round of 64 (on right side) */}
+        {/* Round of 64 */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R64</div>
           <div className="flex flex-col justify-around h-[520px]">
@@ -392,11 +422,11 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
               const p1 = round32Players[idx * 2];
               const p2 = round32Players[idx * 2 + 1];
               return (
-                <Matchup 
-                  key={idx} 
-                  player1={p1} 
-                  player2={p2} 
-                  seed1={p1?.seed || "—"} 
+                <Matchup
+                  key={idx}
+                  player1={p1}
+                  player2={p2}
+                  seed1={p1?.seed || "—"}
                   seed2={p2?.seed || "—"}
                   prob1={p1?.probabilities?.sweet16 || 0}
                   prob2={p2?.probabilities?.sweet16 || 0}
@@ -415,11 +445,11 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
               const p1 = sweet16Players[idx * 2];
               const p2 = sweet16Players[idx * 2 + 1];
               return (
-                <Matchup 
-                  key={idx} 
-                  player1={p1} 
-                  player2={p2} 
-                  seed1={p1?.seed || "—"} 
+                <Matchup
+                  key={idx}
+                  player1={p1}
+                  player2={p2}
+                  seed1={p1?.seed || "—"}
                   seed2={p2?.seed || "—"}
                   prob1={p1?.probabilities?.elite8 || 0}
                   prob2={p2?.probabilities?.elite8 || 0}
@@ -430,28 +460,29 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
           </div>
         </div>
 
-        {/* Elite 8 (on left side) */}
+        {/* Elite 8 */}
+        <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
           <div className="flex flex-col justify-center h-[520px]">
-            {/* Elite 8 winners (2 players from Sweet 16) */}
-            {[0].map((idx) => {
-              const p1 = sweet16Players[idx * 2];
-              const p2 = sweet16Players[idx * 2 + 1];
+            {(() => {
+              const p1 = e8Finalists[0] || null;
+              const p2 = e8Finalists[1] || null;
+
               return (
-                <Matchup 
-                  key={idx} 
-                  player1={p1} 
-                  player2={p2} 
-                  seed1={p1?.seed || "—"} 
-                  seed2={p2?.seed || "—"}
-                  prob1={p1?.probabilities?.elite8 || 0}
-                  prob2={p2?.probabilities?.elite8 || 0}
+                <Matchup
+                  player1={p1}
+                  player2={p2}
+                  seed1={p1?.seed ?? "—"}
+                  seed2={p2?.seed ?? "—"}
+                  prob1={p1?.probabilities?.final4 || 0}
+                  prob2={p2?.probabilities?.final4 || 0}
                   showProbability={!!(p1 && p2)}
                 />
               );
-            })}
+            })()}
           </div>
         </div>
+      </div>
     </div>
   );
 }
@@ -504,40 +535,51 @@ export default function PingPongELO() {
 
   for (let sim = 0; sim < numSimulations; sim++) {
     const seededPlayers = [...allPlayers]
-      .sort((a, b) => b.elo - a.elo)
-      .slice(0, 64)
-      .map(p => ({ ...p }));
+  .sort((a, b) => b.elo - a.elo)
+  .slice(0, 64)
+  .map(p => ({ ...p }));
 
-    const playerInTournament = seededPlayers.find(p => p.id === player.id);
-    if (!playerInTournament) continue;
+const playerInTournament = seededPlayers.find(p => p.id === player.id);
+if (!playerInTournament) continue;
 
-    results.round64++;
+results.round64++;
 
-    let currentRound = [...seededPlayers];
+// split into 4 regions of 16 (already seed-sorted: 1-16, 17-32, ...)
+const regions = [
+  seededPlayers.slice(0, 16),
+  seededPlayers.slice(16, 32),
+  seededPlayers.slice(32, 48),
+  seededPlayers.slice(48, 64)
+];
 
-    currentRound = simulateRound(currentRound);
-    if (currentRound.find(p => p.id === player.id)) results.round32++;
-    else continue;
+const regionSims = regions.map(simulateRegion);
 
-    currentRound = simulateRound(currentRound);
-    if (currentRound.find(p => p.id === player.id)) results.sweet16++;
-    else continue;
+// Did player survive to Round 32?
+const allR32 = regionSims.flatMap(r => r.r32);
+if (allR32.some(p => p?.id === player.id)) results.round32++; else continue;
 
-    currentRound = simulateRound(currentRound);
-    if (currentRound.find(p => p.id === player.id)) results.elite8++;
-    else continue;
+// Sweet 16?
+const allS16 = regionSims.flatMap(r => r.s16);
+if (allS16.some(p => p?.id === player.id)) results.sweet16++; else continue;
 
-    currentRound = simulateRound(currentRound);
-    if (currentRound.find(p => p.id === player.id)) results.final4++;
-    else continue;
+// Elite 8 finalists?
+const allE8Finalists = regionSims.flatMap(r => r.e8Finalists);
+if (allE8Finalists.some(p => p?.id === player.id)) results.elite8++; else continue;
 
-    currentRound = simulateRound(currentRound);
-    if (currentRound.find(p => p.id === player.id)) results.finals++;
-    else continue;
+// Final Four (region champs)
+const final4 = regionSims.map(r => r.champ);
+if (final4.some(p => p?.id === player.id)) results.final4++; else continue;
 
-    currentRound = simulateRound(currentRound);
-    if (currentRound.find(p => p.id === player.id)) results.win++;
-  }
+// Finals
+const finals = [
+  simulateMatch(final4[0], final4[1]),
+  simulateMatch(final4[2], final4[3])
+];
+if (finals.some(p => p?.id === player.id)) results.finals++; else continue;
+
+// Champion
+const champ = simulateMatch(finals[0], finals[1]);
+if (champ?.id === player.id) results.win++;
 
   return {
     round64: Math.round((results.round64 / numSimulations) * 100),
@@ -948,7 +990,7 @@ export default function PingPongELO() {
     
     const playersWithData = playersWithRanks.map((player) => {
       const rank = rankedPlayers.findIndex(p => p.id === player.id) + 1;
-      const probabilities = calculateTournamentProbabilities(player.elo, playersWithRanks);
+      const probabilities = calculateTournamentProbabilities(player.id, playersWithRanks);
       return { ...player, rank, probabilities };
     });
 
