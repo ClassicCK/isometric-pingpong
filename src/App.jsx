@@ -243,7 +243,7 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
         {regionName}
       </h3>
       
-      <div className="flex gap-1">
+      <div className="flex gap-3">
         {/* Round of 64 */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R64</div>
@@ -367,7 +367,7 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
         {regionName}
       </h3>
       
-      <div className="flex gap-2 flex-row-reverse">
+      <div className="flex gap-3 flex-row-reverse">
         {/* Round of 64 (on right side) */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R64</div>
