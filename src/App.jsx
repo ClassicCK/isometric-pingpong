@@ -211,15 +211,24 @@ function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability
 function RegionLeft({ regionName, players, startSeed = 1 }) {
   const playerArray = Array.isArray(players) ? players : [];
   
-  const round64Matchups = [];
-  for (let i = 0; i < 16; i += 2) {
-    round64Matchups.push({
-      player1: playerArray[i] || null,
-      player2: playerArray[i + 1] || null,
-      seed1: startSeed + i,
-      seed2: startSeed + i + 1
-    });
-  }
+  // March Madness seeding: 1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15
+  const seedPairs = [
+    [0, 15],  // 1 vs 16
+    [7, 8],   // 8 vs 9
+    [4, 11],  // 5 vs 12
+    [3, 12],  // 4 vs 13
+    [5, 10],  // 6 vs 11
+    [2, 13],  // 3 vs 14
+    [6, 9],   // 7 vs 10
+    [1, 14]   // 2 vs 15
+  ];
+  
+  const round64Matchups = seedPairs.map(([idx1, idx2]) => ({
+    player1: playerArray[idx1] || null,
+    player2: playerArray[idx2] || null,
+    seed1: startSeed + idx1,
+    seed2: startSeed + idx2
+  }));
 
   return (
     <div className="flex-1">
@@ -231,7 +240,7 @@ function RegionLeft({ regionName, players, startSeed = 1 }) {
         {/* Round of 64 */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R64</div>
-          <div className="space-y-2.5">
+          <div className="flex flex-col justify-around h-[520px]">
             {round64Matchups.map((matchup, idx) => (
               <Matchup
                 key={idx}
@@ -249,7 +258,7 @@ function RegionLeft({ regionName, players, startSeed = 1 }) {
         {/* Round of 32 */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R32</div>
-          <div className="space-y-7" style={{ marginTop: '10px' }}>
+          <div className="flex flex-col justify-around h-[520px]">
             {Array.from({ length: 4 }).map((_, idx) => (
               <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
             ))}
@@ -259,7 +268,7 @@ function RegionLeft({ regionName, players, startSeed = 1 }) {
         {/* Sweet 16 */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">S16</div>
-          <div className="space-y-16" style={{ marginTop: '28px' }}>
+          <div className="flex flex-col justify-around h-[520px]">
             {Array.from({ length: 2 }).map((_, idx) => (
               <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
             ))}
@@ -269,7 +278,7 @@ function RegionLeft({ regionName, players, startSeed = 1 }) {
         {/* Elite 8 */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
-          <div style={{ marginTop: '60px' }}>
+          <div className="flex flex-col justify-center h-[520px]">
             <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
           </div>
         </div>
@@ -282,15 +291,24 @@ function RegionLeft({ regionName, players, startSeed = 1 }) {
 function RegionRight({ regionName, players, startSeed = 1 }) {
   const playerArray = Array.isArray(players) ? players : [];
   
-  const round64Matchups = [];
-  for (let i = 0; i < 16; i += 2) {
-    round64Matchups.push({
-      player1: playerArray[i] || null,
-      player2: playerArray[i + 1] || null,
-      seed1: startSeed + i,
-      seed2: startSeed + i + 1
-    });
-  }
+  // March Madness seeding: 1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15
+  const seedPairs = [
+    [0, 15],  // 1 vs 16
+    [7, 8],   // 8 vs 9
+    [4, 11],  // 5 vs 12
+    [3, 12],  // 4 vs 13
+    [5, 10],  // 6 vs 11
+    [2, 13],  // 3 vs 14
+    [6, 9],   // 7 vs 10
+    [1, 14]   // 2 vs 15
+  ];
+  
+  const round64Matchups = seedPairs.map(([idx1, idx2]) => ({
+    player1: playerArray[idx1] || null,
+    player2: playerArray[idx2] || null,
+    seed1: startSeed + idx1,
+    seed2: startSeed + idx2
+  }));
 
   return (
     <div className="flex-1">
@@ -302,7 +320,7 @@ function RegionRight({ regionName, players, startSeed = 1 }) {
         {/* Round of 64 (on right side) */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R64</div>
-          <div className="space-y-2.5">
+          <div className="flex flex-col justify-around h-[520px]">
             {round64Matchups.map((matchup, idx) => (
               <Matchup
                 key={idx}
@@ -320,7 +338,7 @@ function RegionRight({ regionName, players, startSeed = 1 }) {
         {/* Round of 32 */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R32</div>
-          <div className="space-y-7" style={{ marginTop: '10px' }}>
+          <div className="flex flex-col justify-around h-[520px]">
             {Array.from({ length: 4 }).map((_, idx) => (
               <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
             ))}
@@ -330,7 +348,7 @@ function RegionRight({ regionName, players, startSeed = 1 }) {
         {/* Sweet 16 */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">S16</div>
-          <div className="space-y-16" style={{ marginTop: '28px' }}>
+          <div className="flex flex-col justify-around h-[520px]">
             {Array.from({ length: 2 }).map((_, idx) => (
               <Matchup key={idx} player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
             ))}
@@ -340,7 +358,7 @@ function RegionRight({ regionName, players, startSeed = 1 }) {
         {/* Elite 8 (on left side) */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
-          <div style={{ marginTop: '60px' }}>
+          <div className="flex flex-col justify-center h-[520px]">
             <Matchup player1={null} player2={null} seed1="—" seed2="—" showProbability={false} />
           </div>
         </div>
