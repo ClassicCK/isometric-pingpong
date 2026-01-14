@@ -114,12 +114,13 @@ function ProbabilityCell({ probability }) {
 
   return (
     <div 
-      className="w-full h-full flex items-center justify-center py-5"
+      className="w-full h-full flex items-center justify-center py-3 px-2"
       style={{ 
         backgroundColor: bgColor,
         color: textColor,
         fontFamily: 'monospace',
-        fontSize: '14px'
+        fontSize: '13px',
+        whiteSpace: 'nowrap'
       }}
     >
       {probability > 0 ? `${probability}%` : '—'}
@@ -230,14 +231,14 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
     seed2: startSeed + idx2
   }));
 
-  // Get R32, S16, E8 data from filled bracket
-  const r32Start = Math.floor((startSeed - 1) / 16) * 4;
-  const s16Start = Math.floor((startSeed - 1) / 16) * 2;
-  const e8Index = Math.floor((startSeed - 1) / 16);
+  // Get data from filled bracket for this region
+  const regionIndex = Math.floor((startSeed - 1) / 16); // 0, 1, 2, or 3
+  const r32Start = regionIndex * 4;
+  const s16Start = regionIndex * 2;
 
   const round32Players = filledData?.round32?.slice(r32Start, r32Start + 4) || [];
   const sweet16Players = filledData?.sweet16?.slice(s16Start, s16Start + 2) || [];
-  const elite8Player = filledData?.elite8?.[e8Index] || null;
+  const elite8Player = filledData?.elite8?.[regionIndex] || null;
 
   return (
     <div className="flex-1">
@@ -268,7 +269,7 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R32</div>
           <div className="flex flex-col justify-around h-[520px]">
-            {Array.from({ length: 4 }).map((_, idx) => {
+            {[0, 1, 2, 3].map((idx) => {
               const p1 = round32Players[idx * 2];
               const p2 = round32Players[idx * 2 + 1];
               return (
@@ -291,7 +292,7 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">S16</div>
           <div className="flex flex-col justify-around h-[520px]">
-            {Array.from({ length: 2 }).map((_, idx) => {
+            {[0, 1].map((idx) => {
               const p1 = sweet16Players[idx * 2];
               const p2 = sweet16Players[idx * 2 + 1];
               return (
@@ -315,22 +316,14 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
           <div className="flex flex-col justify-center h-[520px]">
             {elite8Player ? (
-              <Matchup 
-                player1={elite8Player} 
-                player2={null} 
-                seed1={elite8Player.seed} 
-                seed2="—"
-                prob1={elite8Player.probabilities?.final4 || 0}
+              <BracketPlayer 
+                player={elite8Player} 
+                seed={elite8Player.seed}
+                probability={elite8Player.probabilities?.final4 || 0}
                 showProbability={true}
               />
             ) : (
-              <Matchup 
-                player1={null} 
-                player2={null} 
-                seed1="—" 
-                seed2="—"
-                showProbability={false}
-              />
+              <BracketPlayer player={null} seed="—" showProbability={false} />
             )}
           </div>
         </div>
@@ -362,14 +355,14 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
     seed2: startSeed + idx2
   }));
 
-  // Get R32, S16, E8 data from filled bracket
-  const r32Start = Math.floor((startSeed - 1) / 16) * 4;
-  const s16Start = Math.floor((startSeed - 1) / 16) * 2;
-  const e8Index = Math.floor((startSeed - 1) / 16);
+  // Get data from filled bracket for this region
+  const regionIndex = Math.floor((startSeed - 1) / 16); // 0, 1, 2, or 3
+  const r32Start = regionIndex * 4;
+  const s16Start = regionIndex * 2;
 
   const round32Players = filledData?.round32?.slice(r32Start, r32Start + 4) || [];
   const sweet16Players = filledData?.sweet16?.slice(s16Start, s16Start + 2) || [];
-  const elite8Player = filledData?.elite8?.[e8Index] || null;
+  const elite8Player = filledData?.elite8?.[regionIndex] || null;
 
   return (
     <div className="flex-1">
@@ -400,7 +393,7 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R32</div>
           <div className="flex flex-col justify-around h-[520px]">
-            {Array.from({ length: 4 }).map((_, idx) => {
+            {[0, 1, 2, 3].map((idx) => {
               const p1 = round32Players[idx * 2];
               const p2 = round32Players[idx * 2 + 1];
               return (
@@ -419,36 +412,11 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
           </div>
         </div>
 
-        {/* Elite 8 (will appear on left after reverse) */}
-        <div className="flex-1">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
-          <div className="flex flex-col justify-center h-[520px]">
-            {elite8Player ? (
-              <Matchup 
-                player1={elite8Player} 
-                player2={null} 
-                seed1={elite8Player.seed} 
-                seed2="—"
-                prob1={elite8Player.probabilities?.final4 || 0}
-                showProbability={true}
-              />
-            ) : (
-              <Matchup 
-                player1={null} 
-                player2={null} 
-                seed1="—" 
-                seed2="—"
-                showProbability={false}
-              />
-            )}
-          </div>
-        </div>
-
-        {/* Sweet 16 (will appear between E8 and R32 after reverse) */}
+        {/* Sweet 16 */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">S16</div>
           <div className="flex flex-col justify-around h-[520px]">
-            {Array.from({ length: 2 }).map((_, idx) => {
+            {[0, 1].map((idx) => {
               const p1 = sweet16Players[idx * 2];
               const p2 = sweet16Players[idx * 2 + 1];
               return (
@@ -464,6 +432,23 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
                 />
               );
             })}
+          </div>
+        </div>
+
+        {/* Elite 8 (on left side) */}
+        <div className="flex-1">
+          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
+          <div className="flex flex-col justify-center h-[520px]">
+            {elite8Player ? (
+              <BracketPlayer 
+                player={elite8Player} 
+                seed={elite8Player.seed}
+                probability={elite8Player.probabilities?.final4 || 0}
+                showProbability={true}
+              />
+            ) : (
+              <BracketPlayer player={null} seed="—" showProbability={false} />
+            )}
           </div>
         </div>
       </div>
@@ -1104,15 +1089,22 @@ export default function PingPongELO() {
           <div className="flex justify-center my-3">
             <div className="w-64">
               <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">Final Four</div>
-              <Matchup 
-                player1={filledBracket.final4[0]} 
-                player2={filledBracket.final4[1]} 
-                seed1={filledBracket.final4[0]?.seed || "—"} 
-                seed2={filledBracket.final4[1]?.seed || "—"}
-                prob1={filledBracket.final4[0]?.probabilities?.finals || 0}
-                prob2={filledBracket.final4[1]?.probabilities?.finals || 0}
-                showProbability={!!(filledBracket.final4[0] || filledBracket.final4[1])}
-              />
+              {filledBracket.final4[0] && filledBracket.final4[1] ? (
+                <Matchup 
+                  player1={filledBracket.final4[0]} 
+                  player2={filledBracket.final4[1]} 
+                  seed1={filledBracket.final4[0].seed} 
+                  seed2={filledBracket.final4[1].seed}
+                  prob1={filledBracket.final4[0].probabilities?.finals || 0}
+                  prob2={filledBracket.final4[1].probabilities?.finals || 0}
+                  showProbability={true}
+                />
+              ) : (
+                <div className="space-y-0.5">
+                  <BracketPlayer player={null} seed="—" showProbability={false} />
+                  <BracketPlayer player={null} seed="—" showProbability={false} />
+                </div>
+              )}
             </div>
           </div>
 
@@ -1120,15 +1112,22 @@ export default function PingPongELO() {
           <div className="flex justify-center my-6">
             <div className="w-64">
               <div className="text-sm font-bold uppercase mb-2 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>Championship</div>
-              <Matchup 
-                player1={filledBracket.finals[0]} 
-                player2={filledBracket.finals[1]} 
-                seed1={filledBracket.finals[0]?.seed || "—"} 
-                seed2={filledBracket.finals[1]?.seed || "—"}
-                prob1={filledBracket.finals[0]?.probabilities?.win || 0}
-                prob2={filledBracket.finals[1]?.probabilities?.win || 0}
-                showProbability={!!(filledBracket.finals[0] || filledBracket.finals[1])}
-              />
+              {filledBracket.finals[0] && filledBracket.finals[1] ? (
+                <Matchup 
+                  player1={filledBracket.finals[0]} 
+                  player2={filledBracket.finals[1]} 
+                  seed1={filledBracket.finals[0].seed} 
+                  seed2={filledBracket.finals[1].seed}
+                  prob1={filledBracket.finals[0].probabilities?.win || 0}
+                  prob2={filledBracket.finals[1].probabilities?.win || 0}
+                  showProbability={true}
+                />
+              ) : (
+                <div className="space-y-0.5">
+                  <BracketPlayer player={null} seed="—" showProbability={false} />
+                  <BracketPlayer player={null} seed="—" showProbability={false} />
+                </div>
+              )}
             </div>
           </div>
 
@@ -1136,15 +1135,22 @@ export default function PingPongELO() {
           <div className="flex justify-center my-3">
             <div className="w-64">
               <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">Final Four</div>
-              <Matchup 
-                player1={filledBracket.final4[2]} 
-                player2={filledBracket.final4[3]} 
-                seed1={filledBracket.final4[2]?.seed || "—"} 
-                seed2={filledBracket.final4[3]?.seed || "—"}
-                prob1={filledBracket.final4[2]?.probabilities?.finals || 0}
-                prob2={filledBracket.final4[3]?.probabilities?.finals || 0}
-                showProbability={!!(filledBracket.final4[2] || filledBracket.final4[3])}
-              />
+              {filledBracket.final4[2] && filledBracket.final4[3] ? (
+                <Matchup 
+                  player1={filledBracket.final4[2]} 
+                  player2={filledBracket.final4[3]} 
+                  seed1={filledBracket.final4[2].seed} 
+                  seed2={filledBracket.final4[3].seed}
+                  prob1={filledBracket.final4[2].probabilities?.finals || 0}
+                  prob2={filledBracket.final4[3].probabilities?.finals || 0}
+                  showProbability={true}
+                />
+              ) : (
+                <div className="space-y-0.5">
+                  <BracketPlayer player={null} seed="—" showProbability={false} />
+                  <BracketPlayer player={null} seed="—" showProbability={false} />
+                </div>
+              )}
             </div>
           </div>
 
@@ -1287,7 +1293,7 @@ export default function PingPongELO() {
                   return (
                     <React.Fragment key={player.id}>
                       <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors group">
-                        <td className="py-5 pr-6">
+                        <td className="py-3 pr-6">
                           <div className="flex items-center gap-3">
                             <span className="text-2xl font-normal text-gray-900 w-12">{player.rank}</span>
                             {rankChange > 0 && (
@@ -1304,7 +1310,7 @@ export default function PingPongELO() {
                             )}
                           </div>
                         </td>
-                        <td className="py-5 px-6">
+                        <td className="py-3 px-6">
                           <div className="flex items-center gap-3">
                             <img 
                               src={`https://flagcdn.com/24x18/${player.countryCode}.png`}
@@ -1329,7 +1335,7 @@ export default function PingPongELO() {
                             </button>
                           </div>
                         </td>
-                        <td className="py-5 px-6 text-right">
+                        <td className="py-3 px-6 text-right">
                           <span className="text-xl font-normal text-gray-900">{player.elo}</span>
                         </td>
                         <td className="px-0 border-l-2 border-gray-300">
