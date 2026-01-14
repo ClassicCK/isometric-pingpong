@@ -84,11 +84,10 @@ const GITHUB_CONFIG = {
 function ProbabilityCell({ probability }) {
   const getBackgroundColor = (prob) => {
     if (prob === 0) return '#ffffff';
-    
     const white = { r: 255, g: 255, b: 255 };
     const middle = { r: 249, g: 223, b: 226 };
     const dark = { r: 233, g: 30, b: 99 };
-    
+
     let color;
     if (prob <= 50) {
       const t = prob / 50;
@@ -105,7 +104,6 @@ function ProbabilityCell({ probability }) {
         b: Math.round(middle.b + (dark.b - middle.b) * t)
       };
     }
-    
     return `rgb(${color.r}, ${color.g}, ${color.b})`;
   };
 
@@ -113,15 +111,13 @@ function ProbabilityCell({ probability }) {
   const textColor = probability > 60 ? '#ffffff' : '#000000';
 
   return (
-    <div 
-      className="w-full h-full flex items-center justify-center px-2"
-      style={{ 
+    <div className="absolute inset-0 flex items-center justify-center px-2"
+      style={{
         backgroundColor: bgColor,
         color: textColor,
         fontFamily: 'monospace',
         fontSize: '13px',
         whiteSpace: 'nowrap',
-        minHeight: '100%'
       }}
     >
       {probability > 0 ? `${probability}%` : '—'}
@@ -1339,25 +1335,25 @@ export default function PingPongELO() {
                         <td className="py-3 px-6 text-right">
                           <span className="text-lg font-normal text-gray-900">{player.elo}</span>
                         </td>
-                        <td className="px-0 border-l-2 border-gray-300 align-middle">
+                        <td className="px-0 relative border-l-2 border-gray-300 align-middle">
                           <ProbabilityCell probability={player.probabilities.round64} />
                         </td>
-                        <td className="px-0 align-middle">
+                        <td className="px-0 relative align-middle">
                           <ProbabilityCell probability={player.probabilities.round32} />
                         </td>
-                        <td className="px-0 align-middle">
+                        <td className="px-0 relative align-middle">
                           <ProbabilityCell probability={player.probabilities.sweet16} />
                         </td>
-                        <td className="px-0 align-middle">
+                        <td className="px-0 relative align-middle">
                           <ProbabilityCell probability={player.probabilities.elite8} />
                         </td>
-                        <td className="px-0 align-middle">
+                        <td className="px-0 relative align-middle">
                           <ProbabilityCell probability={player.probabilities.final4} />
                         </td>
-                        <td className="px-0 align-middle">
+                        <td className="px-0 relative align-middle">
                           <ProbabilityCell probability={player.probabilities.finals} />
                         </td>
-                        <td className="px-0 align-middle">
+                        <td className="px-0 relative align-middle">
                           <ProbabilityCell probability={player.probabilities.win} />
                         </td>
                       </tr>
