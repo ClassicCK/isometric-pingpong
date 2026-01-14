@@ -194,61 +194,6 @@ function BracketPlayer({ player, seed, probability, showProbability = true }) {
   );
 }
 
-  const getBackgroundColor = (prob) => {
-    if (prob === 0 || !showProbability) return '#ffffff';
-    
-    const white = { r: 255, g: 255, b: 255 };
-    const middle = { r: 249, g: 223, b: 226 };
-    const dark = { r: 233, g: 30, b: 99 };
-    
-    let color;
-    if (prob <= 50) {
-      const t = prob / 50;
-      color = {
-        r: Math.round(white.r + (middle.r - white.r) * t),
-        g: Math.round(white.g + (middle.g - white.g) * t),
-        b: Math.round(white.b + (middle.b - white.b) * t)
-      };
-    } else {
-      const t = (prob - 50) / 50;
-      color = {
-        r: Math.round(middle.r + (dark.r - middle.r) * t),
-        g: Math.round(middle.g + (dark.g - middle.g) * t),
-        b: Math.round(middle.b + (dark.b - middle.b) * t)
-      };
-    }
-    
-    return `rgb(${color.r}, ${color.g}, ${color.b})`;
-  };
-
-  const bgColor = getBackgroundColor(probability);
-  const textColor = probability > 60 && showProbability ? '#ffffff' : '#000000';
-  const countryData = COUNTRIES.find(c => c.code === player.countryCode);
-
-  return (
-    <div 
-      className="flex items-center justify-between h-6 px-2 border border-gray-300 text-xs"
-      style={{ backgroundColor: bgColor }}
-    >
-      <div className="flex items-center gap-1.5 flex-1 min-w-0" style={{ color: textColor }}>
-        <span className="font-semibold w-3 flex-shrink-0">{seed}</span>
-        <img 
-          src={`https://flagcdn.com/12x9/${player.countryCode}.png`}
-          srcSet={`https://flagcdn.com/24x18/${player.countryCode}.png 2x`}
-          width="12"
-          height="9"
-          alt={countryData?.name || 'Flag'}
-          className="flex-shrink-0"
-        />
-        <span className="font-medium truncate">{player.name}</span>
-        <span className="uppercase opacity-70 flex-shrink-0 text-[10px]">{player.office}</span>
-      </div>
-      {showProbability && probability > 0 && (
-        <span className="ml-1 opacity-70 flex-shrink-0" style={{ color: textColor }}>{probability}%</span>
-      )}
-    </div>
-  );
-
 // Matchup Component
 function Matchup({ player1, player2, seed1, seed2, prob1, prob2, showProbability = true }) {
   return (
