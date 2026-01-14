@@ -419,30 +419,7 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
           </div>
         </div>
 
-        {/* Sweet 16 */}
-        <div className="flex-1">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">S16</div>
-          <div className="flex flex-col justify-around h-[520px]">
-            {Array.from({ length: 2 }).map((_, idx) => {
-              const p1 = sweet16Players[idx * 2];
-              const p2 = sweet16Players[idx * 2 + 1];
-              return (
-                <Matchup 
-                  key={idx} 
-                  player1={p1} 
-                  player2={p2} 
-                  seed1={p1?.seed || "—"} 
-                  seed2={p2?.seed || "—"}
-                  prob1={p1?.probabilities?.elite8 || 0}
-                  prob2={p2?.probabilities?.elite8 || 0}
-                  showProbability={!!(p1 && p2)}
-                />
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Elite 8 (on left side) */}
+        {/* Elite 8 (will appear on left after reverse) */}
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
           <div className="flex flex-col justify-center h-[520px]">
@@ -464,6 +441,29 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
                 showProbability={false}
               />
             )}
+          </div>
+        </div>
+
+        {/* Sweet 16 (will appear between E8 and R32 after reverse) */}
+        <div className="flex-1">
+          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">S16</div>
+          <div className="flex flex-col justify-around h-[520px]">
+            {Array.from({ length: 2 }).map((_, idx) => {
+              const p1 = sweet16Players[idx * 2];
+              const p2 = sweet16Players[idx * 2 + 1];
+              return (
+                <Matchup 
+                  key={idx} 
+                  player1={p1} 
+                  player2={p2} 
+                  seed1={p1?.seed || "—"} 
+                  seed2={p2?.seed || "—"}
+                  prob1={p1?.probabilities?.elite8 || 0}
+                  prob2={p2?.probabilities?.elite8 || 0}
+                  showProbability={!!(p1 && p2)}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
@@ -986,10 +986,10 @@ export default function PingPongELO() {
 
   const SortableHeader = ({ column, children, align = 'left' }) => (
     <th 
-      className={`py-4 ${align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left'} ${column === 'round64' ? 'border-l-2 border-gray-300' : ''} ${column === 'rank' ? 'pr-6' : 'px-6 px-0'} text-sm font-normal text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-50 transition-colors select-none`}
+      className={`py-4 ${align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left'} ${column === 'round64' ? 'border-l-2 border-gray-300' : ''} ${column === 'rank' ? 'pr-6 min-w-[120px]' : 'px-6 px-0'} text-sm font-normal text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-50 transition-colors select-none`}
       onClick={() => handleSort(column)}
     >
-      <div className={`flex items-center gap-2 ${align === 'right' ? 'justify-end' : align === 'center' ? 'justify-center' : 'justify-start'}`}>
+      <div className={`flex items-center gap-2 ${align === 'right' ? 'justify-end' : align === 'center' ? 'justify-center' : 'justify-start'} whitespace-nowrap`}>
         {children}
         {sortColumn === column && (
           sortDirection === 'asc' ? <ChevronUp size={14} /> : <ChevronDown size={14} />
