@@ -280,7 +280,7 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
                   seed2={p2?.seed || "—"}
                   prob1={p1?.probabilities?.sweet16 || 0}
                   prob2={p2?.probabilities?.sweet16 || 0}
-                  showProbability={!!(p1 || p2)}
+                  showProbability={!!(p1 && p2)}
                 />
               );
             })}
@@ -303,7 +303,7 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
                   seed2={p2?.seed || "—"}
                   prob1={p1?.probabilities?.elite8 || 0}
                   prob2={p2?.probabilities?.elite8 || 0}
-                  showProbability={!!(p1 || p2)}
+                  showProbability={!!(p1 && p2)}
                 />
               );
             })}
@@ -314,14 +314,24 @@ function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
           <div className="flex flex-col justify-center h-[520px]">
-            <Matchup 
-              player1={elite8Player} 
-              player2={null} 
-              seed1={elite8Player?.seed || "—"} 
-              seed2="—"
-              prob1={elite8Player?.probabilities?.final4 || 0}
-              showProbability={!!elite8Player}
-            />
+            {elite8Player ? (
+              <Matchup 
+                player1={elite8Player} 
+                player2={null} 
+                seed1={elite8Player.seed} 
+                seed2="—"
+                prob1={elite8Player.probabilities?.final4 || 0}
+                showProbability={true}
+              />
+            ) : (
+              <Matchup 
+                player1={null} 
+                player2={null} 
+                seed1="—" 
+                seed2="—"
+                showProbability={false}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -402,7 +412,7 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
                   seed2={p2?.seed || "—"}
                   prob1={p1?.probabilities?.sweet16 || 0}
                   prob2={p2?.probabilities?.sweet16 || 0}
-                  showProbability={!!(p1 || p2)}
+                  showProbability={!!(p1 && p2)}
                 />
               );
             })}
@@ -425,7 +435,7 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
                   seed2={p2?.seed || "—"}
                   prob1={p1?.probabilities?.elite8 || 0}
                   prob2={p2?.probabilities?.elite8 || 0}
-                  showProbability={!!(p1 || p2)}
+                  showProbability={!!(p1 && p2)}
                 />
               );
             })}
@@ -436,14 +446,24 @@ function RegionRight({ regionName, players, startSeed = 1, filledData }) {
         <div className="flex-1">
           <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
           <div className="flex flex-col justify-center h-[520px]">
-            <Matchup 
-              player1={elite8Player} 
-              player2={null} 
-              seed1={elite8Player?.seed || "—"} 
-              seed2="—"
-              prob1={elite8Player?.probabilities?.final4 || 0}
-              showProbability={!!elite8Player}
-            />
+            {elite8Player ? (
+              <Matchup 
+                player1={elite8Player} 
+                player2={null} 
+                seed1={elite8Player.seed} 
+                seed2="—"
+                prob1={elite8Player.probabilities?.final4 || 0}
+                showProbability={true}
+              />
+            ) : (
+              <Matchup 
+                player1={null} 
+                player2={null} 
+                seed1="—" 
+                seed2="—"
+                showProbability={false}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -599,6 +619,7 @@ export default function PingPongELO() {
 
   // Function to fill bracket with most probable outcomes
   const fillBracket = (seededPlayers) => {
+    // Initialize bracket structure
     const bracket = {
       round64: seededPlayers,
       round32: [],
@@ -609,32 +630,32 @@ export default function PingPongELO() {
       champion: null
     };
 
-    // Round of 64 -> 32
+    // Round of 64 -> Round of 32 (64 players -> 32 players)
     for (let i = 0; i < bracket.round64.length; i += 2) {
       bracket.round32.push(getMostLikely(bracket.round64[i], bracket.round64[i + 1]));
     }
 
-    // Round of 32 -> Sweet 16
+    // Round of 32 -> Sweet 16 (32 players -> 16 players)
     for (let i = 0; i < bracket.round32.length; i += 2) {
       bracket.sweet16.push(getMostLikely(bracket.round32[i], bracket.round32[i + 1]));
     }
 
-    // Sweet 16 -> Elite 8
+    // Sweet 16 -> Elite 8 (16 players -> 8 players)
     for (let i = 0; i < bracket.sweet16.length; i += 2) {
       bracket.elite8.push(getMostLikely(bracket.sweet16[i], bracket.sweet16[i + 1]));
     }
 
-    // Elite 8 -> Final 4
+    // Elite 8 -> Final 4 (8 players -> 4 players)
     for (let i = 0; i < bracket.elite8.length; i += 2) {
       bracket.final4.push(getMostLikely(bracket.elite8[i], bracket.elite8[i + 1]));
     }
 
-    // Final 4 -> Finals
+    // Final 4 -> Finals (4 players -> 2 players)
     for (let i = 0; i < bracket.final4.length; i += 2) {
       bracket.finals.push(getMostLikely(bracket.final4[i], bracket.final4[i + 1]));
     }
 
-    // Finals -> Champion
+    // Finals -> Champion (2 players -> 1 player)
     if (bracket.finals.length >= 2) {
       bracket.champion = getMostLikely(bracket.finals[0], bracket.finals[1]);
     }
@@ -1268,7 +1289,7 @@ export default function PingPongELO() {
                       <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors group">
                         <td className="py-5 pr-6">
                           <div className="flex items-center gap-3">
-                            <span className="text-2xl font-normal text-gray-900 w-8">{player.rank}</span>
+                            <span className="text-2xl font-normal text-gray-900 w-12">{player.rank}</span>
                             {rankChange > 0 && (
                               <div className="flex items-center gap-1">
                                 <span className="text-green-600 font-bold">▲</span>
