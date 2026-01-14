@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, X, Menu, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown, Edit2, ArrowLeft } from 'lucide-react';
 
 // All countries with their ISO codes for flat flags
