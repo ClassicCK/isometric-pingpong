@@ -114,13 +114,14 @@ function ProbabilityCell({ probability }) {
 
   return (
     <div 
-      className="w-full h-full flex items-center justify-center py-3 px-2"
+      className="w-full h-full flex items-center justify-center px-2"
       style={{ 
         backgroundColor: bgColor,
         color: textColor,
         fontFamily: 'monospace',
         fontSize: '13px',
-        whiteSpace: 'nowrap'
+        whiteSpace: 'nowrap',
+        minHeight: '100%'
       }}
     >
       {probability > 0 ? `${probability}%` : '—'}
@@ -1295,7 +1296,7 @@ export default function PingPongELO() {
                       <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors group">
                         <td className="py-3 pr-6">
                           <div className="flex items-center gap-3">
-                            <span className="text-2xl font-normal text-gray-900 w-12">{player.rank}</span>
+                            <span className="text-xl font-normal text-gray-900 w-12">{player.rank}</span>
                             {rankChange > 0 && (
                               <div className="flex items-center gap-1">
                                 <span className="text-green-600 font-bold">▲</span>
@@ -1322,9 +1323,9 @@ export default function PingPongELO() {
                               title={countryData?.name || ''}
                               className="flex-shrink-0"
                             />
-                            <div className="flex items-center gap-2">
-                              <span className="text-base text-gray-900">{player.name}</span>
-                              <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">{player.office}</span>
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span className="text-sm text-gray-900 whitespace-nowrap">{player.name}</span>
+                              <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold flex-shrink-0">{player.office}</span>
                             </div>
                             <button
                               onClick={() => startEditPlayer(player)}
@@ -1336,27 +1337,27 @@ export default function PingPongELO() {
                           </div>
                         </td>
                         <td className="py-3 px-6 text-right">
-                          <span className="text-xl font-normal text-gray-900">{player.elo}</span>
+                          <span className="text-lg font-normal text-gray-900">{player.elo}</span>
                         </td>
-                        <td className="px-0 border-l-2 border-gray-300">
+                        <td className="px-0 border-l-2 border-gray-300 align-middle">
                           <ProbabilityCell probability={player.probabilities.round64} />
                         </td>
-                        <td className="px-0">
+                        <td className="px-0 align-middle">
                           <ProbabilityCell probability={player.probabilities.round32} />
                         </td>
-                        <td className="px-0">
+                        <td className="px-0 align-middle">
                           <ProbabilityCell probability={player.probabilities.sweet16} />
                         </td>
-                        <td className="px-0">
+                        <td className="px-0 align-middle">
                           <ProbabilityCell probability={player.probabilities.elite8} />
                         </td>
-                        <td className="px-0">
+                        <td className="px-0 align-middle">
                           <ProbabilityCell probability={player.probabilities.final4} />
                         </td>
-                        <td className="px-0">
+                        <td className="px-0 align-middle">
                           <ProbabilityCell probability={player.probabilities.finals} />
                         </td>
-                        <td className="px-0">
+                        <td className="px-0 align-middle">
                           <ProbabilityCell probability={player.probabilities.win} />
                         </td>
                       </tr>
