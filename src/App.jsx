@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Plus, X, Menu, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown, Edit2, ArrowLeft } from 'lucide-react';
 
 // All countries with their ISO codes for flat flags
@@ -538,12 +538,12 @@ const calculateTournamentProbabilities = (playerId, allPlayers) => {
 
     results.round64++;
 
-    const regions = [
-      seededPlayers.slice(0, 16),
-      seededPlayers.slice(16, 32),
-      seededPlayers.slice(32, 48),
-      seededPlayers.slice(48, 64),
-    ];
+const regions = [0, 1, 2, 3].map((i) =>
+  seededPlayers
+    .filter((p) => p.regionIndex === i)
+    .sort((a, b) => a.seed - b.seed)
+    .slice(0, 16)
+);
 
     const regionSims = regions.map(simulateRegion);
 
@@ -1082,10 +1082,12 @@ if (currentView === 'bracket') {
     }));
 
   // Add probabilities
-const top64WithProbs = top64.map((player) => ({
-  ...player,
-  probabilities: calculateTournamentProbabilities(player.id, top64),
-}));
+const top64WithProbs = useMemo(() => {
+  return top64.map((player) => ({
+    ...player,
+    probabilities: calculateTournamentProbabilities(player.id, top64),
+  }));
+}, [top64]);
 
   // Split into 4 regions based on regionIndex
   const region1 = top64WithProbs.filter(p => p.regionIndex === 0).sort((a, b) => a.seed - b.seed); // East
@@ -1192,31 +1194,33 @@ const top64WithProbs = top64.map((player) => ({
             </div>
           </div>
 
-          {/* Championship */}
-          <div className="flex justify-center my-6">
-            <div className="w-64">
-              <div className="text-sm font-bold uppercase mb-2 text-center" style={{ fontFamily: 'Figtree, sans-serif' }}>Championship</div>
-              {filledBracket.finals[0] && filledBracket.finals[1] ? (
-                <Matchup 
-                  player1={filledBracket.finals[0]} 
-                  player2={filledBracket.finals[1]} 
-                  seed1={filledBracket.finals[0].seed} 
-                  seed2={filledBracket.finals[1].seed}
-                  prob1={filledBracket.finals[0].probabilities?.win || 0}
-                  prob2={filledBracket.finals[1].probabilities?.win || 0}
-                  showProbability={true}
-                />
-              ) : (
-<Matchup
-  player1={filledBracket.finals[0]}
-  player2={filledBracket.finals[1]}
-  seed1={filledBracket.finals[0].seed}
-  seed2={filledBracket.finals[1].seed}
-  showProbability={true}
-/>
-              )}
-            </div>
-          </div>
+ {/* Championship */}
+<div className="flex justify-center my-6">
+  <div className="w-64">
+    <div
+      className="text-sm font-bold uppercase mb-2 text-center"
+      style={{ fontFamily: "Figtree, sans-serif" }}
+    >
+      Championship
+    </div>
+
+    {filledBracket.finals[0] && filledBracket.finals[1] ? (
+      <Matchup
+        player1={filledBracket.finals[0]}
+        player2={filledBracket.finals[1]}
+        seed1={filledBracket.finals[0].seed}
+        seed2={filledBracket.finals[1].seed}
+        showProbability={true}
+      />
+    ) : (
+      <div className="space-y-0.5">
+        <BracketPlayer player={null} seed="—" showProbability={false} />
+        <BracketPlayer player={null} seed="—" showProbability={false} />
+      </div>
+    )}
+  </div>
+</div>
+
 
           {/* Final Four Bottom */}
           <div className="flex justify-center my-3">
