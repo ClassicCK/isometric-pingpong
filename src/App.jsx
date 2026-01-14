@@ -1082,12 +1082,8 @@ if (currentView === 'bracket') {
     }));
 
   // Add probabilities
-const top64WithProbs = useMemo(() => {
-  return top64.map((player) => ({
-    ...player,
-    probabilities: calculateTournamentProbabilities(player.id, top64),
-  }));
-}, [top64]);
+  const top64WithProbs = top64;
+
 
   // Split into 4 regions based on regionIndex
   const region1 = top64WithProbs.filter(p => p.regionIndex === 0).sort((a, b) => a.seed - b.seed); // East
