@@ -480,6 +480,73 @@ export default function PingPongELO() {
     loadData();
   }, []);
 
+  const calculateTournamentProbabilities = (playerELO, allPlayers) => {
+  if (allPlayers.length < 2) {
+    return { round64: 0, round32: 0, sweet16: 0, elite8: 0, final4: 0, finals: 0, win: 0 };
+  }
+
+  const numSimulations = 1000;
+  const results = {
+    round64: 0,
+    round32: 0,
+    sweet16: 0,
+    elite8: 0,
+    final4: 0,
+    finals: 0,
+    win: 0
+  };
+
+  const player = allPlayers.find(p => p.elo === playerELO);
+  if (!player) return results;
+
+  for (let sim = 0; sim < numSimulations; sim++) {
+    const seededPlayers = [...allPlayers]
+      .sort((a, b) => b.elo - a.elo)
+      .slice(0, 64)
+      .map(p => ({ ...p }));
+
+    const playerInTournament = seededPlayers.find(p => p.id === player.id);
+    if (!playerInTournament) continue;
+
+    results.round64++;
+
+    let currentRound = [...seededPlayers];
+
+    currentRound = simulateRound(currentRound);
+    if (currentRound.find(p => p.id === player.id)) results.round32++;
+    else continue;
+
+    currentRound = simulateRound(currentRound);
+    if (currentRound.find(p => p.id === player.id)) results.sweet16++;
+    else continue;
+
+    currentRound = simulateRound(currentRound);
+    if (currentRound.find(p => p.id === player.id)) results.elite8++;
+    else continue;
+
+    currentRound = simulateRound(currentRound);
+    if (currentRound.find(p => p.id === player.id)) results.final4++;
+    else continue;
+
+    currentRound = simulateRound(currentRound);
+    if (currentRound.find(p => p.id === player.id)) results.finals++;
+    else continue;
+
+    currentRound = simulateRound(currentRound);
+    if (currentRound.find(p => p.id === player.id)) results.win++;
+  }
+
+  return {
+    round64: Math.round((results.round64 / numSimulations) * 100),
+    round32: Math.round((results.round32 / numSimulations) * 100),
+    sweet16: Math.round((results.sweet16 / numSimulations) * 100),
+    elite8: Math.round((results.elite8 / numSimulations) * 100),
+    final4: Math.round((results.final4 / numSimulations) * 100),
+    finals: Math.round((results.finals / numSimulations) * 100),
+    win: Math.round((results.win / numSimulations) * 100)
+  };
+};
+
   const loadData = async () => {
     try {
       setLoading(true);
