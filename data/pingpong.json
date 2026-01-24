@@ -377,7 +377,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 69
     },
     {
       "id": "20",
@@ -550,7 +550,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 71
     },
     {
       "id": "25",
@@ -732,7 +732,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "35",
@@ -1116,8 +1116,8 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "NYC",
-      "elo": 1499,
-      "wins": 1,
+      "elo": 1470,
+      "wins": 0,
       "losses": 1,
       "eloHistory": [
         {
@@ -1127,14 +1127,10 @@
         {
           "elo": 1470,
           "timestamp": "2026-01-02T00:00:00.000Z"
-        },
-        {
-          "elo": 1499,
-          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 68
     },
     {
       "id": "53",
@@ -1155,7 +1151,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 70
     },
     {
       "id": "54",
@@ -1295,9 +1291,9 @@
       "name": "James Atkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1450,
+      "elo": 1479,
       "wins": 0,
-      "losses": 2,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1306,14 +1302,10 @@
         {
           "elo": 1479,
           "timestamp": "2026-01-02T00:00:00.000Z"
-        },
-        {
-          "elo": 1450,
-          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 67
     },
     {
       "id": "60",
@@ -1629,18 +1621,6 @@
     }
   ],
   "matches": [
-    {
-      "id": "1769274670750",
-      "winnerId": "52",
-      "loserId": "59",
-      "winner": "Saadat Nursultan",
-      "loser": "James Atkin",
-      "winnerScore": 10,
-      "loserScore": 6,
-      "winnerEloChange": 29,
-      "loserEloChange": -29,
-      "timestamp": "2026-01-09T00:00:00.000Z"
-    },
     {
       "id": "1769274641049",
       "winnerId": "56",
@@ -2158,5 +2138,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:19:34.074Z"
+  "lastUpdated": "2026-01-24T17:19:39.480Z"
 }
