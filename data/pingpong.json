@@ -15,7 +15,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 4
     },
     {
       "id": "2",
@@ -32,7 +32,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 5
     },
     {
       "id": "3",
@@ -49,7 +49,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 6
     },
     {
       "id": "4",
@@ -66,7 +66,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "5",
@@ -83,7 +83,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 8
     },
     {
       "id": "6",
@@ -100,7 +100,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 9
     },
     {
       "id": "7",
@@ -117,7 +117,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 9
+      "lastWeekRank": 10
     },
     {
       "id": "8",
@@ -134,7 +134,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 10
+      "lastWeekRank": 11
     },
     {
       "id": "9",
@@ -151,7 +151,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 12
     },
     {
       "id": "10",
@@ -168,7 +168,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 13
     },
     {
       "id": "11",
@@ -185,7 +185,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 14
     },
     {
       "id": "12",
@@ -202,7 +202,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 15
     },
     {
       "id": "13",
@@ -219,7 +219,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 16
     },
     {
       "id": "14",
@@ -236,7 +236,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 17
     },
     {
       "id": "15",
@@ -253,7 +253,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 18
     },
     {
       "id": "16",
@@ -270,7 +270,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 19
     },
     {
       "id": "17",
@@ -308,24 +308,28 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 20
     },
     {
       "id": "19",
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1500,
-      "wins": 0,
+      "elo": 1524,
+      "wins": 1,
       "losses": 0,
       "eloHistory": [
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1524,
+          "timestamp": "2025-12-10T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 3
     },
     {
       "id": "20",
@@ -761,9 +765,9 @@
       "name": "Ola Sitarska",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1447,
+      "elo": 1423,
       "wins": 0,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -776,6 +780,10 @@
         {
           "elo": 1447,
           "timestamp": "2025-12-08T00:00:00.000Z"
+        },
+        {
+          "elo": 1423,
+          "timestamp": "2025-12-10T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1277,6 +1285,18 @@
   ],
   "matches": [
     {
+      "id": "1769272955340",
+      "winnerId": "19",
+      "loserId": "45",
+      "winner": "Neil Hacker",
+      "loser": "Ola Sitarska",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 24,
+      "loserEloChange": -24,
+      "timestamp": "2025-12-10T00:00:00.000Z"
+    },
+    {
       "id": "1769272894655",
       "winnerId": "44",
       "loserId": "45",
@@ -1301,5 +1321,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T16:41:35.238Z"
+  "lastUpdated": "2026-01-24T16:42:35.973Z"
 }
