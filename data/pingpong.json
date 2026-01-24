@@ -291,7 +291,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 1
+      "lastWeekRank": 2
     },
     {
       "id": "18",
@@ -329,7 +329,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 4
     },
     {
       "id": "20",
@@ -404,9 +404,9 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1517,
+      "elo": 1488,
       "wins": 2,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -423,10 +423,14 @@
         {
           "elo": 1517,
           "timestamp": "2025-12-10T00:00:00.000Z"
+        },
+        {
+          "elo": 1488,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 72
     },
     {
       "id": "25",
@@ -770,7 +774,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 2
+      "lastWeekRank": 3
     },
     {
       "id": "45",
@@ -988,17 +992,21 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1500,
-      "wins": 0,
+      "elo": 1529,
+      "wins": 1,
       "losses": 0,
       "eloHistory": [
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1529,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 1
     },
     {
       "id": "57",
@@ -1015,7 +1023,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "58",
@@ -1032,7 +1040,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 55
     },
     {
       "id": "59",
@@ -1049,7 +1057,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 56
     },
     {
       "id": "60",
@@ -1066,7 +1074,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 57
     },
     {
       "id": "61",
@@ -1083,7 +1091,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 59
+      "lastWeekRank": 58
     },
     {
       "id": "62",
@@ -1100,7 +1108,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 60
+      "lastWeekRank": 59
     },
     {
       "id": "63",
@@ -1117,7 +1125,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 60
     },
     {
       "id": "64",
@@ -1134,7 +1142,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 61
     },
     {
       "id": "65",
@@ -1151,7 +1159,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 62
     },
     {
       "id": "66",
@@ -1168,7 +1176,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 63
     },
     {
       "id": "67",
@@ -1185,7 +1193,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "68",
@@ -1202,7 +1210,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "69",
@@ -1219,7 +1227,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "70",
@@ -1236,7 +1244,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 67
     },
     {
       "id": "71",
@@ -1253,7 +1261,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "72",
@@ -1270,7 +1278,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "73",
@@ -1287,7 +1295,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "74",
@@ -1304,10 +1312,22 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 71
     }
   ],
   "matches": [
+    {
+      "id": "1769273111357",
+      "winnerId": "56",
+      "loserId": "24",
+      "winner": "Jon Finerty",
+      "loser": "George Pool",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 29,
+      "loserEloChange": -29,
+      "timestamp": "2025-12-12T00:00:00.000Z"
+    },
     {
       "id": "1769273059942",
       "winnerId": "24",
@@ -1381,5 +1401,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T16:44:20.502Z"
+  "lastUpdated": "2026-01-24T16:45:12.014Z"
 }
