@@ -4,7 +4,7 @@
       "id": "1",
       "name": "David Lankes",
       "countryCode": "us",
-      "office": "NYC",
+      "office": "LON",
       "elo": 1500,
       "wins": 1,
       "losses": 1,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:55:02.848Z"
+  "lastUpdated": "2026-01-24T17:55:16.973Z"
 }
