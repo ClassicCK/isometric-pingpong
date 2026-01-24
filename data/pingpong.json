@@ -23,7 +23,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "2",
@@ -115,7 +115,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 24
     },
     {
       "id": "6",
@@ -232,7 +232,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 15
     },
     {
       "id": "11",
@@ -257,7 +257,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 14
     },
     {
       "id": "12",
@@ -361,7 +361,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 25
     },
     {
       "id": "16",
@@ -407,7 +407,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "18",
@@ -448,7 +448,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "19",
@@ -752,7 +752,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 26
     },
     {
       "id": "27",
@@ -823,7 +823,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "30",
@@ -1069,7 +1069,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "40",
@@ -1186,7 +1186,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 16
     },
     {
       "id": "45",
@@ -1717,8 +1717,8 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1516,
-      "wins": 1,
+      "elo": 1532,
+      "wins": 2,
       "losses": 0,
       "eloHistory": [
         {
@@ -1728,10 +1728,14 @@
         {
           "elo": 1516,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1532,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 13
     },
     {
       "id": "62",
@@ -1759,9 +1763,9 @@
       "name": "Ryan Penney",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1516,
+      "elo": 1500,
       "wins": 1,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1770,10 +1774,14 @@
         {
           "elo": 1516,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1500,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 29
     },
     {
       "id": "64",
@@ -1815,7 +1823,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 17
     },
     {
       "id": "66",
@@ -1878,7 +1886,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 18
     },
     {
       "id": "69",
@@ -1920,7 +1928,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "71",
@@ -1962,7 +1970,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "73",
@@ -2061,6 +2069,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276458623",
+      "winnerId": "61",
+      "loserId": "63",
+      "winner": "Michael Shell",
+      "loser": "Ryan Penney",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "timestamp": "2026-01-13T00:00:00.000Z"
+    },
     {
       "id": "1769276441074",
       "winnerId": "57",
@@ -3238,5 +3258,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:40:41.380Z"
+  "lastUpdated": "2026-01-24T17:40:58.982Z"
 }
