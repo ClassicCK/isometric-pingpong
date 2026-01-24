@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, X, Menu, TrendingUp, TrendingDown, Minus, ChevronUp, ChevronDown, Edit2, ArrowLeft } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { X, ChevronUp, ChevronDown, Edit2 } from 'lucide-react';
 
 // All countries with their ISO codes for flat flags
 const COUNTRIES = [
@@ -72,18 +72,6 @@ const COUNTRIES = [
 
 const OFFICES = ["NYC", "LON"];
 
-// March Madness seed pairing (1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15)
-const seedPairs = [
-  [0, 15],
-  [7, 8],
-  [4, 11],
-  [3, 12],
-  [5, 10],
-  [2, 13],
-  [6, 9],
-  [1, 14],
-];
-
 // GitHub configuration
 const GITHUB_CONFIG = {
   owner: "ClassicCK",
@@ -109,17 +97,6 @@ function eloWinProb(eloA, eloB, matchNoiseStd = 0) {
   const a = eloA + randn() * matchNoiseStd;
   const b = eloB + randn() * matchNoiseStd;
   return 1 / (1 + Math.pow(10, (b - a) / 400));
-}
-
-function eloUpdate(winnerElo, loserElo, K = 32) {
-  const expectedWinner = 1 / (1 + Math.pow(10, (loserElo - winnerElo) / 400));
-  const expectedLoser = 1 - expectedWinner;
-  return {
-    winnerNew: Math.round(winnerElo + K * (1 - expectedWinner)),
-    loserNew: Math.round(loserElo + K * (0 - expectedLoser)),
-    expectedWinner,
-    expectedLoser,
-  };
 }
 
 // =========================
@@ -164,9 +141,11 @@ function simulateSeason(players, { seasonMatchesPerPlayer = 10, K = 24, matchNoi
     const winner = aWins ? a : b;
     const loser = aWins ? b : a;
 
-    const { winnerNew, loserNew } = eloUpdate(winner.elo, loser.elo, K);
-    winner.elo = winnerNew;
-    loser.elo = loserNew;
+    const expectedWinner = 1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
+    const expectedLoser = 1 - expectedWinner;
+
+    winner.elo = Math.round(winner.elo + K * (1 - expectedWinner));
+    loser.elo = Math.round(loser.elo + K * (0 - expectedLoser));
 
     games.set(a.id, (games.get(a.id) ?? 0) + 1);
     games.set(b.id, (games.get(b.id) ?? 0) + 1);
@@ -182,6 +161,18 @@ function simulateTournamentAndCollect(seededTop64, counters, { matchNoiseStd = 1
     const p = eloWinProb(p1.elo, p2.elo, matchNoiseStd);
     return Math.random() < p ? p1 : p2;
   };
+
+  // March Madness seed pairing (1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15)
+  const seedPairs = [
+    [0, 15],
+    [7, 8],
+    [4, 11],
+    [3, 12],
+    [5, 10],
+    [2, 13],
+    [6, 9],
+    [1, 14],
+  ];
 
   // regions built from regionIndex + seed
   const regions = [0, 1, 2, 3].map((ri) =>
@@ -236,8 +227,8 @@ function simulateTournamentAndCollect(seededTop64, counters, { matchNoiseStd = 1
 
 function simulateSeasonPlusTournamentProbabilities(allPlayers, opts = {}) {
   const {
-    numSimulations = 1000, // you asked for 1000
-    seasonMatchesPerPlayer = 10, // good for 70–100 players
+    numSimulations = 1000,
+    seasonMatchesPerPlayer = 10,
     seasonK = 24,
     seasonMatchNoiseStd = 60,
     tournamentMatchNoiseStd = 15,
@@ -363,312 +354,12 @@ function ProbabilityCell({ probability }) {
   );
 }
 
-function BracketPlayer({ player, seed, probability, showProbability = true }) {
-  if (!player) {
-    return (
-      <div className="flex items-center justify-between h-5 px-1.5 bg-white border border-gray-300">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-gray-400 w-3 text-[10px]">{seed}</span>
-          <span className="text-gray-400 text-[10px]">TBD</span>
-        </div>
-      </div>
-    );
-  }
-
-  const getBackgroundColor = (prob) => {
-    if (prob === 0 || !showProbability) return "#ffffff";
-
-    const white = { r: 255, g: 255, b: 255 };
-    const middle = { r: 249, g: 223, b: 226 };
-    const dark = { r: 233, g: 30, b: 99 };
-
-    let color;
-    if (prob <= 50) {
-      const t = prob / 50;
-      color = {
-        r: Math.round(white.r + (middle.r - white.r) * t),
-        g: Math.round(white.g + (middle.g - white.g) * t),
-        b: Math.round(white.b + (middle.b - white.b) * t),
-      };
-    } else {
-      const t = (prob - 50) / 50;
-      color = {
-        r: Math.round(middle.r + (dark.r - middle.r) * t),
-        g: Math.round(middle.g + (dark.g - middle.g) * t),
-        b: Math.round(middle.b + (dark.b - middle.b) * t),
-      };
-    }
-    return `rgb(${color.r}, ${color.g}, ${color.b})`;
-  };
-
-  const bgColor = getBackgroundColor(probability);
-  const textColor = probability > 60 && showProbability ? "#ffffff" : "#000000";
-
-  return (
-    <div className="flex items-center justify-between h-5 px-1.5 border border-gray-300" style={{ backgroundColor: bgColor }}>
-      <div className="flex items-center gap-2 flex-1 min-w-0" style={{ color: textColor }}>
-        <span className="font-semibold w-3 flex-shrink-0 text-[10px]">{seed}</span>
-        <span className="font-medium truncate text-[10px]">{player.name}</span>
-        <span className="uppercase opacity-70 flex-shrink-0 text-[8px]">{player.office}</span>
-      </div>
-      {showProbability && probability > 0 && (
-        <span className="ml-1 opacity-70 flex-shrink-0 text-[9px]" style={{ color: textColor }}>
-          {probability}%
-        </span>
-      )}
-    </div>
-  );
-}
-
-// Matchup win odds only (not advancement odds)
-function Matchup({ player1, player2, seed1, seed2, showProbability = true }) {
-  const getWinPct = (a, b) => {
-    if (!a || !b) return { a: 0, b: 0 };
-    const p = 1 / (1 + Math.pow(10, (b.elo - a.elo) / 400));
-    const aPct = Math.round(p * 100);
-    return { a: aPct, b: 100 - aPct };
-  };
-
-  const { a: p1Win, b: p2Win } = getWinPct(player1, player2);
-
-  return (
-    <div className="relative">
-      <BracketPlayer player={player1} seed={seed1} probability={showProbability && player1 && player2 ? p1Win : 0} showProbability={showProbability} />
-      <div className="h-[0.5px] bg-gray-300"></div>
-      <BracketPlayer player={player2} seed={seed2} probability={showProbability && player1 && player2 ? p2Win : 0} showProbability={showProbability} />
-    </div>
-  );
-}
-
-// Fill bracket deterministically (higher Elo advances), but keep region structure + finalists for E8
-function fillBracket(top64) {
-  const bracket = {
-    round64: top64,
-    round32: [],
-    sweet16: [],
-    regionElite8Finalists: [],
-    elite8: [],
-    final4: [],
-    finals: [],
-    champion: null,
-  };
-
-  const regions = [0, 1, 2, 3].map((i) =>
-    top64
-      .filter((p) => p.regionIndex === i)
-      .sort((a, b) => a.seed - b.seed)
-      .slice(0, 16)
-  );
-
-  const regionRound32 = [];
-  const regionSweet16 = [];
-  const regionElite8Finalists = [];
-  const regionChamps = [];
-
-  const getMostLikely = (p1, p2) => {
-    if (!p1 && !p2) return null;
-    if (!p1) return p2;
-    if (!p2) return p1;
-    return p1.elo >= p2.elo ? p1 : p2;
-  };
-
-  regions.forEach((region16) => {
-    const r64Ordered = [];
-    seedPairs.forEach(([a, b]) => {
-      r64Ordered.push(region16[a] || null);
-      r64Ordered.push(region16[b] || null);
-    });
-
-    const r32 = [];
-    for (let i = 0; i < r64Ordered.length; i += 2) r32.push(getMostLikely(r64Ordered[i], r64Ordered[i + 1]));
-
-    const s16 = [];
-    for (let i = 0; i < r32.length; i += 2) s16.push(getMostLikely(r32[i], r32[i + 1]));
-
-    const e8Finalists = [];
-    for (let i = 0; i < s16.length; i += 2) e8Finalists.push(getMostLikely(s16[i], s16[i + 1]));
-
-    const champ = getMostLikely(e8Finalists[0], e8Finalists[1]);
-
-    regionRound32.push(...r32);
-    regionSweet16.push(...s16);
-    regionElite8Finalists.push(e8Finalists);
-    regionChamps.push(champ);
-  });
-
-  bracket.round32 = regionRound32;
-  bracket.sweet16 = regionSweet16;
-  bracket.regionElite8Finalists = regionElite8Finalists;
-  bracket.elite8 = regionChamps;
-
-  for (let i = 0; i < bracket.elite8.length; i += 2) bracket.final4.push(getMostLikely(bracket.elite8[i], bracket.elite8[i + 1]));
-  for (let i = 0; i < bracket.final4.length; i += 2) bracket.finals.push(getMostLikely(bracket.final4[i], bracket.final4[i + 1]));
-  bracket.champion = getMostLikely(bracket.finals[0], bracket.finals[1]);
-
-  return bracket;
-}
-
-function RegionLeft({ regionName, players, startSeed = 1, filledData }) {
-  const playerArray = Array.isArray(players) ? players : [];
-
-  const round64Matchups = seedPairs.map(([idx1, idx2]) => ({
-    player1: playerArray[idx1] || null,
-    player2: playerArray[idx2] || null,
-    seed1: idx1 + 1,
-    seed2: idx2 + 1,
-  }));
-
-  const regionIndex = Math.floor((startSeed - 1) / 16);
-  const r32Start = regionIndex * 8;
-  const s16Start = regionIndex * 4;
-
-  const round32Players = filledData?.round32?.slice(r32Start, r32Start + 8) || [];
-  const sweet16Players = filledData?.sweet16?.slice(s16Start, s16Start + 4) || [];
-  const e8Finalists = filledData?.regionElite8Finalists?.[regionIndex] || [];
-
-  return (
-    <div className="flex-1 min-w-0">
-      <h3 className="text-sm font-bold mb-2 uppercase tracking-wide text-center" style={{ fontFamily: "Figtree, sans-serif" }}>
-        {regionName}
-      </h3>
-
-      <div className="flex gap-4 min-w-0">
-        {/* R64 */}
-        <div className="flex-1 min-w-0">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R64</div>
-          <div className="flex flex-col justify-around h-[520px]">
-            {round64Matchups.map((m, idx) => (
-              <Matchup key={idx} player1={m.player1} player2={m.player2} seed1={m.seed1} seed2={m.seed2} showProbability={!!(m.player1 && m.player2)} />
-            ))}
-          </div>
-        </div>
-
-        {/* R32 */}
-        <div className="flex-1 min-w-0">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R32</div>
-          <div className="flex flex-col justify-around h-[520px]">
-            {[0, 1, 2, 3].map((idx) => {
-              const p1 = round32Players[idx * 2];
-              const p2 = round32Players[idx * 2 + 1];
-              return <Matchup key={idx} player1={p1} player2={p2} seed1={p1?.seed || "—"} seed2={p2?.seed || "—"} showProbability={!!(p1 && p2)} />;
-            })}
-          </div>
-        </div>
-
-        {/* S16 */}
-        <div className="flex-1 min-w-0">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">S16</div>
-          <div className="flex flex-col justify-around h-[520px]">
-            {[0, 1].map((idx) => {
-              const p1 = sweet16Players[idx * 2];
-              const p2 = sweet16Players[idx * 2 + 1];
-              return <Matchup key={idx} player1={p1} player2={p2} seed1={p1?.seed || "—"} seed2={p2?.seed || "—"} showProbability={!!(p1 && p2)} />;
-            })}
-          </div>
-        </div>
-
-        {/* E8 */}
-        <div className="flex-1 min-w-0">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
-          <div className="flex flex-col justify-center h-[520px]">
-            <Matchup
-              player1={e8Finalists[0] || null}
-              player2={e8Finalists[1] || null}
-              seed1={e8Finalists[0]?.seed ?? "—"}
-              seed2={e8Finalists[1]?.seed ?? "—"}
-              showProbability={!!(e8Finalists[0] && e8Finalists[1])}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function RegionRight({ regionName, players, startSeed = 1, filledData }) {
-  const playerArray = Array.isArray(players) ? players : [];
-
-  const round64Matchups = seedPairs.map(([idx1, idx2]) => ({
-    player1: playerArray[idx1] || null,
-    player2: playerArray[idx2] || null,
-    seed1: idx1 + 1,
-    seed2: idx2 + 1,
-  }));
-
-  const regionIndex = Math.floor((startSeed - 1) / 16);
-  const r32Start = regionIndex * 8;
-  const s16Start = regionIndex * 4;
-
-  const round32Players = filledData?.round32?.slice(r32Start, r32Start + 8) || [];
-  const sweet16Players = filledData?.sweet16?.slice(s16Start, s16Start + 4) || [];
-  const e8Finalists = filledData?.regionElite8Finalists?.[regionIndex] || [];
-
-  return (
-    <div className="flex-1 min-w-0">
-      <h3 className="text-sm font-bold mb-2 uppercase tracking-wide text-center" style={{ fontFamily: "Figtree, sans-serif" }}>
-        {regionName}
-      </h3>
-
-      <div className="flex gap-4 flex-row-reverse min-w-0">
-        {/* R64 */}
-        <div className="flex-1 min-w-0">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R64</div>
-          <div className="flex flex-col justify-around h-[520px]">
-            {round64Matchups.map((m, idx) => (
-              <Matchup key={idx} player1={m.player1} player2={m.player2} seed1={m.seed1} seed2={m.seed2} showProbability={!!(m.player1 && m.player2)} />
-            ))}
-          </div>
-        </div>
-
-        {/* R32 */}
-        <div className="flex-1 min-w-0">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">R32</div>
-          <div className="flex flex-col justify-around h-[520px]">
-            {[0, 1, 2, 3].map((idx) => {
-              const p1 = round32Players[idx * 2];
-              const p2 = round32Players[idx * 2 + 1];
-              return <Matchup key={idx} player1={p1} player2={p2} seed1={p1?.seed || "—"} seed2={p2?.seed || "—"} showProbability={!!(p1 && p2)} />;
-            })}
-          </div>
-        </div>
-
-        {/* S16 */}
-        <div className="flex-1 min-w-0">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">S16</div>
-          <div className="flex flex-col justify-around h-[520px]">
-            {[0, 1].map((idx) => {
-              const p1 = sweet16Players[idx * 2];
-              const p2 = sweet16Players[idx * 2 + 1];
-              return <Matchup key={idx} player1={p1} player2={p2} seed1={p1?.seed || "—"} seed2={p2?.seed || "—"} showProbability={!!(p1 && p2)} />;
-            })}
-          </div>
-        </div>
-
-        {/* E8 */}
-        <div className="flex-1 min-w-0">
-          <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">E8</div>
-          <div className="flex flex-col justify-center h-[520px]">
-            <Matchup
-              player1={e8Finalists[0] || null}
-              player2={e8Finalists[1] || null}
-              seed1={e8Finalists[0]?.seed ?? "—"}
-              seed2={e8Finalists[1]?.seed ?? "—"}
-              showProbability={!!(e8Finalists[0] && e8Finalists[1])}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // =========================
 // MAIN APP
 // =========================
 export default function PingPongELO() {
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
-  const [currentView, setCurrentView] = useState("rankings");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [selectedWinner, setSelectedWinner] = useState("");
@@ -692,7 +383,7 @@ export default function PingPongELO() {
   const [editCountry, setEditCountry] = useState("");
   const [editOffice, setEditOffice] = useState("");
 
-  // NEW: store all-player season+tournament probabilities (computed once per update)
+  // Store all-player season+tournament probabilities
   const [seasonProbs, setSeasonProbs] = useState({});
   const [probsLoading, setProbsLoading] = useState(false);
 
@@ -701,7 +392,7 @@ export default function PingPongELO() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Recompute “538-style” probabilities whenever Elo changes (players changes)
+  // Recompute "538-style" probabilities whenever Elo changes
   useEffect(() => {
     if (!players || players.length === 0) return;
 
@@ -1071,213 +762,6 @@ export default function PingPongELO() {
   }
 
   // =========================
-  // BRACKET VIEW
-  // =========================
-  if (currentView === "bracket") {
-    const top64 = [...sortedPlayers]
-      .sort((a, b) => (b.elo || 0) - (a.elo || 0))
-      .slice(0, 64)
-      .map((p, index) => ({
-        ...p,
-        seed: Math.floor(index / 4) + 1,
-        regionIndex: index % 4,
-      }));
-
-    if (sortedPlayers.length < 64) {
-      return (
-        <div className="min-h-screen bg-white">
-          <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
-          <div className="border-b border-gray-200">
-            <div className="max-w-7xl mx-auto px-8 py-8">
-              <button
-                onClick={() => setCurrentView("rankings")}
-                className="flex items-center gap-2 text-gray-600 hover:text-black mb-6"
-                style={{ fontFamily: "sans-serif" }}
-              >
-                <ArrowLeft size={20} />
-                <span>Back to Rankings</span>
-              </button>
-              <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif", letterSpacing: "-0.02em" }}>
-                EOY Tournament Bracket
-              </h1>
-            </div>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-8 py-12">
-            <div className="bg-gray-100 border border-gray-300 rounded p-8 text-center">
-              <p className="text-xl text-gray-700 mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>
-                Not enough players for bracket
-              </p>
-              <p className="text-gray-600" style={{ fontFamily: "sans-serif" }}>
-                The tournament bracket requires at least 64 players. Currently: {sortedPlayers.length} players registered.
-              </p>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    const region1 = top64.filter((p) => p.regionIndex === 0).sort((a, b) => a.seed - b.seed);
-    const region2 = top64.filter((p) => p.regionIndex === 1).sort((a, b) => a.seed - b.seed);
-    const region3 = top64.filter((p) => p.regionIndex === 2).sort((a, b) => a.seed - b.seed);
-    const region4 = top64.filter((p) => p.regionIndex === 3).sort((a, b) => a.seed - b.seed);
-
-    const filledBracket = fillBracket(top64);
-
-    return (
-      <div className="min-h-screen bg-white">
-        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
-
-        <div className="border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-8 py-8">
-            <div className="flex items-start justify-between mb-6">
-              <div>
-                <button
-                  onClick={() => setCurrentView("rankings")}
-                  className="flex items-center gap-2 text-gray-600 hover:text-black mb-4"
-                  style={{ fontFamily: "sans-serif" }}
-                >
-                  <ArrowLeft size={20} />
-                  <span>Back to Rankings</span>
-                </button>
-                <div className="text-sm text-gray-500 uppercase tracking-wider" style={{ fontFamily: "sans-serif", letterSpacing: "0.1em" }}>
-                  UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
-                </div>
-              </div>
-            </div>
-
-            <h1 className="text-5xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif", letterSpacing: "-0.02em" }}>
-              EOY Tournament Bracket
-            </h1>
-
-            <p className="text-lg text-gray-700" style={{ fontFamily: "Figtree, sans-serif" }}>
-              Top 64 players seeded by ELO • Matchup win odds from ELO
-            </p>
-          </div>
-        </div>
-
-        <div className="w-full max-w-screen-xl mx-auto px-4 py-8">
-          <div className="grid grid-cols-2 gap-16 mb-4">
-            <div className="pr-16">
-              <RegionLeft regionName="East" players={region1} startSeed={1} filledData={filledBracket} />
-            </div>
-            <div className="pl-16">
-              <RegionRight regionName="West" players={region2} startSeed={17} filledData={filledBracket} />
-            </div>
-          </div>
-
-          {/* Final Four Top */}
-          <div className="flex justify-center my-3">
-            <div className="w-64">
-              <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">Final Four</div>
-              {filledBracket.final4[0] && filledBracket.final4[1] ? (
-                <Matchup
-                  player1={filledBracket.final4[0]}
-                  player2={filledBracket.final4[1]}
-                  seed1={filledBracket.final4[0].seed}
-                  seed2={filledBracket.final4[1].seed}
-                  showProbability={true}
-                />
-              ) : (
-                <div className="space-y-0.5">
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Championship */}
-          <div className="flex justify-center my-6">
-            <div className="w-64">
-              <div className="text-sm font-bold uppercase mb-2 text-center" style={{ fontFamily: "Figtree, sans-serif" }}>
-                Championship
-              </div>
-              {filledBracket.finals[0] && filledBracket.finals[1] ? (
-                <Matchup
-                  player1={filledBracket.finals[0]}
-                  player2={filledBracket.finals[1]}
-                  seed1={filledBracket.finals[0].seed}
-                  seed2={filledBracket.finals[1].seed}
-                  showProbability={true}
-                />
-              ) : (
-                <div className="space-y-0.5">
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Final Four Bottom */}
-          <div className="flex justify-center my-3">
-            <div className="w-64">
-              <div className="text-[10px] text-gray-500 uppercase mb-1 text-center font-semibold">Final Four</div>
-              {filledBracket.final4[2] && filledBracket.final4[3] ? (
-                <Matchup
-                  player1={filledBracket.final4[2]}
-                  player2={filledBracket.final4[3]}
-                  seed1={filledBracket.final4[2].seed}
-                  seed2={filledBracket.final4[3].seed}
-                  showProbability={true}
-                />
-              ) : (
-                <div className="space-y-0.5">
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                  <BracketPlayer player={null} seed="—" showProbability={false} />
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-16 mt-4">
-            <div className="pr-16">
-              <RegionLeft regionName="South" players={region3} startSeed={33} filledData={filledBracket} />
-            </div>
-            <div className="pl-16">
-              <RegionRight regionName="Midwest" players={region4} startSeed={49} filledData={filledBracket} />
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200 mt-8">
-          <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "Figtree, sans-serif" }}>
-            How This Works
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-                Matchup Win Odds
-              </h3>
-              <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-                Each matchup shows the win probability for that game based on the two players’ ELO ratings.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-                Seeding
-              </h3>
-              <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-                Seeds are assigned once (1–16 per region) and stay with the player throughout the bracket.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-gray-200 mt-12">
-          <div className="max-w-7xl mx-auto px-8 py-8">
-            <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
-              <p>Isometric Ping Pong ELO System</p>
-              <p className="mt-1">© 2026 Isometric</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // =========================
   // RANKINGS VIEW
   // =========================
   return (
@@ -1292,13 +776,6 @@ export default function PingPongELO() {
             </div>
 
             <div className="flex gap-3">
-              <button
-                onClick={() => setCurrentView("bracket")}
-                className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors"
-                style={{ fontFamily: "sans-serif" }}
-              >
-                View Bracket
-              </button>
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className="px-5 py-2 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors"
@@ -1482,7 +959,7 @@ export default function PingPongELO() {
           </table>
         </div>
 
-        {/* Sidebar / actions UI (your existing UI) */}
+        {/* Sidebar / actions UI */}
         <div
           className={`fixed top-0 right-0 h-full w-96 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 border-l border-gray-200 ${
             sidebarOpen ? "translate-x-0" : "translate-x-full"
