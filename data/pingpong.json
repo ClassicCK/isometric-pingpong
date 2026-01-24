@@ -616,8 +616,8 @@
     {
       "id": "22",
       "name": "Chris Podgorney",
-      "countryCode": "us",
-      "office": "NYC",
+      "countryCode": "gb",
+      "office": "LON",
       "elo": 1498,
       "wins": 1,
       "losses": 1,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:56:20.496Z"
+  "lastUpdated": "2026-01-24T17:56:28.558Z"
 }
