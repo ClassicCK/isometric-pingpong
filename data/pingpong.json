@@ -911,9 +911,9 @@
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1472,
+      "elo": 1452,
       "wins": 5,
-      "losses": 7,
+      "losses": 8,
       "eloHistory": [
         {
           "elo": 1500,
@@ -966,10 +966,14 @@
         {
           "elo": 1472,
           "timestamp": "2025-12-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1452,
+          "timestamp": "2025-12-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 72
     },
     {
       "id": "48",
@@ -1075,7 +1079,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 71
     },
     {
       "id": "54",
@@ -1171,7 +1175,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "58",
@@ -1467,8 +1471,8 @@
       "name": "Rishabh Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1575,
-      "wins": 4,
+      "elo": 1595,
+      "wins": 5,
       "losses": 1,
       "eloHistory": [
         {
@@ -1494,6 +1498,10 @@
         {
           "elo": 1575,
           "timestamp": "2025-12-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1595,
+          "timestamp": "2025-12-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -1501,6 +1509,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769274225648",
+      "winnerId": "1769273367436",
+      "loserId": "47",
+      "winner": "Rishabh Chatterjee",
+      "loser": "Joel Robinson",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 20,
+      "loserEloChange": -20,
+      "timestamp": "2025-12-15T00:00:00.000Z"
+    },
     {
       "id": "1769274197381",
       "winnerId": "1769273367436",
@@ -1838,5 +1858,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:03:17.981Z"
+  "lastUpdated": "2026-01-24T17:03:46.120Z"
 }
