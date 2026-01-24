@@ -935,7 +935,7 @@
       "id": "32",
       "name": "Terrence Chung",
       "countryCode": "us",
-      "office": "NYC",
+      "office": "LON",
       "elo": 1484,
       "wins": 0,
       "losses": 1,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:56:48.416Z"
+  "lastUpdated": "2026-01-24T17:57:02.464Z"
 }
