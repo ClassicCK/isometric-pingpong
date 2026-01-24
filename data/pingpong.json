@@ -251,8 +251,8 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1562,
-      "wins": 4,
+      "elo": 1582,
+      "wins": 5,
       "losses": 0,
       "eloHistory": [
         {
@@ -274,10 +274,14 @@
         {
           "elo": 1562,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1582,
+          "timestamp": "2026-01-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 5
     },
     {
       "id": "12",
@@ -520,9 +524,9 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1643,
+      "elo": 1623,
       "wins": 10,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -575,10 +579,14 @@
         {
           "elo": 1643,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1623,
+          "timestamp": "2026-01-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 2
+      "lastWeekRank": 3
     },
     {
       "id": "21",
@@ -1690,7 +1698,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 2
     },
     {
       "id": "57",
@@ -1835,7 +1843,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 6
     },
     {
       "id": "62",
@@ -2197,6 +2205,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276826869",
+      "winnerId": "11",
+      "loserId": "20",
+      "winner": "Paul Puget",
+      "loser": "Charlie Parkin",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 20,
+      "loserEloChange": -20,
+      "timestamp": "2026-01-15T00:00:00.000Z"
+    },
     {
       "id": "1769276804655",
       "winnerId": "36",
@@ -3578,5 +3598,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:46:45.003Z"
+  "lastUpdated": "2026-01-24T17:47:07.185Z"
 }
