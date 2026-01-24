@@ -512,8 +512,8 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1621,
-      "wins": 8,
+      "elo": 1631,
+      "wins": 9,
       "losses": 2,
       "eloHistory": [
         {
@@ -559,6 +559,10 @@
         {
           "elo": 1621,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1631,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -636,9 +640,9 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1482,
+      "elo": 1472,
       "wins": 9,
-      "losses": 10,
+      "losses": 11,
       "eloHistory": [
         {
           "elo": 1500,
@@ -719,10 +723,14 @@
         {
           "elo": 1482,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1472,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 70
     },
     {
       "id": "25",
@@ -1268,7 +1276,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "47",
@@ -1382,7 +1390,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 67
     },
     {
       "id": "49",
@@ -1511,7 +1519,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "54",
@@ -1672,7 +1680,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "59",
@@ -1726,7 +1734,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "61",
@@ -2101,6 +2109,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276584006",
+      "winnerId": "20",
+      "loserId": "24",
+      "winner": "Charlie Parkin",
+      "loser": "George Pool",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 10,
+      "loserEloChange": -10,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276569840",
       "winnerId": "11",
@@ -3338,5 +3358,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:42:50.138Z"
+  "lastUpdated": "2026-01-24T17:43:04.322Z"
 }
