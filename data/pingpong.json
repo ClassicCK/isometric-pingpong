@@ -347,9 +347,9 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1497,
+      "elo": 1474,
       "wins": 1,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -362,18 +362,22 @@
         {
           "elo": 1497,
           "timestamp": "2026-01-05T00:00:00.000Z"
+        },
+        {
+          "elo": 1474,
+          "timestamp": "2026-01-05T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 69
     },
     {
       "id": "20",
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1555,
-      "wins": 3,
+      "elo": 1578,
+      "wins": 4,
       "losses": 1,
       "eloHistory": [
         {
@@ -395,10 +399,14 @@
         {
           "elo": 1555,
           "timestamp": "2026-01-05T00:00:00.000Z"
+        },
+        {
+          "elo": 1578,
+          "timestamp": "2026-01-05T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 2
     },
     {
       "id": "21",
@@ -993,7 +1001,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "48",
@@ -1186,7 +1194,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 2
+      "lastWeekRank": 3
     },
     {
       "id": "57",
@@ -1245,7 +1253,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 67
     },
     {
       "id": "60",
@@ -1557,6 +1565,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769274464950",
+      "winnerId": "20",
+      "loserId": "19",
+      "winner": "Charlie Parkin",
+      "loser": "Neil Hacker",
+      "winnerScore": 21,
+      "loserScore": 14,
+      "winnerEloChange": 23,
+      "loserEloChange": -23,
+      "timestamp": "2026-01-05T00:00:00.000Z"
+    },
     {
       "id": "1769274438416",
       "winnerId": "20",
@@ -1978,5 +1998,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:07:19.037Z"
+  "lastUpdated": "2026-01-24T17:07:45.578Z"
 }
