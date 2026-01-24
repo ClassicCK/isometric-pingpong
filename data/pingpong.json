@@ -277,7 +277,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 6
     },
     {
       "id": "12",
@@ -578,7 +578,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 2
     },
     {
       "id": "21",
@@ -1620,9 +1620,9 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1663,
+      "elo": 1642,
       "wins": 11,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1679,10 +1679,14 @@
         {
           "elo": 1663,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1642,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 1
+      "lastWeekRank": 3
     },
     {
       "id": "57",
@@ -1801,8 +1805,8 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1546,
-      "wins": 3,
+      "elo": 1567,
+      "wins": 4,
       "losses": 0,
       "eloHistory": [
         {
@@ -1820,10 +1824,14 @@
         {
           "elo": 1546,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1567,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 5
     },
     {
       "id": "62",
@@ -1986,7 +1994,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "69",
@@ -2177,10 +2185,22 @@
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
-      "lastWeekRank": 2
+      "lastWeekRank": 1
     }
   ],
   "matches": [
+    {
+      "id": "1769276792824",
+      "winnerId": "61",
+      "loserId": "56",
+      "winner": "Michael Shell",
+      "loser": "Jon Finerty",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 21,
+      "loserEloChange": -21,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276772805",
       "winnerId": "36",
@@ -3538,5 +3558,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:46:13.112Z"
+  "lastUpdated": "2026-01-24T17:46:33.052Z"
 }
