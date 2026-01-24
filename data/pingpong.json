@@ -302,9 +302,9 @@
       "name": "Alex Steene",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1552,
+      "elo": 1528,
       "wins": 2,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -316,6 +316,10 @@
         },
         {
           "elo": 1552,
+          "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1528,
           "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
@@ -1052,8 +1056,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1606,
-      "wins": 5,
+      "elo": 1630,
+      "wins": 6,
       "losses": 0,
       "eloHistory": [
         {
@@ -1078,6 +1082,10 @@
         },
         {
           "elo": 1606,
+          "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1630,
           "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
@@ -1422,6 +1430,18 @@
   ],
   "matches": [
     {
+      "id": "1769273853222",
+      "winnerId": "56",
+      "loserId": "18",
+      "winner": "Jon Finerty",
+      "loser": "Alex Steene",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 24,
+      "loserEloChange": -24,
+      "timestamp": "2025-12-12T00:00:00.000Z"
+    },
+    {
       "id": "1769273817419",
       "winnerId": "47",
       "loserId": "24",
@@ -1638,5 +1658,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T16:56:57.993Z"
+  "lastUpdated": "2026-01-24T16:57:33.819Z"
 }
