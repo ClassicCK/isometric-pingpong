@@ -448,9 +448,9 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1447,
+      "elo": 1423,
       "wins": 5,
-      "losses": 7,
+      "losses": 8,
       "eloHistory": [
         {
           "elo": 1500,
@@ -502,6 +502,10 @@
         },
         {
           "elo": 1447,
+          "timestamp": "2025-12-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1423,
           "timestamp": "2025-12-15T00:00:00.000Z"
         }
       ],
@@ -911,8 +915,8 @@
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1452,
-      "wins": 5,
+      "elo": 1476,
+      "wins": 6,
       "losses": 8,
       "eloHistory": [
         {
@@ -970,10 +974,14 @@
         {
           "elo": 1452,
           "timestamp": "2025-12-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1476,
+          "timestamp": "2025-12-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 70
     },
     {
       "id": "48",
@@ -1079,7 +1087,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 72
     },
     {
       "id": "54",
@@ -1175,7 +1183,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 71
     },
     {
       "id": "58",
@@ -1509,6 +1517,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769274248917",
+      "winnerId": "47",
+      "loserId": "24",
+      "winner": "Joel Robinson",
+      "loser": "George Pool",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 24,
+      "loserEloChange": -24,
+      "timestamp": "2025-12-15T00:00:00.000Z"
+    },
     {
       "id": "1769274225648",
       "winnerId": "1769273367436",
@@ -1858,5 +1878,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:03:46.120Z"
+  "lastUpdated": "2026-01-24T17:04:09.552Z"
 }
