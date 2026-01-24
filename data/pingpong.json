@@ -190,7 +190,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 17
     },
     {
       "id": "9",
@@ -240,15 +240,15 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 15
     },
     {
       "id": "11",
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1530,
-      "wins": 2,
+      "elo": 1546,
+      "wins": 3,
       "losses": 0,
       "eloHistory": [
         {
@@ -262,10 +262,14 @@
         {
           "elo": 1530,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1546,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 6
     },
     {
       "id": "12",
@@ -305,9 +309,9 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "NYC",
-      "elo": 1532,
+      "elo": 1516,
       "wins": 2,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -320,10 +324,14 @@
         {
           "elo": 1532,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1516,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 18
     },
     {
       "id": "14",
@@ -1144,7 +1152,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "43",
@@ -1194,7 +1202,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 16
     },
     {
       "id": "45",
@@ -2093,6 +2101,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276569840",
+      "winnerId": "11",
+      "loserId": "13",
+      "winner": "Paul Puget",
+      "loser": "Adithya Pradeep",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276555390",
       "winnerId": "3",
@@ -3318,5 +3338,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:42:35.671Z"
+  "lastUpdated": "2026-01-24T17:42:50.138Z"
 }
