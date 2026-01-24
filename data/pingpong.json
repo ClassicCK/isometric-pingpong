@@ -484,9 +484,9 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1461,
+      "elo": 1446,
       "wins": 7,
-      "losses": 9,
+      "losses": 10,
       "eloHistory": [
         {
           "elo": 1500,
@@ -555,10 +555,14 @@
         {
           "elo": 1461,
           "timestamp": "2026-01-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1446,
+          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 72
     },
     {
       "id": "25",
@@ -1287,7 +1291,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 71
     },
     {
       "id": "58",
@@ -1329,7 +1333,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "60",
@@ -1591,8 +1595,8 @@
       "name": "Rishabh Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1634,
-      "wins": 8,
+      "elo": 1649,
+      "wins": 9,
       "losses": 2,
       "eloHistory": [
         {
@@ -1638,6 +1642,10 @@
         {
           "elo": 1634,
           "timestamp": "2026-01-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1649,
+          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -1645,6 +1653,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769275279527",
+      "winnerId": "1769273367436",
+      "loserId": "24",
+      "winner": "Rishabh Chatterjee",
+      "loser": "George Pool",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 15,
+      "loserEloChange": -15,
+      "timestamp": "2026-01-09T00:00:00.000Z"
+    },
     {
       "id": "1769275258194",
       "winnerId": "24",
@@ -2198,5 +2218,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:20:58.888Z"
+  "lastUpdated": "2026-01-24T17:21:20.187Z"
 }
