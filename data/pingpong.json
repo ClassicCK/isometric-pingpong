@@ -1415,25 +1415,29 @@
       "name": "Jeni Reeve",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1500,
+      "elo": 1490,
       "wins": 0,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1490,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 43
     },
     {
       "id": "56",
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1633,
-      "wins": 8,
+      "elo": 1643,
+      "wins": 9,
       "losses": 2,
       "eloHistory": [
         {
@@ -1479,6 +1483,10 @@
         {
           "elo": 1633,
           "timestamp": "2026-01-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1643,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1524,7 +1532,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "59",
@@ -1566,7 +1574,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "61",
@@ -1583,7 +1591,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "62",
@@ -1600,7 +1608,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "63",
@@ -1617,7 +1625,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 31
     },
     {
       "id": "64",
@@ -1634,7 +1642,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 32
     },
     {
       "id": "65",
@@ -1651,7 +1659,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 33
     },
     {
       "id": "66",
@@ -1668,7 +1676,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 34
     },
     {
       "id": "67",
@@ -1685,7 +1693,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 35
     },
     {
       "id": "68",
@@ -1702,7 +1710,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 36
     },
     {
       "id": "69",
@@ -1719,7 +1727,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 38
+      "lastWeekRank": 37
     },
     {
       "id": "70",
@@ -1736,7 +1744,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 39
+      "lastWeekRank": 38
     },
     {
       "id": "71",
@@ -1753,7 +1761,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 40
+      "lastWeekRank": 39
     },
     {
       "id": "72",
@@ -1770,7 +1778,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 41
+      "lastWeekRank": 40
     },
     {
       "id": "73",
@@ -1787,7 +1795,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 42
+      "lastWeekRank": 41
     },
     {
       "id": "74",
@@ -1804,7 +1812,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 43
+      "lastWeekRank": 42
     },
     {
       "id": "1769273367436",
@@ -1869,6 +1877,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769275936859",
+      "winnerId": "56",
+      "loserId": "55",
+      "winner": "Jon Finerty",
+      "loser": "Jeni Reeve",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 10,
+      "loserEloChange": -10,
+      "timestamp": "2026-01-12T00:00:00.000Z"
+    },
     {
       "id": "1769275923342",
       "winnerId": "53",
@@ -2758,5 +2778,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:32:03.796Z"
+  "lastUpdated": "2026-01-24T17:32:17.505Z"
 }
