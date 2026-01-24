@@ -23,7 +23,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 26
     },
     {
       "id": "2",
@@ -115,7 +115,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "6",
@@ -361,7 +361,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "16",
@@ -592,7 +592,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 33
     },
     {
       "id": "23",
@@ -752,7 +752,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "27",
@@ -823,7 +823,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "30",
@@ -918,9 +918,9 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1505,
+      "elo": 1490,
       "wins": 2,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -941,10 +941,14 @@
         {
           "elo": 1505,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1490,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 34
     },
     {
       "id": "35",
@@ -972,8 +976,8 @@
       "name": "Eamon Jubbawy",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1536,
-      "wins": 2,
+      "elo": 1551,
+      "wins": 3,
       "losses": 0,
       "eloHistory": [
         {
@@ -987,10 +991,14 @@
         {
           "elo": 1536,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1551,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 4
     },
     {
       "id": "37",
@@ -1162,7 +1170,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 5
     },
     {
       "id": "45",
@@ -1923,7 +1931,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 31
     },
     {
       "id": "74",
@@ -1940,7 +1948,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 32
     },
     {
       "id": "1769273367436",
@@ -2005,6 +2013,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276283492",
+      "winnerId": "36",
+      "loserId": "34",
+      "winner": "Eamon Jubbawy",
+      "loser": "Tomek Paczkowski",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 15,
+      "loserEloChange": -15,
+      "timestamp": "2026-01-13T00:00:00.000Z"
+    },
     {
       "id": "1769276256723",
       "winnerId": "31",
@@ -3098,5 +3118,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:37:36.948Z"
+  "lastUpdated": "2026-01-24T17:38:03.829Z"
 }
