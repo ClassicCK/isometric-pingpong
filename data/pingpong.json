@@ -448,9 +448,9 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1468,
+      "elo": 1447,
       "wins": 5,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -498,6 +498,10 @@
         },
         {
           "elo": 1468,
+          "timestamp": "2025-12-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1447,
           "timestamp": "2025-12-15T00:00:00.000Z"
         }
       ],
@@ -1463,8 +1467,8 @@
       "name": "Rishabh Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1554,
-      "wins": 3,
+      "elo": 1575,
+      "wins": 4,
       "losses": 1,
       "eloHistory": [
         {
@@ -1486,6 +1490,10 @@
         {
           "elo": 1554,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1575,
+          "timestamp": "2025-12-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -1493,6 +1501,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769274197381",
+      "winnerId": "1769273367436",
+      "loserId": "24",
+      "winner": "Rishabh Chatterjee",
+      "loser": "George Pool",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 21,
+      "loserEloChange": -21,
+      "timestamp": "2025-12-15T00:00:00.000Z"
+    },
     {
       "id": "1769274167264",
       "winnerId": "24",
@@ -1818,5 +1838,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:02:47.856Z"
+  "lastUpdated": "2026-01-24T17:03:17.981Z"
 }
