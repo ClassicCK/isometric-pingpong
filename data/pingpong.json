@@ -1034,8 +1034,8 @@
     {
       "id": "36",
       "name": "Eamon Jubbawy",
-      "countryCode": "us",
-      "office": "NYC",
+      "countryCode": "gb",
+      "office": "LON",
       "elo": 1591,
       "wins": 7,
       "losses": 1,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:47:37.322Z"
+  "lastUpdated": "2026-01-24T17:53:58.815Z"
 }
