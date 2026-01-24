@@ -774,10 +774,6 @@ export default function PingPongELO() {
           compareA = a.elo;
           compareB = b.elo;
           break;
-        case "makeTournament":
-          compareA = a.probabilities.makeTournament;
-          compareB = b.probabilities.makeTournament;
-          break;
         case "round64":
           compareA = a.probabilities.round64;
           compareB = b.probabilities.round64;
@@ -830,7 +826,7 @@ export default function PingPongELO() {
     <th
       className={`py-4 ${
         align === "right" ? "text-right" : align === "center" ? "text-center" : "text-left"
-      } ${column === "makeTournament" ? "border-l-2 border-gray-300" : ""} ${
+      } ${column === "round64" ? "border-l-2 border-gray-300" : ""} ${
         column === "rank" ? "pr-6 min-w-[120px]" : "px-6 px-0"
       } text-sm font-normal text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-50 transition-colors select-none`}
       onClick={() => handleSort(column)}
@@ -1046,7 +1042,7 @@ export default function PingPongELO() {
       <div className="max-w-7xl mx-auto px-8 py-12">
         <div className="flex items-end justify-between mb-3">
           <div className="flex-1"></div>
-          <div className="text-center" style={{ flex: "0 0 auto", width: "calc(8 * 120px)" }}>
+          <div className="text-center" style={{ flex: "0 0 auto", width: "calc(7 * 120px)" }}>
             <div className="text-sm text-gray-500 uppercase tracking-wide mb-2" style={{ fontFamily: "sans-serif" }}>
               Team Week Tournament Odds
             </div>
@@ -1061,9 +1057,6 @@ export default function PingPongELO() {
                 <SortableHeader column="name">Name</SortableHeader>
                 <SortableHeader column="elo" align="right">ELO</SortableHeader>
 
-                <SortableHeader column="makeTournament" align="center">
-                  Make Tourn.
-                </SortableHeader>
                 <SortableHeader column="round64" align="center">
                   Rd. of 64
                 </SortableHeader>
@@ -1091,7 +1084,7 @@ export default function PingPongELO() {
             <tbody>
               {sortedPlayers.length === 0 ? (
                 <tr>
-                  <td colSpan="11" className="text-center py-16 text-gray-400">
+                  <td colSpan="10" className="text-center py-16 text-gray-400">
                     No players registered yet. Add a player to get started.
                   </td>
                 </tr>
@@ -1153,11 +1146,8 @@ export default function PingPongELO() {
                           <span className="text-lg font-normal text-gray-900">{player.elo}</span>
                         </td>
 
-                        {/* Make Tournament divider begins here */}
+                        {/* Rd. of 64 - first column now has the border */}
                         <td className="px-0 relative border-l-2 border-gray-300 align-middle">
-                          <ProbabilityCell probability={player.probabilities.makeTournament} />
-                        </td>
-                        <td className="px-0 relative align-middle">
                           <ProbabilityCell probability={player.probabilities.round64} />
                         </td>
                         <td className="px-0 relative align-middle">
@@ -1182,7 +1172,7 @@ export default function PingPongELO() {
 
                       {isRank64 && (
                         <tr>
-                          <td colSpan="11" className="p-0">
+                          <td colSpan="10" className="p-0">
                             <div className="border-t-4 border-red-500 relative z-10">
                               <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-1 border-2 border-red-500 rounded text-xs font-bold text-red-600 uppercase tracking-wider z-20">
                                 Tournament Cutoff
