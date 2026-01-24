@@ -843,12 +843,12 @@ export default function PingPongELO() {
                           <div className="flex items-center gap-3 flex-1">
                             {winner && (
                               <img
-                                src={`https://flagcdn.com/24x18/${winner.countryCode}.png`}
-                                srcSet={`https://flagcdn.com/48x36/${winner.countryCode}.png 2x`}
+                                src={`https://flagcdn.com/w40/${winner.countryCode}.png`}
                                 width="24"
                                 height="18"
                                 alt="Flag"
                                 className="flex-shrink-0"
+                                style={{ objectFit: "cover" }}
                               />
                             )}
                             <div className="flex-1">
@@ -885,12 +885,12 @@ export default function PingPongELO() {
                             </div>
                             {loser && (
                               <img
-                                src={`https://flagcdn.com/24x18/${loser.countryCode}.png`}
-                                srcSet={`https://flagcdn.com/48x36/${loser.countryCode}.png 2x`}
+                                src={`https://flagcdn.com/w40/${loser.countryCode}.png`}
                                 width="24"
                                 height="18"
                                 alt="Flag"
                                 className="flex-shrink-0"
+                                style={{ objectFit: "cover" }}
                               />
                             )}
                           </div>
@@ -910,7 +910,7 @@ export default function PingPongELO() {
             <div className="flex items-center justify-between">
               <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
                 <p>Isometric Table Tennis ELO System</p>
-                <p className="mt-1">© 2026 Isometric</p>
+                <p className="mt-1">© 2026 Christopher Kilner</p>
               </div>
               <button
                 onClick={() => setCurrentView("rankings")}
@@ -972,7 +972,7 @@ export default function PingPongELO() {
           <div className="flex-1"></div>
           <div className="text-center" style={{ flex: "0 0 auto", width: "calc(8 * 120px)" }}>
             <div className="text-sm text-gray-500 uppercase tracking-wide mb-2" style={{ fontFamily: "sans-serif" }}>
-              Tournament Odds
+              Team Week Tournament Odds
             </div>
           </div>
         </div>
@@ -1049,14 +1049,13 @@ export default function PingPongELO() {
                         <td className="py-3 px-6">
                           <div className="flex items-center gap-3">
                             <img
-                              src={`https://flagcdn.com/24x18/${player.countryCode}.png`}
-                              srcSet={`https://flagcdn.com/48x36/${player.countryCode}.png 2x,
-                                       https://flagcdn.com/72x54/${player.countryCode}.png 3x`}
+                              src={`https://flagcdn.com/w40/${player.countryCode}.png`}
                               width="24"
                               height="18"
                               alt={countryData?.name || "Flag"}
                               title={countryData?.name || ""}
                               className="flex-shrink-0"
+                              style={{ objectFit: "cover" }}
                             />
                             <div className="flex items-center gap-2 min-w-0">
                               <span className="text-sm text-gray-900 whitespace-nowrap">{player.name}</span>
@@ -1485,7 +1484,7 @@ export default function PingPongELO() {
           <div className="flex items-center justify-between">
             <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
               <p>Isometric Table Tennis ELO System</p>
-              <p className="mt-1">© 2026 Isometric</p>
+              <p className="mt-1">© 2026 Christopher Kilner</p>
             </div>
             <button
               onClick={() => setCurrentView("matches")}
