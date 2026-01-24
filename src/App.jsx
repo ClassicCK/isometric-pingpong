@@ -418,30 +418,42 @@ export default function PingPongELO() {
     try {
       setLoading(true);
 
-      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-        const localPlayers = localStorage.getItem("pingpong:players_v4");
-        const localMatches = localStorage.getItem("pingpong:matches_v4");
+      // Check localStorage first (works everywhere)
+      const localPlayers = localStorage.getItem("pingpong:players_v4");
+      const localMatches = localStorage.getItem("pingpong:matches_v4");
 
-        if (localPlayers) setPlayers(JSON.parse(localPlayers));
-        if (localMatches) setMatches(JSON.parse(localMatches));
+      if (localPlayers && localMatches) {
+        setPlayers(JSON.parse(localPlayers));
+        setMatches(JSON.parse(localMatches));
         setLoading(false);
         return;
       }
 
-      const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}?ref=${GITHUB_CONFIG.branch}`;
-      const response = await fetch(url);
+      // If no local data and not localhost, try to load from GitHub
+      if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+        try {
+          const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}?ref=${GITHUB_CONFIG.branch}`;
+          const response = await fetch(url);
 
-      if (response.ok) {
-        const fileData = await response.json();
-        setFileSha(fileData.sha);
+          if (response.ok) {
+            const fileData = await response.json();
+            setFileSha(fileData.sha);
 
-        const content = atob(fileData.content);
-        const data = JSON.parse(content);
+            const content = atob(fileData.content);
+            const data = JSON.parse(content);
 
-        setPlayers(data.players || []);
-        setMatches(data.matches || []);
-      } else if (response.status === 404) {
-        console.log("No data file found, starting fresh");
+            setPlayers(data.players || []);
+            setMatches(data.matches || []);
+            
+            // Save to localStorage for future use
+            localStorage.setItem("pingpong:players_v4", JSON.stringify(data.players || []));
+            localStorage.setItem("pingpong:matches_v4", JSON.stringify(data.matches || []));
+          } else if (response.status === 404) {
+            console.log("No data file found on GitHub, starting fresh");
+          }
+        } catch (error) {
+          console.log("Could not load from GitHub, starting fresh");
+        }
       }
     } catch (error) {
       console.error("Error loading data:", error);
@@ -452,25 +464,37 @@ export default function PingPongELO() {
 
   const saveData = async (newPlayers, newMatches) => {
     try {
+      // For localhost, use localStorage
       if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
         localStorage.setItem("pingpong:players_v4", JSON.stringify(newPlayers));
         localStorage.setItem("pingpong:matches_v4", JSON.stringify(newMatches));
         return;
       }
 
-      const response = await fetch("/api/save-data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ players: newPlayers, matches: newMatches }),
-      });
+      // For production, save to localStorage as a backup
+      // This allows the app to work without a backend
+      localStorage.setItem("pingpong:players_v4", JSON.stringify(newPlayers));
+      localStorage.setItem("pingpong:matches_v4", JSON.stringify(newMatches));
+      
+      console.log("Data saved to local storage");
+      
+      // Optionally try to save to GitHub via serverless function if available
+      // This will fail silently if the function doesn't exist (e.g., on GitHub Pages)
+      try {
+        const response = await fetch("/api/save-data", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ players: newPlayers, matches: newMatches }),
+        });
 
-      if (response.ok) {
-        const result = await response.json();
-        setFileSha(result.sha);
-      } else {
-        const error = await response.json();
-        console.error("Failed to save:", error);
-        alert("Failed to save data. Please try again.");
+        if (response.ok) {
+          const result = await response.json();
+          setFileSha(result.sha);
+          console.log("Data also saved to GitHub");
+        }
+      } catch (apiError) {
+        // Silently fail - data is still saved in localStorage
+        console.log("GitHub sync not available (using localStorage only)");
       }
     } catch (error) {
       console.error("Error saving data:", error);
