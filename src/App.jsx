@@ -361,6 +361,7 @@ export default function PingPongELO() {
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [currentView, setCurrentView] = useState("rankings"); // "rankings" or "matches"
 
   const [selectedWinner, setSelectedWinner] = useState("");
   const [selectedLoser, setSelectedLoser] = useState("");
@@ -402,7 +403,7 @@ export default function PingPongELO() {
       try {
         const probs = simulateSeasonPlusTournamentProbabilities(players, {
           numSimulations: 1000,
-          seasonMatchesPerPlayer: 10,
+          seasonMatchesPerPlayer: 100,
           seasonK: 24,
           seasonMatchNoiseStd: 60,
           tournamentMatchNoiseStd: 15,
@@ -788,6 +789,146 @@ export default function PingPongELO() {
   // =========================
   // RANKINGS VIEW
   // =========================
+  if (currentView === "matches") {
+    // Match History View
+    return (
+      <div className="min-h-screen bg-white">
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+
+        <div className="border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <button
+              onClick={() => setCurrentView("rankings")}
+              className="text-gray-600 hover:text-black mb-6 flex items-center gap-2"
+              style={{ fontFamily: "sans-serif" }}
+            >
+              ← Back to Rankings
+            </button>
+
+            <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif", letterSpacing: "-0.02em" }}>
+              Match History
+            </h1>
+
+            <p className="text-xl text-gray-700" style={{ fontFamily: "Figtree, sans-serif" }}>
+              Complete record of all {matches.length} matches and their impact on player ratings.
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-12">
+          {matches.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-gray-400 text-lg">No matches recorded yet.</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {matches.map((match) => {
+                const matchDate = new Date(match.timestamp);
+                const winner = players.find(p => p.id === match.winnerId);
+                const loser = players.find(p => p.id === match.loserId);
+                
+                return (
+                  <div 
+                    key={match.id} 
+                    className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow bg-white"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide" style={{ fontFamily: "sans-serif" }}>
+                          {formatDate(match.timestamp)} at {formatTime(match.timestamp)}
+                        </div>
+                        
+                        <div className="flex items-center gap-8">
+                          {/* Winner */}
+                          <div className="flex items-center gap-3 flex-1">
+                            {winner && (
+                              <img
+                                src={`https://flagcdn.com/24x18/${winner.countryCode}.png`}
+                                srcSet={`https://flagcdn.com/48x36/${winner.countryCode}.png 2x`}
+                                width="24"
+                                height="18"
+                                alt="Flag"
+                                className="flex-shrink-0"
+                              />
+                            )}
+                            <div className="flex-1">
+                              <div className="font-semibold text-lg text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+                                {match.winner}
+                              </div>
+                              <div className="text-sm text-green-600 font-medium">
+                                +{match.winnerEloChange} ELO
+                              </div>
+                            </div>
+                            {match.winnerScore !== null && (
+                              <div className="text-2xl font-bold text-gray-900 min-w-[3rem] text-right" style={{ fontFamily: "Figtree, sans-serif" }}>
+                                {match.winnerScore}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="text-gray-400 font-bold text-xl px-4">vs</div>
+
+                          {/* Loser */}
+                          <div className="flex items-center gap-3 flex-1">
+                            {match.loserScore !== null && (
+                              <div className="text-2xl font-bold text-gray-400 min-w-[3rem]" style={{ fontFamily: "Figtree, sans-serif" }}>
+                                {match.loserScore}
+                              </div>
+                            )}
+                            <div className="flex-1">
+                              <div className="font-semibold text-lg text-gray-600" style={{ fontFamily: "Figtree, sans-serif" }}>
+                                {match.loser}
+                              </div>
+                              <div className="text-sm text-red-600 font-medium">
+                                {match.loserEloChange} ELO
+                              </div>
+                            </div>
+                            {loser && (
+                              <img
+                                src={`https://flagcdn.com/24x18/${loser.countryCode}.png`}
+                                srcSet={`https://flagcdn.com/48x36/${loser.countryCode}.png 2x`}
+                                width="24"
+                                height="18"
+                                alt="Flag"
+                                className="flex-shrink-0"
+                              />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="border-t border-gray-200 mt-12">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
+                <p>Isometric Table Tennis ELO System</p>
+                <p className="mt-1">© 2026 Isometric</p>
+              </div>
+              <button
+                onClick={() => setCurrentView("rankings")}
+                className="text-sm text-gray-600 hover:text-black underline"
+                style={{ fontFamily: "sans-serif" }}
+              >
+                ← Back to Rankings
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // =========================
+  // RANKINGS VIEW
+  // =========================
   return (
     <div className="min-h-screen bg-white">
       <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -811,7 +952,7 @@ export default function PingPongELO() {
           </div>
 
           <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif", letterSpacing: "-0.02em" }}>
-            Isometric Ping Pong Rankings
+            Isometric Table Tennis Rankings
           </h1>
 
           <p className="text-xl text-gray-700" style={{ fontFamily: "Figtree, sans-serif" }}>
@@ -831,7 +972,7 @@ export default function PingPongELO() {
           <div className="flex-1"></div>
           <div className="text-center" style={{ flex: "0 0 auto", width: "calc(8 * 120px)" }}>
             <div className="text-sm text-gray-500 uppercase tracking-wide mb-2" style={{ fontFamily: "sans-serif" }}>
-              Simulated Season + Tournament Odds (1,000 sims)
+              Tournament Odds
             </div>
           </div>
         </div>
@@ -1280,6 +1421,81 @@ export default function PingPongELO() {
         </div>
 
         {sidebarOpen && <div className="fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity" onClick={() => setSidebarOpen(false)} />}
+      </div>
+
+      {/* 538-style Explanation Section */}
+      <div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200">
+        <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "Figtree, sans-serif" }}>
+          How This Works
+        </h2>
+        
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
+          <div>
+            <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+              The ELO Rating System
+            </h3>
+            <p className="text-gray-700 leading-relaxed mb-3" style={{ fontFamily: "sans-serif" }}>
+              Every player starts with an ELO rating of 1,500. When you win a match, your rating goes up; when you lose, it goes down. 
+              The amount of change depends on the difference between the two players' ratings — beating a higher-rated opponent 
+              earns you more points than beating a lower-rated one.
+            </p>
+            <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+              We also factor in the margin of victory. Winning 21-5 has a bigger impact on ratings than winning 21-19, 
+              though this effect is capped to prevent extreme swings.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+              Tournament Probability Model
+            </h3>
+            <p className="text-gray-700 leading-relaxed mb-3" style={{ fontFamily: "sans-serif" }}>
+              To calculate tournament odds, we simulate the rest of the season and a 64-player tournament 1,000 times. 
+              Each simulation plays out a full season of matches (with randomness to account for variance), then seeds 
+              the top 64 players into a March Madness-style bracket.
+            </p>
+            <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+              The percentages show how often each player reached each round across all simulations. A player with a 75% 
+              chance to make the tournament made it into the top 64 in 750 of the 1,000 simulations.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-gray-100 border border-gray-300 rounded p-6">
+          <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+            Model Assumptions
+          </h3>
+          <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-700" style={{ fontFamily: "sans-serif" }}>
+            <div>
+              <span className="font-semibold">Season Length:</span> Each player plays ~100 more matches before the tournament
+            </div>
+            <div>
+              <span className="font-semibold">Match Variance:</span> Real-world performance varies ±60 ELO points per match
+            </div>
+            <div>
+              <span className="font-semibold">Tournament Format:</span> Single elimination, 64 players, seeded by ELO
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-8 py-8">
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
+              <p>Isometric Table Tennis ELO System</p>
+              <p className="mt-1">© 2026 Isometric</p>
+            </div>
+            <button
+              onClick={() => setCurrentView("matches")}
+              className="text-sm text-gray-600 hover:text-black underline"
+              style={{ fontFamily: "sans-serif" }}
+            >
+              View Match History →
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
