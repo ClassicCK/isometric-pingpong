@@ -1752,8 +1752,8 @@
     {
       "id": "58",
       "name": "Stacy Kauk",
-      "countryCode": "us",
-      "office": "NYC",
+      "countryCode": "ca",
+      "office": "LON",
       "elo": 1482,
       "wins": 0,
       "losses": 1,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:57:29.018Z"
+  "lastUpdated": "2026-01-24T17:57:43.279Z"
 }
