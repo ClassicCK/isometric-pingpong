@@ -1104,7 +1104,7 @@
     {
       "id": "38",
       "name": "Jing He",
-      "countryCode": "cn",
+      "countryCode": "us",
       "office": "NYC",
       "elo": 1517,
       "wins": 2,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:54:36.446Z"
+  "lastUpdated": "2026-01-24T17:54:46.210Z"
 }
