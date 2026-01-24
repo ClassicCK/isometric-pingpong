@@ -821,7 +821,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 7
     },
     {
       "id": "28",
@@ -1024,8 +1024,8 @@
       "name": "Eamon Jubbawy",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1578,
-      "wins": 5,
+      "elo": 1593,
+      "wins": 6,
       "losses": 0,
       "eloHistory": [
         {
@@ -1050,6 +1050,10 @@
         },
         {
           "elo": 1578,
+          "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1593,
           "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
@@ -1972,9 +1976,9 @@
       "name": "Peteris Bikis",
       "countryCode": "lv",
       "office": "LON",
-      "elo": 1548,
+      "elo": 1533,
       "wins": 3,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1991,10 +1995,14 @@
         {
           "elo": 1548,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1533,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 8
     },
     {
       "id": "69",
@@ -2189,6 +2197,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276804655",
+      "winnerId": "36",
+      "loserId": "68",
+      "winner": "Eamon Jubbawy",
+      "loser": "Peteris Bikis",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 15,
+      "loserEloChange": -15,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276792824",
       "winnerId": "61",
@@ -3558,5 +3578,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:46:33.052Z"
+  "lastUpdated": "2026-01-24T17:46:45.003Z"
 }
