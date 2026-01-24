@@ -489,7 +489,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 73
+      "lastWeekRank": 72
     },
     {
       "id": "20",
@@ -613,7 +613,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 64
     },
     {
       "id": "24",
@@ -706,7 +706,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 65
     },
     {
       "id": "25",
@@ -1252,7 +1252,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 69
     },
     {
       "id": "47",
@@ -1345,7 +1345,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 71
     },
     {
       "id": "48",
@@ -1366,7 +1366,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 68
     },
     {
       "id": "49",
@@ -1495,7 +1495,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 70
     },
     {
       "id": "54",
@@ -1609,8 +1609,8 @@
       "name": "Luke Harry",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1467,
-      "wins": 1,
+      "elo": 1483,
+      "wins": 2,
       "losses": 2,
       "eloHistory": [
         {
@@ -1628,10 +1628,14 @@
         {
           "elo": 1467,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1483,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 63
     },
     {
       "id": "58",
@@ -1652,16 +1656,16 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 66
     },
     {
       "id": "59",
       "name": "James Atkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1468,
+      "elo": 1452,
       "wins": 1,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1678,10 +1682,14 @@
         {
           "elo": 1468,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1452,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 73
     },
     {
       "id": "60",
@@ -1702,7 +1710,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 67
     },
     {
       "id": "61",
@@ -2053,6 +2061,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276441074",
+      "winnerId": "57",
+      "loserId": "59",
+      "winner": "Luke Harry",
+      "loser": "James Atkin",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "timestamp": "2026-01-13T00:00:00.000Z"
+    },
     {
       "id": "1769276417174",
       "winnerId": "56",
@@ -3218,5 +3238,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:40:17.482Z"
+  "lastUpdated": "2026-01-24T17:40:41.380Z"
 }
