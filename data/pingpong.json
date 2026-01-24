@@ -1118,8 +1118,8 @@
       "name": "Rhys Savage",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1516,
-      "wins": 1,
+      "elo": 1533,
+      "wins": 2,
       "losses": 0,
       "eloHistory": [
         {
@@ -1129,10 +1129,14 @@
         {
           "elo": 1516,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1533,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 5
     },
     {
       "id": "43",
@@ -1160,9 +1164,9 @@
       "name": "Cai Green",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1541,
+      "elo": 1524,
       "wins": 2,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1175,10 +1179,14 @@
         {
           "elo": 1541,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1524,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 14
     },
     {
       "id": "45",
@@ -2021,6 +2029,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276347707",
+      "winnerId": "42",
+      "loserId": "44",
+      "winner": "Rhys Savage",
+      "loser": "Cai Green",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 17,
+      "loserEloChange": -17,
+      "timestamp": "2026-01-13T00:00:00.000Z"
+    },
     {
       "id": "1769276322475",
       "winnerId": "38",
@@ -3138,5 +3158,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:38:42.898Z"
+  "lastUpdated": "2026-01-24T17:39:07.923Z"
 }
