@@ -489,7 +489,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 73
     },
     {
       "id": "20",
@@ -1193,9 +1193,9 @@
       "name": "Ola Sitarska",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1410,
+      "elo": 1396,
       "wins": 1,
-      "losses": 5,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1224,6 +1224,10 @@
         {
           "elo": 1410,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1396,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1255,8 +1259,8 @@
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1451,
-      "wins": 8,
+      "elo": 1465,
+      "wins": 9,
       "losses": 10,
       "eloHistory": [
         {
@@ -1334,10 +1338,14 @@
         {
           "elo": 1451,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1465,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 73
+      "lastWeekRank": 72
     },
     {
       "id": "48",
@@ -2029,6 +2037,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276361924",
+      "winnerId": "47",
+      "loserId": "45",
+      "winner": "Joel Robinson",
+      "loser": "Ola Sitarska",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 14,
+      "loserEloChange": -14,
+      "timestamp": "2026-01-13T00:00:00.000Z"
+    },
     {
       "id": "1769276347707",
       "winnerId": "42",
@@ -3158,5 +3178,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:39:07.923Z"
+  "lastUpdated": "2026-01-24T17:39:22.223Z"
 }
