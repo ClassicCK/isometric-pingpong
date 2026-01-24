@@ -206,7 +206,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "13",
@@ -295,7 +295,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 5
     },
     {
       "id": "18",
@@ -324,7 +324,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 2
+      "lastWeekRank": 3
     },
     {
       "id": "19",
@@ -345,7 +345,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "20",
@@ -374,7 +374,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 4
     },
     {
       "id": "21",
@@ -644,7 +644,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "35",
@@ -818,7 +818,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 6
     },
     {
       "id": "45",
@@ -875,9 +875,9 @@
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1481,
+      "elo": 1455,
       "wins": 3,
-      "losses": 5,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -914,10 +914,14 @@
         {
           "elo": 1481,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1455,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 73
     },
     {
       "id": "48",
@@ -1023,7 +1027,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 73
+      "lastWeekRank": 72
     },
     {
       "id": "54",
@@ -1119,7 +1123,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 71
     },
     {
       "id": "58",
@@ -1415,8 +1419,8 @@
       "name": "Rishabh Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1507,
-      "wins": 1,
+      "elo": 1533,
+      "wins": 2,
       "losses": 1,
       "eloHistory": [
         {
@@ -1430,13 +1434,29 @@
         {
           "elo": 1507,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1533,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 2
     }
   ],
   "matches": [
+    {
+      "id": "1769273932085",
+      "winnerId": "1769273367436",
+      "loserId": "47",
+      "winner": "Rishabh Chatterjee",
+      "loser": "Joel Robinson",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 26,
+      "loserEloChange": -26,
+      "timestamp": "2025-12-12T00:00:00.000Z"
+    },
     {
       "id": "1769273895841",
       "winnerId": "47",
@@ -1678,5 +1698,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T16:58:16.467Z"
+  "lastUpdated": "2026-01-24T16:58:52.693Z"
 }
