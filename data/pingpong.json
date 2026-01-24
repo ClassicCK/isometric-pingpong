@@ -23,7 +23,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 24
     },
     {
       "id": "2",
@@ -115,7 +115,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 25
     },
     {
       "id": "6",
@@ -232,7 +232,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 14
     },
     {
       "id": "11",
@@ -257,7 +257,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 13
     },
     {
       "id": "12",
@@ -361,7 +361,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 26
     },
     {
       "id": "16",
@@ -407,7 +407,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "18",
@@ -448,7 +448,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "19",
@@ -752,7 +752,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "27",
@@ -823,7 +823,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "30",
@@ -1069,7 +1069,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "40",
@@ -1186,7 +1186,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 15
     },
     {
       "id": "45",
@@ -1373,8 +1373,8 @@
       "name": "Lukas May",
       "countryCode": "de",
       "office": "LON",
-      "elo": 1516,
-      "wins": 1,
+      "elo": 1532,
+      "wins": 2,
       "losses": 0,
       "eloHistory": [
         {
@@ -1384,10 +1384,14 @@
         {
           "elo": 1516,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1532,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 12
     },
     {
       "id": "50",
@@ -1436,9 +1440,9 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "NYC",
-      "elo": 1515,
+      "elo": 1499,
       "wins": 2,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1455,10 +1459,14 @@
         {
           "elo": 1515,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1499,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 32
     },
     {
       "id": "53",
@@ -1955,7 +1963,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "74",
@@ -1972,7 +1980,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 31
     },
     {
       "id": "1769273367436",
@@ -2037,6 +2045,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276388841",
+      "winnerId": "49",
+      "loserId": "52",
+      "winner": "Lukas May",
+      "loser": "Saadat Nursultan",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "timestamp": "2026-01-13T00:00:00.000Z"
+    },
     {
       "id": "1769276361924",
       "winnerId": "47",
@@ -3178,5 +3198,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:39:22.223Z"
+  "lastUpdated": "2026-01-24T17:39:49.164Z"
 }
