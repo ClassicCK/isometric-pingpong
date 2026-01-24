@@ -240,7 +240,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 11
     },
     {
       "id": "11",
@@ -1230,7 +1230,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 12
     },
     {
       "id": "45",
@@ -1421,9 +1421,9 @@
       "name": "Lukas May",
       "countryCode": "de",
       "office": "LON",
-      "elo": 1532,
+      "elo": 1521,
       "wins": 2,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1436,10 +1436,14 @@
         {
           "elo": 1532,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1521,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 13
     },
     {
       "id": "50",
@@ -1592,8 +1596,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1652,
-      "wins": 10,
+      "elo": 1663,
+      "wins": 11,
       "losses": 2,
       "eloHistory": [
         {
@@ -1647,6 +1651,10 @@
         {
           "elo": 1652,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1663,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1783,7 +1791,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 9
+      "lastWeekRank": 8
     },
     {
       "id": "62",
@@ -1942,7 +1950,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 10
+      "lastWeekRank": 9
     },
     {
       "id": "69",
@@ -1988,7 +1996,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 10
     },
     {
       "id": "71",
@@ -2133,6 +2141,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276669939",
+      "winnerId": "56",
+      "loserId": "49",
+      "winner": "Jon Finerty",
+      "loser": "Lukas May",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 11,
+      "loserEloChange": -11,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276649522",
       "winnerId": "47",
@@ -3418,5 +3438,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:44:09.825Z"
+  "lastUpdated": "2026-01-24T17:44:30.248Z"
 }
