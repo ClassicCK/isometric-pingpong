@@ -357,9 +357,9 @@
       "name": "Kate Rodger",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1527,
+      "elo": 1510,
       "wins": 1,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -368,18 +368,22 @@
         {
           "elo": 1527,
           "timestamp": "2025-12-03T00:00:00.000Z"
+        },
+        {
+          "elo": 1510,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 15
     },
     {
       "id": "18",
       "name": "Alex Steene",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1504,
-      "wins": 2,
+      "elo": 1521,
+      "wins": 3,
       "losses": 2,
       "eloHistory": [
         {
@@ -401,10 +405,14 @@
         {
           "elo": 1504,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1521,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 6
     },
     {
       "id": "19",
@@ -986,7 +994,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 5
     },
     {
       "id": "45",
@@ -1718,6 +1726,18 @@
   ],
   "matches": [
     {
+      "id": "1769275516110",
+      "winnerId": "18",
+      "loserId": "17",
+      "winner": "Alex Steene",
+      "loser": "Kate Rodger",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 17,
+      "loserEloChange": -17,
+      "timestamp": "2026-01-12T00:00:00.000Z"
+    },
+    {
       "id": "1769275502143",
       "winnerId": "15",
       "loserId": "16",
@@ -2378,5 +2398,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:25:02.748Z"
+  "lastUpdated": "2026-01-24T17:25:16.790Z"
 }
