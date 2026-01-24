@@ -15,7 +15,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 6
     },
     {
       "id": "2",
@@ -32,7 +32,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 7
     },
     {
       "id": "3",
@@ -49,7 +49,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 9
+      "lastWeekRank": 8
     },
     {
       "id": "4",
@@ -66,7 +66,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 10
+      "lastWeekRank": 9
     },
     {
       "id": "5",
@@ -83,7 +83,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 10
     },
     {
       "id": "6",
@@ -100,7 +100,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 11
     },
     {
       "id": "7",
@@ -117,7 +117,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 12
     },
     {
       "id": "8",
@@ -134,7 +134,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 13
     },
     {
       "id": "9",
@@ -151,7 +151,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 14
     },
     {
       "id": "10",
@@ -168,7 +168,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 15
     },
     {
       "id": "11",
@@ -185,7 +185,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 16
     },
     {
       "id": "12",
@@ -223,7 +223,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 17
     },
     {
       "id": "14",
@@ -240,7 +240,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 18
     },
     {
       "id": "15",
@@ -257,7 +257,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "16",
@@ -274,7 +274,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "17",
@@ -295,15 +295,15 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 2
+      "lastWeekRank": 3
     },
     {
       "id": "18",
       "name": "Alex Steene",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1527,
-      "wins": 1,
+      "elo": 1552,
+      "wins": 2,
       "losses": 0,
       "eloHistory": [
         {
@@ -313,10 +313,14 @@
         {
           "elo": 1527,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1552,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 2
     },
     {
       "id": "19",
@@ -337,16 +341,16 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 5
     },
     {
       "id": "20",
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1525,
+      "elo": 1500,
       "wins": 1,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -355,10 +359,14 @@
         {
           "elo": 1525,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1500,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 21
     },
     {
       "id": "21",
@@ -1374,6 +1382,18 @@
   ],
   "matches": [
     {
+      "id": "1769273615538",
+      "winnerId": "18",
+      "loserId": "20",
+      "winner": "Alex Steene",
+      "loser": "Charlie Parkin",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 25,
+      "loserEloChange": -25,
+      "timestamp": "2025-12-12T00:00:00.000Z"
+    },
+    {
       "id": "1769273586671",
       "winnerId": "20",
       "loserId": "12",
@@ -1518,5 +1538,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T16:53:07.079Z"
+  "lastUpdated": "2026-01-24T16:53:36.118Z"
 }
