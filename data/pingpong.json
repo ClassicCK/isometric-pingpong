@@ -340,7 +340,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 67
     },
     {
       "id": "19",
@@ -1215,17 +1215,21 @@
       "name": "James Atkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1500,
+      "elo": 1483,
       "wins": 0,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1483,
+          "timestamp": "2026-01-02T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 68
     },
     {
       "id": "60",
@@ -1242,7 +1246,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 52
     },
     {
       "id": "61",
@@ -1259,7 +1263,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "62",
@@ -1276,7 +1280,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "63",
@@ -1293,7 +1297,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 55
     },
     {
       "id": "64",
@@ -1310,7 +1314,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 56
     },
     {
       "id": "65",
@@ -1327,7 +1331,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 57
     },
     {
       "id": "66",
@@ -1344,7 +1348,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 59
+      "lastWeekRank": 58
     },
     {
       "id": "67",
@@ -1361,7 +1365,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 60
+      "lastWeekRank": 59
     },
     {
       "id": "68",
@@ -1378,7 +1382,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 60
     },
     {
       "id": "69",
@@ -1395,7 +1399,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 61
     },
     {
       "id": "70",
@@ -1412,7 +1416,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 62
     },
     {
       "id": "71",
@@ -1429,7 +1433,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 63
     },
     {
       "id": "72",
@@ -1446,7 +1450,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "73",
@@ -1463,7 +1467,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "74",
@@ -1480,15 +1484,15 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "1769273367436",
       "name": "Rishabh Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1648,
-      "wins": 7,
+      "elo": 1665,
+      "wins": 8,
       "losses": 1,
       "eloHistory": [
         {
@@ -1526,6 +1530,10 @@
         {
           "elo": 1648,
           "timestamp": "2026-01-02T00:00:00.000Z"
+        },
+        {
+          "elo": 1665,
+          "timestamp": "2026-01-02T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -1533,6 +1541,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769274364151",
+      "winnerId": "1769273367436",
+      "loserId": "59",
+      "winner": "Rishabh Chatterjee",
+      "loser": "James Atkin",
+      "winnerScore": 11,
+      "loserScore": 3,
+      "winnerEloChange": 17,
+      "loserEloChange": -17,
+      "timestamp": "2026-01-02T00:00:00.000Z"
+    },
     {
       "id": "1769274315335",
       "winnerId": "1769273367436",
@@ -1918,5 +1938,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:05:15.943Z"
+  "lastUpdated": "2026-01-24T17:06:04.708Z"
 }
