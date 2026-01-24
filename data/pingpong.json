@@ -2103,7 +2103,7 @@
       "id": "72",
       "name": "Alex Wright",
       "countryCode": "gb",
-      "office": "LON",
+      "office": "NYC",
       "elo": 1500,
       "wins": 1,
       "losses": 1,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:56:01.569Z"
+  "lastUpdated": "2026-01-24T17:56:09.361Z"
 }
