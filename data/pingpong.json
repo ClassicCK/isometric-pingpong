@@ -1032,8 +1032,8 @@
       "name": "Eamon Jubbawy",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1593,
-      "wins": 6,
+      "elo": 1608,
+      "wins": 7,
       "losses": 0,
       "eloHistory": [
         {
@@ -1063,6 +1063,10 @@
         {
           "elo": 1593,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1608,
+          "timestamp": "2026-01-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1817,9 +1821,9 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1567,
+      "elo": 1552,
       "wins": 4,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1840,6 +1844,10 @@
         {
           "elo": 1567,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1552,
+          "timestamp": "2026-01-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2205,6 +2213,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276841389",
+      "winnerId": "36",
+      "loserId": "61",
+      "winner": "Eamon Jubbawy",
+      "loser": "Michael Shell",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 15,
+      "loserEloChange": -15,
+      "timestamp": "2026-01-15T00:00:00.000Z"
+    },
     {
       "id": "1769276826869",
       "winnerId": "11",
@@ -3598,5 +3618,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:47:07.185Z"
+  "lastUpdated": "2026-01-24T17:47:21.604Z"
 }
