@@ -633,7 +633,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "24",
@@ -730,7 +730,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "25",
@@ -1296,7 +1296,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "47",
@@ -1414,7 +1414,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 67
     },
     {
       "id": "49",
@@ -1547,7 +1547,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "54",
@@ -1665,9 +1665,9 @@
       "name": "Luke Harry",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1483,
+      "elo": 1469,
       "wins": 2,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1688,10 +1688,14 @@
         {
           "elo": 1483,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1469,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 71
     },
     {
       "id": "58",
@@ -1712,7 +1716,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "59",
@@ -1766,15 +1770,15 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "61",
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1532,
-      "wins": 2,
+      "elo": 1546,
+      "wins": 3,
       "losses": 0,
       "eloHistory": [
         {
@@ -1788,6 +1792,10 @@
         {
           "elo": 1532,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1546,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2141,6 +2149,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276689555",
+      "winnerId": "61",
+      "loserId": "57",
+      "winner": "Michael Shell",
+      "loser": "Luke Harry",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 14,
+      "loserEloChange": -14,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276669939",
       "winnerId": "56",
@@ -3438,5 +3458,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:44:30.248Z"
+  "lastUpdated": "2026-01-24T17:44:49.847Z"
 }
