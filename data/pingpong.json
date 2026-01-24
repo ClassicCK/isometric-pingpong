@@ -219,26 +219,30 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1500,
-      "wins": 0,
+      "elo": 1513,
+      "wins": 1,
       "losses": 0,
       "eloHistory": [
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1513,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 12
     },
     {
       "id": "12",
       "name": "Ewan Stephens",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1424,
+      "elo": 1411,
       "wins": 0,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -255,6 +259,10 @@
         {
           "elo": 1424,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1411,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -380,7 +388,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 13
     },
     {
       "id": "19",
@@ -1694,6 +1702,18 @@
   ],
   "matches": [
     {
+      "id": "1769275472578",
+      "winnerId": "11",
+      "loserId": "12",
+      "winner": "Paul Puget",
+      "loser": "Ewan Stephens",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 13,
+      "loserEloChange": -13,
+      "timestamp": "2026-01-12T00:00:00.000Z"
+    },
+    {
       "id": "1769275427877",
       "winnerId": "10",
       "loserId": "9",
@@ -2318,5 +2338,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:23:48.616Z"
+  "lastUpdated": "2026-01-24T17:24:33.235Z"
 }
