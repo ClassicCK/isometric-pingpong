@@ -859,9 +859,9 @@
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1430,
+      "elo": 1416,
       "wins": 1,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -885,6 +885,10 @@
         },
         {
           "elo": 1430,
+          "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1416,
           "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
@@ -1032,8 +1036,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1592,
-      "wins": 4,
+      "elo": 1606,
+      "wins": 5,
       "losses": 0,
       "eloHistory": [
         {
@@ -1054,6 +1058,10 @@
         },
         {
           "elo": 1592,
+          "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1606,
           "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
@@ -1398,6 +1406,18 @@
   ],
   "matches": [
     {
+      "id": "1769273725539",
+      "winnerId": "56",
+      "loserId": "47",
+      "winner": "Jon Finerty",
+      "loser": "Joel Robinson",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 14,
+      "loserEloChange": -14,
+      "timestamp": "2025-12-12T00:00:00.000Z"
+    },
+    {
       "id": "1769273682339",
       "winnerId": "1769273367436",
       "loserId": "47",
@@ -1578,5 +1598,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T16:54:42.961Z"
+  "lastUpdated": "2026-01-24T16:55:26.145Z"
 }
