@@ -218,7 +218,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 73
+      "lastWeekRank": 74
     },
     {
       "id": "13",
@@ -377,7 +377,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "20",
@@ -484,8 +484,8 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1481,
-      "wins": 7,
+      "elo": 1458,
+      "wins": 6,
       "losses": 8,
       "eloHistory": [
         {
@@ -547,14 +547,10 @@
         {
           "elo": 1458,
           "timestamp": "2026-01-09T00:00:00.000Z"
-        },
-        {
-          "elo": 1481,
-          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 70
     },
     {
       "id": "25",
@@ -975,9 +971,9 @@
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1412,
+      "elo": 1435,
       "wins": 6,
-      "losses": 10,
+      "losses": 9,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1042,14 +1038,10 @@
         {
           "elo": 1435,
           "timestamp": "2026-01-09T00:00:00.000Z"
-        },
-        {
-          "elo": 1412,
-          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 74
+      "lastWeekRank": 73
     },
     {
       "id": "48",
@@ -1163,7 +1155,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "54",
@@ -1637,18 +1629,6 @@
     }
   ],
   "matches": [
-    {
-      "id": "1769274724965",
-      "winnerId": "24",
-      "loserId": "47",
-      "winner": "George Pool",
-      "loser": "Joel Robinson",
-      "winnerScore": 12,
-      "loserScore": 10,
-      "winnerEloChange": 24,
-      "loserEloChange": -24,
-      "timestamp": "2026-01-09T00:00:00.000Z"
-    },
     {
       "id": "1769274670750",
       "winnerId": "52",
@@ -2178,5 +2158,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:19:20.542Z"
+  "lastUpdated": "2026-01-24T17:19:34.074Z"
 }
