@@ -15,7 +15,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 9
+      "lastWeekRank": 8
     },
     {
       "id": "2",
@@ -32,7 +32,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 10
+      "lastWeekRank": 9
     },
     {
       "id": "3",
@@ -49,7 +49,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 10
     },
     {
       "id": "4",
@@ -66,7 +66,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 11
     },
     {
       "id": "5",
@@ -83,7 +83,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 12
     },
     {
       "id": "6",
@@ -100,7 +100,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 13
     },
     {
       "id": "7",
@@ -117,7 +117,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 14
     },
     {
       "id": "8",
@@ -134,7 +134,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 15
     },
     {
       "id": "9",
@@ -151,7 +151,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 16
     },
     {
       "id": "10",
@@ -189,7 +189,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 17
     },
     {
       "id": "12",
@@ -235,7 +235,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 18
     },
     {
       "id": "14",
@@ -252,7 +252,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "15",
@@ -269,7 +269,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "16",
@@ -286,7 +286,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "17",
@@ -340,7 +340,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "19",
@@ -407,7 +407,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "22",
@@ -424,7 +424,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "23",
@@ -441,15 +441,15 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 24
     },
     {
       "id": "24",
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1435,
-      "wins": 4,
+      "elo": 1468,
+      "wins": 5,
       "losses": 6,
       "eloHistory": [
         {
@@ -495,6 +495,10 @@
         {
           "elo": 1435,
           "timestamp": "2025-12-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1468,
+          "timestamp": "2025-12-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -515,7 +519,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 25
     },
     {
       "id": "26",
@@ -532,7 +536,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 26
     },
     {
       "id": "27",
@@ -549,7 +553,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "28",
@@ -566,7 +570,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "29",
@@ -583,7 +587,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "30",
@@ -600,7 +604,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "31",
@@ -617,7 +621,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 31
     },
     {
       "id": "32",
@@ -634,7 +638,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 32
     },
     {
       "id": "33",
@@ -651,7 +655,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 33
     },
     {
       "id": "34",
@@ -672,7 +676,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "35",
@@ -689,7 +693,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 34
     },
     {
       "id": "36",
@@ -706,7 +710,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 35
     },
     {
       "id": "37",
@@ -723,7 +727,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 36
     },
     {
       "id": "38",
@@ -740,7 +744,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 38
+      "lastWeekRank": 37
     },
     {
       "id": "39",
@@ -757,7 +761,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 39
+      "lastWeekRank": 38
     },
     {
       "id": "40",
@@ -774,7 +778,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 40
+      "lastWeekRank": 39
     },
     {
       "id": "41",
@@ -791,7 +795,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 41
+      "lastWeekRank": 40
     },
     {
       "id": "42",
@@ -808,7 +812,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 42
+      "lastWeekRank": 41
     },
     {
       "id": "43",
@@ -825,7 +829,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 43
+      "lastWeekRank": 42
     },
     {
       "id": "44",
@@ -896,16 +900,16 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 44
+      "lastWeekRank": 43
     },
     {
       "id": "47",
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1505,
+      "elo": 1472,
       "wins": 5,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -954,10 +958,14 @@
         {
           "elo": 1505,
           "timestamp": "2025-12-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1472,
+          "timestamp": "2025-12-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 70
     },
     {
       "id": "48",
@@ -974,7 +982,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 45
+      "lastWeekRank": 44
     },
     {
       "id": "49",
@@ -991,7 +999,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 46
+      "lastWeekRank": 45
     },
     {
       "id": "50",
@@ -1008,7 +1016,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 47
+      "lastWeekRank": 46
     },
     {
       "id": "51",
@@ -1025,7 +1033,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 48
+      "lastWeekRank": 47
     },
     {
       "id": "52",
@@ -1042,7 +1050,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 49
+      "lastWeekRank": 48
     },
     {
       "id": "53",
@@ -1080,7 +1088,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 50
+      "lastWeekRank": 49
     },
     {
       "id": "55",
@@ -1097,7 +1105,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 51
+      "lastWeekRank": 50
     },
     {
       "id": "56",
@@ -1176,7 +1184,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 51
     },
     {
       "id": "59",
@@ -1193,7 +1201,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 52
     },
     {
       "id": "60",
@@ -1210,7 +1218,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "61",
@@ -1227,7 +1235,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "62",
@@ -1244,7 +1252,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 55
     },
     {
       "id": "63",
@@ -1261,7 +1269,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 56
     },
     {
       "id": "64",
@@ -1278,7 +1286,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 57
     },
     {
       "id": "65",
@@ -1295,7 +1303,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 59
+      "lastWeekRank": 58
     },
     {
       "id": "66",
@@ -1312,7 +1320,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 60
+      "lastWeekRank": 59
     },
     {
       "id": "67",
@@ -1329,7 +1337,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 60
     },
     {
       "id": "68",
@@ -1346,7 +1354,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 61
     },
     {
       "id": "69",
@@ -1363,7 +1371,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 62
     },
     {
       "id": "70",
@@ -1380,7 +1388,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 63
     },
     {
       "id": "71",
@@ -1397,7 +1405,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "72",
@@ -1414,7 +1422,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "73",
@@ -1431,7 +1439,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "74",
@@ -1448,7 +1456,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 67
     },
     {
       "id": "1769273367436",
@@ -1485,6 +1493,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769274167264",
+      "winnerId": "24",
+      "loserId": "47",
+      "winner": "George Pool",
+      "loser": "Joel Robinson",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 33,
+      "loserEloChange": -33,
+      "timestamp": "2025-12-15T00:00:00.000Z"
+    },
     {
       "id": "1769274142548",
       "winnerId": "47",
@@ -1798,5 +1818,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:02:23.181Z"
+  "lastUpdated": "2026-01-24T17:02:47.856Z"
 }
