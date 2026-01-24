@@ -781,9 +781,9 @@
       "name": "Ola Sitarska",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1423,
+      "elo": 1403,
       "wins": 0,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -800,6 +800,10 @@
         {
           "elo": 1423,
           "timestamp": "2025-12-10T00:00:00.000Z"
+        },
+        {
+          "elo": 1403,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -992,8 +996,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1529,
-      "wins": 1,
+      "elo": 1549,
+      "wins": 2,
       "losses": 0,
       "eloHistory": [
         {
@@ -1002,6 +1006,10 @@
         },
         {
           "elo": 1529,
+          "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1549,
           "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
@@ -1317,6 +1325,18 @@
   ],
   "matches": [
     {
+      "id": "1769273194858",
+      "winnerId": "56",
+      "loserId": "45",
+      "winner": "Jon Finerty",
+      "loser": "Ola Sitarska",
+      "winnerScore": 11,
+      "loserScore": 1,
+      "winnerEloChange": 20,
+      "loserEloChange": -20,
+      "timestamp": "2025-12-12T00:00:00.000Z"
+    },
+    {
       "id": "1769273111357",
       "winnerId": "56",
       "loserId": "24",
@@ -1401,5 +1421,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T16:45:12.014Z"
+  "lastUpdated": "2026-01-24T16:46:35.446Z"
 }
