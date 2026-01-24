@@ -436,9 +436,9 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1479,
+      "elo": 1458,
       "wins": 4,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -475,10 +475,14 @@
         {
           "elo": 1479,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1458,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 72
     },
     {
       "id": "25",
@@ -652,7 +656,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "35",
@@ -1035,7 +1039,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 71
     },
     {
       "id": "54",
@@ -1131,7 +1135,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "58",
@@ -1427,8 +1431,8 @@
       "name": "Rishabh Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1533,
-      "wins": 2,
+      "elo": 1554,
+      "wins": 3,
       "losses": 1,
       "eloHistory": [
         {
@@ -1446,6 +1450,10 @@
         {
           "elo": 1533,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1554,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -1453,6 +1461,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769274021352",
+      "winnerId": "1769273367436",
+      "loserId": "24",
+      "winner": "Rishabh Chatterjee",
+      "loser": "George Pool",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 21,
+      "loserEloChange": -21,
+      "timestamp": "2025-12-12T00:00:00.000Z"
+    },
     {
       "id": "1769273969803",
       "winnerId": "24",
@@ -1718,5 +1738,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T16:59:30.392Z"
+  "lastUpdated": "2026-01-24T17:00:22.043Z"
 }
