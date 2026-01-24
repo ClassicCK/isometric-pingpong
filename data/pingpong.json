@@ -5,9 +5,9 @@
       "name": "David Lankes",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1516,
+      "elo": 1500,
       "wins": 1,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -16,10 +16,14 @@
         {
           "elo": 1516,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1500,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 32
     },
     {
       "id": "2",
@@ -47,8 +51,8 @@
       "name": "George Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1516,
-      "wins": 1,
+      "elo": 1532,
+      "wins": 2,
       "losses": 0,
       "eloHistory": [
         {
@@ -58,10 +62,14 @@
         {
           "elo": 1516,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1532,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 9
+      "lastWeekRank": 7
     },
     {
       "id": "4",
@@ -103,7 +111,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 10
+      "lastWeekRank": 9
     },
     {
       "id": "6",
@@ -166,7 +174,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 10
     },
     {
       "id": "9",
@@ -233,7 +241,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "12",
@@ -287,7 +295,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 11
     },
     {
       "id": "14",
@@ -329,7 +337,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 12
     },
     {
       "id": "16",
@@ -375,7 +383,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "18",
@@ -412,7 +420,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 8
     },
     {
       "id": "19",
@@ -548,7 +556,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 13
     },
     {
       "id": "23",
@@ -700,7 +708,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 14
     },
     {
       "id": "27",
@@ -721,7 +729,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 15
     },
     {
       "id": "28",
@@ -763,7 +771,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 16
     },
     {
       "id": "30",
@@ -805,7 +813,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 17
     },
     {
       "id": "32",
@@ -880,7 +888,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 31
     },
     {
       "id": "35",
@@ -968,7 +976,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 18
     },
     {
       "id": "39",
@@ -989,7 +997,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "40",
@@ -1052,7 +1060,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "43",
@@ -1291,7 +1299,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "50",
@@ -1362,7 +1370,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "53",
@@ -1611,7 +1619,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "62",
@@ -1653,7 +1661,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "64",
@@ -1695,7 +1703,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 24
     },
     {
       "id": "66",
@@ -1758,7 +1766,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 25
     },
     {
       "id": "69",
@@ -1800,7 +1808,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 26
     },
     {
       "id": "71",
@@ -1842,7 +1850,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "73",
@@ -1941,6 +1949,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276144142",
+      "winnerId": "3",
+      "loserId": "1",
+      "winner": "George Robinson",
+      "loser": "David Lankes",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "timestamp": "2026-01-13T00:00:00.000Z"
+    },
     {
       "id": "1769276100259",
       "winnerId": "72",
@@ -2938,5 +2958,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:35:00.903Z"
+  "lastUpdated": "2026-01-24T17:35:44.820Z"
 }
