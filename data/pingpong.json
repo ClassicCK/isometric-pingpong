@@ -240,7 +240,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 13
     },
     {
       "id": "11",
@@ -1008,8 +1008,8 @@
       "name": "Eamon Jubbawy",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1551,
-      "wins": 3,
+      "elo": 1566,
+      "wins": 4,
       "losses": 0,
       "eloHistory": [
         {
@@ -1027,6 +1027,10 @@
         {
           "elo": 1551,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1566,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1058,9 +1062,9 @@
       "name": "Jing He",
       "countryCode": "cn",
       "office": "NYC",
-      "elo": 1532,
+      "elo": 1517,
       "wins": 2,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1073,10 +1077,14 @@
         {
           "elo": 1532,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1517,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 9
+      "lastWeekRank": 15
     },
     {
       "id": "39",
@@ -1218,7 +1226,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 14
     },
     {
       "id": "45",
@@ -1423,7 +1431,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 10
+      "lastWeekRank": 9
     },
     {
       "id": "50",
@@ -1767,7 +1775,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 10
     },
     {
       "id": "62",
@@ -1926,7 +1934,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 11
     },
     {
       "id": "69",
@@ -1972,7 +1980,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 12
     },
     {
       "id": "71",
@@ -2117,6 +2125,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276626923",
+      "winnerId": "36",
+      "loserId": "38",
+      "winner": "Eamon Jubbawy",
+      "loser": "Jing He",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 15,
+      "loserEloChange": -15,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276601706",
       "winnerId": "27",
@@ -3378,5 +3398,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:43:22.014Z"
+  "lastUpdated": "2026-01-24T17:43:47.141Z"
 }
