@@ -51,9 +51,9 @@
       "name": "George Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1548,
+      "elo": 1532,
       "wins": 3,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -70,10 +70,14 @@
         {
           "elo": 1548,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1532,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 9
     },
     {
       "id": "4",
@@ -247,8 +251,8 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1546,
-      "wins": 3,
+      "elo": 1562,
+      "wins": 4,
       "losses": 0,
       "eloHistory": [
         {
@@ -266,10 +270,14 @@
         {
           "elo": 1546,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1562,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 5
     },
     {
       "id": "12",
@@ -1799,7 +1807,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 9
+      "lastWeekRank": 8
     },
     {
       "id": "62",
@@ -2157,6 +2165,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276728488",
+      "winnerId": "11",
+      "loserId": "3",
+      "winner": "Paul Puget",
+      "loser": "George Robinson",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276706156",
       "winnerId": "68",
@@ -3478,5 +3498,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:45:06.464Z"
+  "lastUpdated": "2026-01-24T17:45:28.797Z"
 }
