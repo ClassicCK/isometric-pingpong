@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { X, ChevronUp, ChevronDown, Edit2 } from 'lucide-react';
+import { X, ChevronUp, ChevronDown, Edit2, Trash2 } from 'lucide-react';
 
 // All countries with their ISO codes for flat flags
 const COUNTRIES = [
@@ -665,6 +665,74 @@ export default function PingPongELO() {
     setActiveTab("match");
   };
 
+  const deleteMatch = (matchId) => {
+    if (!window.confirm("Are you sure you want to delete this match? This will recalculate all ELO ratings from this point forward.")) {
+      return;
+    }
+
+    // Find the match to delete
+    const matchToDelete = matches.find(m => m.id === matchId);
+    if (!matchToDelete) return;
+
+    // Remove the match from the list
+    const updatedMatches = matches.filter(m => m.id !== matchId);
+
+    // Recalculate ELO ratings by replaying all remaining matches in chronological order
+    const sortedMatches = [...updatedMatches].sort((a, b) => 
+      new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+    );
+
+    // Reset all players to starting ELO and clear history
+    const resetPlayers = players.map(p => ({
+      ...p,
+      elo: 1500,
+      wins: 0,
+      losses: 0,
+      eloHistory: [{ elo: 1500, timestamp: p.joinedAt }]
+    }));
+
+    // Replay all matches
+    let recalculatedPlayers = resetPlayers;
+    sortedMatches.forEach(match => {
+      const winner = recalculatedPlayers.find(p => p.id === match.winnerId);
+      const loser = recalculatedPlayers.find(p => p.id === match.loserId);
+
+      if (winner && loser) {
+        const { winnerNew, loserNew } = calculateELO(
+          winner.elo, 
+          loser.elo, 
+          match.winnerScore, 
+          match.loserScore
+        );
+
+        recalculatedPlayers = recalculatedPlayers.map(p => {
+          if (p.id === match.winnerId) {
+            return {
+              ...p,
+              elo: winnerNew,
+              wins: p.wins + 1,
+              eloHistory: [...p.eloHistory, { elo: winnerNew, timestamp: match.timestamp }]
+            };
+          }
+          if (p.id === match.loserId) {
+            return {
+              ...p,
+              elo: loserNew,
+              losses: p.losses + 1,
+              eloHistory: [...p.eloHistory, { elo: loserNew, timestamp: match.timestamp }]
+            };
+          }
+          return p;
+        });
+      }
+    });
+
+    const playersWithRanks = calculateRankChanges(recalculatedPlayers);
+    setPlayers(playersWithRanks);
+    setMatches(updatedMatches);
+    saveData(playersWithRanks, updatedMatches);
+  };
+
   const handleSort = (column) => {
     if (sortColumn === column) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -830,7 +898,7 @@ export default function PingPongELO() {
                 return (
                   <div 
                     key={match.id} 
-                    className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow bg-white"
+                    className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow bg-white group"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
@@ -896,6 +964,14 @@ export default function PingPongELO() {
                           </div>
                         </div>
                       </div>
+
+                      <button
+                        onClick={() => deleteMatch(match.id)}
+                        className="ml-6 p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors opacity-0 group-hover:opacity-100"
+                        title="Delete match"
+                      >
+                        <Trash2 size={18} />
+                      </button>
                     </div>
                   </div>
                 );
