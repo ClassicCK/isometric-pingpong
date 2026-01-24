@@ -645,7 +645,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 63
     },
     {
       "id": "24",
@@ -742,7 +742,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "25",
@@ -959,7 +959,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 61
     },
     {
       "id": "34",
@@ -1024,8 +1024,8 @@
       "name": "Eamon Jubbawy",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1566,
-      "wins": 4,
+      "elo": 1578,
+      "wins": 5,
       "losses": 0,
       "eloHistory": [
         {
@@ -1046,6 +1046,10 @@
         },
         {
           "elo": 1566,
+          "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1578,
           "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
@@ -1312,16 +1316,16 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 67
     },
     {
       "id": "47",
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1484,
+      "elo": 1472,
       "wins": 10,
-      "losses": 10,
+      "losses": 11,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1406,10 +1410,14 @@
         {
           "elo": 1484,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1472,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 70
     },
     {
       "id": "48",
@@ -1430,7 +1438,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "49",
@@ -1480,7 +1488,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "51",
@@ -1501,7 +1509,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "52",
@@ -1563,7 +1571,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "54",
@@ -1584,7 +1592,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 62
     },
     {
       "id": "55",
@@ -1732,7 +1740,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "59",
@@ -1786,7 +1794,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "61",
@@ -1836,7 +1844,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 55
     },
     {
       "id": "63",
@@ -1882,7 +1890,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 56
     },
     {
       "id": "65",
@@ -1928,7 +1936,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 57
     },
     {
       "id": "67",
@@ -1949,7 +1957,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 59
+      "lastWeekRank": 58
     },
     {
       "id": "68",
@@ -1999,7 +2007,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 60
+      "lastWeekRank": 59
     },
     {
       "id": "70",
@@ -2049,7 +2057,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 60
     },
     {
       "id": "72",
@@ -2173,6 +2181,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276772805",
+      "winnerId": "36",
+      "loserId": "47",
+      "winner": "Eamon Jubbawy",
+      "loser": "Joel Robinson",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 12,
+      "loserEloChange": -12,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276756340",
       "winnerId": "20",
@@ -3518,5 +3538,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:45:56.573Z"
+  "lastUpdated": "2026-01-24T17:46:13.112Z"
 }
