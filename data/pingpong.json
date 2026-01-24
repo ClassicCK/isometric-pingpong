@@ -192,9 +192,9 @@
       "name": "Ewan Stephens",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1448,
+      "elo": 1421,
       "wins": 0,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -206,6 +206,10 @@
         },
         {
           "elo": 1448,
+          "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1421,
           "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
@@ -482,7 +486,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 73
     },
     {
       "id": "25",
@@ -656,7 +660,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 70
     },
     {
       "id": "35",
@@ -887,8 +891,8 @@
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1455,
-      "wins": 3,
+      "elo": 1482,
+      "wins": 4,
       "losses": 6,
       "eloHistory": [
         {
@@ -930,10 +934,14 @@
         {
           "elo": 1455,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1482,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 73
+      "lastWeekRank": 69
     },
     {
       "id": "48",
@@ -1039,7 +1047,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 72
     },
     {
       "id": "54",
@@ -1135,7 +1143,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 71
     },
     {
       "id": "58",
@@ -1462,6 +1470,18 @@
   ],
   "matches": [
     {
+      "id": "1769274043885",
+      "winnerId": "47",
+      "loserId": "12",
+      "winner": "Joel Robinson",
+      "loser": "Ewan Stephens",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "timestamp": "2025-12-12T00:00:00.000Z"
+    },
+    {
       "id": "1769274021352",
       "winnerId": "1769273367436",
       "loserId": "24",
@@ -1738,5 +1758,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:00:22.043Z"
+  "lastUpdated": "2026-01-24T17:00:44.542Z"
 }
