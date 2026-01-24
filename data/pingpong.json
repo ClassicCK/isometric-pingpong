@@ -324,7 +324,7 @@
       "id": "13",
       "name": "Adithya Pradeep",
       "countryCode": "in",
-      "office": "NYC",
+      "office": "LON",
       "elo": 1516,
       "wins": 2,
       "losses": 1,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:54:46.210Z"
+  "lastUpdated": "2026-01-24T17:55:02.848Z"
 }
