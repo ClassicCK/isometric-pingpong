@@ -192,9 +192,9 @@
       "name": "Ewan Stephens",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1475,
+      "elo": 1448,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -203,10 +203,14 @@
         {
           "elo": 1475,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1448,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 74
     },
     {
       "id": "13",
@@ -432,8 +436,8 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1452,
-      "wins": 3,
+      "elo": 1479,
+      "wins": 4,
       "losses": 4,
       "eloHistory": [
         {
@@ -467,10 +471,14 @@
         {
           "elo": 1452,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1479,
+          "timestamp": "2025-12-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 74
+      "lastWeekRank": 69
     },
     {
       "id": "25",
@@ -644,7 +652,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 70
     },
     {
       "id": "35",
@@ -1446,6 +1454,18 @@
   ],
   "matches": [
     {
+      "id": "1769273969803",
+      "winnerId": "24",
+      "loserId": "12",
+      "winner": "George Pool",
+      "loser": "Ewan Stephens",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "timestamp": "2025-12-12T00:00:00.000Z"
+    },
+    {
       "id": "1769273932085",
       "winnerId": "1769273367436",
       "loserId": "47",
@@ -1698,5 +1718,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T16:58:52.693Z"
+  "lastUpdated": "2026-01-24T16:59:30.392Z"
 }
