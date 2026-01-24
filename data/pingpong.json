@@ -251,8 +251,8 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1582,
-      "wins": 5,
+      "elo": 1599,
+      "wins": 6,
       "losses": 0,
       "eloHistory": [
         {
@@ -278,10 +278,14 @@
         {
           "elo": 1582,
           "timestamp": "2026-01-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1599,
+          "timestamp": "2026-01-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 4
     },
     {
       "id": "12",
@@ -1032,9 +1036,9 @@
       "name": "Eamon Jubbawy",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1608,
+      "elo": 1591,
       "wins": 7,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1067,10 +1071,14 @@
         {
           "elo": 1608,
           "timestamp": "2026-01-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1591,
+          "timestamp": "2026-01-15T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 5
     },
     {
       "id": "37",
@@ -2213,6 +2221,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276857023",
+      "winnerId": "11",
+      "loserId": "36",
+      "winner": "Paul Puget",
+      "loser": "Eamon Jubbawy",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 17,
+      "loserEloChange": -17,
+      "timestamp": "2026-01-15T00:00:00.000Z"
+    },
     {
       "id": "1769276841389",
       "winnerId": "36",
@@ -3618,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:47:21.604Z"
+  "lastUpdated": "2026-01-24T17:47:37.322Z"
 }
