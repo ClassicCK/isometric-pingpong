@@ -187,7 +187,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 45
+      "lastWeekRank": 44
     },
     {
       "id": "10",
@@ -569,7 +569,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 66
     },
     {
       "id": "24",
@@ -901,7 +901,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 46
+      "lastWeekRank": 45
     },
     {
       "id": "36",
@@ -1073,7 +1073,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 47
+      "lastWeekRank": 46
     },
     {
       "id": "44",
@@ -1160,7 +1160,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 68
     },
     {
       "id": "47",
@@ -1270,7 +1270,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 67
     },
     {
       "id": "49",
@@ -1369,8 +1369,8 @@
       "name": "Izzy Piper",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1468,
-      "wins": 0,
+      "elo": 1485,
+      "wins": 1,
       "losses": 1,
       "eloHistory": [
         {
@@ -1380,27 +1380,35 @@
         {
           "elo": 1468,
           "timestamp": "2025-12-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1485,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 47
     },
     {
       "id": "54",
       "name": "Dria Wheatley",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1500,
+      "elo": 1483,
       "wins": 0,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1483,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 65
     },
     {
       "id": "55",
@@ -1417,7 +1425,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "56",
@@ -1516,7 +1524,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "59",
@@ -1558,7 +1566,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "61",
@@ -1575,7 +1583,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "62",
@@ -1592,7 +1600,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 31
     },
     {
       "id": "63",
@@ -1609,7 +1617,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 32
     },
     {
       "id": "64",
@@ -1626,7 +1634,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 33
     },
     {
       "id": "65",
@@ -1643,7 +1651,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 34
     },
     {
       "id": "66",
@@ -1660,7 +1668,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 35
     },
     {
       "id": "67",
@@ -1677,7 +1685,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 36
     },
     {
       "id": "68",
@@ -1694,7 +1702,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 38
+      "lastWeekRank": 37
     },
     {
       "id": "69",
@@ -1711,7 +1719,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 39
+      "lastWeekRank": 38
     },
     {
       "id": "70",
@@ -1728,7 +1736,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 40
+      "lastWeekRank": 39
     },
     {
       "id": "71",
@@ -1745,7 +1753,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 41
+      "lastWeekRank": 40
     },
     {
       "id": "72",
@@ -1762,7 +1770,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 42
+      "lastWeekRank": 41
     },
     {
       "id": "73",
@@ -1779,7 +1787,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 43
+      "lastWeekRank": 42
     },
     {
       "id": "74",
@@ -1796,7 +1804,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 44
+      "lastWeekRank": 43
     },
     {
       "id": "1769273367436",
@@ -1861,6 +1869,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769275923342",
+      "winnerId": "53",
+      "loserId": "54",
+      "winner": "Izzy Piper",
+      "loser": "Dria Wheatley",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 17,
+      "loserEloChange": -17,
+      "timestamp": "2026-01-12T00:00:00.000Z"
+    },
     {
       "id": "1769275903808",
       "winnerId": "52",
@@ -2738,5 +2758,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:31:44.471Z"
+  "lastUpdated": "2026-01-24T17:32:03.796Z"
 }
