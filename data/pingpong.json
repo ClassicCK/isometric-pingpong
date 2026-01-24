@@ -1886,7 +1886,7 @@
       "id": "63",
       "name": "Ryan Penney",
       "countryCode": "gb",
-      "office": "LON",
+      "office": "NYC",
       "elo": 1500,
       "wins": 1,
       "losses": 1,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:55:44.617Z"
+  "lastUpdated": "2026-01-24T17:55:50.860Z"
 }
