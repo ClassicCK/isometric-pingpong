@@ -2081,8 +2081,8 @@
     {
       "id": "71",
       "name": "Kevin Sutherland",
-      "countryCode": "gb",
-      "office": "LON",
+      "countryCode": "us",
+      "office": "NYC",
       "elo": 1484,
       "wins": 0,
       "losses": 1,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:57:07.754Z"
+  "lastUpdated": "2026-01-24T17:57:23.795Z"
 }
