@@ -484,9 +484,9 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1458,
+      "elo": 1431,
       "wins": 6,
-      "losses": 8,
+      "losses": 9,
       "eloHistory": [
         {
           "elo": 1500,
@@ -547,10 +547,14 @@
         {
           "elo": 1458,
           "timestamp": "2026-01-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1431,
+          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 73
     },
     {
       "id": "25",
@@ -971,8 +975,8 @@
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1435,
-      "wins": 6,
+      "elo": 1462,
+      "wins": 7,
       "losses": 9,
       "eloHistory": [
         {
@@ -1038,10 +1042,14 @@
         {
           "elo": 1435,
           "timestamp": "2026-01-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1462,
+          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 73
+      "lastWeekRank": 70
     },
     {
       "id": "48",
@@ -1630,6 +1638,18 @@
   ],
   "matches": [
     {
+      "id": "1769275233210",
+      "winnerId": "47",
+      "loserId": "24",
+      "winner": "Joel Robinson",
+      "loser": "George Pool",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "timestamp": "2026-01-09T00:00:00.000Z"
+    },
+    {
       "id": "1769275211863",
       "winnerId": "52",
       "loserId": "59",
@@ -2158,5 +2178,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:20:12.570Z"
+  "lastUpdated": "2026-01-24T17:20:33.660Z"
 }
