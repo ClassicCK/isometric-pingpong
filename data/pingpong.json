@@ -520,8 +520,8 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1631,
-      "wins": 9,
+      "elo": 1643,
+      "wins": 10,
       "losses": 2,
       "eloHistory": [
         {
@@ -570,6 +570,10 @@
         },
         {
           "elo": 1631,
+          "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1643,
           "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
@@ -791,9 +795,9 @@
       "name": "Mark Pullin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1548,
+      "elo": 1536,
       "wins": 3,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -810,10 +814,14 @@
         {
           "elo": 1548,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1536,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 8
     },
     {
       "id": "28",
@@ -1807,7 +1815,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 7
     },
     {
       "id": "62",
@@ -1970,7 +1978,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 6
     },
     {
       "id": "69",
@@ -2165,6 +2173,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769276756340",
+      "winnerId": "20",
+      "loserId": "27",
+      "winner": "Charlie Parkin",
+      "loser": "Mark Pullin",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 12,
+      "loserEloChange": -12,
+      "timestamp": "2026-01-14T00:00:00.000Z"
+    },
     {
       "id": "1769276728488",
       "winnerId": "11",
@@ -3498,5 +3518,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:45:28.797Z"
+  "lastUpdated": "2026-01-24T17:45:56.573Z"
 }
