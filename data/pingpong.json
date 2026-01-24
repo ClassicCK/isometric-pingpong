@@ -484,8 +484,8 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1423,
-      "wins": 5,
+      "elo": 1452,
+      "wins": 6,
       "losses": 8,
       "eloHistory": [
         {
@@ -543,10 +543,14 @@
         {
           "elo": 1423,
           "timestamp": "2025-12-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1452,
+          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 73
+      "lastWeekRank": 71
     },
     {
       "id": "25",
@@ -963,9 +967,9 @@
       "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1476,
+      "elo": 1447,
       "wins": 6,
-      "losses": 8,
+      "losses": 9,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1026,10 +1030,14 @@
         {
           "elo": 1476,
           "timestamp": "2025-12-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1447,
+          "timestamp": "2026-01-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 73
     },
     {
       "id": "48",
@@ -1118,7 +1126,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "53",
@@ -1139,7 +1147,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "54",
@@ -1597,6 +1605,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769274597916",
+      "winnerId": "24",
+      "loserId": "47",
+      "winner": "George Pool",
+      "loser": "Joel Robinson",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 29,
+      "loserEloChange": -29,
+      "timestamp": "2026-01-09T00:00:00.000Z"
+    },
     {
       "id": "1769274560616",
       "winnerId": "20",
@@ -2078,5 +2098,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-24T17:09:21.222Z"
+  "lastUpdated": "2026-01-24T17:09:58.511Z"
 }
