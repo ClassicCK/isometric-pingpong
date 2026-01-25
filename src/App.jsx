@@ -883,16 +883,24 @@ export default function PingPongELO() {
         return [{ elo: currentElo, timestamp: currentDate }];
       }
       
-      const lastEntry = eloHistory[eloHistory.length - 1];
+      // Filter out the initial 1500 starting point - only keep points after actual matches
+      // The first point in eloHistory is always the starting 1500, so we skip it if there are more points
+      const filteredHistory = eloHistory.length > 1 ? eloHistory.slice(1) : eloHistory;
+      
+      if (filteredHistory.length === 0) {
+        return [{ elo: currentElo, timestamp: currentDate }];
+      }
+      
+      const lastEntry = filteredHistory[filteredHistory.length - 1];
       const lastTimestamp = new Date(lastEntry.timestamp);
       const now = new Date();
       
       // If last entry is not today, add a point for today with same ELO
       if (lastTimestamp.toDateString() !== now.toDateString()) {
-        return [...eloHistory, { elo: currentElo, timestamp: currentDate }];
+        return [...filteredHistory, { elo: currentElo, timestamp: currentDate }];
       }
       
-      return eloHistory;
+      return filteredHistory;
     };
 
     // Use raw ELO history for the chart extended to current date
@@ -999,7 +1007,7 @@ export default function PingPongELO() {
                 style={{ objectFit: "cover" }}
               />
               <div>
-                <h1 className="text-6xl font-black" style={{ fontFamily: "Figtree, sans-serif", letterSpacing: "-0.02em" }}>
+                <h1 className="text-6xl font-black" style={{ fontFamily: "monospace", letterSpacing: "-0.02em" }}>
                   {player.name}
                 </h1>
                 <p className="text-xl text-gray-500 mt-2" style={{ fontFamily: "monospace" }}>
