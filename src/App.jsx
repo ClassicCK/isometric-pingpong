@@ -878,7 +878,7 @@ export default function PingPongELO() {
     // Extend each player's history to current date with their current ELO
     const currentDate = new Date().toISOString();
     
-    const extendHistoryToNow = (eloHistory, currentElo) => {
+    const extendHistoryToNow = (eloHistory, currentElo, joinedAt) => {
       if (!eloHistory || eloHistory.length === 0) {
         return [{ elo: currentElo, timestamp: currentDate }];
       }
@@ -888,9 +888,13 @@ export default function PingPongELO() {
         new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
       );
       
-      // Filter out the initial 1500 starting point - only keep points after actual matches
-      // The first point in eloHistory is always the starting 1500, so we skip it if there are more points
-      const filteredHistory = sortedHistory.length > 1 ? sortedHistory.slice(1) : sortedHistory;
+      // Filter out the initial 1500 starting point (matches joinedAt timestamp and elo of 1500)
+      // This is the point created when the player first joins, before any matches
+      const filteredHistory = sortedHistory.filter(entry => {
+        // Keep entries that are NOT the initial starting point
+        const isStartingPoint = entry.elo === 1500 && entry.timestamp === joinedAt;
+        return !isStartingPoint;
+      });
       
       if (filteredHistory.length === 0) {
         return [{ elo: currentElo, timestamp: currentDate }];
@@ -909,10 +913,10 @@ export default function PingPongELO() {
     };
 
     // Use raw ELO history for the chart extended to current date
-    const currentPlayerHistory = extendHistoryToNow(player.eloHistory, player.elo);
+    const currentPlayerHistory = extendHistoryToNow(player.eloHistory, player.elo, player.joinedAt);
     const allPlayerHistories = players.map(p => ({
       ...p,
-      history: extendHistoryToNow(p.eloHistory, p.elo)
+      history: extendHistoryToNow(p.eloHistory, p.elo, p.joinedAt)
     }));
 
     // Get min and max ELO across all players for chart scaling
