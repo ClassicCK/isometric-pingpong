@@ -858,7 +858,7 @@
     },
     {
       "id": "29",
-      "name": "Vid PalÃÂar",
+      "name": "Vid PalÃÂÃÂar",
       "countryCode": "si",
       "office": "LON",
       "elo": 1500,
@@ -1034,7 +1034,7 @@
     {
       "id": "36",
       "name": "Eamon Jubbawy",
-      "countryCode": "gb",
+      "countryCode": "iq",
       "office": "LON",
       "elo": 1590,
       "wins": 7,
@@ -2562,7 +2562,7 @@
       "winnerId": "31",
       "loserId": "29",
       "winner": "Emily Mears",
-      "loser": "Vid PalÃÂar",
+      "loser": "Vid PalÃÂÃÂar",
       "winnerScore": null,
       "loserScore": null,
       "winnerEloChange": 16,
@@ -2909,7 +2909,7 @@
       "id": "1769275614360",
       "winnerId": "29",
       "loserId": "30",
-      "winner": "Vid PalÃÂar",
+      "winner": "Vid PalÃÂÃÂar",
       "loser": "Helen Durrant",
       "winnerScore": null,
       "loserScore": null,
@@ -3638,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-25T17:18:37.693Z"
+  "lastUpdated": "2026-01-25T18:52:57.668Z"
 }
