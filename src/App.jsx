@@ -867,8 +867,39 @@ export default function PingPongELO() {
 
     const countryData = COUNTRIES.find(c => c.code === player.countryCode);
 
+    // Function to get average ELO by day for smoothing
+    const getAverageEloByDay = (eloHistory) => {
+      const dayMap = new Map();
+      
+      eloHistory.forEach(entry => {
+        const date = new Date(entry.timestamp);
+        const dayKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+        
+        if (!dayMap.has(dayKey)) {
+          dayMap.set(dayKey, { sum: 0, count: 0, timestamp: entry.timestamp });
+        }
+        
+        const day = dayMap.get(dayKey);
+        day.sum += entry.elo;
+        day.count += 1;
+      });
+      
+      return Array.from(dayMap.values()).map(day => ({
+        elo: Math.round(day.sum / day.count),
+        timestamp: day.timestamp
+      })).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+    };
+
+    // Get smoothed data for all players
+    const smoothedPlayerData = players.map(p => ({
+      ...p,
+      smoothedHistory: getAverageEloByDay(p.eloHistory)
+    }));
+
+    const currentPlayerSmoothed = smoothedPlayerData.find(p => p.id === selectedPlayerId);
+
     // Get min and max ELO across all players for chart scaling
-    const allEloValues = players.flatMap(p => p.eloHistory.map(h => h.elo));
+    const allEloValues = smoothedPlayerData.flatMap(p => p.smoothedHistory.map(h => h.elo));
     const minElo = Math.min(...allEloValues, 1300);
     const maxElo = Math.max(...allEloValues, 1700);
     const eloRange = maxElo - minElo;
@@ -881,7 +912,7 @@ export default function PingPongELO() {
     const innerHeight = chartHeight - padding.top - padding.bottom;
 
     // Get time range
-    const allTimestamps = players.flatMap(p => p.eloHistory.map(h => new Date(h.timestamp).getTime()));
+    const allTimestamps = smoothedPlayerData.flatMap(p => p.smoothedHistory.map(h => new Date(h.timestamp).getTime()));
     const minTime = Math.min(...allTimestamps);
     const maxTime = Math.max(...allTimestamps);
     const timeRange = maxTime - minTime || 1;
@@ -967,7 +998,7 @@ export default function PingPongELO() {
                 <h1 className="text-6xl font-black" style={{ fontFamily: "Figtree, sans-serif", letterSpacing: "-0.02em" }}>
                   {player.name}
                 </h1>
-                <p className="text-xl text-gray-500 mt-2" style={{ fontFamily: "sans-serif" }}>
+                <p className="text-xl text-gray-500 mt-2" style={{ fontFamily: "monospace" }}>
                   {player.office} • Current ELO: {player.elo}
                 </p>
               </div>
@@ -975,34 +1006,34 @@ export default function PingPongELO() {
 
             <div className="grid grid-cols-4 gap-6 mt-6">
               <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "sans-serif" }}>
+                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
                   Current Rank
                 </div>
-                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
                   #{player.rank}
                 </div>
               </div>
               <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "sans-serif" }}>
+                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
                   Record
                 </div>
-                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
                   {player.wins}-{player.losses}
                 </div>
               </div>
               <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "sans-serif" }}>
+                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
                   Win Rate
                 </div>
-                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
                   {player.wins + player.losses > 0 ? Math.round((player.wins / (player.wins + player.losses)) * 100) : 0}%
                 </div>
               </div>
               <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "sans-serif" }}>
+                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
                   Total Matches
                 </div>
-                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
                   {player.wins + player.losses}
                 </div>
               </div>
@@ -1015,32 +1046,39 @@ export default function PingPongELO() {
             ELO Rating Over Time
           </h2>
 
-          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-12">
+          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-12 relative">
             <svg width={chartWidth} height={chartHeight}>
               {/* Grid lines */}
               {gridLines}
 
-              {/* Background lines for all other players */}
-              {players
+              {/* Background lines for all other players with hover */}
+              {smoothedPlayerData
                 .filter(p => p.id !== selectedPlayerId)
                 .map(p => (
-                  <path
-                    key={p.id}
-                    d={createPath(p.eloHistory)}
-                    stroke="#e5e7eb"
-                    strokeWidth="1.5"
-                    fill="none"
-                    opacity="0.3"
-                  />
+                  <g key={p.id}>
+                    <path
+                      d={createPath(p.smoothedHistory)}
+                      stroke="#9ca3af"
+                      strokeWidth="2"
+                      fill="none"
+                      opacity="0.4"
+                      className="hover:opacity-100 hover:stroke-[#6b7280] transition-all cursor-pointer"
+                      style={{ transition: "all 0.2s" }}
+                    >
+                      <title>{p.name} (ELO: {p.elo})</title>
+                    </path>
+                  </g>
                 ))}
 
               {/* Highlighted line for selected player */}
               <path
-                d={createPath(player.eloHistory)}
+                d={createPath(currentPlayerSmoothed.smoothedHistory)}
                 stroke="#e91e63"
                 strokeWidth="3"
                 fill="none"
-              />
+              >
+                <title>{player.name} (ELO: {player.elo})</title>
+              </path>
 
               {/* Axis labels */}
               <text
@@ -1048,7 +1086,7 @@ export default function PingPongELO() {
                 y={chartHeight - 20}
                 fill="#6b7280"
                 fontSize="12"
-                fontFamily="sans-serif"
+                fontFamily="monospace"
               >
                 {formatDate(new Date(minTime).toISOString())}
               </text>
@@ -1058,7 +1096,7 @@ export default function PingPongELO() {
                 textAnchor="end"
                 fill="#6b7280"
                 fontSize="12"
-                fontFamily="sans-serif"
+                fontFamily="monospace"
               >
                 {formatDate(new Date(maxTime).toISOString())}
               </text>
@@ -1068,7 +1106,7 @@ export default function PingPongELO() {
                 textAnchor="middle"
                 fill="#6b7280"
                 fontSize="12"
-                fontFamily="sans-serif"
+                fontFamily="monospace"
                 fontWeight="600"
               >
                 Date
@@ -1079,7 +1117,7 @@ export default function PingPongELO() {
                 textAnchor="middle"
                 fill="#6b7280"
                 fontSize="12"
-                fontFamily="sans-serif"
+                fontFamily="monospace"
                 fontWeight="600"
                 transform={`rotate(-90, 20, ${chartHeight / 2})`}
               >
@@ -1090,13 +1128,13 @@ export default function PingPongELO() {
             <div className="mt-4 flex items-center gap-6 justify-center">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-0.5 bg-pink-600"></div>
-                <span className="text-sm text-gray-600" style={{ fontFamily: "sans-serif" }}>
+                <span className="text-sm text-gray-600" style={{ fontFamily: "monospace" }}>
                   {player.name}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-8 h-0.5 bg-gray-300"></div>
-                <span className="text-sm text-gray-600" style={{ fontFamily: "sans-serif" }}>
+                <div className="w-8 h-0.5 bg-gray-400"></div>
+                <span className="text-sm text-gray-600" style={{ fontFamily: "monospace" }}>
                   Other Players
                 </span>
               </div>
@@ -1109,7 +1147,7 @@ export default function PingPongELO() {
 
           {playerMatches.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-gray-400 text-lg">No matches played yet.</p>
+              <p className="text-gray-400 text-lg" style={{ fontFamily: "monospace" }}>No matches played yet.</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -1132,7 +1170,7 @@ export default function PingPongELO() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
-                        <div className="text-xs uppercase tracking-wide mb-3" style={{ fontFamily: "sans-serif" }}>
+                        <div className="text-xs uppercase tracking-wide mb-3" style={{ fontFamily: "monospace" }}>
                           <span className={isWinner ? 'text-green-700 font-bold' : 'text-red-700 font-bold'}>
                             {isWinner ? 'WIN' : 'LOSS'}
                           </span>
@@ -1152,25 +1190,25 @@ export default function PingPongELO() {
                               className="flex-shrink-0"
                               style={{ objectFit: "cover" }}
                             />
-                            <div className="font-semibold text-lg text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+                            <div className="font-semibold text-lg text-gray-900" style={{ fontFamily: "monospace" }}>
                               {player.name}
                             </div>
                             {playerScore !== null && (
-                              <div className={`text-2xl font-bold ${isWinner ? 'text-green-700' : 'text-red-700'}`} style={{ fontFamily: "Figtree, sans-serif" }}>
+                              <div className={`text-2xl font-bold ${isWinner ? 'text-green-700' : 'text-red-700'}`} style={{ fontFamily: "monospace" }}>
                                 {playerScore}
                               </div>
                             )}
                           </div>
 
-                          <div className="text-gray-400 font-bold text-xl px-4">vs</div>
+                          <div className="text-gray-400 font-bold text-xl px-4" style={{ fontFamily: "monospace" }}>vs</div>
 
                           <div className="flex items-center gap-3">
                             {opponentScore !== null && (
-                              <div className="text-2xl font-bold text-gray-500" style={{ fontFamily: "Figtree, sans-serif" }}>
+                              <div className="text-2xl font-bold text-gray-500" style={{ fontFamily: "monospace" }}>
                                 {opponentScore}
                               </div>
                             )}
-                            <div className="font-semibold text-lg text-gray-700" style={{ fontFamily: "Figtree, sans-serif" }}>
+                            <div className="font-semibold text-lg text-gray-700" style={{ fontFamily: "monospace" }}>
                               {opponentName}
                             </div>
                             {opponent && (
@@ -1188,7 +1226,7 @@ export default function PingPongELO() {
 
                         <div className={`mt-3 text-sm font-medium ${
                           isWinner ? 'text-green-600' : 'text-red-600'
-                        }`}>
+                        }`} style={{ fontFamily: "monospace" }}>
                           {eloChange > 0 ? '+' : ''}{eloChange} ELO
                         </div>
                       </div>
@@ -1248,7 +1286,7 @@ export default function PingPongELO() {
               Match History
             </h1>
 
-            <p className="text-xl text-gray-700" style={{ fontFamily: "Figtree, sans-serif" }}>
+            <p className="text-xl text-gray-700" style={{ fontFamily: "monospace" }}>
               Complete record of all {matches.length} matches and their impact on player ratings.
             </p>
           </div>
@@ -1257,7 +1295,7 @@ export default function PingPongELO() {
         <div className="max-w-7xl mx-auto px-8 py-12">
           {matches.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-gray-400 text-lg">No matches recorded yet.</p>
+              <p className="text-gray-400 text-lg" style={{ fontFamily: "monospace" }}>No matches recorded yet.</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -1273,7 +1311,7 @@ export default function PingPongELO() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
-                        <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide" style={{ fontFamily: "sans-serif" }}>
+                        <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide" style={{ fontFamily: "monospace" }}>
                           {formatDate(match.timestamp)} at {formatTime(match.timestamp)}
                         </div>
                         
@@ -1291,34 +1329,34 @@ export default function PingPongELO() {
                               />
                             )}
                             <div className="flex-1">
-                              <div className="font-semibold text-lg text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+                              <div className="font-semibold text-lg text-gray-900" style={{ fontFamily: "monospace" }}>
                                 {match.winner}
                               </div>
-                              <div className="text-sm text-green-600 font-medium">
+                              <div className="text-sm text-green-600 font-medium" style={{ fontFamily: "monospace" }}>
                                 +{match.winnerEloChange} ELO
                               </div>
                             </div>
                             {match.winnerScore !== null && (
-                              <div className="text-2xl font-bold text-gray-900 min-w-[3rem] text-right" style={{ fontFamily: "Figtree, sans-serif" }}>
+                              <div className="text-2xl font-bold text-gray-900 min-w-[3rem] text-right" style={{ fontFamily: "monospace" }}>
                                 {match.winnerScore}
                               </div>
                             )}
                           </div>
 
-                          <div className="text-gray-400 font-bold text-xl px-4">vs</div>
+                          <div className="text-gray-400 font-bold text-xl px-4" style={{ fontFamily: "monospace" }}>vs</div>
 
                           {/* Loser */}
                           <div className="flex items-center gap-3 flex-1">
                             {match.loserScore !== null && (
-                              <div className="text-2xl font-bold text-gray-400 min-w-[3rem]" style={{ fontFamily: "Figtree, sans-serif" }}>
+                              <div className="text-2xl font-bold text-gray-400 min-w-[3rem]" style={{ fontFamily: "monospace" }}>
                                 {match.loserScore}
                               </div>
                             )}
                             <div className="flex-1">
-                              <div className="font-semibold text-lg text-gray-600" style={{ fontFamily: "Figtree, sans-serif" }}>
+                              <div className="font-semibold text-lg text-gray-600" style={{ fontFamily: "monospace" }}>
                                 {match.loser}
                               </div>
-                              <div className="text-sm text-red-600 font-medium">
+                              <div className="text-sm text-red-600 font-medium" style={{ fontFamily: "monospace" }}>
                                 {match.loserEloChange} ELO
                               </div>
                             </div>
