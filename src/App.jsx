@@ -925,8 +925,8 @@ export default function PingPongELO() {
     const maxElo = Math.max(...allEloValues, 1700);
     const eloRange = maxElo - minElo;
 
-    // Chart dimensions
-    const chartWidth = 800;
+    // Chart dimensions - use full container width
+    const chartWidth = 1200; // Increased from 800 for full width
     const chartHeight = 400;
     const padding = { top: 40, right: 40, bottom: 60, left: 60 };
     const innerWidth = chartWidth - padding.left - padding.right;
@@ -1067,15 +1067,16 @@ export default function PingPongELO() {
             ELO Rating Over Time
           </h2>
 
-          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-12 relative">
-            <svg 
-              width={chartWidth} 
-              height={chartHeight}
-              onMouseLeave={() => {
-                setHoveredPlayer(null);
-                setHoveredPointElo(null);
-              }}
-            >
+          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-12 relative overflow-x-auto">
+            <div className="flex justify-center">
+              <svg 
+                width={chartWidth} 
+                height={chartHeight}
+                onMouseLeave={() => {
+                  setHoveredPlayer(null);
+                  setHoveredPointElo(null);
+                }}
+              >
               {/* Grid lines */}
               {gridLines}
 
@@ -1245,6 +1246,7 @@ export default function PingPongELO() {
                 ELO Rating
               </text>
             </svg>
+            </div>
 
             {/* Tooltip */}
             {hoveredPlayer && (
@@ -1300,13 +1302,13 @@ export default function PingPongELO() {
                 return (
                   <div 
                     key={match.id} 
-                    className={`border-2 rounded-lg p-6 ${
+                    className="border-2 rounded-lg p-6 ${
                       isWinner ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'
-                    }`}
+                    }"
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <div className="text-xs uppercase tracking-wide mb-3" style={{ fontFamily: "monospace" }}>
+                    <div className="flex items-center justify-center">
+                      <div className="flex-1 max-w-4xl">
+                        <div className="text-xs uppercase tracking-wide mb-3 text-center" style={{ fontFamily: "monospace" }}>
                           <span className={isWinner ? 'text-green-700 font-bold' : 'text-red-700 font-bold'}>
                             {isWinner ? 'WIN' : 'LOSS'}
                           </span>
@@ -1316,7 +1318,7 @@ export default function PingPongELO() {
                           </span>
                         </div>
                         
-                        <div className="flex items-center gap-6">
+                        <div className="flex items-center justify-center gap-6">
                           <div className="flex items-center gap-3">
                             <img
                               src={`https://flagcdn.com/w40/${player.countryCode}.png`}
@@ -1360,7 +1362,7 @@ export default function PingPongELO() {
                           </div>
                         </div>
 
-                        <div className={`mt-3 text-sm font-medium ${
+                        <div className={`mt-3 text-sm font-medium text-center ${
                           isWinner ? 'text-green-600' : 'text-red-600'
                         }`} style={{ fontFamily: "monospace" }}>
                           {eloChange > 0 ? '+' : ''}{eloChange} ELO
