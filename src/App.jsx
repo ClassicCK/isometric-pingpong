@@ -1219,7 +1219,7 @@ export default function PingPongELO() {
                 {formatDate(new Date(minTime).toISOString())}
               </text>
               <text
-                x={chartWidth - padding.right}
+                x={chartWidth - padding.right - 10}
                 y={chartHeight - 20}
                 textAnchor="end"
                 fill="#6b7280"
