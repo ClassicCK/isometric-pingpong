@@ -385,6 +385,9 @@ export default function PingPongELO() {
   const [editCountry, setEditCountry] = useState("");
   const [editOffice, setEditOffice] = useState("");
 
+  const [hoveredPlayer, setHoveredPlayer] = useState(null);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+
   // Store all-player season+tournament probabilities
   const [seasonProbs, setSeasonProbs] = useState({});
   const [probsLoading, setProbsLoading] = useState(false);
@@ -861,39 +864,45 @@ export default function PingPongELO() {
       return null;
     }
 
+    // Calculate proper rank for this player
+    const rankedPlayers = [...players].sort((a, b) => b.elo - a.elo);
+    const playerRank = rankedPlayers.findIndex(p => p.id === selectedPlayerId) + 1;
+
     const playerMatches = matches.filter(m => 
       m.winnerId === selectedPlayerId || m.loserId === selectedPlayerId
     );
 
     const countryData = COUNTRIES.find(c => c.code === player.countryCode);
 
-    // Function to get average ELO by day for smoothing
-    const getAverageEloByDay = (eloHistory) => {
+    // Function to get last ELO of each day (not average)
+    const getLastEloByDay = (eloHistory) => {
       const dayMap = new Map();
       
-      eloHistory.forEach(entry => {
+      // Sort by timestamp first to ensure we get the last entry per day
+      const sortedHistory = [...eloHistory].sort((a, b) => 
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+      );
+      
+      sortedHistory.forEach(entry => {
         const date = new Date(entry.timestamp);
         const dayKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
         
-        if (!dayMap.has(dayKey)) {
-          dayMap.set(dayKey, { sum: 0, count: 0, timestamp: entry.timestamp });
-        }
-        
-        const day = dayMap.get(dayKey);
-        day.sum += entry.elo;
-        day.count += 1;
+        // Always overwrite with latest entry for this day
+        dayMap.set(dayKey, {
+          elo: entry.elo,
+          timestamp: entry.timestamp
+        });
       });
       
-      return Array.from(dayMap.values()).map(day => ({
-        elo: Math.round(day.sum / day.count),
-        timestamp: day.timestamp
-      })).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+      return Array.from(dayMap.values()).sort((a, b) => 
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+      );
     };
 
     // Get smoothed data for all players
     const smoothedPlayerData = players.map(p => ({
       ...p,
-      smoothedHistory: getAverageEloByDay(p.eloHistory)
+      smoothedHistory: getLastEloByDay(p.eloHistory)
     }));
 
     const currentPlayerSmoothed = smoothedPlayerData.find(p => p.id === selectedPlayerId);
@@ -1010,7 +1019,7 @@ export default function PingPongELO() {
                   Current Rank
                 </div>
                 <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
-                  #{player.rank}
+                  #{playerRank}
                 </div>
               </div>
               <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
@@ -1047,7 +1056,11 @@ export default function PingPongELO() {
           </h2>
 
           <div className="bg-white border border-gray-200 rounded-lg p-8 mb-12 relative">
-            <svg width={chartWidth} height={chartHeight}>
+            <svg 
+              width={chartWidth} 
+              height={chartHeight}
+              onMouseLeave={() => setHoveredPlayer(null)}
+            >
               {/* Grid lines */}
               {gridLines}
 
@@ -1062,11 +1075,21 @@ export default function PingPongELO() {
                       strokeWidth="2"
                       fill="none"
                       opacity="0.4"
-                      className="hover:opacity-100 hover:stroke-[#6b7280] transition-all cursor-pointer"
-                      style={{ transition: "all 0.2s" }}
-                    >
-                      <title>{p.name} (ELO: {p.elo})</title>
-                    </path>
+                      onMouseEnter={(e) => {
+                        setHoveredPlayer({ name: p.name, elo: p.elo });
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        setTooltipPos({ x: e.clientX, y: e.clientY });
+                      }}
+                      onMouseMove={(e) => {
+                        setTooltipPos({ x: e.clientX, y: e.clientY });
+                      }}
+                      style={{ 
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        opacity: hoveredPlayer?.name === p.name ? 1 : 0.4,
+                        stroke: hoveredPlayer?.name === p.name ? '#6b7280' : '#9ca3af'
+                      }}
+                    />
                   </g>
                 ))}
 
@@ -1076,9 +1099,15 @@ export default function PingPongELO() {
                 stroke="#e91e63"
                 strokeWidth="3"
                 fill="none"
-              >
-                <title>{player.name} (ELO: {player.elo})</title>
-              </path>
+                onMouseEnter={(e) => {
+                  setHoveredPlayer({ name: player.name, elo: player.elo });
+                  setTooltipPos({ x: e.clientX, y: e.clientY });
+                }}
+                onMouseMove={(e) => {
+                  setTooltipPos({ x: e.clientX, y: e.clientY });
+                }}
+                style={{ cursor: 'pointer' }}
+              />
 
               {/* Axis labels */}
               <text
@@ -1124,6 +1153,21 @@ export default function PingPongELO() {
                 ELO Rating
               </text>
             </svg>
+
+            {/* Tooltip */}
+            {hoveredPlayer && (
+              <div
+                className="fixed bg-gray-900 text-white px-3 py-2 rounded shadow-lg text-sm pointer-events-none z-50"
+                style={{
+                  left: `${tooltipPos.x + 10}px`,
+                  top: `${tooltipPos.y - 10}px`,
+                  fontFamily: 'monospace'
+                }}
+              >
+                <div className="font-bold">{hoveredPlayer.name}</div>
+                <div className="text-gray-300">ELO: {hoveredPlayer.elo}</div>
+              </div>
+            )}
 
             <div className="mt-4 flex items-center gap-6 justify-center">
               <div className="flex items-center gap-2">
