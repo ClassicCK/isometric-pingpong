@@ -388,6 +388,7 @@ export default function PingPongELO() {
   const [hoveredPlayer, setHoveredPlayer] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [hoveredPointElo, setHoveredPointElo] = useState(null);
+  const [hoveredPointDate, setHoveredPointDate] = useState(null);
 
   // Store all-player season+tournament probabilities
   const [seasonProbs, setSeasonProbs] = useState({});
@@ -1075,6 +1076,7 @@ export default function PingPongELO() {
                 onMouseLeave={() => {
                   setHoveredPlayer(null);
                   setHoveredPointElo(null);
+                  setHoveredPointDate(null);
                 }}
               >
               {/* Grid lines */}
@@ -1129,12 +1131,14 @@ export default function PingPongELO() {
                           const point = findClosestPoint(e.clientX, svg);
                           setHoveredPlayer({ name: p.name, elo: p.elo });
                           setHoveredPointElo(point?.elo || p.elo);
+                          setHoveredPointDate(point?.timestamp || null);
                           setTooltipPos({ x: e.clientX, y: e.clientY });
                         }}
                         onMouseMove={(e) => {
                           const svg = e.currentTarget.ownerSVGElement;
                           const point = findClosestPoint(e.clientX, svg);
                           setHoveredPointElo(point?.elo || p.elo);
+                          setHoveredPointDate(point?.timestamp || null);
                           setTooltipPos({ x: e.clientX, y: e.clientY });
                         }}
                         style={{ cursor: 'pointer' }}
@@ -1176,6 +1180,7 @@ export default function PingPongELO() {
                     
                     setHoveredPlayer({ name: player.name, elo: player.elo });
                     setHoveredPointElo(closestPoint?.elo || player.elo);
+                    setHoveredPointDate(closestPoint?.timestamp || null);
                     setTooltipPos({ x: e.clientX, y: e.clientY });
                   }}
                   onMouseMove={(e) => {
@@ -1196,6 +1201,7 @@ export default function PingPongELO() {
                     });
                     
                     setHoveredPointElo(closestPoint?.elo || player.elo);
+                    setHoveredPointDate(closestPoint?.timestamp || null);
                     setTooltipPos({ x: e.clientX, y: e.clientY });
                   }}
                   style={{ cursor: 'pointer' }}
@@ -1260,6 +1266,9 @@ export default function PingPongELO() {
               >
                 <div className="font-bold">{hoveredPlayer.name}</div>
                 <div className="text-gray-300">ELO: {hoveredPointElo !== null ? hoveredPointElo : hoveredPlayer.elo}</div>
+                {hoveredPointDate && (
+                  <div className="text-gray-400 text-xs mt-1">{formatDate(hoveredPointDate)}</div>
+                )}
               </div>
             )}
 
