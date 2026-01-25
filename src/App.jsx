@@ -869,9 +869,9 @@ export default function PingPongELO() {
     const rankedPlayers = [...players].sort((a, b) => b.elo - a.elo);
     const playerRank = rankedPlayers.findIndex(p => p.id === selectedPlayerId) + 1;
 
-    const playerMatches = matches.filter(m => 
-      m.winnerId === selectedPlayerId || m.loserId === selectedPlayerId
-    );
+    const playerMatches = matches
+      .filter(m => m.winnerId === selectedPlayerId || m.loserId === selectedPlayerId)
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 
     const countryData = COUNTRIES.find(c => c.code === player.countryCode);
 
@@ -883,9 +883,14 @@ export default function PingPongELO() {
         return [{ elo: currentElo, timestamp: currentDate }];
       }
       
+      // Sort by timestamp to ensure chronological order
+      const sortedHistory = [...eloHistory].sort((a, b) => 
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+      );
+      
       // Filter out the initial 1500 starting point - only keep points after actual matches
       // The first point in eloHistory is always the starting 1500, so we skip it if there are more points
-      const filteredHistory = eloHistory.length > 1 ? eloHistory.slice(1) : eloHistory;
+      const filteredHistory = sortedHistory.length > 1 ? sortedHistory.slice(1) : sortedHistory;
       
       if (filteredHistory.length === 0) {
         return [{ elo: currentElo, timestamp: currentDate }];
