@@ -875,45 +875,15 @@ export default function PingPongELO() {
 
     const countryData = COUNTRIES.find(c => c.code === player.countryCode);
 
-    // Function to get last ELO of each day (not average)
-    const getLastEloByDay = (eloHistory) => {
-      if (eloHistory.length === 0) return [];
-      
-      const dayMap = new Map();
-      
-      // Sort by timestamp first to ensure we get the last entry per day
-      const sortedHistory = [...eloHistory].sort((a, b) => 
-        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
-      
-      sortedHistory.forEach(entry => {
-        const date = new Date(entry.timestamp);
-        // Use ISO date string for consistent day grouping
-        const dayKey = date.toISOString().split('T')[0];
-        
-        // Always overwrite with latest entry for this day
-        dayMap.set(dayKey, {
-          elo: entry.elo,
-          timestamp: entry.timestamp
-        });
-      });
-      
-      // Return sorted by timestamp
-      return Array.from(dayMap.values()).sort((a, b) => 
-        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
-    };
-
-    // Get smoothed data for all players
-    const smoothedPlayerData = players.map(p => ({
+    // Use raw ELO history for the chart - no aggregation needed
+    const currentPlayerHistory = player.eloHistory || [];
+    const allPlayerHistories = players.map(p => ({
       ...p,
-      smoothedHistory: p.eloHistory.length > 0 ? getLastEloByDay(p.eloHistory) : []
+      history: p.eloHistory || []
     }));
 
-    const currentPlayerSmoothed = smoothedPlayerData.find(p => p.id === selectedPlayerId);
-
     // Get min and max ELO across all players for chart scaling
-    const allEloValues = smoothedPlayerData.flatMap(p => p.smoothedHistory.map(h => h.elo));
+    const allEloValues = players.flatMap(p => (p.eloHistory || []).map(h => h.elo));
     const minElo = Math.min(...allEloValues, 1300);
     const maxElo = Math.max(...allEloValues, 1700);
     const eloRange = maxElo - minElo;
@@ -926,7 +896,7 @@ export default function PingPongELO() {
     const innerHeight = chartHeight - padding.top - padding.bottom;
 
     // Get time range
-    const allTimestamps = smoothedPlayerData.flatMap(p => p.smoothedHistory.map(h => new Date(h.timestamp).getTime()));
+    const allTimestamps = players.flatMap(p => (p.eloHistory || []).map(h => new Date(h.timestamp).getTime()));
     const minTime = Math.min(...allTimestamps);
     const maxTime = Math.max(...allTimestamps);
     const timeRange = maxTime - minTime || 1;
@@ -1073,7 +1043,7 @@ export default function PingPongELO() {
               {gridLines}
 
               {/* Background lines for all other players with hover */}
-              {smoothedPlayerData
+              {allPlayerHistories
                 .filter(p => p.id !== selectedPlayerId)
                 .map(p => {
                   const findClosestPoint = (clientX, svg) => {
@@ -1083,7 +1053,7 @@ export default function PingPongELO() {
                     let closestPoint = null;
                     let closestDistance = Infinity;
                     
-                    p.smoothedHistory.forEach(point => {
+                    p.history.forEach(point => {
                       const px = xScale(point.timestamp);
                       const distance = Math.abs(px - x);
                       if (distance < closestDistance) {
@@ -1099,7 +1069,7 @@ export default function PingPongELO() {
                     <g key={p.id}>
                       {/* Visible line */}
                       <path
-                        d={createPath(p.smoothedHistory)}
+                        d={createPath(p.history)}
                         stroke="#9ca3af"
                         strokeWidth="2"
                         fill="none"
@@ -1112,7 +1082,7 @@ export default function PingPongELO() {
                       />
                       {/* Invisible wider hit area */}
                       <path
-                        d={createPath(p.smoothedHistory)}
+                        d={createPath(p.history)}
                         stroke="transparent"
                         strokeWidth="20"
                         fill="none"
@@ -1138,14 +1108,14 @@ export default function PingPongELO() {
               {/* Highlighted line for selected player */}
               <g>
                 <path
-                  d={createPath(currentPlayerSmoothed.smoothedHistory)}
+                  d={createPath(currentPlayerHistory)}
                   stroke="#e91e63"
                   strokeWidth="3"
                   fill="none"
                   pointerEvents="none"
                 />
                 <path
-                  d={createPath(currentPlayerSmoothed.smoothedHistory)}
+                  d={createPath(currentPlayerHistory)}
                   stroke="transparent"
                   strokeWidth="20"
                   fill="none"
@@ -1157,7 +1127,7 @@ export default function PingPongELO() {
                     let closestPoint = null;
                     let closestDistance = Infinity;
                     
-                    currentPlayerSmoothed.smoothedHistory.forEach(point => {
+                    currentPlayerHistory.forEach(point => {
                       const px = xScale(point.timestamp);
                       const distance = Math.abs(px - x);
                       if (distance < closestDistance) {
@@ -1178,7 +1148,7 @@ export default function PingPongELO() {
                     let closestPoint = null;
                     let closestDistance = Infinity;
                     
-                    currentPlayerSmoothed.smoothedHistory.forEach(point => {
+                    currentPlayerHistory.forEach(point => {
                       const px = xScale(point.timestamp);
                       const distance = Math.abs(px - x);
                       if (distance < closestDistance) {
