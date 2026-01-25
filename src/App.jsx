@@ -875,15 +875,35 @@ export default function PingPongELO() {
 
     const countryData = COUNTRIES.find(c => c.code === player.countryCode);
 
-    // Use raw ELO history for the chart - no aggregation needed
-    const currentPlayerHistory = player.eloHistory || [];
+    // Extend each player's history to current date with their current ELO
+    const currentDate = new Date().toISOString();
+    
+    const extendHistoryToNow = (eloHistory, currentElo) => {
+      if (!eloHistory || eloHistory.length === 0) {
+        return [{ elo: currentElo, timestamp: currentDate }];
+      }
+      
+      const lastEntry = eloHistory[eloHistory.length - 1];
+      const lastTimestamp = new Date(lastEntry.timestamp);
+      const now = new Date();
+      
+      // If last entry is not today, add a point for today with same ELO
+      if (lastTimestamp.toDateString() !== now.toDateString()) {
+        return [...eloHistory, { elo: currentElo, timestamp: currentDate }];
+      }
+      
+      return eloHistory;
+    };
+
+    // Use raw ELO history for the chart extended to current date
+    const currentPlayerHistory = extendHistoryToNow(player.eloHistory, player.elo);
     const allPlayerHistories = players.map(p => ({
       ...p,
-      history: p.eloHistory || []
+      history: extendHistoryToNow(p.eloHistory, p.elo)
     }));
 
     // Get min and max ELO across all players for chart scaling
-    const allEloValues = players.flatMap(p => (p.eloHistory || []).map(h => h.elo));
+    const allEloValues = allPlayerHistories.flatMap(p => p.history.map(h => h.elo));
     const minElo = Math.min(...allEloValues, 1300);
     const maxElo = Math.max(...allEloValues, 1700);
     const eloRange = maxElo - minElo;
@@ -896,7 +916,7 @@ export default function PingPongELO() {
     const innerHeight = chartHeight - padding.top - padding.bottom;
 
     // Get time range
-    const allTimestamps = players.flatMap(p => (p.eloHistory || []).map(h => new Date(h.timestamp).getTime()));
+    const allTimestamps = allPlayerHistories.flatMap(p => p.history.map(h => new Date(h.timestamp).getTime()));
     const minTime = Math.min(...allTimestamps);
     const maxTime = Math.max(...allTimestamps);
     const timeRange = maxTime - minTime || 1;
