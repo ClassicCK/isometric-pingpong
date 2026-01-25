@@ -387,6 +387,7 @@ export default function PingPongELO() {
 
   const [hoveredPlayer, setHoveredPlayer] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+  const [hoveredPointElo, setHoveredPointElo] = useState(null);
 
   // Store all-player season+tournament probabilities
   const [seasonProbs, setSeasonProbs] = useState({});
@@ -876,6 +877,8 @@ export default function PingPongELO() {
 
     // Function to get last ELO of each day (not average)
     const getLastEloByDay = (eloHistory) => {
+      if (eloHistory.length === 0) return [];
+      
       const dayMap = new Map();
       
       // Sort by timestamp first to ensure we get the last entry per day
@@ -885,7 +888,8 @@ export default function PingPongELO() {
       
       sortedHistory.forEach(entry => {
         const date = new Date(entry.timestamp);
-        const dayKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+        // Use ISO date string for consistent day grouping
+        const dayKey = date.toISOString().split('T')[0];
         
         // Always overwrite with latest entry for this day
         dayMap.set(dayKey, {
@@ -894,6 +898,7 @@ export default function PingPongELO() {
         });
       });
       
+      // Return sorted by timestamp
       return Array.from(dayMap.values()).sort((a, b) => 
         new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
       );
@@ -902,7 +907,7 @@ export default function PingPongELO() {
     // Get smoothed data for all players
     const smoothedPlayerData = players.map(p => ({
       ...p,
-      smoothedHistory: getLastEloByDay(p.eloHistory)
+      smoothedHistory: p.eloHistory.length > 0 ? getLastEloByDay(p.eloHistory) : []
     }));
 
     const currentPlayerSmoothed = smoothedPlayerData.find(p => p.id === selectedPlayerId);
@@ -1059,7 +1064,10 @@ export default function PingPongELO() {
             <svg 
               width={chartWidth} 
               height={chartHeight}
-              onMouseLeave={() => setHoveredPlayer(null)}
+              onMouseLeave={() => {
+                setHoveredPlayer(null);
+                setHoveredPointElo(null);
+              }}
             >
               {/* Grid lines */}
               {gridLines}
@@ -1067,47 +1075,124 @@ export default function PingPongELO() {
               {/* Background lines for all other players with hover */}
               {smoothedPlayerData
                 .filter(p => p.id !== selectedPlayerId)
-                .map(p => (
-                  <g key={p.id}>
-                    <path
-                      d={createPath(p.smoothedHistory)}
-                      stroke="#9ca3af"
-                      strokeWidth="2"
-                      fill="none"
-                      opacity="0.4"
-                      onMouseEnter={(e) => {
-                        setHoveredPlayer({ name: p.name, elo: p.elo });
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        setTooltipPos({ x: e.clientX, y: e.clientY });
-                      }}
-                      onMouseMove={(e) => {
-                        setTooltipPos({ x: e.clientX, y: e.clientY });
-                      }}
-                      style={{ 
-                        cursor: 'pointer',
-                        transition: 'all 0.2s',
-                        opacity: hoveredPlayer?.name === p.name ? 1 : 0.4,
-                        stroke: hoveredPlayer?.name === p.name ? '#6b7280' : '#9ca3af'
-                      }}
-                    />
-                  </g>
-                ))}
+                .map(p => {
+                  const findClosestPoint = (clientX, svg) => {
+                    const rect = svg.getBoundingClientRect();
+                    const x = clientX - rect.left;
+                    
+                    let closestPoint = null;
+                    let closestDistance = Infinity;
+                    
+                    p.smoothedHistory.forEach(point => {
+                      const px = xScale(point.timestamp);
+                      const distance = Math.abs(px - x);
+                      if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestPoint = point;
+                      }
+                    });
+                    
+                    return closestPoint;
+                  };
+
+                  return (
+                    <g key={p.id}>
+                      {/* Visible line */}
+                      <path
+                        d={createPath(p.smoothedHistory)}
+                        stroke="#9ca3af"
+                        strokeWidth="2"
+                        fill="none"
+                        pointerEvents="none"
+                        style={{ 
+                          opacity: hoveredPlayer?.name === p.name ? 1 : 0.4,
+                          stroke: hoveredPlayer?.name === p.name ? '#6b7280' : '#9ca3af',
+                          transition: 'all 0.2s'
+                        }}
+                      />
+                      {/* Invisible wider hit area */}
+                      <path
+                        d={createPath(p.smoothedHistory)}
+                        stroke="transparent"
+                        strokeWidth="20"
+                        fill="none"
+                        onMouseEnter={(e) => {
+                          const svg = e.currentTarget.ownerSVGElement;
+                          const point = findClosestPoint(e.clientX, svg);
+                          setHoveredPlayer({ name: p.name, elo: p.elo });
+                          setHoveredPointElo(point?.elo || p.elo);
+                          setTooltipPos({ x: e.clientX, y: e.clientY });
+                        }}
+                        onMouseMove={(e) => {
+                          const svg = e.currentTarget.ownerSVGElement;
+                          const point = findClosestPoint(e.clientX, svg);
+                          setHoveredPointElo(point?.elo || p.elo);
+                          setTooltipPos({ x: e.clientX, y: e.clientY });
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </g>
+                  );
+                })}
 
               {/* Highlighted line for selected player */}
-              <path
-                d={createPath(currentPlayerSmoothed.smoothedHistory)}
-                stroke="#e91e63"
-                strokeWidth="3"
-                fill="none"
-                onMouseEnter={(e) => {
-                  setHoveredPlayer({ name: player.name, elo: player.elo });
-                  setTooltipPos({ x: e.clientX, y: e.clientY });
-                }}
-                onMouseMove={(e) => {
-                  setTooltipPos({ x: e.clientX, y: e.clientY });
-                }}
-                style={{ cursor: 'pointer' }}
-              />
+              <g>
+                <path
+                  d={createPath(currentPlayerSmoothed.smoothedHistory)}
+                  stroke="#e91e63"
+                  strokeWidth="3"
+                  fill="none"
+                  pointerEvents="none"
+                />
+                <path
+                  d={createPath(currentPlayerSmoothed.smoothedHistory)}
+                  stroke="transparent"
+                  strokeWidth="20"
+                  fill="none"
+                  onMouseEnter={(e) => {
+                    const svg = e.currentTarget.ownerSVGElement;
+                    const rect = svg.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    
+                    let closestPoint = null;
+                    let closestDistance = Infinity;
+                    
+                    currentPlayerSmoothed.smoothedHistory.forEach(point => {
+                      const px = xScale(point.timestamp);
+                      const distance = Math.abs(px - x);
+                      if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestPoint = point;
+                      }
+                    });
+                    
+                    setHoveredPlayer({ name: player.name, elo: player.elo });
+                    setHoveredPointElo(closestPoint?.elo || player.elo);
+                    setTooltipPos({ x: e.clientX, y: e.clientY });
+                  }}
+                  onMouseMove={(e) => {
+                    const svg = e.currentTarget.ownerSVGElement;
+                    const rect = svg.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    
+                    let closestPoint = null;
+                    let closestDistance = Infinity;
+                    
+                    currentPlayerSmoothed.smoothedHistory.forEach(point => {
+                      const px = xScale(point.timestamp);
+                      const distance = Math.abs(px - x);
+                      if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestPoint = point;
+                      }
+                    });
+                    
+                    setHoveredPointElo(closestPoint?.elo || player.elo);
+                    setTooltipPos({ x: e.clientX, y: e.clientY });
+                  }}
+                  style={{ cursor: 'pointer' }}
+                />
+              </g>
 
               {/* Axis labels */}
               <text
@@ -1165,7 +1250,7 @@ export default function PingPongELO() {
                 }}
               >
                 <div className="font-bold">{hoveredPlayer.name}</div>
-                <div className="text-gray-300">ELO: {hoveredPlayer.elo}</div>
+                <div className="text-gray-300">ELO: {hoveredPointElo !== null ? hoveredPointElo : hoveredPlayer.elo}</div>
               </div>
             )}
 
