@@ -285,7 +285,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 3
     },
     {
       "id": "12",
@@ -487,8 +487,8 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1445,
-      "wins": 1,
+      "elo": 1483,
+      "wins": 2,
       "losses": 4,
       "eloHistory": [
         {
@@ -514,19 +514,23 @@
         {
           "elo": 1445,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1483,
+          "timestamp": "2026-01-05T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 73
+      "lastWeekRank": 61
     },
     {
       "id": "20",
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1631,
+      "elo": 1593,
       "wins": 10,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -579,10 +583,14 @@
         {
           "elo": 1631,
           "timestamp": "2026-01-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1593,
+          "timestamp": "2026-01-05T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 4
     },
     {
       "id": "21",
@@ -649,7 +657,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 64
     },
     {
       "id": "24",
@@ -746,7 +754,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 69
     },
     {
       "id": "25",
@@ -963,7 +971,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 62
     },
     {
       "id": "34",
@@ -1332,7 +1340,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 68
     },
     {
       "id": "47",
@@ -1433,7 +1441,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 72
     },
     {
       "id": "48",
@@ -1454,7 +1462,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 67
     },
     {
       "id": "49",
@@ -1587,7 +1595,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 70
     },
     {
       "id": "54",
@@ -1608,7 +1616,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 63
     },
     {
       "id": "55",
@@ -1739,7 +1747,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 71
     },
     {
       "id": "58",
@@ -1760,7 +1768,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 65
     },
     {
       "id": "59",
@@ -1793,7 +1801,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 73
     },
     {
       "id": "60",
@@ -1814,7 +1822,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 66
     },
     {
       "id": "61",
@@ -2213,6 +2221,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769361517000",
+      "winnerId": "19",
+      "loserId": "20",
+      "winner": "Neil Hacker",
+      "loser": "Charlie Parkin",
+      "winnerScore": 21,
+      "loserScore": 19,
+      "winnerEloChange": 38,
+      "loserEloChange": -38,
+      "timestamp": "2026-01-05T00:00:00.000Z"
+    },
     {
       "id": "1769276857023",
       "winnerId": "11",
@@ -3618,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-25T17:17:45.315Z"
+  "lastUpdated": "2026-01-25T17:18:37.693Z"
 }
