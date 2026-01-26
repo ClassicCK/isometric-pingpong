@@ -215,7 +215,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 36
     },
     {
       "id": "10",
@@ -869,8 +869,8 @@
       "name": "Vid",
       "countryCode": "si",
       "office": "LON",
-      "elo": 1500,
-      "wins": 1,
+      "elo": 1485,
+      "wins": 0,
       "losses": 1,
       "eloHistory": [
         {
@@ -878,9 +878,22 @@
           "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1516,
-          "timestamp": "2026-01-12T00:00:00.000Z"
-        },
+          "elo": 1485,
+          "timestamp": "2026-01-13T00:00:00.000Z"
+        }
+      ],
+      "joinedAt": "2026-01-13T00:00:00.000Z",
+      "lastWeekRank": 37
+    },
+    {
+      "id": "30",
+      "name": "Helen Durrant",
+      "countryCode": "gb",
+      "office": "LON",
+      "elo": 1500,
+      "wins": 0,
+      "losses": 0,
+      "eloHistory": [
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
@@ -890,32 +903,11 @@
       "lastWeekRank": 25
     },
     {
-      "id": "30",
-      "name": "Helen Durrant",
-      "countryCode": "gb",
-      "office": "LON",
-      "elo": 1484,
-      "wins": 0,
-      "losses": 1,
-      "eloHistory": [
-        {
-          "elo": 1500,
-          "timestamp": "2026-01-13T00:00:00.000Z"
-        },
-        {
-          "elo": 1484,
-          "timestamp": "2026-01-12T00:00:00.000Z"
-        }
-      ],
-      "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 49
-    },
-    {
       "id": "31",
       "name": "Emily Mears",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1515,
+      "elo": 1514,
       "wins": 2,
       "losses": 1,
       "eloHistory": [
@@ -928,16 +920,16 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1532,
+          "elo": 1531,
           "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1515,
+          "elo": 1514,
           "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 17
     },
     {
       "id": "32",
@@ -958,7 +950,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 50
+      "lastWeekRank": 49
     },
     {
       "id": "33",
@@ -1107,7 +1099,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 51
+      "lastWeekRank": 50
     },
     {
       "id": "38",
@@ -1182,7 +1174,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 51
     },
     {
       "id": "41",
@@ -1203,7 +1195,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 52
     },
     {
       "id": "42",
@@ -1520,7 +1512,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "51",
@@ -1541,7 +1533,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "52",
@@ -1729,7 +1721,7 @@
       "name": "Luke Harry",
       "countryCode": "au",
       "office": "LON",
-      "elo": 1487,
+      "elo": 1484,
       "wins": 2,
       "losses": 3,
       "eloHistory": [
@@ -1746,20 +1738,20 @@
           "timestamp": "2026-01-07T00:00:00.000Z"
         },
         {
-          "elo": 1467,
+          "elo": 1482,
+          "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1497,
           "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1455,
+          "elo": 1484,
           "timestamp": "2026-01-14T00:00:00.000Z"
-        },
-        {
-          "elo": 1487,
-          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 55
     },
     {
       "id": "58",
@@ -1787,7 +1779,7 @@
       "name": "James Atkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1451,
+      "elo": 1453,
       "wins": 1,
       "losses": 3,
       "eloHistory": [
@@ -1808,7 +1800,7 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1451,
+          "elo": 1453,
           "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
@@ -1841,7 +1833,7 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1549,
+      "elo": 1550,
       "wins": 4,
       "losses": 1,
       "eloHistory": [
@@ -1862,11 +1854,11 @@
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1565,
+          "elo": 1566,
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1549,
+          "elo": 1550,
           "timestamp": "2026-01-15T00:00:00.000Z"
         }
       ],
@@ -2088,7 +2080,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 16
     },
     {
       "id": "71",
@@ -2946,18 +2938,6 @@
       "timestamp": "2026-01-12T00:00:00.000Z"
     },
     {
-      "id": "1769275614360",
-      "winnerId": "29",
-      "loserId": "30",
-      "winner": "Vid PalÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂar",
-      "loser": "Helen Durrant",
-      "winnerScore": null,
-      "loserScore": null,
-      "winnerEloChange": 16,
-      "loserEloChange": -16,
-      "timestamp": "2026-01-12T00:00:00.000Z"
-    },
-    {
       "id": "1769275597577",
       "winnerId": "27",
       "loserId": "28",
@@ -3678,5 +3658,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-26T15:47:18.406Z"
+  "lastUpdated": "2026-01-26T15:48:19.043Z"
 }
