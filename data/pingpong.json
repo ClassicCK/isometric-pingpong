@@ -1204,7 +1204,7 @@
     {
       "id": "42",
       "name": "Rhys Savage",
-      "countryCode": "gb",
+      "countryCode": "gb-wls",
       "office": "LON",
       "elo": 1513,
       "wins": 2,
@@ -3658,5 +3658,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-26T13:03:28.504Z"
+  "lastUpdated": "2026-01-26T13:03:58.357Z"
 }
