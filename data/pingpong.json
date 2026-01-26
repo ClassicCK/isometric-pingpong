@@ -521,7 +521,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 72
     },
     {
       "id": "20",
@@ -636,7 +636,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 33
     },
     {
       "id": "23",
@@ -1008,7 +1008,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 34
     },
     {
       "id": "35",
@@ -1566,7 +1566,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 32
     },
     {
       "id": "53",
@@ -1637,7 +1637,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 35
     },
     {
       "id": "56",
@@ -1717,8 +1717,8 @@
       "name": "Luke Harry",
       "countryCode": "au",
       "office": "LON",
-      "elo": 1455,
-      "wins": 1,
+      "elo": 1487,
+      "wins": 2,
       "losses": 3,
       "eloHistory": [
         {
@@ -1740,27 +1740,35 @@
         {
           "elo": 1455,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1487,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 36
     },
     {
       "id": "58",
       "name": "Stacy Kauk",
       "countryCode": "ca",
       "office": "LON",
-      "elo": 1500,
+      "elo": 1468,
       "wins": 0,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1468,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 71
     },
     {
       "id": "59",
@@ -1897,7 +1905,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "64",
@@ -1943,7 +1951,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "66",
@@ -2114,7 +2122,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "73",
@@ -2131,7 +2139,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "74",
@@ -2148,7 +2156,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 31
     },
     {
       "id": "1769273367436",
@@ -2213,6 +2221,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769431381634",
+      "winnerId": "57",
+      "loserId": "58",
+      "winner": "Luke Harry",
+      "loser": "Stacy Kauk",
+      "winnerScore": 7,
+      "loserScore": 1,
+      "winnerEloChange": 32,
+      "loserEloChange": -32,
+      "timestamp": "2026-01-12T00:00:00.000Z"
+    },
     {
       "id": "1769361517000",
       "winnerId": "19",
@@ -3618,5 +3638,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-26T12:42:39.682Z"
+  "lastUpdated": "2026-01-26T12:43:02.353Z"
 }
