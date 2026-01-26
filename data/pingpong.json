@@ -862,7 +862,7 @@
     },
     {
       "id": "29",
-      "name": "Vid PalÃÂar",
+      "name": "Vid PalÃÂÃÂar",
       "countryCode": "si",
       "office": "LON",
       "elo": 1500,
@@ -1137,7 +1137,7 @@
     {
       "id": "39",
       "name": "Anisha Joseph",
-      "countryCode": "in",
+      "countryCode": "sg",
       "office": "LON",
       "elo": 1500,
       "wins": 1,
@@ -2594,7 +2594,7 @@
       "winnerId": "31",
       "loserId": "29",
       "winner": "Emily Mears",
-      "loser": "Vid PalÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂar",
+      "loser": "Vid PalÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂar",
       "winnerScore": null,
       "loserScore": null,
       "winnerEloChange": 16,
@@ -2929,7 +2929,7 @@
       "id": "1769275614360",
       "winnerId": "29",
       "loserId": "30",
-      "winner": "Vid PalÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂar",
+      "winner": "Vid PalÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂar",
       "loser": "Helen Durrant",
       "winnerScore": null,
       "loserScore": null,
@@ -3658,5 +3658,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-26T12:47:02.536Z"
+  "lastUpdated": "2026-01-26T13:02:24.812Z"
 }
