@@ -862,7 +862,7 @@
     },
     {
       "id": "29",
-      "name": "Vid PalÃÂÃÂar",
+      "name": "Vid",
       "countryCode": "si",
       "office": "LON",
       "elo": 1500,
@@ -3658,5 +3658,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-26T13:02:24.812Z"
+  "lastUpdated": "2026-01-26T13:02:43.433Z"
 }
