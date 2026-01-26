@@ -869,9 +869,9 @@
       "name": "Vid",
       "countryCode": "si",
       "office": "LON",
-      "elo": 1516,
+      "elo": 1499,
       "wins": 1,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -880,10 +880,14 @@
         {
           "elo": 1516,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1499,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 31
     },
     {
       "id": "30",
@@ -911,8 +915,8 @@
       "name": "Emily Mears",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1500,
-      "wins": 1,
+      "elo": 1517,
+      "wins": 2,
       "losses": 1,
       "eloHistory": [
         {
@@ -926,10 +930,14 @@
         {
           "elo": 1500,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1517,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 15
     },
     {
       "id": "32",
@@ -1153,7 +1161,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 25
     },
     {
       "id": "40",
@@ -1909,7 +1917,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 26
     },
     {
       "id": "64",
@@ -1955,7 +1963,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "66",
@@ -2126,7 +2134,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "73",
@@ -2143,7 +2151,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "74",
@@ -2160,7 +2168,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "1769273367436",
@@ -2229,6 +2237,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769442569344",
+      "winnerId": "31",
+      "loserId": "29",
+      "winner": "Emily Mears",
+      "loser": "Vid",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 17,
+      "loserEloChange": -17,
+      "timestamp": "2026-01-13T00:00:00.000Z"
+    },
     {
       "id": "1769442517962",
       "winnerId": "29",
@@ -3658,5 +3678,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-26T15:49:15.767Z"
+  "lastUpdated": "2026-01-26T15:49:29.738Z"
 }
