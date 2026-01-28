@@ -469,14 +469,22 @@ export default function PingPongELO() {
     }
   };
 
-const saveData = async (newPlayers, newMatches) => {
-  try {
-    // For local development, use localStorage
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      localStorage.setItem('pingpong:players_v4', JSON.stringify(newPlayers));
-      localStorage.setItem('pingpong:matches_v4', JSON.stringify(newMatches));
-      return;
-    }
+  const saveData = async (newPlayers, newMatches) => {
+    try {
+      // For localhost, use localStorage
+      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        localStorage.setItem("pingpong:players_v4", JSON.stringify(newPlayers));
+        localStorage.setItem("pingpong:matches_v4", JSON.stringify(newMatches));
+        return;
+      }
+
+      // For production, save to localStorage as a backup
+      // This allows the app to work without a backend
+      localStorage.setItem("pingpong:players_v4", JSON.stringify(newPlayers));
+      localStorage.setItem("pingpong:matches_v4", JSON.stringify(newMatches));
+      
+      console.log("Data saved to local storage");
+      
       // Optionally try to save to GitHub via serverless function if available
       // This will fail silently if the function doesn't exist (e.g., on GitHub Pages)
       try {
@@ -498,6 +506,8 @@ const saveData = async (newPlayers, newMatches) => {
     } catch (error) {
       console.error("Error saving data:", error);
       alert("Failed to save data. Please try again.");
+    }
+  };
 
   const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
