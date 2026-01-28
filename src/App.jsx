@@ -469,45 +469,19 @@ export default function PingPongELO() {
     }
   };
 
-  const saveData = async (newPlayers, newMatches) => {
-    try {
-      // For localhost, use localStorage
-      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-        localStorage.setItem("pingpong:players_v4", JSON.stringify(newPlayers));
-        localStorage.setItem("pingpong:matches_v4", JSON.stringify(newMatches));
-        return;
-      }
-
-      // For production, save to localStorage as a backup
-      // This allows the app to work without a backend
-      localStorage.setItem("pingpong:players_v4", JSON.stringify(newPlayers));
-      localStorage.setItem("pingpong:matches_v4", JSON.stringify(newMatches));
-      
-      console.log("Data saved to local storage");
-      
-      // Optionally try to save to GitHub via serverless function if available
-      // This will fail silently if the function doesn't exist (e.g., on GitHub Pages)
-      try {
-        const response = await fetch("/api/save-data", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ players: newPlayers, matches: newMatches }),
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          setFileSha(result.sha);
-          console.log("Data also saved to GitHub");
-        }
-      } catch (apiError) {
-        // Silently fail - data is still saved in localStorage
-        console.log("GitHub sync not available (using localStorage only)");
-      }
-    } catch (error) {
-      console.error("Error saving data:", error);
-      alert("Failed to save data. Please try again.");
+const saveData = async (newPlayers, newMatches) => {
+  try {
+    // ALWAYS save to GitHub in production
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      // Local development only
+      localStorage.setItem('pingpong:players_v4', JSON.stringify(newPlayers));
+      localStorage.setItem('pingpong:matches_v4', JSON.stringify(newMatches));
+      console.log('💾 Saved to localStorage (local dev)');
+      return;
     }
-  };
+
+    // Production: Save to GitHub
+    console.log('☁️ Saving to GitHub...');
 
   const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
