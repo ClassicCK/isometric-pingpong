@@ -471,18 +471,12 @@ export default function PingPongELO() {
 
 const saveData = async (newPlayers, newMatches) => {
   try {
-    // ALWAYS save to GitHub in production
+    // For local development, use localStorage
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      // Local development only
       localStorage.setItem('pingpong:players_v4', JSON.stringify(newPlayers));
       localStorage.setItem('pingpong:matches_v4', JSON.stringify(newMatches));
-      console.log('💾 Saved to localStorage (local dev)');
       return;
     }
-
-    // Production: Save to GitHub
-    console.log('☁️ Saving to GitHub...');
-      
       // Optionally try to save to GitHub via serverless function if available
       // This will fail silently if the function doesn't exist (e.g., on GitHub Pages)
       try {
