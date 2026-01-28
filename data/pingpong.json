@@ -329,9 +329,9 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "LON",
-      "elo": 1490,
+      "elo": 1543,
       "wins": 3,
-      "losses": 3,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -352,14 +352,6 @@
         {
           "elo": 1543,
           "timestamp": "2026-01-26T00:00:00.000Z"
-        },
-        {
-          "elo": 1516,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1490,
-          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -511,8 +503,8 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1567,
-      "wins": 6,
+      "elo": 1514,
+      "wins": 4,
       "losses": 4,
       "eloHistory": [
         {
@@ -549,14 +541,6 @@
         },
         {
           "elo": 1514,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1541,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1567,
           "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
@@ -1292,9 +1276,9 @@
       "name": "Cai Green",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1524,
+      "elo": 1492,
       "wins": 2,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1311,6 +1295,10 @@
         {
           "elo": 1524,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1492,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1617,8 +1605,8 @@
       "name": "Izzy Piper",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1476,
-      "wins": 1,
+      "elo": 1508,
+      "wins": 2,
       "losses": 2,
       "eloHistory": [
         {
@@ -1636,6 +1624,10 @@
         {
           "elo": 1476,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1508,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2270,27 +2262,15 @@
   ],
   "matches": [
     {
-      "id": "1769604702380",
-      "winnerId": "19",
-      "loserId": "13",
-      "winner": "Neil Hacker",
-      "loser": "Adithya Pradeep",
+      "id": "1769605256019",
+      "winnerId": "53",
+      "loserId": "44",
+      "winner": "Izzy Piper",
+      "loser": "Cai Green",
       "winnerScore": 11,
-      "loserScore": 5,
-      "winnerEloChange": 26,
-      "loserEloChange": -26,
-      "timestamp": "2026-01-28T00:00:00.000Z"
-    },
-    {
-      "id": "1769604649629",
-      "winnerId": "19",
-      "loserId": "13",
-      "winner": "Neil Hacker",
-      "loser": "Adithya Pradeep",
-      "winnerScore": 13,
-      "loserScore": 11,
-      "winnerEloChange": 27,
-      "loserEloChange": -27,
+      "loserScore": 3,
+      "winnerEloChange": 32,
+      "loserEloChange": -32,
       "timestamp": "2026-01-28T00:00:00.000Z"
     },
     {
@@ -3758,5 +3738,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-28T12:51:42.973Z"
+  "lastUpdated": "2026-01-28T13:00:57.317Z"
 }
