@@ -201,9 +201,9 @@
       "name": "David Armstrong",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1460,
+      "elo": 1485,
       "wins": 0,
-      "losses": 2,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
@@ -212,10 +212,6 @@
         {
           "elo": 1485,
           "timestamp": "2026-01-12T00:00:00.000Z"
-        },
-        {
-          "elo": 1460,
-          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -495,8 +491,8 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1459,
-      "wins": 2,
+      "elo": 1496,
+      "wins": 3,
       "losses": 4,
       "eloHistory": [
         {
@@ -526,6 +522,10 @@
         {
           "elo": 1459,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1496,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -536,9 +536,9 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1620,
+      "elo": 1583,
       "wins": 10,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -595,6 +595,10 @@
         {
           "elo": 1620,
           "timestamp": "2026-01-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1583,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -866,7 +870,7 @@
     },
     {
       "id": "29",
-      "name": "Vid PalÃÂÃÂÃÂÃÂar",
+      "name": "Vid",
       "countryCode": "si",
       "office": "LON",
       "elo": 1500,
@@ -1208,7 +1212,7 @@
     {
       "id": "42",
       "name": "Rhys Savage",
-      "countryCode": "gb",
+      "countryCode": "gb-wls",
       "office": "LON",
       "elo": 1513,
       "wins": 2,
@@ -1353,7 +1357,7 @@
     {
       "id": "47",
       "name": "Joel Robinson",
-      "countryCode": "gb",
+      "countryCode": "gb-eng",
       "office": "LON",
       "elo": 1472,
       "wins": 10,
@@ -1477,8 +1481,8 @@
       "name": "Lukas May",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1545,
-      "wins": 3,
+      "elo": 1520,
+      "wins": 2,
       "losses": 1,
       "eloHistory": [
         {
@@ -1496,10 +1500,6 @@
         {
           "elo": 1520,
           "timestamp": "2026-01-14T00:00:00.000Z"
-        },
-        {
-          "elo": 1545,
-          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2064,7 +2064,7 @@
     {
       "id": "70",
       "name": "Jamie Atkinson",
-      "countryCode": "gb",
+      "countryCode": "gb-eng",
       "office": "LON",
       "elo": 1515,
       "wins": 2,
@@ -2238,15 +2238,15 @@
   ],
   "matches": [
     {
-      "id": "1769605623411",
-      "winnerId": "49",
-      "loserId": "9",
-      "winner": "Lukas May",
-      "loser": "David Armstrong",
+      "id": "1769619581022",
+      "winnerId": "19",
+      "loserId": "20",
+      "winner": "Neil Hacker",
+      "loser": "Charlie Parkin",
       "winnerScore": 11,
-      "loserScore": 6,
-      "winnerEloChange": 25,
-      "loserEloChange": -25,
+      "loserScore": 9,
+      "winnerEloChange": 37,
+      "loserEloChange": -37,
       "timestamp": "2026-01-28T00:00:00.000Z"
     },
     {
@@ -3678,5 +3678,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-28T13:07:04.171Z"
+  "lastUpdated": "2026-01-28T16:59:42.105Z"
 }
