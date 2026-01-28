@@ -469,45 +469,45 @@ export default function PingPongELO() {
     }
   };
 
-  const saveData = async (newPlayers, newMatches) => {
-    try {
-      // For localhost, use localStorage
-      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-        localStorage.setItem("pingpong:players_v4", JSON.stringify(newPlayers));
-        localStorage.setItem("pingpong:matches_v4", JSON.stringify(newMatches));
-        return;
-      }
+const saveData = async (newPlayers, newMatches) => {
+  try {
+    console.log('💾 Saving to GitHub (strict mode)...');
+    console.log('Players:', newPlayers.length, '| Matches:', newMatches.length);
+    
+    const response = await fetch('/api/save-data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        players: newPlayers,
+        matches: newMatches
+      })
+    });
 
-      // For production, save to localStorage as a backup
-      // This allows the app to work without a backend
-      localStorage.setItem("pingpong:players_v4", JSON.stringify(newPlayers));
-      localStorage.setItem("pingpong:matches_v4", JSON.stringify(newMatches));
+    const result = await response.json();
+    
+    if (response.ok) {
+      setFileSha(result.sha);
+      console.log('✅ SUCCESS: Saved to GitHub');
+      console.log('📊 Saved:', newPlayers.length, 'players,', newMatches.length, 'matches');
       
-      console.log("Data saved to local storage");
+      // Update localStorage cache
+      localStorage.setItem('pingpong:players_v4', JSON.stringify(newPlayers));
+      localStorage.setItem('pingpong:matches_v4', JSON.stringify(newMatches));
       
-      // Optionally try to save to GitHub via serverless function if available
-      // This will fail silently if the function doesn't exist (e.g., on GitHub Pages)
-      try {
-        const response = await fetch("/api/save-data", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ players: newPlayers, matches: newMatches }),
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          setFileSha(result.sha);
-          console.log("Data also saved to GitHub");
-        }
-      } catch (apiError) {
-        // Silently fail - data is still saved in localStorage
-        console.log("GitHub sync not available (using localStorage only)");
-      }
-    } catch (error) {
-      console.error("Error saving data:", error);
-      alert("Failed to save data. Please try again.");
+      return true;
+    } else {
+      console.error('❌ GitHub save failed:', result);
+      alert(`Failed to save to GitHub: ${result.error}\n${result.details || ''}\n\nMatch was NOT saved. Please try again.`);
+      return false;
     }
-  };
+  } catch (error) {
+    console.error('❌ Network error:', error);
+    alert(`Network error: ${error.message}\n\nMatch was NOT saved. Please check your connection.`);
+    return false;
+  }
+};
 
   const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
@@ -599,18 +599,30 @@ export default function PingPongELO() {
       timestamp,
     };
 
-    const updatedMatches = [newMatch, ...matches];
-    setPlayers(playersWithRanks);
-    setMatches(updatedMatches);
-    saveData(playersWithRanks, updatedMatches);
-
-    setSelectedWinner("");
-    setSelectedLoser("");
-    setWinnerScore("");
-    setLoserScore("");
-    setMatchDate("");
-    setSidebarOpen(false);
-  };
+const updatedMatches = [newMatch, ...matches];
+  
+  // Update UI optimistically
+  setPlayers(playersWithRanks);
+  setMatches(updatedMatches);
+  
+  // Save to GitHub - THIS PART IS NEW
+  saveData(playersWithRanks, updatedMatches).then(success => {
+    if (success) {
+      // Clear form only if save succeeded
+      setSelectedWinner("");
+      setSelectedLoser("");
+      setWinnerScore("");
+      setLoserScore("");
+      setMatchDate("");
+      setSidebarOpen(false);
+    } else {
+      // Save failed - revert the UI
+      console.warn('⚠️ Save failed, reverting UI');
+      setPlayers(players); // revert to old state
+      setMatches(matches); // revert to old state
+    }
+  });
+};
 
   const addPlayer = () => {
     if (!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice) return;
