@@ -482,6 +482,28 @@ const saveData = async (newPlayers, newMatches) => {
 
     // Production: Save to GitHub
     console.log('☁️ Saving to GitHub...');
+      
+      // Optionally try to save to GitHub via serverless function if available
+      // This will fail silently if the function doesn't exist (e.g., on GitHub Pages)
+      try {
+        const response = await fetch("/api/save-data", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ players: newPlayers, matches: newMatches }),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setFileSha(result.sha);
+          console.log("Data also saved to GitHub");
+        }
+      } catch (apiError) {
+        // Silently fail - data is still saved in localStorage
+        console.log("GitHub sync not available (using localStorage only)");
+      }
+    } catch (error) {
+      console.error("Error saving data:", error);
+      alert("Failed to save data. Please try again.");
 
   const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
