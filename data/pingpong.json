@@ -936,7 +936,7 @@
     {
       "id": "30",
       "name": "Helen Durrant",
-      "countryCode": "gb",
+      "countryCode": "nz",
       "office": "LON",
       "elo": 1483,
       "wins": 0,
@@ -3818,5 +3818,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-28T18:05:54.106Z"
+  "lastUpdated": "2026-01-28T18:06:20.654Z"
 }
