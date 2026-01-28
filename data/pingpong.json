@@ -333,8 +333,8 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "LON",
-      "elo": 1517,
-      "wins": 2,
+      "elo": 1543,
+      "wins": 3,
       "losses": 1,
       "eloHistory": [
         {
@@ -352,6 +352,10 @@
         {
           "elo": 1517,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1543,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1596,9 +1600,9 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "LON",
-      "elo": 1499,
+      "elo": 1473,
       "wins": 2,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1619,6 +1623,10 @@
         {
           "elo": 1499,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1473,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2285,6 +2293,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769622254264",
+      "winnerId": "13",
+      "loserId": "52",
+      "winner": "Adithya Pradeep",
+      "loser": "Saadat Nursultan",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 26,
+      "loserEloChange": -26,
+      "timestamp": "2026-01-28T00:00:00.000Z"
+    },
     {
       "id": "1769622220257",
       "winnerId": "49",
@@ -3798,5 +3818,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-28T17:43:40.872Z"
+  "lastUpdated": "2026-01-28T17:44:14.919Z"
 }
