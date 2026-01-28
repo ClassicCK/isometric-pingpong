@@ -329,9 +329,9 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "LON",
-      "elo": 1516,
+      "elo": 1490,
       "wins": 3,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -355,6 +355,10 @@
         },
         {
           "elo": 1516,
+          "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1490,
           "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
@@ -507,8 +511,8 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1541,
-      "wins": 5,
+      "elo": 1567,
+      "wins": 6,
       "losses": 4,
       "eloHistory": [
         {
@@ -549,6 +553,10 @@
         },
         {
           "elo": 1541,
+          "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1567,
           "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
@@ -2270,6 +2278,18 @@
   ],
   "matches": [
     {
+      "id": "1769605404235",
+      "winnerId": "19",
+      "loserId": "13",
+      "winner": "Neil Hacker",
+      "loser": "Adithya Pradeep",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 26,
+      "loserEloChange": -26,
+      "timestamp": "2026-01-28T00:00:00.000Z"
+    },
+    {
       "id": "1769605389422",
       "winnerId": "19",
       "loserId": "13",
@@ -3758,5 +3778,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-28T13:03:10.006Z"
+  "lastUpdated": "2026-01-28T13:03:24.514Z"
 }
