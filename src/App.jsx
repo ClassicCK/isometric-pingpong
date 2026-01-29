@@ -1507,7 +1507,7 @@ export default function PingPongELO() {
                 <SortableHeader column="winRate" align="center">Win Rate</SortableHeader>
                 <SortableHeader column="efficiency" align="center">Efficiency</SortableHeader>
                 <SortableHeader column="pointsDiff" align="center">Points Diff</SortableHeader>
-                <SortableHeader column="bettingOdds" align="center">Betting Odds</SortableHeader>
+                <SortableHeader column="bettingOdds" align="center">Odds</SortableHeader>
               </tr>
             </thead>
 
@@ -1664,10 +1664,10 @@ export default function PingPongELO() {
 
     <div>
       <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-        Betting Odds
+        Odds
       </h3>
       <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-        American betting odds for winning the 64-player tournament based on 1,000 simulated seasons and tournaments. +2500 means a $100 bet wins $2500. -200 means you need to bet $200 to win $100.
+        Betting odds for winning the 64-player tournament based on 1,000 simulated seasons and tournaments. +2500 means a $100 bet wins $2500. -200 means you need to bet $200 to win $100.
       </p>
     </div>
   </div>
