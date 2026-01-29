@@ -426,41 +426,21 @@ export default function PingPongELO() {
     setLoading(true);
     console.log('📡 Loading data from GitHub...');
 
-    const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.filePath}?ref=${GITHUB_CONFIG.branch}`;
-    
-    const response = await fetch(url, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        // Add cache-busting to ensure fresh data
-        'Cache-Control': 'no-cache'
-      }
-    });
+    const response = await fetch('/api/load-data');
 
     if (response.ok) {
-      const fileData = await response.json();
-      setFileSha(fileData.sha);
-
-      const content = atob(fileData.content);
-      const data = JSON.parse(content);
-
+      const data = await response.json();
+      if (data.sha) setFileSha(data.sha);
       setPlayers(data.players || []);
       setMatches(data.matches || []);
-      
-      console.log('✅ Loaded from GitHub:', data.players?.length || 0, 'players,', data.matches?.length || 0, 'matches');
-      console.log('📅 Last updated:', data.lastUpdated || 'unknown');
-    } else if (response.status === 404) {
-      console.log('⚠️ No data file found on GitHub, starting fresh');
-      setPlayers([]);
-      setMatches([]);
+      console.log('✅ Loaded:', data.players?.length || 0, 'players');
     } else {
-      console.error('❌ GitHub fetch failed with status:', response.status);
-      const errorText = await response.text();
-      console.error('Error details:', errorText);
-      alert(`Failed to load data from GitHub (${response.status}). Please refresh the page.`);
+      console.error('❌ Load failed');
+      alert('Failed to load data. Please refresh.');
     }
   } catch (error) {
-    console.error('❌ Error loading data:', error);
-    alert(`Network error: ${error.message}\n\nCould not load data from GitHub. Please check your connection and refresh.`);
+    console.error('❌ Error:', error);
+    alert(`Network error: ${error.message}`);
   } finally {
     setLoading(false);
   }
