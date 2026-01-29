@@ -201,9 +201,9 @@
       "name": "David Armstrong",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1485,
+      "elo": 1460,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -212,6 +212,10 @@
         {
           "elo": 1485,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1460,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1557,8 +1561,8 @@
       "name": "Lukas May",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1520,
-      "wins": 2,
+      "elo": 1545,
+      "wins": 3,
       "losses": 1,
       "eloHistory": [
         {
@@ -1576,6 +1580,10 @@
         {
           "elo": 1520,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1545,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2333,6 +2341,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769725186320",
+      "winnerId": "49",
+      "loserId": "9",
+      "winner": "Lukas May",
+      "loser": "David Armstrong",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 25,
+      "loserEloChange": -25,
+      "timestamp": "2026-01-28T00:00:00.000Z"
+    },
     {
       "id": "1769711720813",
       "winnerId": "13",
@@ -3918,5 +3938,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-29T18:35:21.345Z"
+  "lastUpdated": "2026-01-29T22:19:47.416Z"
 }
