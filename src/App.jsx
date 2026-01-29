@@ -1010,12 +1010,20 @@ export default function PingPongELO() {
                               alt={countryData?.name || "Flag"}
                               className="flex-shrink-0"
                             />
-                            <div className="flex items-center gap-2 min-w-0">
-                              <span className="text-sm text-gray-900 whitespace-nowrap">{player.name}</span>
-                              <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold flex-shrink-0">
-                                {player.office}
-                              </span>
-                            </div>
+<div className="flex items-center gap-2 min-w-0">
+  <button
+    onClick={() => {
+      setSelectedPlayerId(player.id);
+      setCurrentView("player");
+    }}
+    className="text-sm text-gray-900 whitespace-nowrap hover:text-pink-600 hover:underline transition-colors"
+  >
+    {player.name}
+  </button>
+  <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold flex-shrink-0">
+    {player.office}
+  </span>
+</div>
                             <button
                               onClick={() => startEditPlayer(player)}
                               className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-200 rounded"
