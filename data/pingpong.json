@@ -44,7 +44,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 40
+      "lastWeekRank": 39
     },
     {
       "id": "3",
@@ -98,7 +98,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 41
+      "lastWeekRank": 40
     },
     {
       "id": "5",
@@ -144,7 +144,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 42
+      "lastWeekRank": 41
     },
     {
       "id": "7",
@@ -165,7 +165,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 43
+      "lastWeekRank": 42
     },
     {
       "id": "8",
@@ -194,7 +194,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 16
     },
     {
       "id": "9",
@@ -215,7 +215,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 36
     },
     {
       "id": "10",
@@ -329,7 +329,7 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "LON",
-      "elo": 1479,
+      "elo": 1460,
       "wins": 2,
       "losses": 3,
       "eloHistory": [
@@ -350,11 +350,11 @@
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1498,
+          "elo": 1484,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1479,
+          "elo": 1460,
           "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
@@ -366,7 +366,7 @@
       "name": "Christopher Kilner",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1473,
+      "elo": 1461,
       "wins": 1,
       "losses": 3,
       "eloHistory": [
@@ -379,20 +379,20 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
+          "elo": 1512,
+          "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1484,
+          "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
           "elo": 1461,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1442,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1473,
           "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 44
+      "lastWeekRank": 43
     },
     {
       "id": "15",
@@ -438,7 +438,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 45
+      "lastWeekRank": 44
     },
     {
       "id": "17",
@@ -511,7 +511,7 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1628,
+      "elo": 1645,
       "wins": 10,
       "losses": 6,
       "eloHistory": [
@@ -544,44 +544,44 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1496,
+          "elo": 1492,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1527,
+          "elo": 1516,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1501,
+          "elo": 1544,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1540,
+          "elo": 1567,
+          "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1543,
+          "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1575,
+          "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1603,
+          "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1581,
           "timestamp": "2026-01-29T00:00:00.000Z"
         },
         {
-          "elo": 1573,
+          "elo": 1616,
           "timestamp": "2026-01-29T00:00:00.000Z"
         },
         {
-          "elo": 1548,
+          "elo": 1645,
           "timestamp": "2026-01-29T00:00:00.000Z"
-        },
-        {
-          "elo": 1571,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1590,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1609,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1628,
-          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -592,7 +592,7 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1578,
+      "elo": 1584,
       "wins": 11,
       "losses": 5,
       "eloHistory": [
@@ -653,15 +653,15 @@
           "timestamp": "2026-01-15T00:00:00.000Z"
         },
         {
-          "elo": 1583,
+          "elo": 1644,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1552,
+          "elo": 1612,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1578,
+          "elo": 1584,
           "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
@@ -687,7 +687,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 46
+      "lastWeekRank": 45
     },
     {
       "id": "22",
@@ -851,7 +851,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 47
+      "lastWeekRank": 46
     },
     {
       "id": "26",
@@ -883,7 +883,7 @@
       "name": "Mark Pullin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1537,
+      "elo": 1536,
       "wins": 3,
       "losses": 1,
       "eloHistory": [
@@ -904,7 +904,7 @@
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1537,
+          "elo": 1536,
           "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
@@ -930,16 +930,16 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 48
+      "lastWeekRank": 47
     },
     {
       "id": "29",
       "name": "Vid",
       "countryCode": "si",
       "office": "LON",
-      "elo": 1500,
+      "elo": 1516,
       "wins": 1,
-      "losses": 1,
+      "losses": 0,
       "eloHistory": [
         {
           "elo": 1500,
@@ -948,14 +948,10 @@
         {
           "elo": 1516,
           "timestamp": "2026-01-12T00:00:00.000Z"
-        },
-        {
-          "elo": 1500,
-          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 15
     },
     {
       "id": "30",
@@ -976,15 +972,15 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 49
+      "lastWeekRank": 48
     },
     {
       "id": "31",
       "name": "Emily Mears",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1515,
-      "wins": 2,
+      "elo": 1500,
+      "wins": 1,
       "losses": 1,
       "eloHistory": [
         {
@@ -996,16 +992,12 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1532,
-          "timestamp": "2026-01-13T00:00:00.000Z"
-        },
-        {
-          "elo": 1515,
+          "elo": 1500,
           "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 25
     },
     {
       "id": "32",
@@ -1026,7 +1018,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 50
+      "lastWeekRank": 49
     },
     {
       "id": "33",
@@ -1105,7 +1097,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 38
+      "lastWeekRank": 37
     },
     {
       "id": "36",
@@ -1161,7 +1153,7 @@
       "name": "Jeannie Wilkening",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1453,
+      "elo": 1456,
       "wins": 0,
       "losses": 2,
       "eloHistory": [
@@ -1174,12 +1166,12 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1453,
+          "elo": 1456,
           "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 51
+      "lastWeekRank": 50
     },
     {
       "id": "38",
@@ -1254,7 +1246,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 51
     },
     {
       "id": "41",
@@ -1275,7 +1267,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 52
     },
     {
       "id": "42",
@@ -1325,7 +1317,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 39
+      "lastWeekRank": 38
     },
     {
       "id": "44",
@@ -1596,7 +1588,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "51",
@@ -1617,7 +1609,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "52",
@@ -1732,7 +1724,7 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1597,
+      "elo": 1602,
       "wins": 12,
       "losses": 5,
       "eloHistory": [
@@ -1797,15 +1789,15 @@
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1605,
+          "elo": 1666,
           "timestamp": "2026-01-29T00:00:00.000Z"
         },
         {
-          "elo": 1572,
+          "elo": 1631,
           "timestamp": "2026-01-29T00:00:00.000Z"
         },
         {
-          "elo": 1597,
+          "elo": 1602,
           "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
@@ -1817,7 +1809,7 @@
       "name": "Luke Harry",
       "countryCode": "au",
       "office": "LON",
-      "elo": 1487,
+      "elo": 1484,
       "wins": 2,
       "losses": 3,
       "eloHistory": [
@@ -1834,20 +1826,20 @@
           "timestamp": "2026-01-07T00:00:00.000Z"
         },
         {
-          "elo": 1467,
+          "elo": 1482,
+          "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1497,
           "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1455,
+          "elo": 1484,
           "timestamp": "2026-01-14T00:00:00.000Z"
-        },
-        {
-          "elo": 1487,
-          "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 55
     },
     {
       "id": "58",
@@ -1875,7 +1867,7 @@
       "name": "James Atkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1451,
+      "elo": 1453,
       "wins": 1,
       "losses": 3,
       "eloHistory": [
@@ -1896,7 +1888,7 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1451,
+          "elo": 1453,
           "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
@@ -1929,7 +1921,7 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1549,
+      "elo": 1550,
       "wins": 4,
       "losses": 1,
       "eloHistory": [
@@ -1950,11 +1942,11 @@
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1565,
+          "elo": 1566,
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1549,
+          "elo": 1550,
           "timestamp": "2026-01-15T00:00:00.000Z"
         }
       ],
@@ -2827,18 +2819,6 @@
       "loserScore": null,
       "winnerEloChange": 15,
       "loserEloChange": -15,
-      "timestamp": "2026-01-13T00:00:00.000Z"
-    },
-    {
-      "id": "1769276256723",
-      "winnerId": "31",
-      "loserId": "29",
-      "winner": "Emily Mears",
-      "loser": "Vid PalÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂar",
-      "winnerScore": null,
-      "loserScore": null,
-      "winnerEloChange": 16,
-      "loserEloChange": -16,
       "timestamp": "2026-01-13T00:00:00.000Z"
     },
     {
@@ -3898,5 +3878,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-29T18:32:34.026Z"
+  "lastUpdated": "2026-01-29T18:33:06.872Z"
 }
