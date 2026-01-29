@@ -1,6 +1,40 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { X, ChevronUp, ChevronDown, Edit2, Trash2 } from 'lucide-react';
 
+// Component for Recent Form visualization
+function RecentFormBar({ matches }) {
+  if (!matches || matches.length === 0) {
+    return (
+      <div className="flex gap-1 justify-center">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="w-6 h-6 bg-gray-200 rounded-sm"></div>
+        ))}
+      </div>
+    );
+  }
+
+  const paddedMatches = [...Array(5)].map((_, i) => matches[i] || null);
+
+  return (
+    <div className="flex gap-1 justify-center">
+      {paddedMatches.map((result, i) => (
+        <div
+          key={i}
+          className={`w-6 h-6 rounded-sm flex items-center justify-center text-xs font-bold ${
+            result === 'W'
+              ? 'bg-green-500 text-white'
+              : result === 'L'
+              ? 'bg-red-500 text-white'
+              : 'bg-gray-200'
+          }`}
+        >
+          {result || '—'}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // All countries with their ISO codes for flat flags
 const COUNTRIES = [
   { name: 'Afghanistan', code: 'af' }, { name: 'Albania', code: 'al' }, { name: 'Algeria', code: 'dz' },
@@ -72,43 +106,41 @@ const COUNTRIES = [
 
 const OFFICES = ["NYC", "LON"];
 
-// GitHub configuration
-const GITHUB_CONFIG = {
-  owner: "ClassicCK",
-  repo: "isometric-pingpong",
-  branch: "main",
-  filePath: "data/pingpong.json",
-};
+// Convert probability to American betting odds
+function probabilityToOdds(probability) {
+  if (probability <= 0) return "+10000";
+  if (probability >= 100) return "-10000";
+  
+  const prob = probability / 100;
+  
+  if (prob >= 0.5) {
+    const odds = Math.round((prob / (1 - prob)) * 100);
+    return `-${odds}`;
+  } else {
+    const odds = Math.round(((1 - prob) / prob) * 100);
+    return `+${odds}`;
+  }
+}
 
-// =========================
-// RANDOM / ELO HELPERS
-// =========================
+// Random number generator for simulations
 function randn() {
-  // Box-Muller transform
-  let u = 0,
-    v = 0;
+  let u = 0, v = 0;
   while (u === 0) u = Math.random();
   while (v === 0) v = Math.random();
   return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
 }
 
 function eloWinProb(eloA, eloB, matchNoiseStd = 0) {
-  // Match-day performance noise
   const a = eloA + randn() * matchNoiseStd;
   const b = eloB + randn() * matchNoiseStd;
   return 1 / (1 + Math.pow(10, (b - a) / 400));
 }
 
-// =========================
-// SEASON + TOURNAMENT SIMS
-// =========================
 function simulateSeason(players, { seasonMatchesPerPlayer = 10, K = 24, matchNoiseStd = 60 } = {}) {
-  // Clone minimal player objects
   const sims = players.map((p) => ({ ...p }));
   const n = sims.length;
   const totalMatches = Math.max(0, Math.round((n * seasonMatchesPerPlayer) / 2));
 
-  // Track games played to keep schedule roughly balanced
   const games = new Map();
   sims.forEach((p) => games.set(p.id, 0));
 
@@ -162,24 +194,10 @@ function simulateTournamentAndCollect(seededTop64, counters, { matchNoiseStd = 1
     return Math.random() < p ? p1 : p2;
   };
 
-  // March Madness seed pairing (1v16, 8v9, 5v12, 4v13, 6v11, 3v14, 7v10, 2v15)
-  const seedPairs = [
-    [0, 15],
-    [7, 8],
-    [4, 11],
-    [3, 12],
-    [5, 10],
-    [2, 13],
-    [6, 9],
-    [1, 14],
-  ];
+  const seedPairs = [[0, 15], [7, 8], [4, 11], [3, 12], [5, 10], [2, 13], [6, 9], [1, 14]];
 
-  // regions built from regionIndex + seed
   const regions = [0, 1, 2, 3].map((ri) =>
-    seededTop64
-      .filter((p) => p.regionIndex === ri)
-      .sort((a, b) => a.seed - b.seed)
-      .slice(0, 16)
+    seededTop64.filter((p) => p.regionIndex === ri).sort((a, b) => a.seed - b.seed).slice(0, 16)
   );
 
   const regionChamps = [];
@@ -191,36 +209,29 @@ function simulateTournamentAndCollect(seededTop64, counters, { matchNoiseStd = 1
       r64Ordered.push(region16[b] || null);
     });
 
-    // R64 -> R32
     const r32 = [];
     for (let i = 0; i < r64Ordered.length; i += 2) r32.push(simMatch(r64Ordered[i], r64Ordered[i + 1]));
     r32.forEach((p) => p && (counters[p.id].round32 += 1));
 
-    // R32 -> S16
     const s16 = [];
     for (let i = 0; i < r32.length; i += 2) s16.push(simMatch(r32[i], r32[i + 1]));
     s16.forEach((p) => p && (counters[p.id].sweet16 += 1));
 
-    // S16 -> E8 (region finalists)
     const e8 = [];
     for (let i = 0; i < s16.length; i += 2) e8.push(simMatch(s16[i], s16[i + 1]));
     e8.forEach((p) => p && (counters[p.id].elite8 += 1));
 
-    // E8 -> region champ
     const champ = simMatch(e8[0], e8[1]);
     if (champ) regionChamps.push(champ);
   });
 
-  // Final Four (region champs)
   regionChamps.forEach((p) => p && (counters[p.id].final4 += 1));
 
-  // Finals
   const f1 = simMatch(regionChamps[0], regionChamps[1]);
   const f2 = simMatch(regionChamps[2], regionChamps[3]);
   if (f1) counters[f1.id].finals += 1;
   if (f2) counters[f2.id].finals += 1;
 
-  // Champion
   const champ = simMatch(f1, f2);
   if (champ) counters[champ.id].win += 1;
 }
@@ -234,7 +245,6 @@ function simulateSeasonPlusTournamentProbabilities(allPlayers, opts = {}) {
     tournamentMatchNoiseStd = 15,
   } = opts;
 
-  // init counters for everyone
   const counters = {};
   allPlayers.forEach((p) => {
     counters[p.id] = {
@@ -249,7 +259,6 @@ function simulateSeasonPlusTournamentProbabilities(allPlayers, opts = {}) {
     };
   });
 
-  // Minimal player snapshot for speed
   const base = allPlayers.map((p) => ({
     id: p.id,
     name: p.name,
@@ -259,36 +268,31 @@ function simulateSeasonPlusTournamentProbabilities(allPlayers, opts = {}) {
   }));
 
   for (let sim = 0; sim < numSimulations; sim++) {
-    // 1) simulate season to get end-of-season Elo
     const postSeason = simulateSeason(base, {
       seasonMatchesPerPlayer,
       K: seasonK,
       matchNoiseStd: seasonMatchNoiseStd,
     });
 
-    // 2) seed top 64 after season
     const seededTop64 = [...postSeason]
       .sort((a, b) => b.elo - a.elo)
       .slice(0, 64)
       .map((p, index) => ({
         ...p,
-        seed: Math.floor(index / 4) + 1, // 1..16
-        regionIndex: index % 4, // distribute seeds across 4 regions
+        seed: Math.floor(index / 4) + 1,
+        regionIndex: index % 4,
       }));
 
-    // everyone in the field made tournament + round64
     seededTop64.forEach((p) => {
       counters[p.id].makeTournament += 1;
       counters[p.id].round64 += 1;
     });
 
-    // 3) simulate tournament
     simulateTournamentAndCollect(seededTop64, counters, {
       matchNoiseStd: tournamentMatchNoiseStd,
     });
   }
 
-  // Convert to percent
   const probs = {};
   Object.entries(counters).forEach(([id, c]) => {
     probs[id] = {
@@ -306,62 +310,11 @@ function simulateSeasonPlusTournamentProbabilities(allPlayers, opts = {}) {
   return probs;
 }
 
-// =========================
-// UI COMPONENTS
-// =========================
-function ProbabilityCell({ probability }) {
-  const getBackgroundColor = (prob) => {
-    if (prob === 0) return "#ffffff";
-    const white = { r: 255, g: 255, b: 255 };
-    const middle = { r: 249, g: 223, b: 226 };
-    const dark = { r: 233, g: 30, b: 99 };
-
-    let color;
-    if (prob <= 50) {
-      const t = prob / 50;
-      color = {
-        r: Math.round(white.r + (middle.r - white.r) * t),
-        g: Math.round(white.g + (middle.g - white.g) * t),
-        b: Math.round(white.b + (middle.b - white.b) * t),
-      };
-    } else {
-      const t = (prob - 50) / 50;
-      color = {
-        r: Math.round(middle.r + (dark.r - middle.r) * t),
-        g: Math.round(middle.g + (dark.g - middle.g) * t),
-        b: Math.round(middle.b + (dark.b - middle.b) * t),
-      };
-    }
-    return `rgb(${color.r}, ${color.g}, ${color.b})`;
-  };
-
-  const bgColor = getBackgroundColor(probability);
-  const textColor = probability > 60 ? "#ffffff" : "#000000";
-
-  return (
-    <div
-      className="absolute inset-0 flex items-center justify-center px-2"
-      style={{
-        backgroundColor: bgColor,
-        color: textColor,
-        fontFamily: "monospace",
-        fontSize: "13px",
-        whiteSpace: "nowrap",
-      }}
-    >
-      {probability > 0 ? `${probability}%` : "—"}
-    </div>
-  );
-}
-
-// =========================
-// MAIN APP
-// =========================
 export default function PingPongELO() {
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentView, setCurrentView] = useState("rankings"); // "rankings" or "matches" or "player"
+  const [currentView, setCurrentView] = useState("rankings");
   const [selectedPlayerId, setSelectedPlayerId] = useState(null);
 
   const [selectedWinner, setSelectedWinner] = useState("");
@@ -390,20 +343,18 @@ export default function PingPongELO() {
   const [hoveredPointElo, setHoveredPointElo] = useState(null);
   const [hoveredPointDate, setHoveredPointDate] = useState(null);
 
-  // Store all-player season+tournament probabilities
+  // Store tournament probabilities
   const [seasonProbs, setSeasonProbs] = useState({});
   const [probsLoading, setProbsLoading] = useState(false);
 
   useEffect(() => {
     loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Recompute "538-style" probabilities whenever Elo changes
+  // Simulate tournament probabilities
   useEffect(() => {
     if (!players || players.length === 0) return;
 
-    // Avoid locking the UI: kick to next tick
     setProbsLoading(true);
     setTimeout(() => {
       try {
@@ -421,67 +372,87 @@ export default function PingPongELO() {
     }, 0);
   }, [players]);
 
-  const loadData = async () => {
-  try {
-    setLoading(true);
-    console.log('📡 Loading data from GitHub...');
-
-    const response = await fetch('/api/load-data');
-
-    if (response.ok) {
-      const data = await response.json();
-      if (data.sha) setFileSha(data.sha);
-      setPlayers(data.players || []);
-      setMatches(data.matches || []);
-      console.log('✅ Loaded:', data.players?.length || 0, 'players');
-    } else {
-      console.error('❌ Load failed');
-      alert('Failed to load data. Please refresh.');
-    }
-  } catch (error) {
-    console.error('❌ Error:', error);
-    alert(`Network error: ${error.message}`);
-  } finally {
-    setLoading(false);
-  }
-};
-
-const saveData = async (newPlayers, newMatches) => {
-  try {
-    console.log('💾 Saving to GitHub...');
-    console.log('Players:', newPlayers.length, '| Matches:', newMatches.length);
+  // Backfill expectedWinProbability for existing matches
+  useEffect(() => {
+    if (players.length === 0 || matches.length === 0) return;
     
-    const response = await fetch('/api/save-data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        players: newPlayers,
-        matches: newMatches
-      })
-    });
-
-    const result = await response.json();
-    
-    if (response.ok) {
-      setFileSha(result.sha);
-      console.log('✅ SUCCESS: Saved to GitHub');
-      console.log('📊 Saved:', newPlayers.length, 'players,', newMatches.length, 'matches');
+    let needsUpdate = false;
+    const updatedMatches = matches.map(match => {
+      if (match.expectedWinProbability !== undefined) return match;
       
-      // NO localStorage - GitHub is the single source of truth
-      return true;
-    } else {
-      console.error('❌ GitHub save failed:', result);
-      alert(`Failed to save to GitHub: ${result.error}\n${result.details || ''}\n\nMatch was NOT saved. Please try again.`);
+      needsUpdate = true;
+      const winner = players.find(p => p.id === match.winnerId);
+      const loser = players.find(p => p.id === match.loserId);
+      
+      if (!winner || !loser) return match;
+      
+      const winnerEloAtTime = winner.eloHistory.find(h => h.timestamp === match.timestamp)?.elo || winner.elo;
+      const loserEloAtTime = loser.eloHistory.find(h => h.timestamp === match.timestamp)?.elo || loser.elo;
+      
+      const expectedWinProbability = 1 / (1 + Math.pow(10, (loserEloAtTime - winnerEloAtTime) / 400));
+      
+      return { ...match, expectedWinProbability };
+    });
+    
+    if (needsUpdate) {
+      console.log('📊 Backfilling expectedWinProbability for', matches.length, 'matches');
+      setMatches(updatedMatches);
+      saveData(players, updatedMatches);
+    }
+  }, [players, matches]);
+
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      console.log('📡 Loading data from GitHub...');
+
+      const response = await fetch('/api/load-data');
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.sha) setFileSha(data.sha);
+        setPlayers(data.players || []);
+        setMatches(data.matches || []);
+        console.log('✅ Loaded:', data.players?.length || 0, 'players');
+      } else {
+        console.error('❌ Load failed');
+        alert('Failed to load data. Please refresh.');
+      }
+    } catch (error) {
+      console.error('❌ Error:', error);
+      alert(`Network error: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveData = async (newPlayers, newMatches) => {
+    try {
+      console.log('💾 Saving to GitHub...');
+      
+      const response = await fetch('/api/save-data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ players: newPlayers, matches: newMatches })
+      });
+
+      const result = await response.json();
+      
+      if (response.ok) {
+        setFileSha(result.sha);
+        console.log('✅ SUCCESS: Saved to GitHub');
+        return true;
+      } else {
+        console.error('❌ GitHub save failed:', result);
+        alert(`Failed to save: ${result.error}`);
+        return false;
+      }
+    } catch (error) {
+      console.error('❌ Network error:', error);
+      alert(`Network error: ${error.message}`);
       return false;
     }
-  } catch (error) {
-    console.error('❌ Network error:', error);
-    alert(`Network error: ${error.message}\n\nMatch was NOT saved. Please check your connection.`);
-    return false;
-  }
-};
+  };
 
   const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
@@ -490,8 +461,7 @@ const saveData = async (newPlayers, newMatches) => {
     let adjustedK = K;
     if (winnerScoreVal !== null && loserScoreVal !== null) {
       const scoreDiff = winnerScoreVal - loserScoreVal;
-      const movMultiplier =
-        Math.log(Math.abs(scoreDiff) + 1) * (2.2 / ((winnerELO - loserELO) * 0.001 + 2.2));
+      const movMultiplier = Math.log(Math.abs(scoreDiff) + 1) * (2.2 / ((winnerELO - loserELO) * 0.001 + 2.2));
       adjustedK = K * (1 + movMultiplier * 0.5);
       adjustedK = Math.min(adjustedK, K * 1.75);
       adjustedK = Math.max(adjustedK, K * 0.5);
@@ -501,6 +471,7 @@ const saveData = async (newPlayers, newMatches) => {
       winnerNew: Math.round(winnerELO + adjustedK * (1 - expectedWinner)),
       loserNew: Math.round(loserELO + adjustedK * (0 - expectedLoser)),
       kFactorUsed: adjustedK,
+      expectedWinProbability: expectedWinner,
     };
   };
 
@@ -510,17 +481,13 @@ const saveData = async (newPlayers, newMatches) => {
 
     return updatedPlayers.map((player) => {
       const weekAgoHistory = player.eloHistory.filter((h) => new Date(h.timestamp) <= oneWeekAgo);
-      const weekAgoELO =
-        weekAgoHistory.length > 0 ? weekAgoHistory[weekAgoHistory.length - 1].elo : player.eloHistory[0]?.elo || 1500;
+      const weekAgoELO = weekAgoHistory.length > 0 ? weekAgoHistory[weekAgoHistory.length - 1].elo : player.eloHistory[0]?.elo || 1500;
 
-      const weekAgoRankings = updatedPlayers
-        .map((p) => {
-          const pWeekAgoHistory = p.eloHistory.filter((h) => new Date(h.timestamp) <= oneWeekAgo);
-          const pWeekAgoELO =
-            pWeekAgoHistory.length > 0 ? pWeekAgoHistory[pWeekAgoHistory.length - 1].elo : p.eloHistory[0]?.elo || 1500;
-          return { id: p.id, elo: pWeekAgoELO };
-        })
-        .sort((a, b) => b.elo - a.elo);
+      const weekAgoRankings = updatedPlayers.map((p) => {
+        const pWeekAgoHistory = p.eloHistory.filter((h) => new Date(h.timestamp) <= oneWeekAgo);
+        const pWeekAgoELO = pWeekAgoHistory.length > 0 ? pWeekAgoHistory[pWeekAgoHistory.length - 1].elo : p.eloHistory[0]?.elo || 1500;
+        return { id: p.id, elo: pWeekAgoELO };
+      }).sort((a, b) => b.elo - a.elo);
 
       const weekAgoRank = weekAgoRankings.findIndex((p) => p.id === player.id) + 1;
       return { ...player, lastWeekRank: weekAgoRank };
@@ -545,7 +512,7 @@ const saveData = async (newPlayers, newMatches) => {
       if (winnerScoreNum < 0 || loserScoreNum < 0) return alert("Scores must be positive numbers");
     }
 
-    const { winnerNew, loserNew } = calculateELO(winner.elo, loser.elo, winnerScoreNum, loserScoreNum);
+    const { winnerNew, loserNew, expectedWinProbability } = calculateELO(winner.elo, loser.elo, winnerScoreNum, loserScoreNum);
     const timestamp = matchDate ? new Date(matchDate).toISOString() : new Date().toISOString();
 
     const updatedPlayers = players.map((p) => {
@@ -570,33 +537,29 @@ const saveData = async (newPlayers, newMatches) => {
       loserScore: loserScoreNum,
       winnerEloChange: winnerNew - winner.elo,
       loserEloChange: loserNew - loser.elo,
+      expectedWinProbability,
       timestamp,
     };
 
-const updatedMatches = [newMatch, ...matches];
-  
-  // Update UI optimistically
-  setPlayers(playersWithRanks);
-  setMatches(updatedMatches);
-  
-  // Save to GitHub - THIS PART IS NEW
-  saveData(playersWithRanks, updatedMatches).then(success => {
-    if (success) {
-      // Clear form only if save succeeded
-      setSelectedWinner("");
-      setSelectedLoser("");
-      setWinnerScore("");
-      setLoserScore("");
-      setMatchDate("");
-      setSidebarOpen(false);
-    } else {
-      // Save failed - revert the UI
-      console.warn('⚠️ Save failed, reverting UI');
-      setPlayers(players); // revert to old state
-      setMatches(matches); // revert to old state
-    }
-  });
-};
+    const updatedMatches = [newMatch, ...matches];
+    
+    setPlayers(playersWithRanks);
+    setMatches(updatedMatches);
+    
+    saveData(playersWithRanks, updatedMatches).then(success => {
+      if (success) {
+        setSelectedWinner("");
+        setSelectedLoser("");
+        setWinnerScore("");
+        setLoserScore("");
+        setMatchDate("");
+        setSidebarOpen(false);
+      } else {
+        setPlayers(players);
+        setMatches(matches);
+      }
+    });
+  };
 
   const addPlayer = () => {
     if (!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice) return;
@@ -658,23 +621,11 @@ const updatedMatches = [newMatch, ...matches];
   };
 
   const deleteMatch = (matchId) => {
-    if (!window.confirm("Are you sure you want to delete this match? This will recalculate all ELO ratings from this point forward.")) {
-      return;
-    }
+    if (!window.confirm("Delete this match? This will recalculate all ELO ratings.")) return;
 
-    // Find the match to delete
-    const matchToDelete = matches.find(m => m.id === matchId);
-    if (!matchToDelete) return;
-
-    // Remove the match from the list
     const updatedMatches = matches.filter(m => m.id !== matchId);
+    const sortedMatches = [...updatedMatches].sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
 
-    // Recalculate ELO ratings by replaying all remaining matches in chronological order
-    const sortedMatches = [...updatedMatches].sort((a, b) => 
-      new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-    );
-
-    // Reset all players to starting ELO and clear history
     const resetPlayers = players.map(p => ({
       ...p,
       elo: 1500,
@@ -683,19 +634,14 @@ const updatedMatches = [newMatch, ...matches];
       eloHistory: [{ elo: 1500, timestamp: p.joinedAt }]
     }));
 
-    // Replay all matches
     let recalculatedPlayers = resetPlayers;
     sortedMatches.forEach(match => {
       const winner = recalculatedPlayers.find(p => p.id === match.winnerId);
       const loser = recalculatedPlayers.find(p => p.id === match.loserId);
 
       if (winner && loser) {
-        const { winnerNew, loserNew } = calculateELO(
-          winner.elo, 
-          loser.elo, 
-          match.winnerScore, 
-          match.loserScore
-        );
+        const { winnerNew, loserNew, expectedWinProbability } = calculateELO(winner.elo, loser.elo, match.winnerScore, match.loserScore);
+        match.expectedWinProbability = expectedWinProbability;
 
         recalculatedPlayers = recalculatedPlayers.map(p => {
           if (p.id === match.winnerId) {
@@ -734,11 +680,6 @@ const updatedMatches = [newMatch, ...matches];
     }
   };
 
-  const ZERO = useMemo(
-    () => ({ makeTournament: 0, round64: 0, round32: 0, sweet16: 0, elite8: 0, final4: 0, finals: 0, win: 0 }),
-    []
-  );
-
   const getSortedPlayers = () => {
     const playersCopy = players.map((p) => ({ ...p }));
     const playersWithRanks = calculateRankChanges(playersCopy);
@@ -746,8 +687,61 @@ const updatedMatches = [newMatch, ...matches];
 
     const playersWithData = playersWithRanks.map((player) => {
       const rank = rankedPlayers.findIndex((p) => p.id === player.id) + 1;
-      const probabilities = seasonProbs[player.id] || ZERO;
-      return { ...player, rank, probabilities };
+      
+      // Get player's matches (sorted by date, most recent first)
+      const playerMatches = matches
+        .filter(m => m.winnerId === player.id || m.loserId === player.id)
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      
+      // Recent form (last 5 matches)
+      const recentMatches = playerMatches.slice(0, 5).map(m => m.winnerId === player.id ? 'W' : 'L');
+      
+      // Clutch % (close games = decided by 2 points or less)
+      const closeGames = playerMatches.filter(m => {
+        if (m.winnerScore === null || m.loserScore === null) return false;
+        return Math.abs(m.winnerScore - m.loserScore) <= 2;
+      });
+      const closeGameWins = closeGames.filter(m => m.winnerId === player.id).length;
+      const closeGameLosses = closeGames.length - closeGameWins;
+      
+      // Efficiency (actual wins vs expected wins)
+      let expectedWins = 0;
+      playerMatches.forEach(m => {
+        if (m.expectedWinProbability) {
+          if (m.winnerId === player.id) {
+            expectedWins += m.expectedWinProbability;
+          } else {
+            expectedWins += (1 - m.expectedWinProbability);
+          }
+        }
+      });
+      
+      // Points differential
+      let pointsFor = 0;
+      let pointsAgainst = 0;
+      playerMatches.forEach(m => {
+        if (m.winnerScore !== null && m.loserScore !== null) {
+          if (m.winnerId === player.id) {
+            pointsFor += m.winnerScore;
+            pointsAgainst += m.loserScore;
+          } else {
+            pointsFor += m.loserScore;
+            pointsAgainst += m.winnerScore;
+          }
+        }
+      });
+
+      return { 
+        ...player, 
+        rank,
+        recentMatches,
+        closeGameWins,
+        closeGameLosses,
+        expectedWins,
+        pointsFor,
+        pointsAgainst,
+        bettingOdds: probabilityToOdds((seasonProbs[player.id]?.win || 0)),
+      };
     });
 
     return [...playersWithData].sort((a, b) => {
@@ -766,33 +760,31 @@ const updatedMatches = [newMatch, ...matches];
           compareA = a.elo;
           compareB = b.elo;
           break;
-        case "round64":
-          compareA = a.probabilities.round64;
-          compareB = b.probabilities.round64;
+        case "winRate":
+          compareA = a.wins / (a.wins + a.losses || 1);
+          compareB = b.wins / (b.wins + b.losses || 1);
           break;
-        case "round32":
-          compareA = a.probabilities.round32;
-          compareB = b.probabilities.round32;
+        case "clutch":
+          const aClutch = (a.closeGameWins + a.closeGameLosses) > 0 ? a.closeGameWins / (a.closeGameWins + a.closeGameLosses) : 0;
+          const bClutch = (b.closeGameWins + b.closeGameLosses) > 0 ? b.closeGameWins / (b.closeGameWins + b.closeGameLosses) : 0;
+          compareA = aClutch;
+          compareB = bClutch;
           break;
-        case "sweet16":
-          compareA = a.probabilities.sweet16;
-          compareB = b.probabilities.sweet16;
+        case "efficiency":
+          compareA = a.wins - a.expectedWins;
+          compareB = b.wins - b.expectedWins;
           break;
-        case "elite8":
-          compareA = a.probabilities.elite8;
-          compareB = b.probabilities.elite8;
+        case "pointsDiff":
+          compareA = a.pointsFor - a.pointsAgainst;
+          compareB = b.pointsFor - b.pointsAgainst;
           break;
-        case "final4":
-          compareA = a.probabilities.final4;
-          compareB = b.probabilities.final4;
+        case "gp":
+          compareA = a.wins + a.losses;
+          compareB = b.wins + b.losses;
           break;
-        case "finals":
-          compareA = a.probabilities.finals;
-          compareB = b.probabilities.finals;
-          break;
-        case "win":
-          compareA = a.probabilities.win;
-          compareB = b.probabilities.win;
+        case "bettingOdds":
+          compareA = a.bettingOdds;
+          compareB = b.bettingOdds;
           break;
         default:
           return 0;
@@ -805,10 +797,14 @@ const updatedMatches = [newMatch, ...matches];
 
   const sortedPlayers = getSortedPlayers();
 
+  // Sort matches by date (most recent first)
+  const sortedMatches = [...matches].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
   const formatDate = (isoString) => {
     const d = new Date(isoString);
     return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
   };
+  
   const formatTime = (isoString) => {
     const d = new Date(isoString);
     return d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true }).toUpperCase();
@@ -816,18 +812,10 @@ const updatedMatches = [newMatch, ...matches];
 
   const SortableHeader = ({ column, children, align = "left" }) => (
     <th
-      className={`py-4 ${
-        align === "right" ? "text-right" : align === "center" ? "text-center" : "text-left"
-      } ${column === "round64" ? "border-l-2 border-gray-300" : ""} ${
-        column === "rank" ? "pr-6 min-w-[120px]" : "px-6 px-0"
-      } text-sm font-normal text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-50 transition-colors select-none`}
+      className={`py-4 ${align === "right" ? "text-right" : align === "center" ? "text-center" : "text-left"} ${column === "rank" ? "pr-6 min-w-[120px]" : "px-6"} text-sm font-normal text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-50 transition-colors select-none`}
       onClick={() => handleSort(column)}
     >
-      <div
-        className={`flex items-center gap-2 ${
-          align === "right" ? "justify-end" : align === "center" ? "justify-center" : "justify-start"
-        } whitespace-nowrap`}
-      >
+      <div className={`flex items-center gap-2 ${align === "right" ? "justify-end" : align === "center" ? "justify-center" : "justify-start"} whitespace-nowrap`}>
         {children}
         {sortColumn === column && (sortDirection === "asc" ? <ChevronUp size={14} /> : <ChevronDown size={14} />)}
       </div>
@@ -842,676 +830,72 @@ const updatedMatches = [newMatch, ...matches];
     );
   }
 
-  // =========================
-  // PLAYER DETAIL VIEW
-  // =========================
-  if (currentView === "player" && selectedPlayerId) {
-    const player = players.find(p => p.id === selectedPlayerId);
-    if (!player) {
-      setCurrentView("rankings");
-      return null;
-    }
-
-    // Calculate proper rank for this player
-    const rankedPlayers = [...players].sort((a, b) => b.elo - a.elo);
-    const playerRank = rankedPlayers.findIndex(p => p.id === selectedPlayerId) + 1;
-
-    const playerMatches = matches
-      .filter(m => m.winnerId === selectedPlayerId || m.loserId === selectedPlayerId)
-      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-
-    const countryData = COUNTRIES.find(c => c.code === player.countryCode);
-
-    // Extend each player's history to current date with their current ELO
-    const currentDate = new Date().toISOString();
-    
-    const extendHistoryToNow = (eloHistory, currentElo, joinedAt) => {
-      if (!eloHistory || eloHistory.length === 0) {
-        return [{ elo: currentElo, timestamp: currentDate }];
-      }
-      
-      // Sort by timestamp to ensure chronological order
-      const sortedHistory = [...eloHistory].sort((a, b) => 
-        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
-      
-      // Filter out the initial 1500 starting point (matches joinedAt timestamp and elo of 1500)
-      // This is the point created when the player first joins, before any matches
-      const filteredHistory = sortedHistory.filter(entry => {
-        // Keep entries that are NOT the initial starting point
-        const isStartingPoint = entry.elo === 1500 && entry.timestamp === joinedAt;
-        return !isStartingPoint;
-      });
-      
-      if (filteredHistory.length === 0) {
-        return [{ elo: currentElo, timestamp: currentDate }];
-      }
-      
-      const lastEntry = filteredHistory[filteredHistory.length - 1];
-      const lastTimestamp = new Date(lastEntry.timestamp);
-      const now = new Date();
-      
-      // If last entry is not today, add a point for today with same ELO
-      if (lastTimestamp.toDateString() !== now.toDateString()) {
-        return [...filteredHistory, { elo: currentElo, timestamp: currentDate }];
-      }
-      
-      return filteredHistory;
-    };
-
-    // Use raw ELO history for the chart extended to current date
-    const currentPlayerHistory = extendHistoryToNow(player.eloHistory, player.elo, player.joinedAt);
-    const allPlayerHistories = players.map(p => ({
-      ...p,
-      history: extendHistoryToNow(p.eloHistory, p.elo, p.joinedAt)
-    }));
-
-    // Get min and max ELO across all players for chart scaling
-    const allEloValues = allPlayerHistories.flatMap(p => p.history.map(h => h.elo));
-    const minElo = Math.min(...allEloValues, 1300);
-    const maxElo = Math.max(...allEloValues, 1700);
-    const eloRange = maxElo - minElo;
-
-    // Chart dimensions - use full container width
-    const chartWidth = 1200; // Increased from 800 for full width
-    const chartHeight = 400;
-    const padding = { top: 40, right: 40, bottom: 60, left: 60 };
-    const innerWidth = chartWidth - padding.left - padding.right;
-    const innerHeight = chartHeight - padding.top - padding.bottom;
-
-    // Get time range
-    const allTimestamps = allPlayerHistories.flatMap(p => p.history.map(h => new Date(h.timestamp).getTime()));
-    const minTime = Math.min(...allTimestamps);
-    const maxTime = Math.max(...allTimestamps);
-    const timeRange = maxTime - minTime || 1;
-
-    const xScale = (timestamp) => {
-      const time = new Date(timestamp).getTime();
-      return padding.left + ((time - minTime) / timeRange) * innerWidth;
-    };
-
-    const yScale = (elo) => {
-      return chartHeight - padding.bottom - ((elo - minElo) / eloRange) * innerHeight;
-    };
-
-    // Create path for a player's ELO history
-    const createPath = (eloHistory) => {
-      if (eloHistory.length === 0) return "";
-      
-      let path = `M ${xScale(eloHistory[0].timestamp)} ${yScale(eloHistory[0].elo)}`;
-      for (let i = 1; i < eloHistory.length; i++) {
-        path += ` L ${xScale(eloHistory[i].timestamp)} ${yScale(eloHistory[i].elo)}`;
-      }
-      return path;
-    };
-
-    // Grid lines (horizontal)
-    const gridLines = [];
-    const numGridLines = 5;
-    for (let i = 0; i <= numGridLines; i++) {
-      const elo = minElo + (eloRange * i / numGridLines);
-      const y = yScale(elo);
-      gridLines.push(
-        <g key={i}>
-          <line
-            x1={padding.left}
-            y1={y}
-            x2={chartWidth - padding.right}
-            y2={y}
-            stroke="#e5e7eb"
-            strokeWidth="1"
-          />
-          <text
-            x={padding.left - 10}
-            y={y}
-            textAnchor="end"
-            alignmentBaseline="middle"
-            fill="#9ca3af"
-            fontSize="12"
-            fontFamily="sans-serif"
-          >
-            {Math.round(elo)}
-          </text>
-        </g>
-      );
-    }
-
-    return (
-      <div className="min-h-screen bg-white">
-        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
-
-        <div className="border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-8 py-8">
-            <button
-              onClick={() => {
-                setCurrentView("rankings");
-                setSelectedPlayerId(null);
-              }}
-              className="text-gray-600 hover:text-black mb-6 flex items-center gap-2"
-              style={{ fontFamily: "sans-serif" }}
-            >
-              ← Back to Rankings
-            </button>
-
-            <div className="flex items-center gap-4 mb-4">
-              <img
-                src={`https://flagcdn.com/w40/${player.countryCode}.png`}
-                width="48"
-                height="36"
-                alt={countryData?.name || "Flag"}
-                title={countryData?.name || ""}
-                style={{ objectFit: "cover" }}
-              />
-              <div>
-                <h1 className="text-6xl font-black" style={{ fontFamily: "monospace", letterSpacing: "-0.02em" }}>
-                  {player.name}
-                </h1>
-                <p className="text-xl text-gray-500 mt-2" style={{ fontFamily: "monospace" }}>
-                  {player.office} • Current ELO: {player.elo}
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-4 gap-6 mt-6">
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
-                  Current Rank
-                </div>
-                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
-                  #{playerRank}
-                </div>
-              </div>
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
-                  Record
-                </div>
-                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
-                  {player.wins}-{player.losses}
-                </div>
-              </div>
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
-                  Win Rate
-                </div>
-                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
-                  {player.wins + player.losses > 0 ? Math.round((player.wins / (player.wins + player.losses)) * 100) : 0}%
-                </div>
-              </div>
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
-                  Total Matches
-                </div>
-                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
-                  {player.wins + player.losses}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-8 py-12">
-          <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: "Figtree, sans-serif" }}>
-            ELO Rating Over Time
-          </h2>
-
-          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-12 relative overflow-x-auto">
-            <div className="flex justify-center">
-              <svg 
-                width={chartWidth} 
-                height={chartHeight}
-                onMouseLeave={() => {
-                  setHoveredPlayer(null);
-                  setHoveredPointElo(null);
-                  setHoveredPointDate(null);
-                }}
-              >
-              {/* Grid lines */}
-              {gridLines}
-
-              {/* Background lines for all other players with hover */}
-              {allPlayerHistories
-                .filter(p => p.id !== selectedPlayerId)
-                .map(p => {
-                  const findClosestPoint = (clientX, svg) => {
-                    const rect = svg.getBoundingClientRect();
-                    const x = clientX - rect.left;
-                    
-                    let closestPoint = null;
-                    let closestDistance = Infinity;
-                    
-                    p.history.forEach(point => {
-                      const px = xScale(point.timestamp);
-                      const distance = Math.abs(px - x);
-                      if (distance < closestDistance) {
-                        closestDistance = distance;
-                        closestPoint = point;
-                      }
-                    });
-                    
-                    return closestPoint;
-                  };
-
-                  return (
-                    <g key={p.id}>
-                      {/* Visible line */}
-                      <path
-                        d={createPath(p.history)}
-                        stroke="#9ca3af"
-                        strokeWidth="2"
-                        fill="none"
-                        pointerEvents="none"
-                        style={{ 
-                          opacity: hoveredPlayer?.name === p.name ? 1 : 0.4,
-                          stroke: hoveredPlayer?.name === p.name ? '#6b7280' : '#9ca3af',
-                          transition: 'all 0.2s'
-                        }}
-                      />
-                      {/* Invisible wider hit area */}
-                      <path
-                        d={createPath(p.history)}
-                        stroke="transparent"
-                        strokeWidth="20"
-                        fill="none"
-                        onMouseEnter={(e) => {
-                          const svg = e.currentTarget.ownerSVGElement;
-                          const point = findClosestPoint(e.clientX, svg);
-                          setHoveredPlayer({ name: p.name, elo: p.elo });
-                          setHoveredPointElo(point?.elo || p.elo);
-                          setHoveredPointDate(point?.timestamp || null);
-                          setTooltipPos({ x: e.clientX, y: e.clientY });
-                        }}
-                        onMouseMove={(e) => {
-                          const svg = e.currentTarget.ownerSVGElement;
-                          const point = findClosestPoint(e.clientX, svg);
-                          setHoveredPointElo(point?.elo || p.elo);
-                          setHoveredPointDate(point?.timestamp || null);
-                          setTooltipPos({ x: e.clientX, y: e.clientY });
-                        }}
-                        style={{ cursor: 'pointer' }}
-                      />
-                    </g>
-                  );
-                })}
-
-              {/* Highlighted line for selected player */}
-              <g>
-                <path
-                  d={createPath(currentPlayerHistory)}
-                  stroke="#e91e63"
-                  strokeWidth="3"
-                  fill="none"
-                  pointerEvents="none"
-                />
-                <path
-                  d={createPath(currentPlayerHistory)}
-                  stroke="transparent"
-                  strokeWidth="20"
-                  fill="none"
-                  onMouseEnter={(e) => {
-                    const svg = e.currentTarget.ownerSVGElement;
-                    const rect = svg.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    
-                    let closestPoint = null;
-                    let closestDistance = Infinity;
-                    
-                    currentPlayerHistory.forEach(point => {
-                      const px = xScale(point.timestamp);
-                      const distance = Math.abs(px - x);
-                      if (distance < closestDistance) {
-                        closestDistance = distance;
-                        closestPoint = point;
-                      }
-                    });
-                    
-                    setHoveredPlayer({ name: player.name, elo: player.elo });
-                    setHoveredPointElo(closestPoint?.elo || player.elo);
-                    setHoveredPointDate(closestPoint?.timestamp || null);
-                    setTooltipPos({ x: e.clientX, y: e.clientY });
-                  }}
-                  onMouseMove={(e) => {
-                    const svg = e.currentTarget.ownerSVGElement;
-                    const rect = svg.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    
-                    let closestPoint = null;
-                    let closestDistance = Infinity;
-                    
-                    currentPlayerHistory.forEach(point => {
-                      const px = xScale(point.timestamp);
-                      const distance = Math.abs(px - x);
-                      if (distance < closestDistance) {
-                        closestDistance = distance;
-                        closestPoint = point;
-                      }
-                    });
-                    
-                    setHoveredPointElo(closestPoint?.elo || player.elo);
-                    setHoveredPointDate(closestPoint?.timestamp || null);
-                    setTooltipPos({ x: e.clientX, y: e.clientY });
-                  }}
-                  style={{ cursor: 'pointer' }}
-                />
-              </g>
-
-              {/* Axis labels */}
-              <text
-                x={padding.left}
-                y={chartHeight - 20}
-                fill="#6b7280"
-                fontSize="12"
-                fontFamily="monospace"
-              >
-                {formatDate(new Date(minTime).toISOString())}
-              </text>
-              <text
-                x={chartWidth - padding.right - 10}
-                y={chartHeight - 20}
-                textAnchor="end"
-                fill="#6b7280"
-                fontSize="12"
-                fontFamily="monospace"
-              >
-                {formatDate(new Date(maxTime).toISOString())}
-              </text>
-              <text
-                x={chartWidth / 2}
-                y={chartHeight - 20}
-                textAnchor="middle"
-                fill="#6b7280"
-                fontSize="12"
-                fontFamily="monospace"
-                fontWeight="600"
-              >
-                Date
-              </text>
-              <text
-                x={20}
-                y={chartHeight / 2}
-                textAnchor="middle"
-                fill="#6b7280"
-                fontSize="12"
-                fontFamily="monospace"
-                fontWeight="600"
-                transform={`rotate(-90, 20, ${chartHeight / 2})`}
-              >
-                ELO Rating
-              </text>
-            </svg>
-            </div>
-
-            {/* Tooltip */}
-            {hoveredPlayer && (
-              <div
-                className="fixed bg-gray-900 text-white px-3 py-2 rounded shadow-lg text-sm pointer-events-none z-50"
-                style={{
-                  left: `${tooltipPos.x + 10}px`,
-                  top: `${tooltipPos.y - 10}px`,
-                  fontFamily: 'monospace'
-                }}
-              >
-                <div className="font-bold">{hoveredPlayer.name}</div>
-                <div className="text-gray-300">ELO: {hoveredPointElo !== null ? hoveredPointElo : hoveredPlayer.elo}</div>
-                {hoveredPointDate && (
-                  <div className="text-gray-400 text-xs mt-1">{formatDate(hoveredPointDate)}</div>
-                )}
-              </div>
-            )}
-
-            <div className="mt-4 flex items-center gap-6 justify-center">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-0.5 bg-pink-600"></div>
-                <span className="text-sm text-gray-600" style={{ fontFamily: "monospace" }}>
-                  {player.name}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-0.5 bg-gray-400"></div>
-                <span className="text-sm text-gray-600" style={{ fontFamily: "monospace" }}>
-                  Other Players
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: "Figtree, sans-serif" }}>
-            Match History ({playerMatches.length} matches)
-          </h2>
-
-          {playerMatches.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-gray-400 text-lg" style={{ fontFamily: "monospace" }}>No matches played yet.</p>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {playerMatches.map((match) => {
-                const isWinner = match.winnerId === selectedPlayerId;
-                const opponent = isWinner 
-                  ? players.find(p => p.id === match.loserId)
-                  : players.find(p => p.id === match.winnerId);
-                const opponentName = isWinner ? match.loser : match.winner;
-                const playerScore = isWinner ? match.winnerScore : match.loserScore;
-                const opponentScore = isWinner ? match.loserScore : match.winnerScore;
-                const eloChange = isWinner ? match.winnerEloChange : match.loserEloChange;
-
-                return (
-                  <div 
-                    key={match.id} 
-                    className="border-2 rounded-lg p-6 ${
-                      isWinner ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'
-                    }"
-                  >
-                    <div className="flex items-center justify-center">
-                      <div className="flex-1 max-w-4xl">
-                        <div className="text-xs uppercase tracking-wide mb-3 text-center" style={{ fontFamily: "monospace" }}>
-                          <span className={isWinner ? 'text-green-700 font-bold' : 'text-red-700 font-bold'}>
-                            {isWinner ? 'WIN' : 'LOSS'}
-                          </span>
-                          <span className="text-gray-500 mx-2">•</span>
-                          <span className="text-gray-600">
-                            {formatDate(match.timestamp)} at {formatTime(match.timestamp)}
-                          </span>
-                        </div>
-                        
-                        <div className="flex items-center justify-center gap-6">
-                          <div className="flex items-center gap-3">
-                            <img
-                              src={`https://flagcdn.com/w40/${player.countryCode}.png`}
-                              width="24"
-                              height="18"
-                              alt="Flag"
-                              className="flex-shrink-0"
-                              style={{ objectFit: "cover" }}
-                            />
-                            <div className="font-semibold text-lg text-gray-900" style={{ fontFamily: "monospace" }}>
-                              {player.name}
-                            </div>
-                            {playerScore !== null && (
-                              <div className={`text-2xl font-bold ${isWinner ? 'text-green-700' : 'text-red-700'}`} style={{ fontFamily: "monospace" }}>
-                                {playerScore}
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="text-gray-400 font-bold text-xl px-4" style={{ fontFamily: "monospace" }}>vs</div>
-
-                          <div className="flex items-center gap-3">
-                            {opponentScore !== null && (
-                              <div className="text-2xl font-bold text-gray-500" style={{ fontFamily: "monospace" }}>
-                                {opponentScore}
-                              </div>
-                            )}
-                            <div className="font-semibold text-lg text-gray-700" style={{ fontFamily: "monospace" }}>
-                              {opponentName}
-                            </div>
-                            {opponent && (
-                              <img
-                                src={`https://flagcdn.com/w40/${opponent.countryCode}.png`}
-                                width="24"
-                                height="18"
-                                alt="Flag"
-                                className="flex-shrink-0"
-                                style={{ objectFit: "cover" }}
-                              />
-                            )}
-                          </div>
-                        </div>
-
-                        <div className={`mt-3 text-sm font-medium text-center ${
-                          isWinner ? 'text-green-600' : 'text-red-600'
-                        }`} style={{ fontFamily: "monospace" }}>
-                          {eloChange > 0 ? '+' : ''}{eloChange} ELO
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* Footer */}
-        <div className="border-t border-gray-200 mt-12">
-          <div className="max-w-7xl mx-auto px-8 py-8">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
-                <p>Isometric Table Tennis ELO System</p>
-                <p className="mt-1">© 2026 Christopher Kilner</p>
-              </div>
-              <button
-                onClick={() => {
-                  setCurrentView("rankings");
-                  setSelectedPlayerId(null);
-                }}
-                className="text-sm text-gray-600 hover:text-black underline"
-                style={{ fontFamily: "sans-serif" }}
-              >
-                ← Back to Rankings
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // =========================
-  // RANKINGS VIEW
-  // =========================
+  // MATCHES VIEW
   if (currentView === "matches") {
-    // Match History View
     return (
       <div className="min-h-screen bg-white">
         <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
-
         <div className="border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-8 py-8">
-            <button
-              onClick={() => setCurrentView("rankings")}
-              className="text-gray-600 hover:text-black mb-6 flex items-center gap-2"
-              style={{ fontFamily: "sans-serif" }}
-            >
+            <button onClick={() => setCurrentView("rankings")} className="text-gray-600 hover:text-black mb-6 flex items-center gap-2">
               ← Back to Rankings
             </button>
-
-            <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif", letterSpacing: "-0.02em" }}>
-              Match History
-            </h1>
-
-            <p className="text-xl text-gray-700" style={{ fontFamily: "monospace" }}>
-              Complete record of all {matches.length} matches and their impact on player ratings.
-            </p>
+            <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Match History</h1>
+            <p className="text-xl text-gray-700" style={{ fontFamily: "monospace" }}>Complete record of all {matches.length} matches.</p>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-8 py-12">
-          {matches.length === 0 ? (
+          {sortedMatches.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-gray-400 text-lg" style={{ fontFamily: "monospace" }}>No matches recorded yet.</p>
+              <p className="text-gray-400 text-lg">No matches recorded yet.</p>
             </div>
           ) : (
             <div className="space-y-3">
-              {matches.map((match) => {
-                const matchDate = new Date(match.timestamp);
+              {sortedMatches.map((match) => {
                 const winner = players.find(p => p.id === match.winnerId);
                 const loser = players.find(p => p.id === match.loserId);
                 
                 return (
-                  <div 
-                    key={match.id} 
-                    className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow bg-white group"
-                  >
+                  <div key={match.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow bg-white group">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
-                        <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide" style={{ fontFamily: "monospace" }}>
+                        <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide">
                           {formatDate(match.timestamp)} at {formatTime(match.timestamp)}
                         </div>
                         
                         <div className="flex items-center gap-8">
-                          {/* Winner */}
                           <div className="flex items-center gap-3 flex-1">
                             {winner && (
-                              <img
-                                src={`https://flagcdn.com/w40/${winner.countryCode}.png`}
-                                width="24"
-                                height="18"
-                                alt="Flag"
-                                className="flex-shrink-0"
-                                style={{ objectFit: "cover" }}
-                              />
+                              <img src={`https://flagcdn.com/w40/${winner.countryCode}.png`} width="24" height="18" alt="Flag" className="flex-shrink-0" />
                             )}
                             <div className="flex-1">
-                              <div className="font-semibold text-lg text-gray-900" style={{ fontFamily: "monospace" }}>
-                                {match.winner}
-                              </div>
-                              <div className="text-sm text-green-600 font-medium" style={{ fontFamily: "monospace" }}>
-                                +{match.winnerEloChange} ELO
-                              </div>
+                              <div className="font-semibold text-lg text-gray-900">{match.winner}</div>
+                              <div className="text-sm text-green-600 font-medium">+{match.winnerEloChange} ELO</div>
                             </div>
                             {match.winnerScore !== null && (
-                              <div className="text-2xl font-bold text-gray-900 min-w-[3rem] text-right" style={{ fontFamily: "monospace" }}>
-                                {match.winnerScore}
-                              </div>
+                              <div className="text-2xl font-bold text-gray-900 min-w-[3rem] text-right">{match.winnerScore}</div>
                             )}
                           </div>
 
-                          <div className="text-gray-400 font-bold text-xl px-4" style={{ fontFamily: "monospace" }}>vs</div>
+                          <div className="text-gray-400 font-bold text-xl px-4">vs</div>
 
-                          {/* Loser */}
                           <div className="flex items-center gap-3 flex-1">
                             {match.loserScore !== null && (
-                              <div className="text-2xl font-bold text-gray-400 min-w-[3rem]" style={{ fontFamily: "monospace" }}>
-                                {match.loserScore}
-                              </div>
+                              <div className="text-2xl font-bold text-gray-400 min-w-[3rem]">{match.loserScore}</div>
                             )}
                             <div className="flex-1">
-                              <div className="font-semibold text-lg text-gray-600" style={{ fontFamily: "monospace" }}>
-                                {match.loser}
-                              </div>
-                              <div className="text-sm text-red-600 font-medium" style={{ fontFamily: "monospace" }}>
-                                {match.loserEloChange} ELO
-                              </div>
+                              <div className="font-semibold text-lg text-gray-600">{match.loser}</div>
+                              <div className="text-sm text-red-600 font-medium">{match.loserEloChange} ELO</div>
                             </div>
                             {loser && (
-                              <img
-                                src={`https://flagcdn.com/w40/${loser.countryCode}.png`}
-                                width="24"
-                                height="18"
-                                alt="Flag"
-                                className="flex-shrink-0"
-                                style={{ objectFit: "cover" }}
-                              />
+                              <img src={`https://flagcdn.com/w40/${loser.countryCode}.png`} width="24" height="18" alt="Flag" className="flex-shrink-0" />
                             )}
                           </div>
                         </div>
                       </div>
 
-                      <button
-                        onClick={() => deleteMatch(match.id)}
-                        className="ml-6 p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors opacity-0 group-hover:opacity-100"
-                        title="Delete match"
-                      >
+                      <button onClick={() => deleteMatch(match.id)} className="ml-6 p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors opacity-0 group-hover:opacity-100" title="Delete match">
                         <Trash2 size={18} />
                       </button>
                     </div>
@@ -1521,32 +905,11 @@ const updatedMatches = [newMatch, ...matches];
             </div>
           )}
         </div>
-
-        {/* Footer */}
-        <div className="border-t border-gray-200 mt-12">
-          <div className="max-w-7xl mx-auto px-8 py-8">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
-                <p>Isometric Table Tennis ELO System</p>
-                <p className="mt-1">© 2026 Christopher Kilner</p>
-              </div>
-              <button
-                onClick={() => setCurrentView("rankings")}
-                className="text-sm text-gray-600 hover:text-black underline"
-                style={{ fontFamily: "sans-serif" }}
-              >
-                ← Back to Rankings
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }
 
-  // =========================
   // RANKINGS VIEW
-  // =========================
   return (
     <div className="min-h-screen bg-white">
       <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -1554,47 +917,31 @@ const updatedMatches = [newMatch, ...matches];
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-8 py-8">
           <div className="flex items-start justify-between mb-6">
-            <div className="text-sm text-gray-500 uppercase tracking-wider" style={{ fontFamily: "sans-serif", letterSpacing: "0.1em" }}>
+            <div className="text-sm text-gray-500 uppercase tracking-wider">
               UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
             </div>
 
             <div className="flex gap-3">
-              <button
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="px-5 py-2 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors"
-                style={{ fontFamily: "sans-serif" }}
-              >
+              <button onClick={() => setCurrentView("matches")} className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors">
+                View Matches
+              </button>
+              <button onClick={() => setSidebarOpen(!sidebarOpen)} className="px-5 py-2 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors">
                 + Record Match
               </button>
             </div>
           </div>
 
-          <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif", letterSpacing: "-0.02em" }}>
+          <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>
             Isometric Table Tennis Rankings
           </h1>
 
           <p className="text-xl text-gray-700" style={{ fontFamily: "Figtree, sans-serif" }}>
             How {players.length} players compare by ELO rating, updated after each match.
           </p>
-
-          {probsLoading && (
-            <div className="mt-3 text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
-              Updating probabilities (1,000 season+tournament simulations)…
-            </div>
-          )}
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-8 py-12">
-        <div className="flex items-end justify-between mb-3">
-          <div className="flex-1"></div>
-          <div className="text-center" style={{ flex: "0 0 auto", width: "calc(7 * 120px)" }}>
-            <div className="text-sm text-gray-500 uppercase tracking-wide mb-2" style={{ fontFamily: "sans-serif" }}>
-              Team Week Tournament Odds
-            </div>
-          </div>
-        </div>
-
         <div className="overflow-x-auto">
           <table className="w-full border-collapse" style={{ fontFamily: "monospace" }}>
             <thead>
@@ -1602,35 +949,19 @@ const updatedMatches = [newMatch, ...matches];
                 <SortableHeader column="rank">↑ Rank</SortableHeader>
                 <SortableHeader column="name">Name</SortableHeader>
                 <SortableHeader column="elo" align="right">ELO</SortableHeader>
-
-                <SortableHeader column="round64" align="center">
-                  Rd. of 64
-                </SortableHeader>
-                <SortableHeader column="round32" align="center">
-                  Rd. of 32
-                </SortableHeader>
-                <SortableHeader column="sweet16" align="center">
-                  Sweet 16
-                </SortableHeader>
-                <SortableHeader column="elite8" align="center">
-                  Elite 8
-                </SortableHeader>
-                <SortableHeader column="final4" align="center">
-                  Final 4
-                </SortableHeader>
-                <SortableHeader column="finals" align="center">
-                  Finals
-                </SortableHeader>
-                <SortableHeader column="win" align="center">
-                  Win
-                </SortableHeader>
+                <SortableHeader column="form" align="center">Recent Form</SortableHeader>
+                <SortableHeader column="winRate" align="center">Win Rate</SortableHeader>
+                <SortableHeader column="efficiency" align="center">Efficiency</SortableHeader>
+                <SortableHeader column="pointsDiff" align="center">Points Diff</SortableHeader>
+                <SortableHeader column="gp" align="center">GP</SortableHeader>
+                <SortableHeader column="bettingOdds" align="center">Betting Odds</SortableHeader>
               </tr>
             </thead>
 
             <tbody>
               {sortedPlayers.length === 0 ? (
                 <tr>
-                  <td colSpan="10" className="text-center py-16 text-gray-400">
+                  <td colSpan="9" className="text-center py-16 text-gray-400">
                     No players registered yet. Add a player to get started.
                   </td>
                 </tr>
@@ -1639,6 +970,15 @@ const updatedMatches = [newMatch, ...matches];
                   const rankChange = player.lastWeekRank ? player.lastWeekRank - player.rank : 0;
                   const countryData = COUNTRIES.find((c) => c.code === player.countryCode);
                   const isRank64 = player.rank === 64;
+
+                  const totalMatches = player.wins + player.losses;
+                  const winRate = totalMatches > 0 ? ((player.wins / totalMatches) * 100).toFixed(1) : '0.0';
+                  
+                  const pointsDiff = player.pointsFor - player.pointsAgainst;
+                  const pointsDiffStr = pointsDiff > 0 ? `+${pointsDiff}` : pointsDiff.toString();
+
+                  const performanceVsExpected = player.wins - player.expectedWins;
+                  const performanceStr = performanceVsExpected > 0 ? `+${performanceVsExpected.toFixed(1)}` : performanceVsExpected.toFixed(1);
 
                   return (
                     <React.Fragment key={player.id}>
@@ -1664,24 +1004,15 @@ const updatedMatches = [newMatch, ...matches];
                         <td className="py-3 px-6">
                           <div className="flex items-center gap-3">
                             <img
-                              src={`https://flagcdn.com/w40/${player.countryCode}.png`}
+                              src={`https://flagcdn.com/24x18/${player.countryCode}.png`}
+                              srcSet={`https://flagcdn.com/48x36/${player.countryCode}.png 2x`}
                               width="24"
                               height="18"
                               alt={countryData?.name || "Flag"}
-                              title={countryData?.name || ""}
                               className="flex-shrink-0"
-                              style={{ objectFit: "cover" }}
                             />
                             <div className="flex items-center gap-2 min-w-0">
-                              <button
-                                onClick={() => {
-                                  setSelectedPlayerId(player.id);
-                                  setCurrentView("player");
-                                }}
-                                className="text-sm text-gray-900 whitespace-nowrap hover:text-pink-600 hover:underline transition-colors"
-                              >
-                                {player.name}
-                              </button>
+                              <span className="text-sm text-gray-900 whitespace-nowrap">{player.name}</span>
                               <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold flex-shrink-0">
                                 {player.office}
                               </span>
@@ -1700,33 +1031,49 @@ const updatedMatches = [newMatch, ...matches];
                           <span className="text-lg font-normal text-gray-900">{player.elo}</span>
                         </td>
 
-                        {/* Rd. of 64 - first column now has the border */}
-                        <td className="px-0 relative border-l-2 border-gray-300 align-middle">
-                          <ProbabilityCell probability={player.probabilities.round64} />
+                        <td className="py-3 px-6">
+                          <RecentFormBar matches={player.recentMatches} />
                         </td>
-                        <td className="px-0 relative align-middle">
-                          <ProbabilityCell probability={player.probabilities.round32} />
+
+                        <td className="py-3 px-6 text-center">
+                          <div className="flex flex-col items-center">
+                            <span className="text-sm font-semibold text-gray-900">{winRate}%</span>
+                            <span className="text-xs text-gray-400">{player.wins}-{player.losses}</span>
+                          </div>
                         </td>
-                        <td className="px-0 relative align-middle">
-                          <ProbabilityCell probability={player.probabilities.sweet16} />
+
+                        <td className="py-3 px-6 text-center">
+                          <span className={`text-sm font-semibold ${
+                            performanceVsExpected > 0.5 ? 'text-green-600' : 
+                            performanceVsExpected < -0.5 ? 'text-red-600' : 
+                            'text-gray-900'
+                          }`}>
+                            {performanceStr}
+                          </span>
                         </td>
-                        <td className="px-0 relative align-middle">
-                          <ProbabilityCell probability={player.probabilities.elite8} />
+
+                        <td className="py-3 px-6 text-center">
+                          <span className={`text-sm font-semibold ${
+                            pointsDiff > 0 ? 'text-green-600' : pointsDiff < 0 ? 'text-red-600' : 'text-gray-900'
+                          }`}>
+                            {pointsDiffStr}
+                          </span>
                         </td>
-                        <td className="px-0 relative align-middle">
-                          <ProbabilityCell probability={player.probabilities.final4} />
+
+                        <td className="py-3 px-6 text-center">
+                          <span className="text-sm text-gray-900">{totalMatches}</span>
                         </td>
-                        <td className="px-0 relative align-middle">
-                          <ProbabilityCell probability={player.probabilities.finals} />
-                        </td>
-                        <td className="px-0 relative align-middle">
-                          <ProbabilityCell probability={player.probabilities.win} />
+
+                        <td className="py-3 px-6 text-center">
+                          <span className="text-sm font-mono font-semibold text-gray-900">
+                            {player.bettingOdds || '+10000'}
+                          </span>
                         </td>
                       </tr>
 
                       {isRank64 && (
                         <tr>
-                          <td colSpan="10" className="p-0">
+                          <td colSpan="9" className="p-0">
                             <div className="border-t-4 border-red-500 relative z-10">
                               <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-1 border-2 border-red-500 rounded text-xs font-bold text-red-600 uppercase tracking-wider z-20">
                                 Tournament Cutoff
@@ -1743,55 +1090,25 @@ const updatedMatches = [newMatch, ...matches];
           </table>
         </div>
 
-        {/* Sidebar / actions UI */}
-        <div
-          className={`fixed top-0 right-0 h-full w-96 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 border-l border-gray-200 ${
-            sidebarOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
+        {/* Sidebar */}
+        <div className={`fixed top-0 right-0 h-full w-96 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 border-l border-gray-200 ${sidebarOpen ? "translate-x-0" : "translate-x-full"}`}>
           <div className="h-full flex flex-col">
             <div className="px-6 py-6 border-b border-gray-200 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-900" style={{ fontFamily: "sans-serif" }}>
-                Actions
-              </h2>
+              <h2 className="text-xl font-bold text-gray-900">Actions</h2>
               <button onClick={() => setSidebarOpen(false)} className="p-2 hover:bg-gray-100 rounded transition-colors">
                 <X size={20} />
               </button>
             </div>
 
             <div className="flex border-b border-gray-200">
-              <button
-                onClick={() => {
-                  setActiveTab("match");
-                  setEditingPlayer(null);
-                }}
-                className={`flex-1 px-6 py-4 font-semibold transition-colors ${
-                  activeTab === "match" ? "text-black border-b-2 border-black" : "text-gray-400 hover:text-gray-700"
-                }`}
-                style={{ fontFamily: "sans-serif" }}
-              >
+              <button onClick={() => { setActiveTab("match"); setEditingPlayer(null); }} className={`flex-1 px-6 py-4 font-semibold transition-colors ${activeTab === "match" ? "text-black border-b-2 border-black" : "text-gray-400 hover:text-gray-700"}`}>
                 Record Match
               </button>
-              <button
-                onClick={() => {
-                  setActiveTab("player");
-                  setEditingPlayer(null);
-                }}
-                className={`flex-1 px-6 py-4 font-semibold transition-colors ${
-                  activeTab === "player" ? "text-black border-b-2 border-black" : "text-gray-400 hover:text-gray-700"
-                }`}
-                style={{ fontFamily: "sans-serif" }}
-              >
+              <button onClick={() => { setActiveTab("player"); setEditingPlayer(null); }} className={`flex-1 px-6 py-4 font-semibold transition-colors ${activeTab === "player" ? "text-black border-b-2 border-black" : "text-gray-400 hover:text-gray-700"}`}>
                 Add Player
               </button>
               {editingPlayer && (
-                <button
-                  onClick={() => setActiveTab("edit")}
-                  className={`flex-1 px-6 py-4 font-semibold transition-colors ${
-                    activeTab === "edit" ? "text-black border-b-2 border-black" : "text-gray-400 hover:text-gray-700"
-                  }`}
-                  style={{ fontFamily: "sans-serif" }}
-                >
+                <button onClick={() => setActiveTab("edit")} className={`flex-1 px-6 py-4 font-semibold transition-colors ${activeTab === "edit" ? "text-black border-b-2 border-black" : "text-gray-400 hover:text-gray-700"}`}>
                   Edit Player
                 </button>
               )}
@@ -1801,166 +1118,81 @@ const updatedMatches = [newMatch, ...matches];
               {activeTab === "match" ? (
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Winner
-                    </label>
-                    <select
-                      value={selectedWinner}
-                      onChange={(e) => setSelectedWinner(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
-                      style={{ fontFamily: "sans-serif" }}
-                    >
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Winner</label>
+                    <select value={selectedWinner} onChange={(e) => setSelectedWinner(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select winner...</option>
                       {players.map((player) => (
-                        <option key={player.id} value={player.id}>
-                          {player.name} ({player.office}) - ELO: {player.elo}
-                        </option>
+                        <option key={player.id} value={player.id}>{player.name} ({player.office}) - ELO: {player.elo}</option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Loser
-                    </label>
-                    <select
-                      value={selectedLoser}
-                      onChange={(e) => setSelectedLoser(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
-                      style={{ fontFamily: "sans-serif" }}
-                    >
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Loser</label>
+                    <select value={selectedLoser} onChange={(e) => setSelectedLoser(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select loser...</option>
                       {players.map((player) => (
-                        <option key={player.id} value={player.id}>
-                          {player.name} ({player.office}) - ELO: {player.elo}
-                        </option>
+                        <option key={player.id} value={player.id}>{player.name} ({player.office}) - ELO: {player.elo}</option>
                       ))}
                     </select>
                   </div>
 
                   <div className="border-t border-gray-200 pt-4">
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Score (Optional)
-                    </label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Score (Optional)</label>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
                         <label className="block text-xs text-gray-500 mb-1">Winner Score</label>
-                        <input
-                          type="number"
-                          min="0"
-                          value={winnerScore}
-                          onChange={(e) => setWinnerScore(e.target.value)}
-                          placeholder="21"
-                          className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
-                          style={{ fontFamily: "sans-serif" }}
-                        />
+                        <input type="number" min="0" value={winnerScore} onChange={(e) => setWinnerScore(e.target.value)} placeholder="21" className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none" />
                       </div>
                       <div>
                         <label className="block text-xs text-gray-500 mb-1">Loser Score</label>
-                        <input
-                          type="number"
-                          min="0"
-                          value={loserScore}
-                          onChange={(e) => setLoserScore(e.target.value)}
-                          placeholder="19"
-                          className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
-                          style={{ fontFamily: "sans-serif" }}
-                        />
+                        <input type="number" min="0" value={loserScore} onChange={(e) => setLoserScore(e.target.value)} placeholder="19" className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none" />
                       </div>
                     </div>
                   </div>
 
                   <div className="border-t border-gray-200 pt-4">
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Match Date (Optional)
-                    </label>
-                    <input
-                      type="date"
-                      value={matchDate}
-                      onChange={(e) => setMatchDate(e.target.value)}
-                      max={new Date().toISOString().split("T")[0]}
-                      className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
-                      style={{ fontFamily: "sans-serif" }}
-                    />
-                    <p className="text-xs text-gray-500 mt-2">Leave blank to use today's date. Use this to add past matches.</p>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Match Date (Optional)</label>
+                    <input type="date" value={matchDate} onChange={(e) => setMatchDate(e.target.value)} max={new Date().toISOString().split("T")[0]} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none" />
+                    <p className="text-xs text-gray-500 mt-2">Leave blank to use today's date.</p>
                   </div>
 
-                  <button
-                    onClick={recordMatch}
-                    disabled={!selectedWinner || !selectedLoser || selectedWinner === selectedLoser}
-                    className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-                    style={{ fontFamily: "sans-serif" }}
-                  >
+                  <button onClick={recordMatch} disabled={!selectedWinner || !selectedLoser || selectedWinner === selectedLoser} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                     Record Match
                   </button>
                 </div>
               ) : activeTab === "edit" ? (
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Player Name
-                    </label>
-                    <input
-                      type="text"
-                      value={editName}
-                      onChange={(e) => setEditName(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
-                      style={{ fontFamily: "sans-serif" }}
-                    />
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Player Name</label>
+                    <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all" />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Country
-                    </label>
-                    <select
-                      value={editCountry}
-                      onChange={(e) => setEditCountry(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
-                      style={{ fontFamily: "sans-serif" }}
-                    >
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Country</label>
+                    <select value={editCountry} onChange={(e) => setEditCountry(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select country...</option>
                       {COUNTRIES.map((country) => (
-                        <option key={country.code} value={country.code}>
-                          {country.name}
-                        </option>
+                        <option key={country.code} value={country.code}>{country.name}</option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Office
-                    </label>
-                    <select
-                      value={editOffice}
-                      onChange={(e) => setEditOffice(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
-                      style={{ fontFamily: "sans-serif" }}
-                    >
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Office</label>
+                    <select value={editOffice} onChange={(e) => setEditOffice(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select office...</option>
                       {OFFICES.map((office) => (
-                        <option key={office} value={office}>
-                          {office}
-                        </option>
+                        <option key={office} value={office}>{office}</option>
                       ))}
                     </select>
                   </div>
 
                   <div className="flex gap-3">
-                    <button
-                      onClick={saveEditPlayer}
-                      disabled={!editName.trim() || !editCountry || !editOffice}
-                      className="flex-1 px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-                      style={{ fontFamily: "sans-serif" }}
-                    >
+                    <button onClick={saveEditPlayer} disabled={!editName.trim() || !editCountry || !editOffice} className="flex-1 px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                       Save Changes
                     </button>
-                    <button
-                      onClick={cancelEdit}
-                      className="px-6 py-3 border-2 border-gray-300 font-semibold hover:bg-gray-100 transition-colors"
-                      style={{ fontFamily: "sans-serif" }}
-                    >
+                    <button onClick={cancelEdit} className="px-6 py-3 border-2 border-gray-300 font-semibold hover:bg-gray-100 transition-colors">
                       Cancel
                     </button>
                   </div>
@@ -1968,69 +1200,37 @@ const updatedMatches = [newMatch, ...matches];
               ) : (
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Player Name
-                    </label>
-                    <input
-                      type="text"
-                      value={newPlayerName}
-                      onChange={(e) => setNewPlayerName(e.target.value)}
-                      placeholder="Enter player name..."
-                      className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
-                      style={{ fontFamily: "sans-serif" }}
-                    />
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Player Name</label>
+                    <input type="text" value={newPlayerName} onChange={(e) => setNewPlayerName(e.target.value)} placeholder="Enter player name..." className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all" />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Country
-                    </label>
-                    <select
-                      value={newPlayerCountry}
-                      onChange={(e) => setNewPlayerCountry(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
-                      style={{ fontFamily: "sans-serif" }}
-                    >
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Country</label>
+                    <select value={newPlayerCountry} onChange={(e) => setNewPlayerCountry(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select country...</option>
                       {COUNTRIES.map((country) => (
-                        <option key={country.code} value={country.code}>
-                          {country.name}
-                        </option>
+                        <option key={country.code} value={country.code}>{country.name}</option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2" style={{ fontFamily: "sans-serif" }}>
-                      Office
-                    </label>
-                    <select
-                      value={newPlayerOffice}
-                      onChange={(e) => setNewPlayerOffice(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all"
-                      style={{ fontFamily: "sans-serif" }}
-                    >
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Office</label>
+                    <select value={newPlayerOffice} onChange={(e) => setNewPlayerOffice(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select office...</option>
                       {OFFICES.map((office) => (
-                        <option key={office} value={office}>
-                          {office}
-                        </option>
+                        <option key={office} value={office}>{office}</option>
                       ))}
                     </select>
                   </div>
 
                   <div className="bg-gray-100 p-4 rounded border border-gray-300">
-                    <div className="text-sm text-gray-700" style={{ fontFamily: "sans-serif" }}>
+                    <div className="text-sm text-gray-700">
                       <strong>Note:</strong> New players start with an ELO rating of 1500.
                     </div>
                   </div>
 
-                  <button
-                    onClick={addPlayer}
-                    disabled={!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice}
-                    className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-                    style={{ fontFamily: "sans-serif" }}
-                  >
+                  <button onClick={addPlayer} disabled={!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                     Add Player
                   </button>
                 </div>
@@ -2040,81 +1240,6 @@ const updatedMatches = [newMatch, ...matches];
         </div>
 
         {sidebarOpen && <div className="fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity" onClick={() => setSidebarOpen(false)} />}
-      </div>
-
-      {/* 538-style Explanation Section */}
-      <div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200">
-        <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "Figtree, sans-serif" }}>
-          How This Works
-        </h2>
-        
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          <div>
-            <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-              The ELO Rating System
-            </h3>
-            <p className="text-gray-700 leading-relaxed mb-3" style={{ fontFamily: "sans-serif" }}>
-              Every player starts with an ELO rating of 1,500. When you win a match, your rating goes up; when you lose, it goes down. 
-              The amount of change depends on the difference between the two players' ratings — beating a higher-rated opponent 
-              earns you more points than beating a lower-rated one.
-            </p>
-            <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-              We also factor in the margin of victory. Winning 21-5 has a bigger impact on ratings than winning 21-19, 
-              though this effect is capped to prevent extreme swings.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-              Tournament Probability Model
-            </h3>
-            <p className="text-gray-700 leading-relaxed mb-3" style={{ fontFamily: "sans-serif" }}>
-              To calculate tournament odds, we simulate the rest of the season and a 64-player tournament 1,000 times. 
-              Each simulation plays out a full season of matches (with randomness to account for variance), then seeds 
-              the top 64 players into a March Madness-style bracket.
-            </p>
-            <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-              The percentages show how often each player reached each round across all simulations. A player with a 75% 
-              chance to make the tournament made it into the top 64 in 750 of the 1,000 simulations.
-            </p>
-          </div>
-        </div>
-
-        <div className="bg-gray-100 border border-gray-300 rounded p-6">
-          <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-            Model Assumptions
-          </h3>
-          <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-700" style={{ fontFamily: "sans-serif" }}>
-            <div>
-              <span className="font-semibold">Season Length:</span> Each player plays ~100 more matches before the tournament
-            </div>
-            <div>
-              <span className="font-semibold">Match Variance:</span> Real-world performance varies ±60 ELO points per match
-            </div>
-            <div>
-              <span className="font-semibold">Tournament Format:</span> Single elimination, 64 players, seeded by ELO
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-8 py-8">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
-              <p>Isometric Table Tennis ELO System</p>
-              <p className="mt-1">© 2026 Christopher Kilner</p>
-            </div>
-            <button
-              onClick={() => setCurrentView("matches")}
-              className="text-sm text-gray-600 hover:text-black underline"
-              style={{ fontFamily: "sans-serif" }}
-            >
-              View Match History →
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
