@@ -44,7 +44,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 39
+      "lastWeekRank": 40
     },
     {
       "id": "3",
@@ -98,7 +98,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 40
+      "lastWeekRank": 41
     },
     {
       "id": "5",
@@ -144,7 +144,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 41
+      "lastWeekRank": 42
     },
     {
       "id": "7",
@@ -165,7 +165,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 42
+      "lastWeekRank": 43
     },
     {
       "id": "8",
@@ -194,7 +194,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 15
     },
     {
       "id": "9",
@@ -392,7 +392,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 43
+      "lastWeekRank": 44
     },
     {
       "id": "15",
@@ -438,7 +438,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 44
+      "lastWeekRank": 45
     },
     {
       "id": "17",
@@ -687,7 +687,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 45
+      "lastWeekRank": 46
     },
     {
       "id": "22",
@@ -851,7 +851,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 46
+      "lastWeekRank": 47
     },
     {
       "id": "26",
@@ -883,7 +883,7 @@
       "name": "Mark Pullin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1536,
+      "elo": 1537,
       "wins": 3,
       "losses": 1,
       "eloHistory": [
@@ -904,7 +904,7 @@
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1536,
+          "elo": 1537,
           "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
@@ -930,39 +930,14 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 47
+      "lastWeekRank": 48
     },
     {
       "id": "29",
       "name": "Vid",
       "countryCode": "si",
       "office": "LON",
-      "elo": 1499,
-      "wins": 1,
-      "losses": 1,
-      "eloHistory": [
-        {
-          "elo": 1500,
-          "timestamp": "2026-01-13T00:00:00.000Z"
-        },
-        {
-          "elo": 1516,
-          "timestamp": "2026-01-12T00:00:00.000Z"
-        },
-        {
-          "elo": 1499,
-          "timestamp": "2026-01-13T00:00:00.000Z"
-        }
-      ],
-      "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
-    },
-    {
-      "id": "30",
-      "name": "Helen Durrant",
-      "countryCode": "gb",
-      "office": "LON",
-      "elo": 1484,
+      "elo": 1485,
       "wins": 0,
       "losses": 1,
       "eloHistory": [
@@ -971,19 +946,36 @@
           "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1484,
-          "timestamp": "2026-01-12T00:00:00.000Z"
+          "elo": 1485,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 48
+      "lastWeekRank": 37
+    },
+    {
+      "id": "30",
+      "name": "Helen Durrant",
+      "countryCode": "gb",
+      "office": "LON",
+      "elo": 1500,
+      "wins": 0,
+      "losses": 0,
+      "eloHistory": [
+        {
+          "elo": 1500,
+          "timestamp": "2026-01-13T00:00:00.000Z"
+        }
+      ],
+      "joinedAt": "2026-01-13T00:00:00.000Z",
+      "lastWeekRank": 25
     },
     {
       "id": "31",
       "name": "Emily Mears",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1517,
+      "elo": 1514,
       "wins": 2,
       "losses": 1,
       "eloHistory": [
@@ -996,16 +988,16 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1500,
-          "timestamp": "2026-01-14T00:00:00.000Z"
+          "elo": 1531,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1517,
-          "timestamp": "2026-01-13T00:00:00.000Z"
+          "elo": 1514,
+          "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 17
     },
     {
       "id": "32",
@@ -1105,7 +1097,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 38
     },
     {
       "id": "36",
@@ -1233,7 +1225,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 26
     },
     {
       "id": "40",
@@ -1325,7 +1317,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 38
+      "lastWeekRank": 39
     },
     {
       "id": "44",
@@ -2005,7 +1997,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 27
     },
     {
       "id": "64",
@@ -2051,7 +2043,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 28
     },
     {
       "id": "66",
@@ -2176,7 +2168,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 16
     },
     {
       "id": "71",
@@ -2222,7 +2214,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 29
     },
     {
       "id": "73",
@@ -2239,7 +2231,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 30
     },
     {
       "id": "74",
@@ -2256,7 +2248,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 31
     },
     {
       "id": "1769273367436",
@@ -3166,18 +3158,6 @@
       "timestamp": "2026-01-12T00:00:00.000Z"
     },
     {
-      "id": "1769275614360",
-      "winnerId": "29",
-      "loserId": "30",
-      "winner": "Vid PalÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂar",
-      "loser": "Helen Durrant",
-      "winnerScore": null,
-      "loserScore": null,
-      "winnerEloChange": 16,
-      "loserEloChange": -16,
-      "timestamp": "2026-01-12T00:00:00.000Z"
-    },
-    {
       "id": "1769275597577",
       "winnerId": "27",
       "loserId": "28",
@@ -3898,5 +3878,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-29T18:33:23.188Z"
+  "lastUpdated": "2026-01-29T18:33:48.968Z"
 }
