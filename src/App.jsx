@@ -830,6 +830,560 @@ export default function PingPongELO() {
     );
   }
 
+  // =========================
+  // PLAYER DETAIL VIEW
+  // =========================
+  if (currentView === "player" && selectedPlayerId) {
+    const player = players.find(p => p.id === selectedPlayerId);
+    if (!player) {
+      setCurrentView("rankings");
+      return null;
+    }
+
+    // Calculate proper rank for this player
+    const rankedPlayers = [...players].sort((a, b) => b.elo - a.elo);
+    const playerRank = rankedPlayers.findIndex(p => p.id === selectedPlayerId) + 1;
+
+    const playerMatches = matches
+      .filter(m => m.winnerId === selectedPlayerId || m.loserId === selectedPlayerId)
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+
+    const countryData = COUNTRIES.find(c => c.code === player.countryCode);
+
+    // Extend each player's history to current date with their current ELO
+    const currentDate = new Date().toISOString();
+    
+    const extendHistoryToNow = (eloHistory, currentElo, joinedAt) => {
+      if (!eloHistory || eloHistory.length === 0) {
+        return [{ elo: currentElo, timestamp: currentDate }];
+      }
+      
+      // Sort by timestamp to ensure chronological order
+      const sortedHistory = [...eloHistory].sort((a, b) => 
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+      );
+      
+      // Filter out the initial 1500 starting point (matches joinedAt timestamp and elo of 1500)
+      // This is the point created when the player first joins, before any matches
+      const filteredHistory = sortedHistory.filter(entry => {
+        // Keep entries that are NOT the initial starting point
+        const isStartingPoint = entry.elo === 1500 && entry.timestamp === joinedAt;
+        return !isStartingPoint;
+      });
+      
+      if (filteredHistory.length === 0) {
+        return [{ elo: currentElo, timestamp: currentDate }];
+      }
+      
+      const lastEntry = filteredHistory[filteredHistory.length - 1];
+      const lastTimestamp = new Date(lastEntry.timestamp);
+      const now = new Date();
+      
+      // If last entry is not today, add a point for today with same ELO
+      if (lastTimestamp.toDateString() !== now.toDateString()) {
+        return [...filteredHistory, { elo: currentElo, timestamp: currentDate }];
+      }
+      
+      return filteredHistory;
+    };
+
+    // Use raw ELO history for the chart extended to current date
+    const currentPlayerHistory = extendHistoryToNow(player.eloHistory, player.elo, player.joinedAt);
+    const allPlayerHistories = players.map(p => ({
+      ...p,
+      history: extendHistoryToNow(p.eloHistory, p.elo, p.joinedAt)
+    }));
+
+    // Get min and max ELO across all players for chart scaling
+    const allEloValues = allPlayerHistories.flatMap(p => p.history.map(h => h.elo));
+    const minElo = Math.min(...allEloValues, 1300);
+    const maxElo = Math.max(...allEloValues, 1700);
+    const eloRange = maxElo - minElo;
+
+    // Chart dimensions - use full container width
+    const chartWidth = 1200; // Increased from 800 for full width
+    const chartHeight = 400;
+    const padding = { top: 40, right: 40, bottom: 60, left: 60 };
+    const innerWidth = chartWidth - padding.left - padding.right;
+    const innerHeight = chartHeight - padding.top - padding.bottom;
+
+    // Get time range
+    const allTimestamps = allPlayerHistories.flatMap(p => p.history.map(h => new Date(h.timestamp).getTime()));
+    const minTime = Math.min(...allTimestamps);
+    const maxTime = Math.max(...allTimestamps);
+    const timeRange = maxTime - minTime || 1;
+
+    const xScale = (timestamp) => {
+      const time = new Date(timestamp).getTime();
+      return padding.left + ((time - minTime) / timeRange) * innerWidth;
+    };
+
+    const yScale = (elo) => {
+      return chartHeight - padding.bottom - ((elo - minElo) / eloRange) * innerHeight;
+    };
+
+    // Create path for a player's ELO history
+    const createPath = (eloHistory) => {
+      if (eloHistory.length === 0) return "";
+      
+      let path = `M ${xScale(eloHistory[0].timestamp)} ${yScale(eloHistory[0].elo)}`;
+      for (let i = 1; i < eloHistory.length; i++) {
+        path += ` L ${xScale(eloHistory[i].timestamp)} ${yScale(eloHistory[i].elo)}`;
+      }
+      return path;
+    };
+
+    // Grid lines (horizontal)
+    const gridLines = [];
+    const numGridLines = 5;
+    for (let i = 0; i <= numGridLines; i++) {
+      const elo = minElo + (eloRange * i / numGridLines);
+      const y = yScale(elo);
+      gridLines.push(
+        <g key={i}>
+          <line
+            x1={padding.left}
+            y1={y}
+            x2={chartWidth - padding.right}
+            y2={y}
+            stroke="#e5e7eb"
+            strokeWidth="1"
+          />
+          <text
+            x={padding.left - 10}
+            y={y}
+            textAnchor="end"
+            alignmentBaseline="middle"
+            fill="#9ca3af"
+            fontSize="12"
+            fontFamily="sans-serif"
+          >
+            {Math.round(elo)}
+          </text>
+        </g>
+      );
+    }
+
+    return (
+      <div className="min-h-screen bg-white">
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+
+        <div className="border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <button
+              onClick={() => {
+                setCurrentView("rankings");
+                setSelectedPlayerId(null);
+              }}
+              className="text-gray-600 hover:text-black mb-6 flex items-center gap-2"
+              style={{ fontFamily: "sans-serif" }}
+            >
+              ← Back to Rankings
+            </button>
+
+            <div className="flex items-center gap-4 mb-4">
+              <img
+                src={`https://flagcdn.com/w40/${player.countryCode}.png`}
+                width="48"
+                height="36"
+                alt={countryData?.name || "Flag"}
+                title={countryData?.name || ""}
+                style={{ objectFit: "cover" }}
+              />
+              <div>
+                <h1 className="text-6xl font-black" style={{ fontFamily: "monospace", letterSpacing: "-0.02em" }}>
+                  {player.name}
+                </h1>
+                <p className="text-xl text-gray-500 mt-2" style={{ fontFamily: "monospace" }}>
+                  {player.office} • Current ELO: {player.elo}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-4 gap-6 mt-6">
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
+                  Current Rank
+                </div>
+                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
+                  #{playerRank}
+                </div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
+                  Record
+                </div>
+                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
+                  {player.wins}-{player.losses}
+                </div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
+                  Win Rate
+                </div>
+                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
+                  {player.wins + player.losses > 0 ? Math.round((player.wins / (player.wins + player.losses)) * 100) : 0}%
+                </div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <div className="text-sm text-gray-500 uppercase tracking-wide mb-1" style={{ fontFamily: "monospace" }}>
+                  Total Matches
+                </div>
+                <div className="text-3xl font-bold text-gray-900" style={{ fontFamily: "monospace" }}>
+                  {player.wins + player.losses}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-12">
+          <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: "Figtree, sans-serif" }}>
+            ELO Rating Over Time
+          </h2>
+
+          <div className="bg-white border border-gray-200 rounded-lg p-8 mb-12 relative overflow-x-auto">
+            <div className="flex justify-center">
+              <svg 
+                width={chartWidth} 
+                height={chartHeight}
+                onMouseLeave={() => {
+                  setHoveredPlayer(null);
+                  setHoveredPointElo(null);
+                  setHoveredPointDate(null);
+                }}
+              >
+              {/* Grid lines */}
+              {gridLines}
+
+              {/* Background lines for all other players with hover */}
+              {allPlayerHistories
+                .filter(p => p.id !== selectedPlayerId)
+                .map(p => {
+                  const findClosestPoint = (clientX, svg) => {
+                    const rect = svg.getBoundingClientRect();
+                    const x = clientX - rect.left;
+                    
+                    let closestPoint = null;
+                    let closestDistance = Infinity;
+                    
+                    p.history.forEach(point => {
+                      const px = xScale(point.timestamp);
+                      const distance = Math.abs(px - x);
+                      if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestPoint = point;
+                      }
+                    });
+                    
+                    return closestPoint;
+                  };
+
+                  return (
+                    <g key={p.id}>
+                      {/* Visible line */}
+                      <path
+                        d={createPath(p.history)}
+                        stroke="#9ca3af"
+                        strokeWidth="2"
+                        fill="none"
+                        pointerEvents="none"
+                        style={{ 
+                          opacity: hoveredPlayer?.name === p.name ? 1 : 0.4,
+                          stroke: hoveredPlayer?.name === p.name ? '#6b7280' : '#9ca3af',
+                          transition: 'all 0.2s'
+                        }}
+                      />
+                      {/* Invisible wider hit area */}
+                      <path
+                        d={createPath(p.history)}
+                        stroke="transparent"
+                        strokeWidth="20"
+                        fill="none"
+                        onMouseEnter={(e) => {
+                          const svg = e.currentTarget.ownerSVGElement;
+                          const point = findClosestPoint(e.clientX, svg);
+                          setHoveredPlayer({ name: p.name, elo: p.elo });
+                          setHoveredPointElo(point?.elo || p.elo);
+                          setHoveredPointDate(point?.timestamp || null);
+                          setTooltipPos({ x: e.clientX, y: e.clientY });
+                        }}
+                        onMouseMove={(e) => {
+                          const svg = e.currentTarget.ownerSVGElement;
+                          const point = findClosestPoint(e.clientX, svg);
+                          setHoveredPointElo(point?.elo || p.elo);
+                          setHoveredPointDate(point?.timestamp || null);
+                          setTooltipPos({ x: e.clientX, y: e.clientY });
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      />
+                    </g>
+                  );
+                })}
+
+              {/* Highlighted line for selected player */}
+              <g>
+                <path
+                  d={createPath(currentPlayerHistory)}
+                  stroke="#e91e63"
+                  strokeWidth="3"
+                  fill="none"
+                  pointerEvents="none"
+                />
+                <path
+                  d={createPath(currentPlayerHistory)}
+                  stroke="transparent"
+                  strokeWidth="20"
+                  fill="none"
+                  onMouseEnter={(e) => {
+                    const svg = e.currentTarget.ownerSVGElement;
+                    const rect = svg.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    
+                    let closestPoint = null;
+                    let closestDistance = Infinity;
+                    
+                    currentPlayerHistory.forEach(point => {
+                      const px = xScale(point.timestamp);
+                      const distance = Math.abs(px - x);
+                      if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestPoint = point;
+                      }
+                    });
+                    
+                    setHoveredPlayer({ name: player.name, elo: player.elo });
+                    setHoveredPointElo(closestPoint?.elo || player.elo);
+                    setHoveredPointDate(closestPoint?.timestamp || null);
+                    setTooltipPos({ x: e.clientX, y: e.clientY });
+                  }}
+                  onMouseMove={(e) => {
+                    const svg = e.currentTarget.ownerSVGElement;
+                    const rect = svg.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    
+                    let closestPoint = null;
+                    let closestDistance = Infinity;
+                    
+                    currentPlayerHistory.forEach(point => {
+                      const px = xScale(point.timestamp);
+                      const distance = Math.abs(px - x);
+                      if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestPoint = point;
+                      }
+                    });
+                    
+                    setHoveredPointElo(closestPoint?.elo || player.elo);
+                    setHoveredPointDate(closestPoint?.timestamp || null);
+                    setTooltipPos({ x: e.clientX, y: e.clientY });
+                  }}
+                  style={{ cursor: 'pointer' }}
+                />
+              </g>
+
+              {/* Axis labels */}
+              <text
+                x={padding.left}
+                y={chartHeight - 20}
+                fill="#6b7280"
+                fontSize="12"
+                fontFamily="monospace"
+              >
+                {formatDate(new Date(minTime).toISOString())}
+              </text>
+              <text
+                x={chartWidth - padding.right - 10}
+                y={chartHeight - 20}
+                textAnchor="end"
+                fill="#6b7280"
+                fontSize="12"
+                fontFamily="monospace"
+              >
+                {formatDate(new Date(maxTime).toISOString())}
+              </text>
+              <text
+                x={chartWidth / 2}
+                y={chartHeight - 20}
+                textAnchor="middle"
+                fill="#6b7280"
+                fontSize="12"
+                fontFamily="monospace"
+                fontWeight="600"
+              >
+                Date
+              </text>
+              <text
+                x={20}
+                y={chartHeight / 2}
+                textAnchor="middle"
+                fill="#6b7280"
+                fontSize="12"
+                fontFamily="monospace"
+                fontWeight="600"
+                transform={`rotate(-90, 20, ${chartHeight / 2})`}
+              >
+                ELO Rating
+              </text>
+            </svg>
+            </div>
+
+            {/* Tooltip */}
+            {hoveredPlayer && (
+              <div
+                className="fixed bg-gray-900 text-white px-3 py-2 rounded shadow-lg text-sm pointer-events-none z-50"
+                style={{
+                  left: `${tooltipPos.x + 10}px`,
+                  top: `${tooltipPos.y - 10}px`,
+                  fontFamily: 'monospace'
+                }}
+              >
+                <div className="font-bold">{hoveredPlayer.name}</div>
+                <div className="text-gray-300">ELO: {hoveredPointElo !== null ? hoveredPointElo : hoveredPlayer.elo}</div>
+                {hoveredPointDate && (
+                  <div className="text-gray-400 text-xs mt-1">{formatDate(hoveredPointDate)}</div>
+                )}
+              </div>
+            )}
+
+            <div className="mt-4 flex items-center gap-6 justify-center">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-0.5 bg-pink-600"></div>
+                <span className="text-sm text-gray-600" style={{ fontFamily: "monospace" }}>
+                  {player.name}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-0.5 bg-gray-400"></div>
+                <span className="text-sm text-gray-600" style={{ fontFamily: "monospace" }}>
+                  Other Players
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: "Figtree, sans-serif" }}>
+            Match History ({playerMatches.length} matches)
+          </h2>
+
+          {playerMatches.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-gray-400 text-lg" style={{ fontFamily: "monospace" }}>No matches played yet.</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {playerMatches.map((match) => {
+                const isWinner = match.winnerId === selectedPlayerId;
+                const opponent = isWinner 
+                  ? players.find(p => p.id === match.loserId)
+                  : players.find(p => p.id === match.winnerId);
+                const opponentName = isWinner ? match.loser : match.winner;
+                const playerScore = isWinner ? match.winnerScore : match.loserScore;
+                const opponentScore = isWinner ? match.loserScore : match.winnerScore;
+                const eloChange = isWinner ? match.winnerEloChange : match.loserEloChange;
+
+                return (
+                  <div 
+                    key={match.id} 
+                    className={`border-2 rounded-lg p-6 ${
+                      isWinner ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'
+                    }`}
+                  >
+                    <div className="flex items-center justify-center">
+                      <div className="flex-1 max-w-4xl">
+                        <div className="text-xs uppercase tracking-wide mb-3 text-center" style={{ fontFamily: "monospace" }}>
+                          <span className={isWinner ? 'text-green-700 font-bold' : 'text-red-700 font-bold'}>
+                            {isWinner ? 'WIN' : 'LOSS'}
+                          </span>
+                          <span className="text-gray-500 mx-2">•</span>
+                          <span className="text-gray-600">
+                            {formatDate(match.timestamp)} at {formatTime(match.timestamp)}
+                          </span>
+                        </div>
+                        
+                        <div className="flex items-center justify-center gap-6">
+                          <div className="flex items-center gap-3">
+                            <img
+                              src={`https://flagcdn.com/w40/${player.countryCode}.png`}
+                              width="24"
+                              height="18"
+                              alt="Flag"
+                              className="flex-shrink-0"
+                              style={{ objectFit: "cover" }}
+                            />
+                            <div className="font-semibold text-lg text-gray-900" style={{ fontFamily: "monospace" }}>
+                              {player.name}
+                            </div>
+                            {playerScore !== null && (
+                              <div className={`text-2xl font-bold ${isWinner ? 'text-green-700' : 'text-red-700'}`} style={{ fontFamily: "monospace" }}>
+                                {playerScore}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="text-gray-400 font-bold text-xl px-4" style={{ fontFamily: "monospace" }}>vs</div>
+
+                          <div className="flex items-center gap-3">
+                            {opponentScore !== null && (
+                              <div className="text-2xl font-bold text-gray-500" style={{ fontFamily: "monospace" }}>
+                                {opponentScore}
+                              </div>
+                            )}
+                            <div className="font-semibold text-lg text-gray-700" style={{ fontFamily: "monospace" }}>
+                              {opponentName}
+                            </div>
+                            {opponent && (
+                              <img
+                                src={`https://flagcdn.com/w40/${opponent.countryCode}.png`}
+                                width="24"
+                                height="18"
+                                alt="Flag"
+                                className="flex-shrink-0"
+                                style={{ objectFit: "cover" }}
+                              />
+                            )}
+                          </div>
+                        </div>
+
+                        <div className={`mt-3 text-sm font-medium text-center ${
+                          isWinner ? 'text-green-600' : 'text-red-600'
+                        }`} style={{ fontFamily: "monospace" }}>
+                          {eloChange > 0 ? '+' : ''}{eloChange} ELO
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="border-t border-gray-200 mt-12">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-gray-500" style={{ fontFamily: "sans-serif" }}>
+                <p>Isometric Table Tennis ELO System</p>
+                <p className="mt-1">© 2026 Christopher Kilner</p>
+              </div>
+              <button
+                onClick={() => {
+                  setCurrentView("rankings");
+                  setSelectedPlayerId(null);
+                }}
+                className="text-sm text-gray-600 hover:text-black underline"
+                style={{ fontFamily: "sans-serif" }}
+              >
+                ← Back to Rankings
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // MATCHES VIEW
   if (currentView === "matches") {
     return (
