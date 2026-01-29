@@ -1316,9 +1316,9 @@
       "name": "Cai Green",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1524,
+      "elo": 1492,
       "wins": 2,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1335,6 +1335,10 @@
         {
           "elo": 1524,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1492,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1637,8 +1641,8 @@
       "name": "Izzy Piper",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1476,
-      "wins": 1,
+      "elo": 1508,
+      "wins": 2,
       "losses": 2,
       "eloHistory": [
         {
@@ -1656,6 +1660,10 @@
         {
           "elo": 1476,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1508,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2301,6 +2309,18 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769711511363",
+      "winnerId": "53",
+      "loserId": "44",
+      "winner": "Izzy Piper",
+      "loser": "Cai Green",
+      "winnerScore": 11,
+      "loserScore": 3,
+      "winnerEloChange": 32,
+      "loserEloChange": -32,
+      "timestamp": "2026-01-28T00:00:00.000Z"
+    },
     {
       "id": "1769711495183",
       "winnerId": "14",
@@ -3838,5 +3858,5 @@
       "timestamp": "2025-12-03T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-01-29T18:31:35.866Z"
+  "lastUpdated": "2026-01-29T18:31:52.218Z"
 }
