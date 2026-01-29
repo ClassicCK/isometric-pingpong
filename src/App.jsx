@@ -1652,25 +1652,6 @@ export default function PingPongELO() {
   <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "Figtree, sans-serif" }}>
     How This Works
   </h2>
-  
-  <div className="grid md:grid-cols-2 gap-8">
-    <div>
-      <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-        Recent Form
-      </h3>
-      <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-        Shows the outcome of your last 5 matches. Green boxes are wins, red boxes are losses.
-      </p>
-    </div>
-
-    <div>
-      <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-        Win Rate
-      </h3>
-      <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-        Your overall winning percentage with your win-loss record shown below.
-      </p>
-    </div>
 
     <div>
       <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
@@ -1678,15 +1659,6 @@ export default function PingPongELO() {
       </h3>
       <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
         How many more (or fewer) games you've won compared to what your ELO predicted. Positive numbers mean you're overperforming.
-      </p>
-    </div>
-
-    <div>
-      <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-        Points Diff
-      </h3>
-      <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-        Total points scored minus total points conceded across all matches. Shows your scoring dominance.
       </p>
     </div>
 
