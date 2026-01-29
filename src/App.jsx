@@ -1653,6 +1653,7 @@ export default function PingPongELO() {
     How This Works
   </h2>
 
+   <div className="grid md:grid-cols-2 gap-8">
     <div>
       <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
         Efficiency
