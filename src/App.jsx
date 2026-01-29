@@ -953,7 +953,6 @@ export default function PingPongELO() {
                 <SortableHeader column="winRate" align="center">Win Rate</SortableHeader>
                 <SortableHeader column="efficiency" align="center">Efficiency</SortableHeader>
                 <SortableHeader column="pointsDiff" align="center">Points Diff</SortableHeader>
-                <SortableHeader column="gp" align="center">GP</SortableHeader>
                 <SortableHeader column="bettingOdds" align="center">Betting Odds</SortableHeader>
               </tr>
             </thead>
@@ -961,7 +960,7 @@ export default function PingPongELO() {
             <tbody>
               {sortedPlayers.length === 0 ? (
                 <tr>
-                  <td colSpan="9" className="text-center py-16 text-gray-400">
+                  <td colSpan="8" className="text-center py-16 text-gray-400">
                     No players registered yet. Add a player to get started.
                   </td>
                 </tr>
@@ -1061,10 +1060,6 @@ export default function PingPongELO() {
                         </td>
 
                         <td className="py-3 px-6 text-center">
-                          <span className="text-sm text-gray-900">{totalMatches}</span>
-                        </td>
-
-                        <td className="py-3 px-6 text-center">
                           <span className="text-sm font-mono font-semibold text-gray-900">
                             {player.bettingOdds || '+10000'}
                           </span>
@@ -1073,7 +1068,7 @@ export default function PingPongELO() {
 
                       {isRank64 && (
                         <tr>
-                          <td colSpan="9" className="p-0">
+                          <td colSpan="8" className="p-0">
                             <div className="border-t-4 border-red-500 relative z-10">
                               <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-1 border-2 border-red-500 rounded text-xs font-bold text-red-600 uppercase tracking-wider z-20">
                                 Tournament Cutoff
@@ -1089,6 +1084,60 @@ export default function PingPongELO() {
             </tbody>
           </table>
         </div>
+
+        {/* Explainer Section */}
+<div className="max-w-7xl mx-auto px-8 py-12 border-t-2 border-gray-200">
+  <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "Figtree, sans-serif" }}>
+    How This Works
+  </h2>
+  
+  <div className="grid md:grid-cols-2 gap-8">
+    <div>
+      <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+        Recent Form
+      </h3>
+      <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+        Shows the outcome of your last 5 matches. Green boxes are wins, red boxes are losses.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+        Win Rate
+      </h3>
+      <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+        Your overall winning percentage with your win-loss record shown below.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+        Efficiency
+      </h3>
+      <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+        How many more (or fewer) games you've won compared to what your ELO predicted. Positive numbers mean you're overperforming.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+        Points Diff
+      </h3>
+      <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+        Total points scored minus total points conceded across all matches. Shows your scoring dominance.
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
+        Betting Odds
+      </h3>
+      <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
+        American betting odds for winning the 64-player tournament based on 1,000 simulated seasons and tournaments. +2500 means a $100 bet wins $2500. -200 means you need to bet $200 to win $100.
+      </p>
+    </div>
+  </div>
+</div>
 
         {/* Sidebar */}
         <div className={`fixed top-0 right-0 h-full w-96 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 border-l border-gray-200 ${sidebarOpen ? "translate-x-0" : "translate-x-full"}`}>
