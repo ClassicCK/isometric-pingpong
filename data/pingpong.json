@@ -1580,8 +1580,8 @@
       "name": "Lawrence Holmes",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1455,
-      "wins": 0,
+      "elo": 1481,
+      "wins": 1,
       "losses": 2,
       "eloHistory": [
         {
@@ -1595,6 +1595,10 @@
         {
           "elo": 1455,
           "timestamp": "2026-01-30T17:09:18.191Z"
+        },
+        {
+          "elo": 1481,
+          "timestamp": "2026-01-30T17:19:01.484Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1935,9 +1939,9 @@
       "name": "James Atkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1431,
+      "elo": 1405,
       "wins": 1,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1962,6 +1966,10 @@
         {
           "elo": 1431,
           "timestamp": "2026-01-30T17:10:42.685Z"
+        },
+        {
+          "elo": 1405,
+          "timestamp": "2026-01-30T17:19:01.484Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2389,6 +2397,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769793541491",
+      "winnerId": "48",
+      "loserId": "59",
+      "winner": "Lawrence Holmes",
+      "loser": "James Atkin",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 26,
+      "loserEloChange": -26,
+      "expectedWinProbability": 0.5344839447268315,
+      "timestamp": "2026-01-30T17:19:01.484Z"
+    },
     {
       "id": "1769793229205",
       "winnerId": "26",
@@ -4197,5 +4218,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-01-30T17:13:50.028Z"
+  "lastUpdated": "2026-01-30T17:19:02.226Z"
 }
