@@ -293,7 +293,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 2
     },
     {
       "id": "12",
@@ -374,8 +374,8 @@
       "name": "Christopher Kilner",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1461,
-      "wins": 1,
+      "elo": 1488,
+      "wins": 2,
       "losses": 3,
       "eloHistory": [
         {
@@ -397,6 +397,10 @@
         {
           "elo": 1461,
           "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1488,
+          "timestamp": "2026-01-30T12:20:54.990Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -845,9 +849,9 @@
       "name": "Tajo Oja",
       "countryCode": "ee",
       "office": "LON",
-      "elo": 1484,
+      "elo": 1457,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -856,6 +860,10 @@
         {
           "elo": 1484,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1457,
+          "timestamp": "2026-01-30T12:20:54.990Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1826,7 +1834,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 2
+      "lastWeekRank": 1
     },
     {
       "id": "57",
@@ -2337,10 +2345,23 @@
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
-      "lastWeekRank": 1
+      "lastWeekRank": 4
     }
   ],
   "matches": [
+    {
+      "id": "1769775655002",
+      "winnerId": "14",
+      "loserId": "25",
+      "winner": "Christopher Kilner",
+      "loser": "Tajo Oja",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.46694860611555894,
+      "timestamp": "2026-01-30T12:20:54.990Z"
+    },
     {
       "id": "1769725186320",
       "winnerId": "49",
@@ -4071,5 +4092,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-01-29T23:00:16.127Z"
+  "lastUpdated": "2026-01-30T12:20:56.227Z"
 }
