@@ -23,7 +23,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "2",
@@ -123,7 +123,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "6",
@@ -333,7 +333,7 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "LON",
-      "elo": 1490,
+      "elo": 1482,
       "wins": 3,
       "losses": 3,
       "eloHistory": [
@@ -354,16 +354,16 @@
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1484,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1460,
-          "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1490,
+          "elo": 1543,
           "timestamp": "2026-01-26T00:00:00.000Z"
+        },
+        {
+          "elo": 1508,
+          "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1482,
+          "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -391,11 +391,11 @@
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1484,
+          "elo": 1485,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1461,
+          "elo": 1462,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
@@ -437,7 +437,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "16",
@@ -531,9 +531,9 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1600,
+      "elo": 1647,
       "wins": 10,
-      "losses": 7,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -564,48 +564,44 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1492,
+          "elo": 1494,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1516,
+          "elo": 1520,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1544,
+          "elo": 1547,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1567,
+          "elo": 1570,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1543,
+          "elo": 1546,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1575,
+          "elo": 1578,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1603,
+          "elo": 1605,
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1581,
+          "elo": 1583,
           "timestamp": "2026-01-29T00:00:00.000Z"
         },
         {
-          "elo": 1616,
+          "elo": 1618,
           "timestamp": "2026-01-29T00:00:00.000Z"
         },
         {
-          "elo": 1645,
+          "elo": 1647,
           "timestamp": "2026-01-29T00:00:00.000Z"
-        },
-        {
-          "elo": 1600,
-          "timestamp": "2026-01-30T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -616,7 +612,7 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1584,
+      "elo": 1585,
       "wins": 11,
       "losses": 5,
       "eloHistory": [
@@ -685,7 +681,7 @@
           "timestamp": "2026-01-28T00:00:00.000Z"
         },
         {
-          "elo": 1584,
+          "elo": 1585,
           "timestamp": "2026-01-28T00:00:00.000Z"
         }
       ],
@@ -861,7 +857,7 @@
       "name": "Tajo Oja",
       "countryCode": "ee",
       "office": "LON",
-      "elo": 1454,
+      "elo": 1455,
       "wins": 1,
       "losses": 3,
       "eloHistory": [
@@ -874,15 +870,15 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1457,
+          "elo": 1458,
           "timestamp": "2026-01-30T12:20:54.990Z"
         },
         {
-          "elo": 1484,
+          "elo": 1485,
           "timestamp": "2026-01-30T12:21:32.170Z"
         },
         {
-          "elo": 1454,
+          "elo": 1455,
           "timestamp": "2026-01-30T12:21:48.871Z"
         }
       ],
@@ -912,7 +908,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 24
     },
     {
       "id": "27",
@@ -973,7 +969,7 @@
       "name": "Vid",
       "countryCode": "si",
       "office": "LON",
-      "elo": 1502,
+      "elo": 1500,
       "wins": 1,
       "losses": 1,
       "eloHistory": [
@@ -982,23 +978,23 @@
           "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1485,
-          "timestamp": "2026-01-13T00:00:00.000Z"
+          "elo": 1516,
+          "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1502,
-          "timestamp": "2026-01-12T00:00:00.000Z"
+          "elo": 1500,
+          "timestamp": "2026-01-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 25
     },
     {
       "id": "30",
       "name": "Helen Durrant",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1483,
+      "elo": 1484,
       "wins": 0,
       "losses": 1,
       "eloHistory": [
@@ -1007,19 +1003,19 @@
           "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1483,
+          "elo": 1484,
           "timestamp": "2026-01-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 48
     },
     {
       "id": "31",
       "name": "Emily Mears",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1514,
+      "elo": 1515,
       "wins": 2,
       "losses": 1,
       "eloHistory": [
@@ -1032,16 +1028,16 @@
           "timestamp": "2026-01-12T00:00:00.000Z"
         },
         {
-          "elo": 1531,
+          "elo": 1532,
           "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1514,
+          "elo": 1515,
           "timestamp": "2026-01-14T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 16
     },
     {
       "id": "32",
@@ -1062,7 +1058,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 48
+      "lastWeekRank": 49
     },
     {
       "id": "33",
@@ -1215,7 +1211,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 49
+      "lastWeekRank": 50
     },
     {
       "id": "38",
@@ -1290,7 +1286,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 50
+      "lastWeekRank": 51
     },
     {
       "id": "41",
@@ -1311,7 +1307,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 51
+      "lastWeekRank": 52
     },
     {
       "id": "42",
@@ -1401,8 +1397,8 @@
       "name": "Ola Sitarska",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1439,
-      "wins": 2,
+      "elo": 1394,
+      "wins": 1,
       "losses": 6,
       "eloHistory": [
         {
@@ -1436,10 +1432,6 @@
         {
           "elo": 1394,
           "timestamp": "2026-01-13T00:00:00.000Z"
-        },
-        {
-          "elo": 1439,
-          "timestamp": "2026-01-30T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1640,7 +1632,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 53
     },
     {
       "id": "51",
@@ -1661,14 +1653,14 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 54
     },
     {
       "id": "52",
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "LON",
-      "elo": 1469,
+      "elo": 1473,
       "wins": 2,
       "losses": 3,
       "eloHistory": [
@@ -1693,7 +1685,7 @@
           "timestamp": "2026-01-13T00:00:00.000Z"
         },
         {
-          "elo": 1469,
+          "elo": 1473,
           "timestamp": "2026-01-26T00:00:00.000Z"
         }
       ],
@@ -1895,7 +1887,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 55
     },
     {
       "id": "58",
@@ -2028,7 +2020,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 56
     },
     {
       "id": "63",
@@ -2074,7 +2066,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 57
     },
     {
       "id": "65",
@@ -2120,7 +2112,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 58
     },
     {
       "id": "67",
@@ -2141,7 +2133,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 59
     },
     {
       "id": "68",
@@ -2195,7 +2187,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 59
+      "lastWeekRank": 60
     },
     {
       "id": "70",
@@ -2224,7 +2216,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 17
     },
     {
       "id": "71",
@@ -2245,7 +2237,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 60
+      "lastWeekRank": 61
     },
     {
       "id": "72",
@@ -2374,19 +2366,6 @@
   ],
   "matches": [
     {
-      "id": "1769776644559",
-      "winnerId": "45",
-      "loserId": "19",
-      "winner": "Ola Sitarska",
-      "loser": "Neil Hacker",
-      "winnerScore": 11,
-      "loserScore": 4,
-      "winnerEloChange": 45,
-      "loserEloChange": -45,
-      "expectedWinProbability": 0.19079200251416192,
-      "timestamp": "2026-01-30T00:00:00.000Z"
-    },
-    {
       "id": "1769775708876",
       "winnerId": "14",
       "loserId": "25",
@@ -2396,7 +2375,7 @@
       "loserScore": 5,
       "winnerEloChange": 30,
       "loserEloChange": -30,
-      "expectedWinProbability": 0.46694860611555894,
+      "expectedWinProbability": 0.46551605527316847,
       "timestamp": "2026-01-30T12:21:48.871Z"
     },
     {
@@ -2409,7 +2388,7 @@
       "loserScore": 9,
       "winnerEloChange": 27,
       "loserEloChange": -27,
-      "expectedWinProbability": 0.4555054269169921,
+      "expectedWinProbability": 0.4569335079777882,
       "timestamp": "2026-01-30T12:21:32.170Z"
     },
     {
@@ -2422,7 +2401,7 @@
       "loserScore": 9,
       "winnerEloChange": 27,
       "loserEloChange": -27,
-      "expectedWinProbability": 0.46694860611555894,
+      "expectedWinProbability": 0.46838170217189273,
       "timestamp": "2026-01-30T12:20:54.990Z"
     },
     {
@@ -2436,7 +2415,7 @@
       "winnerEloChange": 25,
       "loserEloChange": -25,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.6199413590445233
+      "expectedWinProbability": 0.550199353253537
     },
     {
       "id": "1769711720813",
@@ -2449,7 +2428,7 @@
       "winnerEloChange": 30,
       "loserEloChange": -30,
       "timestamp": "2026-01-26T00:00:00.000Z",
-      "expectedWinProbability": 0.5301846800039021
+      "expectedWinProbability": 0.525880930891169
     },
     {
       "id": "1769711648384",
@@ -2462,7 +2441,7 @@
       "winnerEloChange": 17,
       "loserEloChange": -17,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.527315973006493
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769711602699",
@@ -2488,7 +2467,7 @@
       "winnerEloChange": 19,
       "loserEloChange": -19,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.5115108912177917
+      "expectedWinProbability": 0.38141587791096926
     },
     {
       "id": "1769711539800",
@@ -2501,7 +2480,7 @@
       "winnerEloChange": 19,
       "loserEloChange": -19,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.5115108912177917
+      "expectedWinProbability": 0.47986327796418354
     },
     {
       "id": "1769711511363",
@@ -2514,7 +2493,7 @@
       "winnerEloChange": 32,
       "loserEloChange": -32,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.5230095872975623
+      "expectedWinProbability": 0.43135860811633236
     },
     {
       "id": "1769711495183",
@@ -2527,7 +2506,7 @@
       "winnerEloChange": 31,
       "loserEloChange": -31,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.5798997603578815
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769711475013",
@@ -2540,7 +2519,7 @@
       "winnerEloChange": 19,
       "loserEloChange": -19,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.4712494361077314
+      "expectedWinProbability": 0.5115108912177917
     },
     {
       "id": "1769711459484",
@@ -2553,7 +2532,7 @@
       "winnerEloChange": 23,
       "loserEloChange": -23,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.4712494361077314
+      "expectedWinProbability": 0.5882899718631628
     },
     {
       "id": "1769709667682",
@@ -2566,7 +2545,7 @@
       "winnerEloChange": 25,
       "loserEloChange": -25,
       "timestamp": "2026-01-29T00:00:00.000Z",
-      "expectedWinProbability": 0.6199413590445233
+      "expectedWinProbability": 0.5558909611168531
     },
     {
       "id": "1769709647284",
@@ -2579,7 +2558,7 @@
       "winnerEloChange": 33,
       "loserEloChange": -33,
       "timestamp": "2026-01-29T00:00:00.000Z",
-      "expectedWinProbability": 0.3800586409554767
+      "expectedWinProbability": 0.38277496909505365
     },
     {
       "id": "1769692214493",
@@ -2592,7 +2571,7 @@
       "winnerEloChange": 39,
       "loserEloChange": -39,
       "timestamp": "2026-01-29T00:00:00.000Z",
-      "expectedWinProbability": 0.3800586409554767
+      "expectedWinProbability": 0.48130022207044143
     },
     {
       "id": "1769619608186",
@@ -2605,7 +2584,7 @@
       "winnerEloChange": 26,
       "loserEloChange": -26,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.7057813597120025
+      "expectedWinProbability": 0.5714631174083814
     },
     {
       "id": "1769619596954",
@@ -2618,7 +2597,7 @@
       "winnerEloChange": 31,
       "loserEloChange": -31,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.2942186402879975
+      "expectedWinProbability": 0.36259162325551547
     },
     {
       "id": "1769619581022",
@@ -2631,7 +2610,7 @@
       "winnerEloChange": 37,
       "loserEloChange": -37,
       "timestamp": "2026-01-28T00:00:00.000Z",
-      "expectedWinProbability": 0.2942186402879975
+      "expectedWinProbability": 0.4512256641402582
     },
     {
       "id": "1769431621863",
@@ -2644,7 +2623,7 @@
       "winnerEloChange": 32,
       "loserEloChange": -32,
       "timestamp": "2026-01-23T00:00:00.000Z",
-      "expectedWinProbability": 0.5230095872975623
+      "expectedWinProbability": 0.43135860811633236
     },
     {
       "id": "1769431381634",
@@ -2657,7 +2636,7 @@
       "winnerEloChange": 32,
       "loserEloChange": -32,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5201367220358165
+      "expectedWinProbability": 0.4285368825916186
     },
     {
       "id": "1769361517000",
@@ -2670,7 +2649,7 @@
       "winnerEloChange": 38,
       "loserEloChange": -38,
       "timestamp": "2026-01-05T00:00:00.000Z",
-      "expectedWinProbability": 0.577092475825329
+      "expectedWinProbability": 0.5086338358210827
     },
     {
       "id": "1769276857023",
@@ -2683,7 +2662,7 @@
       "winnerEloChange": 17,
       "loserEloChange": -17,
       "timestamp": "2026-01-15T00:00:00.000Z",
-      "expectedWinProbability": 0.5057562084111449
+      "expectedWinProbability": 0.4569335079777882
     },
     {
       "id": "1769276841389",
@@ -2696,7 +2675,7 @@
       "winnerEloChange": 15,
       "loserEloChange": -15,
       "timestamp": "2026-01-15T00:00:00.000Z",
-      "expectedWinProbability": 0.5344839447268315
+      "expectedWinProbability": 0.5115108912177917
     },
     {
       "id": "1769276826869",
@@ -2709,7 +2688,7 @@
       "winnerEloChange": 20,
       "loserEloChange": -20,
       "timestamp": "2026-01-15T00:00:00.000Z",
-      "expectedWinProbability": 0.4398498547680971
+      "expectedWinProbability": 0.41310497662089996
     },
     {
       "id": "1769276804655",
@@ -2722,7 +2701,7 @@
       "winnerEloChange": 15,
       "loserEloChange": -15,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.5700528235839882
+      "expectedWinProbability": 0.527315973006493
     },
     {
       "id": "1769276792824",
@@ -2735,7 +2714,7 @@
       "winnerEloChange": 21,
       "loserEloChange": -21,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.3882294992189357
+      "expectedWinProbability": 0.33258157812677697
     },
     {
       "id": "1769276772805",
@@ -2748,7 +2727,7 @@
       "winnerEloChange": 12,
       "loserEloChange": -12,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.6584145209169125
+      "expectedWinProbability": 0.6440338538222926
     },
     {
       "id": "1769276756340",
@@ -2761,7 +2740,7 @@
       "winnerEloChange": 12,
       "loserEloChange": -12,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.6519120398746636
+      "expectedWinProbability": 0.6199413590445233
     },
     {
       "id": "1769276728488",
@@ -2774,7 +2753,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.5430664920222119
+      "expectedWinProbability": 0.4971218004251891
     },
     {
       "id": "1769276706156",
@@ -2787,7 +2766,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.502878199574811
+      "expectedWinProbability": 0.47842666694885455
     },
     {
       "id": "1769276689555",
@@ -2800,7 +2779,7 @@
       "winnerEloChange": 14,
       "loserEloChange": -14,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.5980137657693436
+      "expectedWinProbability": 0.5798997603578815
     },
     {
       "id": "1769276669939",
@@ -2813,7 +2792,7 @@
       "winnerEloChange": 11,
       "loserEloChange": -11,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.655820505912395
+      "expectedWinProbability": 0.6400649998028851
     },
     {
       "id": "1769276649522",
@@ -2826,7 +2805,7 @@
       "winnerEloChange": 19,
       "loserEloChange": -19,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.41310497662089996
+      "expectedWinProbability": 0.3854986389914422
     },
     {
       "id": "1769276626923",
@@ -2839,7 +2818,7 @@
       "winnerEloChange": 15,
       "loserEloChange": -15,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.5686413918836677
+      "expectedWinProbability": 0.5644004902404213
     },
     {
       "id": "1769276601706",
@@ -2852,7 +2831,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.5086338358210827
+      "expectedWinProbability": 0.4827374755676238
     },
     {
       "id": "1769276584006",
@@ -2865,7 +2844,7 @@
       "winnerEloChange": 10,
       "loserEloChange": -10,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.7057813597120025
+      "expectedWinProbability": 0.6936879164219654
     },
     {
       "id": "1769276569840",
@@ -2878,7 +2857,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.5416377027147634
+      "expectedWinProbability": 0.5201367220358165
     },
     {
       "id": "1769276555390",
@@ -2891,7 +2870,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-14T00:00:00.000Z",
-      "expectedWinProbability": 0.5014391117091528
+      "expectedWinProbability": 0.4769904127024377
     },
     {
       "id": "1769276520040",
@@ -2943,7 +2922,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-13T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.5201367220358165
     },
     {
       "id": "1769276417174",
@@ -2956,7 +2935,7 @@
       "winnerEloChange": 9,
       "loserEloChange": -9,
       "timestamp": "2026-01-13T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.7140789025853503
     },
     {
       "id": "1769276388841",
@@ -2969,7 +2948,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-13T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.5014391117091528
     },
     {
       "id": "1769276361924",
@@ -2982,7 +2961,7 @@
       "winnerEloChange": 14,
       "loserEloChange": -14,
       "timestamp": "2026-01-13T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.558731369324761
     },
     {
       "id": "1769276347707",
@@ -2995,7 +2974,7 @@
       "winnerEloChange": 17,
       "loserEloChange": -17,
       "timestamp": "2026-01-13T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.4640840730548977
     },
     {
       "id": "1769276322475",
@@ -3021,7 +3000,7 @@
       "winnerEloChange": 15,
       "loserEloChange": -15,
       "timestamp": "2026-01-13T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.544494573083008
     },
     {
       "id": "1769276243124",
@@ -3047,7 +3026,7 @@
       "winnerEloChange": 18,
       "loserEloChange": -18,
       "timestamp": "2026-01-13T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.4327711556570478
     },
     {
       "id": "1769276207840",
@@ -3060,7 +3039,7 @@
       "winnerEloChange": 12,
       "loserEloChange": -12,
       "timestamp": "2026-01-13T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.615864104253756
     },
     {
       "id": "1769276193008",
@@ -3086,7 +3065,7 @@
       "winnerEloChange": 17,
       "loserEloChange": -17,
       "timestamp": "2026-01-13T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.4569335079777882
     },
     {
       "id": "1769276158976",
@@ -3125,7 +3104,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769276086860",
@@ -3138,7 +3117,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769276070676",
@@ -3151,7 +3130,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769276058076",
@@ -3164,7 +3143,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769276036158",
@@ -3177,7 +3156,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769276017242",
@@ -3190,7 +3169,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275998659",
@@ -3203,7 +3182,7 @@
       "winnerEloChange": 18,
       "loserEloChange": -18,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.47986327796418354
+      "expectedWinProbability": 0.4285368825916186
     },
     {
       "id": "1769275936859",
@@ -3216,7 +3195,7 @@
       "winnerEloChange": 10,
       "loserEloChange": -10,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.7081663882812006
+      "expectedWinProbability": 0.6838163141936586
     },
     {
       "id": "1769275923342",
@@ -3229,7 +3208,7 @@
       "winnerEloChange": 17,
       "loserEloChange": -17,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.502878199574811
+      "expectedWinProbability": 0.4540780772195163
     },
     {
       "id": "1769275903808",
@@ -3242,7 +3221,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.544494573083008
+      "expectedWinProbability": 0.4985608882908471
     },
     {
       "id": "1769275883742",
@@ -3255,7 +3234,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275860143",
@@ -3268,7 +3247,7 @@
       "winnerEloChange": 19,
       "loserEloChange": -19,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.4540780772195163
+      "expectedWinProbability": 0.40060320329074317
     },
     {
       "id": "1769275829594",
@@ -3281,7 +3260,7 @@
       "winnerEloChange": 21,
       "loserEloChange": -21,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.399221754109989
+      "expectedWinProbability": 0.34288131351292145
     },
     {
       "id": "1769275813607",
@@ -3294,7 +3273,7 @@
       "winnerEloChange": 15,
       "loserEloChange": -15,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5798997603578815
+      "expectedWinProbability": 0.5373473171664928
     },
     {
       "id": "1769275790926",
@@ -3307,7 +3286,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275768727",
@@ -3320,7 +3299,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275744976",
@@ -3333,7 +3312,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275718043",
@@ -3346,7 +3325,7 @@
       "winnerEloChange": 15,
       "loserEloChange": -15,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5728722513945045
+      "expectedWinProbability": 0.5301846800039021
     },
     {
       "id": "1769275694845",
@@ -3359,7 +3338,7 @@
       "winnerEloChange": 17,
       "loserEloChange": -17,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5316182978281073
+      "expectedWinProbability": 0.4827374755676238
     },
     {
       "id": "1769275641962",
@@ -3372,7 +3351,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275597577",
@@ -3385,7 +3364,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275580894",
@@ -3398,7 +3377,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275564010",
@@ -3411,7 +3390,7 @@
       "winnerEloChange": 18,
       "loserEloChange": -18,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.48130022207044143
+      "expectedWinProbability": 0.42994717641601177
     },
     {
       "id": "1769275547428",
@@ -3424,7 +3403,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275529377",
@@ -3437,7 +3416,7 @@
       "winnerEloChange": 10,
       "loserEloChange": -10,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.698558626418023
+      "expectedWinProbability": 0.6737761878883222
     },
     {
       "id": "1769275516110",
@@ -3450,7 +3429,7 @@
       "winnerEloChange": 17,
       "loserEloChange": -17,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5186997779295586
+      "expectedWinProbability": 0.469815319996098
     },
     {
       "id": "1769275502143",
@@ -3463,7 +3442,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275489177",
@@ -3476,7 +3455,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275472578",
@@ -3489,7 +3468,7 @@
       "winnerEloChange": 13,
       "loserEloChange": -13,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.6400649998028851
+      "expectedWinProbability": 0.6049129020079569
     },
     {
       "id": "1769275427877",
@@ -3502,7 +3481,7 @@
       "winnerEloChange": 15,
       "loserEloChange": -15,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5827018849642301
+      "expectedWinProbability": 0.5402082283237456
     },
     {
       "id": "1769275412628",
@@ -3515,7 +3494,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275395562",
@@ -3528,7 +3507,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275376644",
@@ -3541,7 +3520,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275356693",
@@ -3554,7 +3533,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2026-01-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769275279527",
@@ -3567,7 +3546,7 @@
       "winnerEloChange": 15,
       "loserEloChange": -15,
       "timestamp": "2026-01-09T00:00:00.000Z",
-      "expectedWinProbability": 0.8153518152833006
+      "expectedWinProbability": 0.7936407431881689
     },
     {
       "id": "1769275258194",
@@ -3580,7 +3559,7 @@
       "winnerEloChange": 30,
       "loserEloChange": -30,
       "timestamp": "2026-01-09T00:00:00.000Z",
-      "expectedWinProbability": 0.4827374755676238
+      "expectedWinProbability": 0.43843206102635396
     },
     {
       "id": "1769275233210",
@@ -3593,7 +3572,7 @@
       "winnerEloChange": 27,
       "loserEloChange": -27,
       "timestamp": "2026-01-09T00:00:00.000Z",
-      "expectedWinProbability": 0.5172625244323762
+      "expectedWinProbability": 0.4726840269935071
     },
     {
       "id": "1769275211863",
@@ -3606,7 +3585,7 @@
       "winnerEloChange": 29,
       "loserEloChange": -29,
       "timestamp": "2026-01-09T00:00:00.000Z",
-      "expectedWinProbability": 0.5700528235839882
+      "expectedWinProbability": 0.48705085510713625
     },
     {
       "id": "1769274641049",
@@ -3619,7 +3598,7 @@
       "winnerEloChange": 30,
       "loserEloChange": -30,
       "timestamp": "2026-01-09T00:00:00.000Z",
-      "expectedWinProbability": 0.41031649686004995
+      "expectedWinProbability": 0.3665922999288324
     },
     {
       "id": "1769274620999",
@@ -3632,7 +3611,7 @@
       "winnerEloChange": 22,
       "loserEloChange": -22,
       "timestamp": "2026-01-09T00:00:00.000Z",
-      "expectedWinProbability": 0.6737761878883222
+      "expectedWinProbability": 0.6479830132503057
     },
     {
       "id": "1769274597916",
@@ -3645,7 +3624,7 @@
       "winnerEloChange": 29,
       "loserEloChange": -29,
       "timestamp": "2026-01-09T00:00:00.000Z",
-      "expectedWinProbability": 0.4827374755676238
+      "expectedWinProbability": 0.45265148195413535
     },
     {
       "id": "1769274560616",
@@ -3658,7 +3637,7 @@
       "winnerEloChange": 20,
       "loserEloChange": -20,
       "timestamp": "2026-01-07T00:00:00.000Z",
-      "expectedWinProbability": 0.6712405808158318
+      "expectedWinProbability": 0.6131368201531431
     },
     {
       "id": "1769274539501",
@@ -3671,7 +3650,7 @@
       "winnerEloChange": 25,
       "loserEloChange": -25,
       "timestamp": "2026-01-07T00:00:00.000Z",
-      "expectedWinProbability": 0.6466688423256146
+      "expectedWinProbability": 0.6185841220890307
     },
     {
       "id": "1769274516118",
@@ -3684,7 +3663,7 @@
       "winnerEloChange": 20,
       "loserEloChange": -20,
       "timestamp": "2026-01-05T00:00:00.000Z",
-      "expectedWinProbability": 0.6838163141936586
+      "expectedWinProbability": 0.6293885472175023
     },
     {
       "id": "1769274464950",
@@ -3710,7 +3689,7 @@
       "winnerEloChange": 27,
       "loserEloChange": -27,
       "timestamp": "2026-01-05T00:00:00.000Z",
-      "expectedWinProbability": 0.422907524174671
+      "expectedWinProbability": 0.5143871841659987
     },
     {
       "id": "1769274392967",
@@ -3723,7 +3702,7 @@
       "winnerEloChange": 30,
       "loserEloChange": -30,
       "timestamp": "2026-01-02T00:00:00.000Z",
-      "expectedWinProbability": 0.554469374021676
+      "expectedWinProbability": 0.46838170217189273
     },
     {
       "id": "1769274364151",
@@ -3736,7 +3715,7 @@
       "winnerEloChange": 17,
       "loserEloChange": -17,
       "timestamp": "2026-01-02T00:00:00.000Z",
-      "expectedWinProbability": 0.6838163141936586
+      "expectedWinProbability": 0.6293885472175023
     },
     {
       "id": "1769274315335",
@@ -3749,7 +3728,7 @@
       "winnerEloChange": 26,
       "loserEloChange": -26,
       "timestamp": "2026-01-02T00:00:00.000Z",
-      "expectedWinProbability": 0.5129491448928637
+      "expectedWinProbability": 0.469815319996098
     },
     {
       "id": "1769274292000",
@@ -3762,7 +3741,7 @@
       "winnerEloChange": 27,
       "loserEloChange": -27,
       "timestamp": "2026-01-02T00:00:00.000Z",
-      "expectedWinProbability": 0.5129491448928637
+      "expectedWinProbability": 0.5558909611168531
     },
     {
       "id": "1769274248917",
@@ -3775,7 +3754,7 @@
       "winnerEloChange": 24,
       "loserEloChange": -24,
       "timestamp": "2025-12-15T00:00:00.000Z",
-      "expectedWinProbability": 0.5629847281035958
+      "expectedWinProbability": 0.4913661641789174
     },
     {
       "id": "1769274225648",
@@ -3788,7 +3767,7 @@
       "winnerEloChange": 20,
       "loserEloChange": -20,
       "timestamp": "2025-12-15T00:00:00.000Z",
-      "expectedWinProbability": 0.6199413590445233
+      "expectedWinProbability": 0.5882899718631628
     },
     {
       "id": "1769274197381",
@@ -3814,7 +3793,7 @@
       "winnerEloChange": 33,
       "loserEloChange": -33,
       "timestamp": "2025-12-15T00:00:00.000Z",
-      "expectedWinProbability": 0.43701527189640416
+      "expectedWinProbability": 0.4441090388831469
     },
     {
       "id": "1769274142548",
@@ -3827,7 +3806,7 @@
       "winnerEloChange": 23,
       "loserEloChange": -23,
       "timestamp": "2025-12-15T00:00:00.000Z",
-      "expectedWinProbability": 0.5629847281035958
+      "expectedWinProbability": 0.469815319996098
     },
     {
       "id": "1769274065900",
@@ -3840,7 +3819,7 @@
       "winnerEloChange": 30,
       "loserEloChange": -30,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5798997603578815
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769274043885",
@@ -3853,7 +3832,7 @@
       "winnerEloChange": 27,
       "loserEloChange": -27,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5658152030692333
+      "expectedWinProbability": 0.4827374755676238
     },
     {
       "id": "1769274021352",
@@ -3866,7 +3845,7 @@
       "winnerEloChange": 21,
       "loserEloChange": -21,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5573116337622928
+      "expectedWinProbability": 0.4827374755676238
     },
     {
       "id": "1769273969803",
@@ -3905,7 +3884,7 @@
       "winnerEloChange": 30,
       "loserEloChange": -30,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.544494573083008
+      "expectedWinProbability": 0.4712494361077314
     },
     {
       "id": "1769273853222",
@@ -3918,7 +3897,7 @@
       "winnerEloChange": 24,
       "loserEloChange": -24,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.577092475825329
+      "expectedWinProbability": 0.5402082283237456
     },
     {
       "id": "1769273817419",
@@ -3931,7 +3910,7 @@
       "winnerEloChange": 35,
       "loserEloChange": -35,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.544494573083008
+      "expectedWinProbability": 0.5573116337622928
     },
     {
       "id": "1769273775821",
@@ -3944,7 +3923,7 @@
       "winnerEloChange": 29,
       "loserEloChange": -29,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.525880930891169
+      "expectedWinProbability": 0.43701527189640416
     },
     {
       "id": "1769273725539",
@@ -3957,7 +3936,7 @@
       "winnerEloChange": 14,
       "loserEloChange": -14,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5129491448928637
+      "expectedWinProbability": 0.4741190691088309
     },
     {
       "id": "1769273682339",
@@ -3970,7 +3949,7 @@
       "winnerEloChange": 26,
       "loserEloChange": -26,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5129491448928637
+      "expectedWinProbability": 0.550199353253537
     },
     {
       "id": "1769273645288",
@@ -3983,7 +3962,7 @@
       "winnerEloChange": 28,
       "loserEloChange": -28,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5798997603578815
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769273615538",
@@ -3996,7 +3975,7 @@
       "winnerEloChange": 25,
       "loserEloChange": -25,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.42010023964211857
+      "expectedWinProbability": 0.384135895746244
     },
     {
       "id": "1769273586671",
@@ -4009,7 +3988,7 @@
       "winnerEloChange": 25,
       "loserEloChange": -25,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.581301478368915
+      "expectedWinProbability": 0.5714631174083814
     },
     {
       "id": "1769273394256",
@@ -4022,7 +4001,7 @@
       "winnerEloChange": 19,
       "loserEloChange": -19,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5
+      "expectedWinProbability": 0.4626526828335072
     },
     {
       "id": "1769273253673",
@@ -4035,7 +4014,7 @@
       "winnerEloChange": 27,
       "loserEloChange": -27,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.4355995097595788
+      "expectedWinProbability": 0.4769904127024377
     },
     {
       "id": "1769273221324",
@@ -4048,7 +4027,7 @@
       "winnerEloChange": 24,
       "loserEloChange": -24,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5686413918836677
+      "expectedWinProbability": 0.6117705007810643
     },
     {
       "id": "1769273194858",
@@ -4061,7 +4040,7 @@
       "winnerEloChange": 20,
       "loserEloChange": -20,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.6635740980412955
+      "expectedWinProbability": 0.7358774441014764
     },
     {
       "id": "1769273111357",
@@ -4074,7 +4053,7 @@
       "winnerEloChange": 29,
       "loserEloChange": -29,
       "timestamp": "2025-12-12T00:00:00.000Z",
-      "expectedWinProbability": 0.5573116337622928
+      "expectedWinProbability": 0.676301669492737
     },
     {
       "id": "1769273059942",
@@ -4087,7 +4066,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2025-12-10T00:00:00.000Z",
-      "expectedWinProbability": 0.5459219227804837
+      "expectedWinProbability": 0.5
     },
     {
       "id": "1769273032524",
@@ -4113,7 +4092,7 @@
       "winnerEloChange": 16,
       "loserEloChange": -16,
       "timestamp": "2025-12-10T00:00:00.000Z",
-      "expectedWinProbability": 0.4540780772195163
+      "expectedWinProbability": 0.41171002813683716
     },
     {
       "id": "1769272955340",
@@ -4126,7 +4105,7 @@
       "winnerEloChange": 24,
       "loserEloChange": -24,
       "timestamp": "2025-12-10T00:00:00.000Z",
-      "expectedWinProbability": 0.641390111955618
+      "expectedWinProbability": 0.5756869523764296
     },
     {
       "id": "1769272894655",
@@ -4139,7 +4118,7 @@
       "winnerEloChange": 26,
       "loserEloChange": -26,
       "timestamp": "2025-12-08T00:00:00.000Z",
-      "expectedWinProbability": 0.6117705007810643
+      "expectedWinProbability": 0.5387780920571715
     },
     {
       "id": "1769272093697",
@@ -4152,8 +4131,8 @@
       "winnerEloChange": 27,
       "loserEloChange": -27,
       "timestamp": "2025-12-03T00:00:00.000Z",
-      "expectedWinProbability": 0.577092475825329
+      "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-01-30T12:37:25.595Z"
+  "lastUpdated": "2026-01-30T12:37:53.943Z"
 }
