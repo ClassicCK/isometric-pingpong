@@ -531,9 +531,9 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1645,
+      "elo": 1600,
       "wins": 10,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -602,6 +602,10 @@
         {
           "elo": 1645,
           "timestamp": "2026-01-29T00:00:00.000Z"
+        },
+        {
+          "elo": 1600,
+          "timestamp": "2026-01-30T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1397,8 +1401,8 @@
       "name": "Ola Sitarska",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1394,
-      "wins": 1,
+      "elo": 1439,
+      "wins": 2,
       "losses": 6,
       "eloHistory": [
         {
@@ -1432,6 +1436,10 @@
         {
           "elo": 1394,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1439,
+          "timestamp": "2026-01-30T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2365,6 +2373,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769776644559",
+      "winnerId": "45",
+      "loserId": "19",
+      "winner": "Ola Sitarska",
+      "loser": "Neil Hacker",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 45,
+      "loserEloChange": -45,
+      "expectedWinProbability": 0.19079200251416192,
+      "timestamp": "2026-01-30T00:00:00.000Z"
+    },
     {
       "id": "1769775708876",
       "winnerId": "14",
@@ -4134,5 +4155,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-01-30T12:21:49.345Z"
+  "lastUpdated": "2026-01-30T12:37:25.595Z"
 }
