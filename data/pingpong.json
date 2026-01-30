@@ -374,9 +374,9 @@
       "name": "Christopher Kilner",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1488,
+      "elo": 1461,
       "wins": 2,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -401,6 +401,10 @@
         {
           "elo": 1488,
           "timestamp": "2026-01-30T12:20:54.990Z"
+        },
+        {
+          "elo": 1461,
+          "timestamp": "2026-01-30T12:21:32.170Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -849,8 +853,8 @@
       "name": "Tajo Oja",
       "countryCode": "ee",
       "office": "LON",
-      "elo": 1457,
-      "wins": 0,
+      "elo": 1484,
+      "wins": 1,
       "losses": 2,
       "eloHistory": [
         {
@@ -864,6 +868,10 @@
         {
           "elo": 1457,
           "timestamp": "2026-01-30T12:20:54.990Z"
+        },
+        {
+          "elo": 1484,
+          "timestamp": "2026-01-30T12:21:32.170Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2349,6 +2357,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769775692182",
+      "winnerId": "25",
+      "loserId": "14",
+      "winner": "Tajo Oja",
+      "loser": "Christopher Kilner",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.4555054269169921,
+      "timestamp": "2026-01-30T12:21:32.170Z"
+    },
     {
       "id": "1769775655002",
       "winnerId": "14",
@@ -4092,5 +4113,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-01-30T12:20:56.227Z"
+  "lastUpdated": "2026-01-30T12:21:32.890Z"
 }
