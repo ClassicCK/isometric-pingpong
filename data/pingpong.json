@@ -490,9 +490,9 @@
       "name": "Alex Steene",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1486,
+      "elo": 1466,
       "wins": 3,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -525,6 +525,10 @@
         {
           "elo": 1486,
           "timestamp": "2026-01-30T17:13:49.191Z"
+        },
+        {
+          "elo": 1466,
+          "timestamp": "2026-01-30T17:23:08.292Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -616,8 +620,8 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1584,
-      "wins": 11,
+      "elo": 1604,
+      "wins": 12,
       "losses": 5,
       "eloHistory": [
         {
@@ -687,6 +691,10 @@
         {
           "elo": 1584,
           "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1604,
+          "timestamp": "2026-01-30T17:23:08.292Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2397,6 +2405,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769793788301",
+      "winnerId": "20",
+      "loserId": "18",
+      "winner": "Charlie Parkin",
+      "loser": "Alex Steene",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 20,
+      "loserEloChange": -20,
+      "expectedWinProbability": 0.6374083767444845,
+      "timestamp": "2026-01-30T17:23:08.292Z"
+    },
     {
       "id": "1769793541491",
       "winnerId": "48",
@@ -4218,5 +4239,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-01-30T17:19:02.226Z"
+  "lastUpdated": "2026-01-30T17:23:09.002Z"
 }
