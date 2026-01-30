@@ -890,8 +890,8 @@
       "name": "Murtz Abidi",
       "countryCode": "ch",
       "office": "LON",
-      "elo": 1526,
-      "wins": 2,
+      "elo": 1548,
+      "wins": 3,
       "losses": 1,
       "eloHistory": [
         {
@@ -909,6 +909,10 @@
         {
           "elo": 1526,
           "timestamp": "2026-01-30T17:09:18.191Z"
+        },
+        {
+          "elo": 1548,
+          "timestamp": "2026-01-30T17:10:42.685Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1923,9 +1927,9 @@
       "name": "James Atkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1453,
+      "elo": 1431,
       "wins": 1,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1946,6 +1950,10 @@
         {
           "elo": 1453,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1431,
+          "timestamp": "2026-01-30T17:10:42.685Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2373,6 +2381,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769793042692",
+      "winnerId": "26",
+      "loserId": "59",
+      "winner": "Murtz Abidi",
+      "loser": "James Atkin",
+      "winnerScore": 11,
+      "loserScore": 2,
+      "winnerEloChange": 22,
+      "loserEloChange": -22,
+      "expectedWinProbability": 0.6035363185261781,
+      "timestamp": "2026-01-30T17:10:42.685Z"
+    },
     {
       "id": "1769792958200",
       "winnerId": "26",
@@ -4155,5 +4176,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-01-30T17:09:19.313Z"
+  "lastUpdated": "2026-01-30T17:10:43.956Z"
 }
