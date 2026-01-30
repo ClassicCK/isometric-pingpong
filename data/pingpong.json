@@ -531,9 +531,9 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1615,
+      "elo": 1647,
       "wins": 10,
-      "losses": 7,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -602,10 +602,6 @@
         {
           "elo": 1647,
           "timestamp": "2026-01-29T00:00:00.000Z"
-        },
-        {
-          "elo": 1615,
-          "timestamp": "2026-01-30T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -616,8 +612,8 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1617,
-      "wins": 12,
+      "elo": 1585,
+      "wins": 11,
       "losses": 5,
       "eloHistory": [
         {
@@ -687,10 +683,6 @@
         {
           "elo": 1585,
           "timestamp": "2026-01-28T00:00:00.000Z"
-        },
-        {
-          "elo": 1617,
-          "timestamp": "2026-01-30T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2373,19 +2365,6 @@
     }
   ],
   "matches": [
-    {
-      "id": "1769776707210",
-      "winnerId": "20",
-      "loserId": "19",
-      "winner": "Charlie Parkin",
-      "loser": "Neil Hacker",
-      "winnerScore": 11,
-      "loserScore": 8,
-      "winnerEloChange": 32,
-      "loserEloChange": -32,
-      "expectedWinProbability": 0.41171002813683716,
-      "timestamp": "2026-01-30T00:00:00.000Z"
-    },
     {
       "id": "1769775708876",
       "winnerId": "14",
@@ -4155,5 +4134,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-01-30T12:38:27.916Z"
+  "lastUpdated": "2026-01-30T12:38:50.594Z"
 }
