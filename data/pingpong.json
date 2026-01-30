@@ -490,9 +490,9 @@
       "name": "Alex Steene",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1511,
+      "elo": 1486,
       "wins": 3,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -521,6 +521,10 @@
         {
           "elo": 1511,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1486,
+          "timestamp": "2026-01-30T17:13:49.191Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -890,8 +894,8 @@
       "name": "Murtz Abidi",
       "countryCode": "ch",
       "office": "LON",
-      "elo": 1548,
-      "wins": 3,
+      "elo": 1573,
+      "wins": 4,
       "losses": 1,
       "eloHistory": [
         {
@@ -913,6 +917,10 @@
         {
           "elo": 1548,
           "timestamp": "2026-01-30T17:10:42.685Z"
+        },
+        {
+          "elo": 1573,
+          "timestamp": "2026-01-30T17:13:49.191Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2381,6 +2389,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1769793229205",
+      "winnerId": "26",
+      "loserId": "18",
+      "winner": "Murtz Abidi",
+      "loser": "Alex Steene",
+      "winnerScore": 11,
+      "loserScore": 2,
+      "winnerEloChange": 25,
+      "loserEloChange": -25,
+      "expectedWinProbability": 0.5530468951694625,
+      "timestamp": "2026-01-30T17:13:49.191Z"
+    },
     {
       "id": "1769793042692",
       "winnerId": "26",
@@ -4176,5 +4197,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-01-30T17:10:43.956Z"
+  "lastUpdated": "2026-01-30T17:13:50.028Z"
 }
