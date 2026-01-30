@@ -129,7 +129,7 @@
       "id": "6",
       "name": "Kelley MacDonald",
       "countryCode": "va",
-      "office": "NYC",
+      "office": "LON",
       "elo": 1484,
       "wins": 0,
       "losses": 1,
@@ -4134,5 +4134,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-01-30T15:59:42.057Z"
+  "lastUpdated": "2026-01-30T15:59:52.057Z"
 }
