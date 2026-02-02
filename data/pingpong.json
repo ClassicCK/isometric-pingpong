@@ -2152,8 +2152,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1512,
-      "wins": 1,
+      "elo": 1558,
+      "wins": 3,
       "losses": 1,
       "eloHistory": [
         {
@@ -2166,6 +2166,14 @@
         },
         {
           "elo": 1512,
+          "timestamp": "2026-02-02T00:00:00.000Z"
+        },
+        {
+          "elo": 1537,
+          "timestamp": "2026-02-02T00:00:00.000Z"
+        },
+        {
+          "elo": 1558,
           "timestamp": "2026-02-02T00:00:00.000Z"
         }
       ],
@@ -2298,9 +2306,9 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb-eng",
       "office": "LON",
-      "elo": 1515,
+      "elo": 1469,
       "wins": 2,
-      "losses": 1,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2317,6 +2325,14 @@
         {
           "elo": 1515,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1490,
+          "timestamp": "2026-02-02T00:00:00.000Z"
+        },
+        {
+          "elo": 1469,
+          "timestamp": "2026-02-02T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2469,6 +2485,32 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770050754520",
+      "winnerId": "64",
+      "loserId": "70",
+      "winner": "Tom Sellers",
+      "loser": "Jamie Atkinson",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 21,
+      "loserEloChange": -21,
+      "expectedWinProbability": 0.5672288443429522,
+      "timestamp": "2026-02-02T00:00:00.000Z"
+    },
+    {
+      "id": "1770050751722",
+      "winnerId": "64",
+      "loserId": "70",
+      "winner": "Tom Sellers",
+      "loser": "Jamie Atkinson",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 25,
+      "loserEloChange": -25,
+      "expectedWinProbability": 0.49568276024494023,
+      "timestamp": "2026-02-02T00:00:00.000Z"
+    },
     {
       "id": "1770047412705",
       "winnerId": "64",
@@ -4407,5 +4449,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T15:50:13.958Z"
+  "lastUpdated": "2026-02-02T16:46:03.033Z"
 }
