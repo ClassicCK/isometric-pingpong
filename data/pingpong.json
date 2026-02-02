@@ -378,9 +378,9 @@
       "name": "Christopher Kilner",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1491,
+      "elo": 1476,
       "wins": 3,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -413,6 +413,10 @@
         {
           "elo": 1491,
           "timestamp": "2026-01-30T12:21:48.871Z"
+        },
+        {
+          "elo": 1476,
+          "timestamp": "2026-02-02T19:09:07.215Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -543,8 +547,8 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1663,
-      "wins": 14,
+      "elo": 1678,
+      "wins": 15,
       "losses": 8,
       "eloHistory": [
         {
@@ -638,6 +642,10 @@
         {
           "elo": 1663,
           "timestamp": "2026-01-30T00:00:00.000Z"
+        },
+        {
+          "elo": 1678,
+          "timestamp": "2026-02-02T19:09:07.215Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2509,6 +2517,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770059347235",
+      "winnerId": "19",
+      "loserId": "14",
+      "winner": "Neil Hacker",
+      "loser": "Christopher Kilner",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 15,
+      "loserEloChange": -15,
+      "expectedWinProbability": 0.7291099628977525,
+      "timestamp": "2026-02-02T19:09:07.215Z"
+    },
     {
       "id": "1770055675396",
       "winnerId": "24",
@@ -4512,5 +4533,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T18:07:56.381Z"
+  "lastUpdated": "2026-02-02T19:09:08.295Z"
 }
