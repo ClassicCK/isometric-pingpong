@@ -1157,8 +1157,8 @@
       "name": "Madi Berman",
       "countryCode": "np",
       "office": "LON",
-      "elo": 1507,
-      "wins": 1,
+      "elo": 1537,
+      "wins": 2,
       "losses": 1,
       "eloHistory": [
         {
@@ -1172,6 +1172,10 @@
         {
           "elo": 1507,
           "timestamp": "2026-02-02T16:55:58.316Z"
+        },
+        {
+          "elo": 1537,
+          "timestamp": "2026-02-02T17:35:08.682Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2168,9 +2172,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1537,
+      "elo": 1507,
       "wins": 2,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2187,6 +2191,10 @@
         {
           "elo": 1537,
           "timestamp": "2026-02-02T00:00:00.000Z"
+        },
+        {
+          "elo": 1507,
+          "timestamp": "2026-02-02T17:35:08.682Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2493,6 +2501,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770053708698",
+      "winnerId": "33",
+      "loserId": "64",
+      "winner": "Madi Berman",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 30,
+      "loserEloChange": -30,
+      "expectedWinProbability": 0.4569335079777882,
+      "timestamp": "2026-02-02T17:35:08.682Z"
+    },
     {
       "id": "1770052018125",
       "winnerId": "24",
@@ -4470,5 +4491,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T17:17:08.036Z"
+  "lastUpdated": "2026-02-02T17:35:09.923Z"
 }
