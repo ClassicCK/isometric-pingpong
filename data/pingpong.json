@@ -130,9 +130,9 @@
       "name": "Kelley MacDonald",
       "countryCode": "va",
       "office": "LON",
-      "elo": 1484,
+      "elo": 1456,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -141,6 +141,10 @@
         {
           "elo": 1484,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1456,
+          "timestamp": "2026-02-02T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2148,8 +2152,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1484,
-      "wins": 0,
+      "elo": 1512,
+      "wins": 1,
       "losses": 1,
       "eloHistory": [
         {
@@ -2159,6 +2163,10 @@
         {
           "elo": 1484,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1512,
+          "timestamp": "2026-02-02T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2461,6 +2469,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770047412705",
+      "winnerId": "64",
+      "loserId": "6",
+      "winner": "Tom Sellers",
+      "loser": "Kelley MacDonald",
+      "winnerScore": 11,
+      "loserScore": 0,
+      "winnerEloChange": 28,
+      "loserEloChange": -28,
+      "expectedWinProbability": 0.5,
+      "timestamp": "2026-02-02T00:00:00.000Z"
+    },
     {
       "id": "1770038726695",
       "winnerId": "49",
@@ -4386,5 +4407,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T15:38:38.298Z"
+  "lastUpdated": "2026-02-02T15:50:13.958Z"
 }
