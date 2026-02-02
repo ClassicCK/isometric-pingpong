@@ -2316,7 +2316,7 @@
     {
       "id": "70",
       "name": "Jamie Atkinson",
-      "countryCode": "gb-eng",
+      "countryCode": "gb",
       "office": "LON",
       "elo": 1490,
       "wins": 2,
@@ -4470,5 +4470,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T17:16:59.206Z"
+  "lastUpdated": "2026-02-02T17:17:08.036Z"
 }
