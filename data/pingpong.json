@@ -921,9 +921,9 @@
       "name": "Tajo Oja",
       "countryCode": "ee",
       "office": "LON",
-      "elo": 1433,
+      "elo": 1409,
       "wins": 1,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -948,6 +948,10 @@
         {
           "elo": 1433,
           "timestamp": "2026-02-02T13:25:26.691Z"
+        },
+        {
+          "elo": 1409,
+          "timestamp": "2026-02-02T16:55:58.316Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1145,8 +1149,8 @@
       "name": "Madi Berman",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1483,
-      "wins": 0,
+      "elo": 1507,
+      "wins": 1,
       "losses": 1,
       "eloHistory": [
         {
@@ -1156,6 +1160,10 @@
         {
           "elo": 1483,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1507,
+          "timestamp": "2026-02-02T16:55:58.316Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2477,6 +2485,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770051358323",
+      "winnerId": "33",
+      "loserId": "25",
+      "winner": "Madi Berman",
+      "loser": "Tajo Oja",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 24,
+      "loserEloChange": -24,
+      "expectedWinProbability": 0.5714631174083814,
+      "timestamp": "2026-02-02T16:55:58.316Z"
+    },
     {
       "id": "1770050790054",
       "winnerId": "64",
@@ -4428,5 +4449,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T16:46:30.830Z"
+  "lastUpdated": "2026-02-02T16:55:59.496Z"
 }
