@@ -822,7 +822,7 @@
     {
       "id": "24",
       "name": "George Pool",
-      "countryCode": "gb",
+      "countryCode": "jm",
       "office": "LON",
       "elo": 1513,
       "wins": 10,
@@ -1155,7 +1155,7 @@
     {
       "id": "33",
       "name": "Madi Berman",
-      "countryCode": "us",
+      "countryCode": "np",
       "office": "LON",
       "elo": 1507,
       "wins": 1,
@@ -4470,5 +4470,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T17:10:37.444Z"
+  "lastUpdated": "2026-02-02T17:10:39.468Z"
 }
