@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "David Lankes",
-      "countryCode": "us",
+      "countryCode": "ni",
       "office": "LON",
       "elo": 1500,
       "wins": 1,
@@ -4533,5 +4533,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T19:09:08.295Z"
+  "lastUpdated": "2026-02-02T23:06:38.005Z"
 }
