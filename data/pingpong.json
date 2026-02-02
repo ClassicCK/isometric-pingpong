@@ -103,7 +103,7 @@
     {
       "id": "5",
       "name": "Sophie Harris",
-      "countryCode": "jp",
+      "countryCode": "gb",
       "office": "LON",
       "elo": 1500,
       "wins": 1,
@@ -2146,7 +2146,7 @@
     {
       "id": "64",
       "name": "Tom Sellers",
-      "countryCode": "gb",
+      "countryCode": "cz",
       "office": "LON",
       "elo": 1484,
       "wins": 0,
@@ -4386,5 +4386,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T15:36:29.635Z"
+  "lastUpdated": "2026-02-02T15:38:38.298Z"
 }
