@@ -824,8 +824,8 @@
       "name": "George Pool",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1477,
-      "wins": 9,
+      "elo": 1513,
+      "wins": 10,
       "losses": 11,
       "eloHistory": [
         {
@@ -911,6 +911,10 @@
         {
           "elo": 1477,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1513,
+          "timestamp": "2026-02-02T17:06:58.109Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -962,9 +966,9 @@
       "name": "Murtz Abidi",
       "countryCode": "ch",
       "office": "LON",
-      "elo": 1573,
+      "elo": 1537,
       "wins": 4,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -989,6 +993,10 @@
         {
           "elo": 1573,
           "timestamp": "2026-01-30T17:13:49.191Z"
+        },
+        {
+          "elo": 1537,
+          "timestamp": "2026-02-02T17:06:58.109Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2485,6 +2493,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770052018125",
+      "winnerId": "24",
+      "loserId": "26",
+      "winner": "George Pool",
+      "loser": "Murtz Abidi",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 36,
+      "loserEloChange": -36,
+      "expectedWinProbability": 0.3652566649476832,
+      "timestamp": "2026-02-02T17:06:58.109Z"
+    },
     {
       "id": "1770051358323",
       "winnerId": "33",
@@ -4449,5 +4470,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-02T16:57:14.075Z"
+  "lastUpdated": "2026-02-02T17:06:59.335Z"
 }
