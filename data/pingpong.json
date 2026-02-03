@@ -1904,8 +1904,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1625,
-      "wins": 13,
+      "elo": 1649,
+      "wins": 14,
       "losses": 5,
       "eloHistory": [
         {
@@ -1983,6 +1983,10 @@
         {
           "elo": 1625,
           "timestamp": "2026-02-03T12:45:18.708Z"
+        },
+        {
+          "elo": 1649,
+          "timestamp": "2026-02-03T12:48:31.418Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2463,9 +2467,9 @@
       "name": "Rishabh Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1613,
+      "elo": 1589,
       "wins": 9,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2518,6 +2522,10 @@
         {
           "elo": 1613,
           "timestamp": "2026-01-23T00:00:00.000Z"
+        },
+        {
+          "elo": 1589,
+          "timestamp": "2026-02-03T12:48:31.418Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -2525,6 +2533,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770122911441",
+      "winnerId": "56",
+      "loserId": "1769273367436",
+      "winner": "Jon Finerty",
+      "loser": "Rishabh Chatterjee",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 24,
+      "loserEloChange": -24,
+      "expectedWinProbability": 0.5172625244323762,
+      "timestamp": "2026-02-03T12:48:31.418Z"
+    },
     {
       "id": "1770122718723",
       "winnerId": "56",
@@ -4554,5 +4575,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-03T12:46:23.475Z"
+  "lastUpdated": "2026-02-03T12:48:31.998Z"
 }
