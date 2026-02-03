@@ -832,9 +832,9 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1512,
+      "elo": 1493,
       "wins": 11,
-      "losses": 12,
+      "losses": 13,
       "eloHistory": [
         {
           "elo": 1500,
@@ -931,6 +931,10 @@
         {
           "elo": 1512,
           "timestamp": "2026-02-03T12:45:18.708Z"
+        },
+        {
+          "elo": 1493,
+          "timestamp": "2026-02-03T12:45:20.604Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1904,8 +1908,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1625,
-      "wins": 13,
+      "elo": 1644,
+      "wins": 14,
       "losses": 5,
       "eloHistory": [
         {
@@ -1983,6 +1987,10 @@
         {
           "elo": 1625,
           "timestamp": "2026-02-03T12:45:18.708Z"
+        },
+        {
+          "elo": 1644,
+          "timestamp": "2026-02-03T12:45:20.604Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2525,6 +2533,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770122720616",
+      "winnerId": "56",
+      "loserId": "24",
+      "winner": "Jon Finerty",
+      "loser": "George Pool",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 19,
+      "loserEloChange": -19,
+      "expectedWinProbability": 0.6571186864870786,
+      "timestamp": "2026-02-03T12:45:20.604Z"
+    },
     {
       "id": "1770122718723",
       "winnerId": "56",
@@ -4554,5 +4575,5 @@
       "expectedWinProbability": 0.577092475825329
     }
   ],
-  "lastUpdated": "2026-02-03T12:45:19.548Z"
+  "lastUpdated": "2026-02-03T12:45:20.834Z"
 }
