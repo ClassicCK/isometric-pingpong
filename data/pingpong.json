@@ -832,8 +832,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1490,
-      "wins": 11,
+      "elo": 1522,
+      "wins": 12,
       "losses": 13,
       "eloHistory": [
         {
@@ -935,6 +935,10 @@
         {
           "elo": 1490,
           "timestamp": "2026-02-03T12:53:16.103Z"
+        },
+        {
+          "elo": 1522,
+          "timestamp": "2026-02-03T13:01:09.720Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1177,9 +1181,9 @@
       "name": "Madi Berman",
       "countryCode": "np",
       "office": "LON",
-      "elo": 1537,
+      "elo": 1505,
       "wins": 2,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1196,6 +1200,10 @@
         {
           "elo": 1537,
           "timestamp": "2026-02-02T17:35:08.682Z"
+        },
+        {
+          "elo": 1505,
+          "timestamp": "2026-02-03T13:01:09.720Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2541,6 +2549,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770123669741",
+      "winnerId": "24",
+      "loserId": "33",
+      "winner": "George Pool",
+      "loser": "Madi Berman",
+      "winnerScore": 11,
+      "loserScore": 3,
+      "winnerEloChange": 32,
+      "loserEloChange": -32,
+      "expectedWinProbability": 0.4327711556570478,
+      "timestamp": "2026-02-03T13:01:09.720Z"
+    },
     {
       "id": "1770123196122",
       "winnerId": "1769273367436",
@@ -4596,5 +4617,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-03T12:53:16.672Z"
+  "lastUpdated": "2026-02-03T13:01:10.689Z"
 }
