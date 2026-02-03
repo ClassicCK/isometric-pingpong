@@ -1181,8 +1181,8 @@
       "name": "Madi Berman",
       "countryCode": "np",
       "office": "LON",
-      "elo": 1505,
-      "wins": 2,
+      "elo": 1529,
+      "wins": 3,
       "losses": 2,
       "eloHistory": [
         {
@@ -1204,6 +1204,10 @@
         {
           "elo": 1505,
           "timestamp": "2026-02-03T13:01:09.720Z"
+        },
+        {
+          "elo": 1529,
+          "timestamp": "2026-02-03T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1214,9 +1218,9 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1490,
+      "elo": 1466,
       "wins": 2,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1241,6 +1245,10 @@
         {
           "elo": 1490,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1466,
+          "timestamp": "2026-02-03T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2549,6 +2557,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770131066492",
+      "winnerId": "33",
+      "loserId": "34",
+      "winner": "Madi Berman",
+      "loser": "Tomek Paczkowski",
+      "winnerScore": 13,
+      "loserScore": 11,
+      "winnerEloChange": 24,
+      "loserEloChange": -24,
+      "expectedWinProbability": 0.5215733330511455,
+      "timestamp": "2026-02-03T00:00:00.000Z"
+    },
     {
       "id": "1770123669741",
       "winnerId": "24",
@@ -4617,5 +4638,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-03T13:01:10.689Z"
+  "lastUpdated": "2026-02-03T15:04:27.779Z"
 }
