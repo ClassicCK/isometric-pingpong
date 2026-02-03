@@ -1435,7 +1435,7 @@
     {
       "id": "41",
       "name": "Clare Leckie",
-      "countryCode": "gb",
+      "countryCode": "au",
       "office": "LON",
       "elo": 1484,
       "wins": 0,
@@ -4659,5 +4659,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-03T19:02:54.952Z"
+  "lastUpdated": "2026-02-03T20:41:03.183Z"
 }
