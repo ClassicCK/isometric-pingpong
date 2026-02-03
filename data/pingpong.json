@@ -30,8 +30,8 @@
       "name": "Seb Green",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1484,
-      "wins": 0,
+      "elo": 1500,
+      "wins": 1,
       "losses": 1,
       "eloHistory": [
         {
@@ -41,6 +41,10 @@
         {
           "elo": 1484,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1500,
+          "timestamp": "2026-01-30T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1408,9 +1412,9 @@
       "name": "Chris Pollard",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1484,
+      "elo": 1468,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1419,6 +1423,10 @@
         {
           "elo": 1484,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1468,
+          "timestamp": "2026-01-30T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2557,6 +2565,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770145373597",
+      "winnerId": "2",
+      "loserId": "40",
+      "winner": "Seb Green",
+      "loser": "Chris Pollard",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "expectedWinProbability": 0.5,
+      "timestamp": "2026-01-30T00:00:00.000Z"
+    },
     {
       "id": "1770131066492",
       "winnerId": "33",
@@ -4638,5 +4659,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-03T15:04:27.779Z"
+  "lastUpdated": "2026-02-03T19:02:54.952Z"
 }
