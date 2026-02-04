@@ -864,8 +864,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1553,
-      "wins": 14,
+      "elo": 1569,
+      "wins": 15,
       "losses": 14,
       "eloHistory": [
         {
@@ -983,6 +983,10 @@
         {
           "elo": 1553,
           "timestamp": "2026-02-04T18:08:08.999Z"
+        },
+        {
+          "elo": 1569,
+          "timestamp": "2026-02-04T18:13:45.309Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1691,9 +1695,9 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1428,
+      "elo": 1412,
       "wins": 10,
-      "losses": 13,
+      "losses": 14,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1790,6 +1794,10 @@
         {
           "elo": 1428,
           "timestamp": "2026-02-04T12:29:36.617Z"
+        },
+        {
+          "elo": 1412,
+          "timestamp": "2026-02-04T18:13:45.309Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2741,6 +2749,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770228825326",
+      "winnerId": "24",
+      "loserId": "47",
+      "winner": "George Pool",
+      "loser": "Joel 'The Soul Reaper' Robinson",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "expectedWinProbability": 0.672509643334985,
+      "timestamp": "2026-02-04T18:13:45.309Z"
+    },
     {
       "id": "1770228489016",
       "winnerId": "24",
@@ -5121,5 +5142,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T18:08:09.662Z"
+  "lastUpdated": "2026-02-04T18:13:46.080Z"
 }
