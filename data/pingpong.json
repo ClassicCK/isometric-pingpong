@@ -989,9 +989,9 @@
       "name": "Tajo Oja",
       "countryCode": "ee",
       "office": "LON",
-      "elo": 1381,
+      "elo": 1357,
       "wins": 1,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1023,6 +1023,10 @@
         },
         {
           "elo": 1381,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1357,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -1880,8 +1884,8 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "LON",
-      "elo": 1431,
-      "wins": 3,
+      "elo": 1455,
+      "wins": 4,
       "losses": 6,
       "eloHistory": [
         {
@@ -1922,6 +1926,10 @@
         },
         {
           "elo": 1431,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1455,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2693,6 +2701,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770225655119",
+      "winnerId": "52",
+      "loserId": "25",
+      "winner": "Saadat Nursultan",
+      "loser": "Tajo Oja",
+      "winnerScore": 11,
+      "loserScore": 3,
+      "winnerEloChange": 24,
+      "loserEloChange": -24,
+      "expectedWinProbability": 0.5714631174083814,
+      "timestamp": "2026-02-04T00:00:00.000Z"
+    },
     {
       "id": "1770225653384",
       "winnerId": "52",
@@ -4995,5 +5016,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:20:54.261Z"
+  "lastUpdated": "2026-02-04T17:20:55.447Z"
 }
