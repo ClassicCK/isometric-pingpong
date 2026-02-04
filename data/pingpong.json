@@ -559,8 +559,8 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1702,
-      "wins": 16,
+      "elo": 1718,
+      "wins": 17,
       "losses": 8,
       "eloHistory": [
         {
@@ -662,6 +662,10 @@
         {
           "elo": 1702,
           "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1718,
+          "timestamp": "2026-02-04T16:45:51.835Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -856,9 +860,9 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1545,
+      "elo": 1529,
       "wins": 13,
-      "losses": 13,
+      "losses": 14,
       "eloHistory": [
         {
           "elo": 1500,
@@ -967,6 +971,10 @@
         {
           "elo": 1545,
           "timestamp": "2026-02-04T12:29:36.617Z"
+        },
+        {
+          "elo": 1529,
+          "timestamp": "2026-02-04T16:45:51.835Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2637,6 +2645,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770223551844",
+      "winnerId": "19",
+      "loserId": "24",
+      "winner": "Neil Hacker",
+      "loser": "George Pool",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "expectedWinProbability": 0.7117225243427553,
+      "timestamp": "2026-02-04T16:45:51.835Z"
+    },
     {
       "id": "1770223390290",
       "winnerId": "19",
@@ -4848,5 +4869,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T16:45:28.188Z"
+  "lastUpdated": "2026-02-04T16:45:52.739Z"
 }
