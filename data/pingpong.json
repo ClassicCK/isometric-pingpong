@@ -1205,9 +1205,9 @@
       "name": "Madi Berman",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1529,
+      "elo": 1498,
       "wins": 3,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1232,6 +1232,10 @@
         {
           "elo": 1529,
           "timestamp": "2026-02-03T00:00:00.000Z"
+        },
+        {
+          "elo": 1498,
+          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2430,8 +2434,8 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1488,
-      "wins": 2,
+      "elo": 1519,
+      "wins": 3,
       "losses": 2,
       "eloHistory": [
         {
@@ -2453,6 +2457,10 @@
         {
           "elo": 1488,
           "timestamp": "2026-02-02T00:00:00.000Z"
+        },
+        {
+          "elo": 1519,
+          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2621,6 +2629,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770222979145",
+      "winnerId": "70",
+      "loserId": "33",
+      "winner": "Jamie Atkinson",
+      "loser": "Madi Berman",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 31,
+      "loserEloChange": -31,
+      "expectedWinProbability": 0.44126863067523897,
+      "timestamp": "2026-02-04T00:00:00.000Z"
+    },
     {
       "id": "1770220524228",
       "winnerId": "20",
@@ -4806,5 +4827,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T15:55:24.781Z"
+  "lastUpdated": "2026-02-04T16:36:20.343Z"
 }
