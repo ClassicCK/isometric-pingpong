@@ -1221,8 +1221,8 @@
       "name": "Madi Berman",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1501,
-      "wins": 4,
+      "elo": 1520,
+      "wins": 5,
       "losses": 4,
       "eloHistory": [
         {
@@ -1259,6 +1259,10 @@
         },
         {
           "elo": 1501,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1520,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -1872,9 +1876,9 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "LON",
-      "elo": 1421,
+      "elo": 1402,
       "wins": 2,
-      "losses": 5,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1906,6 +1910,10 @@
         },
         {
           "elo": 1421,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1402,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2677,6 +2685,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770225462512",
+      "winnerId": "33",
+      "loserId": "52",
+      "winner": "Madi Berman",
+      "loser": "Saadat Nursultan",
+      "winnerScore": 14,
+      "loserScore": 12,
+      "winnerEloChange": 19,
+      "loserEloChange": -19,
+      "expectedWinProbability": 0.6131368201531431,
+      "timestamp": "2026-02-04T00:00:00.000Z"
+    },
     {
       "id": "1770225460760",
       "winnerId": "33",
@@ -4953,5 +4974,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:17:41.894Z"
+  "lastUpdated": "2026-02-04T17:17:42.852Z"
 }
