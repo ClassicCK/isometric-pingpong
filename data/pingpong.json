@@ -2320,9 +2320,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1511,
+      "elo": 1484,
       "wins": 5,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2370,6 +2370,10 @@
         },
         {
           "elo": 1511,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1484,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2506,8 +2510,8 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1518,
-      "wins": 3,
+      "elo": 1545,
+      "wins": 4,
       "losses": 2,
       "eloHistory": [
         {
@@ -2532,6 +2536,10 @@
         },
         {
           "elo": 1518,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1545,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2701,6 +2709,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770227003368",
+      "winnerId": "70",
+      "loserId": "64",
+      "winner": "Jamie Atkinson",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.5100724469274385,
+      "timestamp": "2026-02-04T00:00:00.000Z"
+    },
     {
       "id": "1770225655119",
       "winnerId": "52",
@@ -5016,5 +5037,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:20:55.447Z"
+  "lastUpdated": "2026-02-04T17:43:24.431Z"
 }
