@@ -668,8 +668,8 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1604,
-      "wins": 15,
+      "elo": 1620,
+      "wins": 16,
       "losses": 9,
       "eloHistory": [
         {
@@ -770,6 +770,10 @@
         },
         {
           "elo": 1604,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1620,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2256,9 +2260,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1487,
+      "elo": 1471,
       "wins": 3,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2290,6 +2294,10 @@
         },
         {
           "elo": 1487,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1471,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2613,6 +2621,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770220524228",
+      "winnerId": "20",
+      "loserId": "64",
+      "winner": "Charlie Parkin",
+      "loser": "Tom Sellers",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 16,
+      "loserEloChange": -16,
+      "expectedWinProbability": 0.6622877974308888,
+      "timestamp": "2026-02-04T00:00:00.000Z"
+    },
     {
       "id": "1770220502027",
       "winnerId": "20",
@@ -4785,5 +4806,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T15:55:03.299Z"
+  "lastUpdated": "2026-02-04T15:55:24.781Z"
 }
