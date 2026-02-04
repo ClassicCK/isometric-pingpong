@@ -1229,9 +1229,9 @@
       "name": "Madi Berman",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1491,
-      "wins": 5,
-      "losses": 5,
+      "elo": 1543,
+      "wins": 6,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1274,8 +1274,8 @@
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1491,
-          "timestamp": "2026-02-04T18:00:23.838Z"
+          "elo": 1543,
+          "timestamp": "2026-02-04T18:00:34.829Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1286,9 +1286,9 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1498,
-      "wins": 3,
-      "losses": 4,
+      "elo": 1446,
+      "wins": 2,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1319,8 +1319,8 @@
           "timestamp": "2026-02-03T00:00:00.000Z"
         },
         {
-          "elo": 1498,
-          "timestamp": "2026-02-04T18:00:23.838Z"
+          "elo": 1446,
+          "timestamp": "2026-02-04T18:00:34.829Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1672,7 +1672,7 @@
     },
     {
       "id": "47",
-      "name": "Joel Robinson",
+      "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
       "elo": 1428,
@@ -2328,9 +2328,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1511,
+      "elo": 1464,
       "wins": 5,
-      "losses": 6,
+      "losses": 8,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2378,6 +2378,14 @@
         },
         {
           "elo": 1511,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1484,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1464,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2514,8 +2522,8 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1518,
-      "wins": 3,
+      "elo": 1565,
+      "wins": 5,
       "losses": 2,
       "eloHistory": [
         {
@@ -2540,6 +2548,14 @@
         },
         {
           "elo": 1518,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1545,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1565,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2710,17 +2726,43 @@
   ],
   "matches": [
     {
-      "id": "1770228023853",
-      "winnerId": "34",
-      "loserId": "33",
-      "winner": "Tomek Paczkowski",
-      "loser": "Madi Berman",
+      "id": "1770228034860",
+      "winnerId": "33",
+      "loserId": "34",
+      "winner": "Madi Berman",
+      "loser": "Tomek Paczkowski",
       "winnerScore": 11,
-      "loserScore": 9,
-      "winnerEloChange": 29,
-      "loserEloChange": -29,
-      "expectedWinProbability": 0.4271277486054956,
-      "timestamp": "2026-02-04T18:00:23.838Z"
+      "loserScore": 8,
+      "winnerEloChange": 23,
+      "loserEloChange": -23,
+      "expectedWinProbability": 0.5728722513945045,
+      "timestamp": "2026-02-04T18:00:34.829Z"
+    },
+    {
+      "id": "1770227069810",
+      "winnerId": "70",
+      "loserId": "64",
+      "winner": "Jamie Atkinson",
+      "loser": "Tom Sellers",
+      "winnerScore": 17,
+      "loserScore": 15,
+      "winnerEloChange": 20,
+      "loserEloChange": -20,
+      "expectedWinProbability": 0.5868950233791,
+      "timestamp": "2026-02-04T00:00:00.000Z"
+    },
+    {
+      "id": "1770227003368",
+      "winnerId": "70",
+      "loserId": "64",
+      "winner": "Jamie Atkinson",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.5100724469274385,
+      "timestamp": "2026-02-04T00:00:00.000Z"
     },
     {
       "id": "1770225655119",
@@ -5037,5 +5079,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T18:00:24.863Z"
+  "lastUpdated": "2026-02-04T18:00:35.247Z"
 }
