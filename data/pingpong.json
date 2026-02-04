@@ -1646,9 +1646,9 @@
       "name": "Jenn Yin",
       "countryCode": "ca",
       "office": "NYC",
-      "elo": 1479,
+      "elo": 1457,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1657,6 +1657,10 @@
         {
           "elo": 1479,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1457,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2237,8 +2241,8 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1550,
-      "wins": 4,
+      "elo": 1572,
+      "wins": 5,
       "losses": 1,
       "eloHistory": [
         {
@@ -2264,6 +2268,10 @@
         {
           "elo": 1550,
           "timestamp": "2026-01-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1572,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2320,9 +2328,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1464,
+      "elo": 1511,
       "wins": 5,
-      "losses": 8,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2370,14 +2378,6 @@
         },
         {
           "elo": 1511,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1484,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1464,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2514,8 +2514,8 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1565,
-      "wins": 5,
+      "elo": 1518,
+      "wins": 3,
       "losses": 2,
       "eloHistory": [
         {
@@ -2540,14 +2540,6 @@
         },
         {
           "elo": 1518,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1545,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1565,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2718,30 +2710,17 @@
   ],
   "matches": [
     {
-      "id": "1770227069810",
-      "winnerId": "70",
-      "loserId": "64",
-      "winner": "Jamie Atkinson",
-      "loser": "Tom Sellers",
-      "winnerScore": 17,
-      "loserScore": 15,
-      "winnerEloChange": 20,
-      "loserEloChange": -20,
-      "expectedWinProbability": 0.5868950233791,
-      "timestamp": "2026-02-04T00:00:00.000Z"
-    },
-    {
-      "id": "1770227003368",
-      "winnerId": "70",
-      "loserId": "64",
-      "winner": "Jamie Atkinson",
-      "loser": "Tom Sellers",
+      "id": "1770227375291",
+      "winnerId": "61",
+      "loserId": "46",
+      "winner": "Michael Shell",
+      "loser": "Jenn Yin",
       "winnerScore": 11,
-      "loserScore": 8,
-      "winnerEloChange": 27,
-      "loserEloChange": -27,
-      "expectedWinProbability": 0.5100724469274385,
-      "timestamp": "2026-02-04T00:00:00.000Z"
+      "loserScore": 7,
+      "winnerEloChange": 22,
+      "loserEloChange": -22,
+      "expectedWinProbability": 0.6007782458900109,
+      "timestamp": "2026-01-29T00:00:00.000Z"
     },
     {
       "id": "1770225655119",
@@ -5058,5 +5037,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:44:30.580Z"
+  "lastUpdated": "2026-02-04T17:49:35.718Z"
 }
