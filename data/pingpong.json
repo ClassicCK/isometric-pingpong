@@ -111,7 +111,7 @@
     {
       "id": "5",
       "name": "Sophie Harris",
-      "countryCode": "gb",
+      "countryCode": "jp",
       "office": "LON",
       "elo": 1500,
       "wins": 1,
@@ -4743,5 +4743,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T13:01:22.915Z"
+  "lastUpdated": "2026-02-04T14:12:57.904Z"
 }
