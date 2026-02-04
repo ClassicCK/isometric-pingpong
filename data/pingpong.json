@@ -267,8 +267,8 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1642,
-      "wins": 8,
+      "elo": 1605,
+      "wins": 7,
       "losses": 1,
       "eloHistory": [
         {
@@ -305,10 +305,6 @@
         },
         {
           "elo": 1605,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1642,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -563,9 +559,9 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1681,
+      "elo": 1718,
       "wins": 17,
-      "losses": 9,
+      "losses": 8,
       "eloHistory": [
         {
           "elo": 1500,
@@ -670,10 +666,6 @@
         {
           "elo": 1718,
           "timestamp": "2026-02-04T16:45:51.835Z"
-        },
-        {
-          "elo": 1681,
-          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1872,9 +1864,9 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "LON",
-      "elo": 1473,
+      "elo": 1443,
       "wins": 2,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1899,6 +1891,10 @@
         {
           "elo": 1473,
           "timestamp": "2026-01-26T00:00:00.000Z"
+        },
+        {
+          "elo": 1443,
+          "timestamp": "2026-02-04T17:02:33.301Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2288,8 +2284,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1452,
-      "wins": 3,
+      "elo": 1482,
+      "wins": 4,
       "losses": 6,
       "eloHistory": [
         {
@@ -2331,6 +2327,10 @@
         {
           "elo": 1452,
           "timestamp": "2026-02-04T16:58:19.039Z"
+        },
+        {
+          "elo": 1482,
+          "timestamp": "2026-02-04T17:02:33.301Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2662,17 +2662,17 @@
   ],
   "matches": [
     {
-      "id": "1770224515106",
-      "winnerId": "11",
-      "loserId": "19",
-      "winner": "Paul Puget",
-      "loser": "Neil Hacker",
-      "winnerScore": 21,
-      "loserScore": 9,
-      "winnerEloChange": 37,
-      "loserEloChange": -37,
-      "expectedWinProbability": 0.34288131351292145,
-      "timestamp": "2026-02-04T00:00:00.000Z"
+      "id": "1770224553308",
+      "winnerId": "64",
+      "loserId": "52",
+      "winner": "Tom Sellers",
+      "loser": "Saadat Nursultan",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 30,
+      "loserEloChange": -30,
+      "expectedWinProbability": 0.469815319996098,
+      "timestamp": "2026-02-04T17:02:33.301Z"
     },
     {
       "id": "1770224299055",
@@ -4911,5 +4911,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:01:55.928Z"
+  "lastUpdated": "2026-02-04T17:02:34.131Z"
 }
