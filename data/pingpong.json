@@ -1229,9 +1229,9 @@
       "name": "Madi Berman",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1520,
+      "elo": 1491,
       "wins": 5,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1272,6 +1272,10 @@
         {
           "elo": 1520,
           "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1491,
+          "timestamp": "2026-02-04T18:00:23.838Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1282,8 +1286,8 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1469,
-      "wins": 2,
+      "elo": 1498,
+      "wins": 3,
       "losses": 4,
       "eloHistory": [
         {
@@ -1313,6 +1317,10 @@
         {
           "elo": 1469,
           "timestamp": "2026-02-03T00:00:00.000Z"
+        },
+        {
+          "elo": 1498,
+          "timestamp": "2026-02-04T18:00:23.838Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1664,7 +1672,7 @@
     },
     {
       "id": "47",
-      "name": "Joel 'The Soul Reaper' Robinson",
+      "name": "Joel Robinson",
       "countryCode": "gb",
       "office": "LON",
       "elo": 1428,
@@ -2320,9 +2328,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1464,
+      "elo": 1511,
       "wins": 5,
-      "losses": 8,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2370,14 +2378,6 @@
         },
         {
           "elo": 1511,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1484,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1464,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2514,8 +2514,8 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1565,
-      "wins": 5,
+      "elo": 1518,
+      "wins": 3,
       "losses": 2,
       "eloHistory": [
         {
@@ -2540,14 +2540,6 @@
         },
         {
           "elo": 1518,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1545,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1565,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2718,30 +2710,17 @@
   ],
   "matches": [
     {
-      "id": "1770227069810",
-      "winnerId": "70",
-      "loserId": "64",
-      "winner": "Jamie Atkinson",
-      "loser": "Tom Sellers",
-      "winnerScore": 17,
-      "loserScore": 15,
-      "winnerEloChange": 20,
-      "loserEloChange": -20,
-      "expectedWinProbability": 0.5868950233791,
-      "timestamp": "2026-02-04T00:00:00.000Z"
-    },
-    {
-      "id": "1770227003368",
-      "winnerId": "70",
-      "loserId": "64",
-      "winner": "Jamie Atkinson",
-      "loser": "Tom Sellers",
+      "id": "1770228023853",
+      "winnerId": "34",
+      "loserId": "33",
+      "winner": "Tomek Paczkowski",
+      "loser": "Madi Berman",
       "winnerScore": 11,
-      "loserScore": 8,
-      "winnerEloChange": 27,
-      "loserEloChange": -27,
-      "expectedWinProbability": 0.5100724469274385,
-      "timestamp": "2026-02-04T00:00:00.000Z"
+      "loserScore": 9,
+      "winnerEloChange": 29,
+      "loserEloChange": -29,
+      "expectedWinProbability": 0.4271277486054956,
+      "timestamp": "2026-02-04T18:00:23.838Z"
     },
     {
       "id": "1770225655119",
@@ -5058,5 +5037,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:53:35.291Z"
+  "lastUpdated": "2026-02-04T18:00:24.863Z"
 }
