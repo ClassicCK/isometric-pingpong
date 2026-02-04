@@ -1195,7 +1195,7 @@
     {
       "id": "33",
       "name": "Madi Berman",
-      "countryCode": "np",
+      "countryCode": "us",
       "office": "LON",
       "elo": 1529,
       "wins": 3,
@@ -4743,5 +4743,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T13:00:25.164Z"
+  "lastUpdated": "2026-02-04T13:01:22.915Z"
 }
