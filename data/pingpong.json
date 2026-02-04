@@ -131,7 +131,7 @@
         },
         {
           "elo": 1471,
-          "timestamp": "2026-02-04T17:07:53.968Z"
+          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2338,7 +2338,7 @@
         },
         {
           "elo": 1511,
-          "timestamp": "2026-02-04T17:07:53.968Z"
+          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2670,7 +2670,7 @@
   ],
   "matches": [
     {
-      "id": "1770224873978",
+      "id": "1770224915373",
       "winnerId": "64",
       "loserId": "5",
       "winner": "Tom Sellers",
@@ -2680,7 +2680,7 @@
       "winnerEloChange": 29,
       "loserEloChange": -29,
       "expectedWinProbability": 0.4741190691088309,
-      "timestamp": "2026-02-04T17:07:53.968Z"
+      "timestamp": "2026-02-04T00:00:00.000Z"
     },
     {
       "id": "1770224553308",
@@ -4932,5 +4932,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:07:54.944Z"
+  "lastUpdated": "2026-02-04T17:08:36.265Z"
 }
