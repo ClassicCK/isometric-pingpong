@@ -113,9 +113,9 @@
       "name": "Sophie Harris",
       "countryCode": "jp",
       "office": "LON",
-      "elo": 1500,
+      "elo": 1471,
       "wins": 1,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -128,6 +128,10 @@
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1471,
+          "timestamp": "2026-02-04T17:07:53.968Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -267,8 +271,8 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1642,
-      "wins": 8,
+      "elo": 1605,
+      "wins": 7,
       "losses": 1,
       "eloHistory": [
         {
@@ -305,10 +309,6 @@
         },
         {
           "elo": 1605,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1642,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -563,9 +563,9 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1681,
+      "elo": 1718,
       "wins": 17,
-      "losses": 9,
+      "losses": 8,
       "eloHistory": [
         {
           "elo": 1500,
@@ -670,10 +670,6 @@
         {
           "elo": 1718,
           "timestamp": "2026-02-04T16:45:51.835Z"
-        },
-        {
-          "elo": 1681,
-          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2292,8 +2288,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1482,
-      "wins": 4,
+      "elo": 1511,
+      "wins": 5,
       "losses": 6,
       "eloHistory": [
         {
@@ -2339,6 +2335,10 @@
         {
           "elo": 1482,
           "timestamp": "2026-02-04T17:02:33.301Z"
+        },
+        {
+          "elo": 1511,
+          "timestamp": "2026-02-04T17:07:53.968Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2670,17 +2670,17 @@
   ],
   "matches": [
     {
-      "id": "1770224824787",
-      "winnerId": "11",
-      "loserId": "19",
-      "winner": "Paul Puget",
-      "loser": "Neil Hacker",
-      "winnerScore": 21,
-      "loserScore": 9,
-      "winnerEloChange": 37,
-      "loserEloChange": -37,
-      "expectedWinProbability": 0.34288131351292145,
-      "timestamp": "2026-02-04T00:00:00.000Z"
+      "id": "1770224873978",
+      "winnerId": "64",
+      "loserId": "5",
+      "winner": "Tom Sellers",
+      "loser": "Sophie Harris",
+      "winnerScore": 11,
+      "loserScore": 0,
+      "winnerEloChange": 29,
+      "loserEloChange": -29,
+      "expectedWinProbability": 0.4741190691088309,
+      "timestamp": "2026-02-04T17:07:53.968Z"
     },
     {
       "id": "1770224553308",
@@ -4932,5 +4932,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:07:05.655Z"
+  "lastUpdated": "2026-02-04T17:07:54.944Z"
 }
