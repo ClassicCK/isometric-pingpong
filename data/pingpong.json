@@ -559,8 +559,8 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1686,
-      "wins": 15,
+      "elo": 1700,
+      "wins": 16,
       "losses": 8,
       "eloHistory": [
         {
@@ -658,6 +658,10 @@
         {
           "elo": 1686,
           "timestamp": "2026-02-02T19:09:07.215Z"
+        },
+        {
+          "elo": 1700,
+          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1205,9 +1209,9 @@
       "name": "Madi Berman",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1498,
+      "elo": 1484,
       "wins": 3,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1235,6 +1239,10 @@
         },
         {
           "elo": 1498,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1484,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2629,6 +2637,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770223390290",
+      "winnerId": "19",
+      "loserId": "33",
+      "winner": "Neil Hacker",
+      "loser": "Madi Berman",
+      "winnerScore": 21,
+      "loserScore": 9,
+      "winnerEloChange": 14,
+      "loserEloChange": -14,
+      "expectedWinProbability": 0.7469129214289432,
+      "timestamp": "2026-02-04T00:00:00.000Z"
+    },
     {
       "id": "1770222979145",
       "winnerId": "70",
@@ -4827,5 +4848,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T16:36:20.343Z"
+  "lastUpdated": "2026-02-04T16:43:11.367Z"
 }
