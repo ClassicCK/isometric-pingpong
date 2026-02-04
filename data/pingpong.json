@@ -1871,9 +1871,9 @@
       "name": "Ryan Huang",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1484,
+      "elo": 1465,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1882,6 +1882,10 @@
         {
           "elo": 1484,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1465,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2245,8 +2249,8 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1594,
-      "wins": 6,
+      "elo": 1613,
+      "wins": 7,
       "losses": 1,
       "eloHistory": [
         {
@@ -2279,6 +2283,10 @@
         },
         {
           "elo": 1594,
+          "timestamp": "2026-01-29T00:00:00.000Z"
+        },
+        {
+          "elo": 1613,
           "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
@@ -2717,6 +2725,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770227436502",
+      "winnerId": "61",
+      "loserId": "51",
+      "winner": "Michael Shell",
+      "loser": "Ryan Huang",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 19,
+      "loserEloChange": -19,
+      "expectedWinProbability": 0.6532171672188698,
+      "timestamp": "2026-01-29T00:00:00.000Z"
+    },
     {
       "id": "1770227408172",
       "winnerId": "61",
@@ -5058,5 +5079,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:50:08.640Z"
+  "lastUpdated": "2026-02-04T17:50:36.909Z"
 }
