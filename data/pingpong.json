@@ -489,9 +489,9 @@
       "name": "Kate Rodger",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1510,
+      "elo": 1488,
       "wins": 1,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -504,6 +504,10 @@
         {
           "elo": 1510,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1488,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2241,8 +2245,8 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1572,
-      "wins": 5,
+      "elo": 1594,
+      "wins": 6,
       "losses": 1,
       "eloHistory": [
         {
@@ -2271,6 +2275,10 @@
         },
         {
           "elo": 1572,
+          "timestamp": "2026-01-29T00:00:00.000Z"
+        },
+        {
+          "elo": 1594,
           "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
@@ -2709,6 +2717,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770227408172",
+      "winnerId": "61",
+      "loserId": "17",
+      "winner": "Michael Shell",
+      "loser": "Kate Rodger",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 22,
+      "loserEloChange": -22,
+      "expectedWinProbability": 0.5882899718631628,
+      "timestamp": "2026-01-29T00:00:00.000Z"
+    },
     {
       "id": "1770227375291",
       "winnerId": "61",
@@ -5037,5 +5058,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T17:49:35.718Z"
+  "lastUpdated": "2026-02-04T17:50:08.640Z"
 }
