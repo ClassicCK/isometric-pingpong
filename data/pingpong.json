@@ -1873,9 +1873,9 @@
       "name": "Izzy Piper",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1508,
+      "elo": 1478,
       "wins": 2,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1896,6 +1896,10 @@
         {
           "elo": 1508,
           "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1478,
+          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2248,8 +2252,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1478,
-      "wins": 2,
+      "elo": 1508,
+      "wins": 3,
       "losses": 3,
       "eloHistory": [
         {
@@ -2275,6 +2279,10 @@
         {
           "elo": 1478,
           "timestamp": "2026-02-04T11:16:57.732Z"
+        },
+        {
+          "elo": 1508,
+          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2597,6 +2605,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770219485717",
+      "winnerId": "64",
+      "loserId": "53",
+      "winner": "Tom Sellers",
+      "loser": "Izzy Piper",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 30,
+      "loserEloChange": -30,
+      "expectedWinProbability": 0.4569335079777882,
+      "timestamp": "2026-02-04T00:00:00.000Z"
+    },
     {
       "id": "1770210024476",
       "winnerId": "1769273367436",
@@ -4743,5 +4764,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T14:12:57.904Z"
+  "lastUpdated": "2026-02-04T15:38:06.807Z"
 }
