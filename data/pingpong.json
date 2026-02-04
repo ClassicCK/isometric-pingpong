@@ -563,7 +563,7 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1719,
+      "elo": 1718,
       "wins": 17,
       "losses": 8,
       "eloHistory": [
@@ -664,11 +664,11 @@
           "timestamp": "2026-02-02T19:09:07.215Z"
         },
         {
-          "elo": 1703,
+          "elo": 1702,
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1719,
+          "elo": 1718,
           "timestamp": "2026-02-04T16:45:51.835Z"
         }
       ],
@@ -1233,8 +1233,8 @@
       "name": "Madi Supreme",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1525,
-      "wins": 6,
+      "elo": 1509,
+      "wins": 5,
       "losses": 5,
       "eloHistory": [
         {
@@ -1270,19 +1270,15 @@
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1542,
+          "elo": 1505,
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1525,
+          "elo": 1480,
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1498,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1525,
+          "elo": 1509,
           "timestamp": "2026-02-04T18:00:34.829Z"
         }
       ],
@@ -1294,7 +1290,7 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1448,
+      "elo": 1446,
       "wins": 3,
       "losses": 6,
       "eloHistory": [
@@ -1331,11 +1327,11 @@
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1471,
+          "elo": 1469,
           "timestamp": "2026-02-04T18:00:34.829Z"
         },
         {
-          "elo": 1448,
+          "elo": 1446,
           "timestamp": "2026-02-04T18:08:08.999Z"
         }
       ],
@@ -1912,9 +1908,9 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "LON",
-      "elo": 1421,
+      "elo": 1440,
       "wins": 3,
-      "losses": 6,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1949,11 +1945,7 @@
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1450,
-          "timestamp": "2026-02-04T00:00:00.000Z"
-        },
-        {
-          "elo": 1421,
+          "elo": 1440,
           "timestamp": "2026-02-04T17:02:33.301Z"
         }
       ],
@@ -2344,7 +2336,7 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1468,
+      "elo": 1470,
       "wins": 5,
       "losses": 8,
       "eloHistory": [
@@ -2401,7 +2393,7 @@
           "timestamp": "2026-02-04T16:58:19.039Z"
         },
         {
-          "elo": 1468,
+          "elo": 1470,
           "timestamp": "2026-02-04T17:02:33.301Z"
         }
       ],
@@ -2538,7 +2530,7 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1565,
+      "elo": 1563,
       "wins": 5,
       "losses": 2,
       "eloHistory": [
@@ -2571,7 +2563,7 @@
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1565,
+          "elo": 1563,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -2764,7 +2756,7 @@
       "loserScore": 4,
       "winnerEloChange": 24,
       "loserEloChange": -24,
-      "expectedWinProbability": 0.5827018849642301,
+      "expectedWinProbability": 0.5854986786718095,
       "timestamp": "2026-02-04T18:08:08.999Z"
     },
     {
@@ -2790,7 +2782,7 @@
       "loserScore": 8,
       "winnerEloChange": 23,
       "loserEloChange": -23,
-      "expectedWinProbability": 0.5,
+      "expectedWinProbability": 0.4741190691088309,
       "timestamp": "2026-02-04T18:00:34.829Z"
     },
     {
@@ -2833,19 +2825,6 @@
       "timestamp": "2026-02-04T00:00:00.000Z"
     },
     {
-      "id": "1770225462512",
-      "winnerId": "33",
-      "loserId": "52",
-      "winner": "Madi Berman",
-      "loser": "Saadat Nursultan",
-      "winnerScore": 14,
-      "loserScore": 12,
-      "winnerEloChange": 19,
-      "loserEloChange": -19,
-      "expectedWinProbability": 0.5,
-      "timestamp": "2026-02-04T00:00:00.000Z"
-    },
-    {
       "id": "1770225460760",
       "winnerId": "33",
       "loserId": "52",
@@ -2855,7 +2834,7 @@
       "loserScore": 12,
       "winnerEloChange": 22,
       "loserEloChange": -22,
-      "expectedWinProbability": 0.5714631174083814,
+      "expectedWinProbability": 0.5,
       "timestamp": "2026-02-04T00:00:00.000Z"
     },
     {
@@ -2881,7 +2860,7 @@
       "loserScore": 4,
       "winnerEloChange": 30,
       "loserEloChange": -30,
-      "expectedWinProbability": 0.4841750147352649,
+      "expectedWinProbability": 0.4540780772195163,
       "timestamp": "2026-02-04T17:02:33.301Z"
     },
     {
@@ -2907,7 +2886,7 @@
       "loserScore": 7,
       "winnerEloChange": 16,
       "loserEloChange": -16,
-      "expectedWinProbability": 0.7129021574054539,
+      "expectedWinProbability": 0.7117225243427553,
       "timestamp": "2026-02-04T16:45:51.835Z"
     },
     {
@@ -2920,7 +2899,7 @@
       "loserScore": 9,
       "winnerEloChange": 14,
       "loserEloChange": -14,
-      "expectedWinProbability": 0.6961287704295998,
+      "expectedWinProbability": 0.7210782431975601,
       "timestamp": "2026-02-04T00:00:00.000Z"
     },
     {
@@ -2933,7 +2912,7 @@
       "loserScore": 4,
       "winnerEloChange": 31,
       "loserEloChange": -31,
-      "expectedWinProbability": 0.5186997779295586,
+      "expectedWinProbability": 0.5473485180458647,
       "timestamp": "2026-02-04T00:00:00.000Z"
     },
     {
@@ -5121,5 +5100,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T23:24:17.083Z"
+  "lastUpdated": "2026-02-04T23:24:19.917Z"
 }
