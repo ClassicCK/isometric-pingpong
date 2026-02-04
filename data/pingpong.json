@@ -271,8 +271,8 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1605,
-      "wins": 7,
+      "elo": 1642,
+      "wins": 8,
       "losses": 1,
       "eloHistory": [
         {
@@ -309,6 +309,10 @@
         },
         {
           "elo": 1605,
+          "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1642,
           "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
@@ -563,9 +567,9 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1718,
+      "elo": 1681,
       "wins": 17,
-      "losses": 8,
+      "losses": 9,
       "eloHistory": [
         {
           "elo": 1500,
@@ -670,6 +674,10 @@
         {
           "elo": 1718,
           "timestamp": "2026-02-04T16:45:51.835Z"
+        },
+        {
+          "elo": 1681,
+          "timestamp": "2026-02-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2749,6 +2757,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770233157530",
+      "winnerId": "11",
+      "loserId": "19",
+      "winner": "Paul Puget",
+      "loser": "Neil Hacker",
+      "winnerScore": 21,
+      "loserScore": 5,
+      "winnerEloChange": 37,
+      "loserEloChange": -37,
+      "expectedWinProbability": 0.34288131351292145,
+      "timestamp": "2026-02-04T00:00:00.000Z"
+    },
     {
       "id": "1770228825326",
       "winnerId": "24",
@@ -5142,5 +5163,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T18:14:02.937Z"
+  "lastUpdated": "2026-02-04T19:25:58.747Z"
 }
