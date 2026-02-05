@@ -23,7 +23,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "2",
@@ -135,7 +135,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "6",
@@ -461,7 +461,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "16",
@@ -489,9 +489,9 @@
       "name": "Kate Rodger",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1510,
+      "elo": 1488,
       "wins": 1,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -504,10 +504,14 @@
         {
           "elo": 1510,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1488,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 35
     },
     {
       "id": "18",
@@ -790,7 +794,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "21",
@@ -836,7 +840,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 31
     },
     {
       "id": "23",
@@ -1076,7 +1080,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "27",
@@ -1155,7 +1159,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 24
     },
     {
       "id": "30",
@@ -1336,7 +1340,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 33
     },
     {
       "id": "35",
@@ -1406,7 +1410,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 6
     },
     {
       "id": "37",
@@ -1485,7 +1489,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 25
     },
     {
       "id": "40",
@@ -1614,7 +1618,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 32
     },
     {
       "id": "45",
@@ -1991,7 +1995,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "54",
@@ -2033,7 +2037,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 34
     },
     {
       "id": "56",
@@ -2257,8 +2261,8 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1572,
-      "wins": 5,
+      "elo": 1594,
+      "wins": 6,
       "losses": 1,
       "eloHistory": [
         {
@@ -2288,10 +2292,14 @@
         {
           "elo": 1572,
           "timestamp": "2026-01-29T00:00:00.000Z"
+        },
+        {
+          "elo": 1594,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 5
     },
     {
       "id": "62",
@@ -2337,7 +2345,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 26
     },
     {
       "id": "64",
@@ -2431,7 +2439,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "66",
@@ -2622,7 +2630,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "73",
@@ -2639,7 +2647,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "74",
@@ -2656,7 +2664,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "1769273367436",
@@ -2741,6 +2749,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770255173419",
+      "winnerId": "61",
+      "loserId": "17",
+      "winner": "Michael Shell",
+      "loser": "Kate Rodger",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 22,
+      "loserEloChange": -22,
+      "expectedWinProbability": 0.5882899718631628,
+      "timestamp": "2026-01-29T00:00:00.000Z"
+    },
     {
       "id": "1770255132322",
       "winnerId": "61",
@@ -5121,5 +5142,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-05T01:32:13.327Z"
+  "lastUpdated": "2026-02-05T01:32:53.797Z"
 }
