@@ -235,7 +235,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "10",
@@ -436,7 +436,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "15",
@@ -673,7 +673,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 1
     },
     {
       "id": "20",
@@ -990,7 +990,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "25",
@@ -1666,9 +1666,9 @@
       "name": "Jenn Yin",
       "countryCode": "ca",
       "office": "NYC",
-      "elo": 1479,
+      "elo": 1457,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1677,10 +1677,14 @@
         {
           "elo": 1479,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1457,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 71
     },
     {
       "id": "47",
@@ -1793,7 +1797,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 67
     },
     {
       "id": "48",
@@ -1950,7 +1954,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "53",
@@ -2126,7 +2130,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 1
+      "lastWeekRank": 4
     },
     {
       "id": "57",
@@ -2184,7 +2188,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "59",
@@ -2253,8 +2257,8 @@
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1550,
-      "wins": 4,
+      "elo": 1572,
+      "wins": 5,
       "losses": 1,
       "eloHistory": [
         {
@@ -2280,6 +2284,10 @@
         {
           "elo": 1550,
           "timestamp": "2026-01-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1572,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2733,6 +2741,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770255132322",
+      "winnerId": "61",
+      "loserId": "46",
+      "winner": "Michael Shell",
+      "loser": "Jenn Yin",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 22,
+      "loserEloChange": -22,
+      "expectedWinProbability": 0.6007782458900109,
+      "timestamp": "2026-01-29T00:00:00.000Z"
+    },
     {
       "id": "1770228825326",
       "winnerId": "24",
@@ -5100,5 +5121,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-04T23:24:19.917Z"
+  "lastUpdated": "2026-02-05T01:32:13.327Z"
 }
