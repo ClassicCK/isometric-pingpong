@@ -387,7 +387,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 60
     },
     {
       "id": "14",
@@ -861,7 +861,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 61
     },
     {
       "id": "24",
@@ -994,7 +994,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "25",
@@ -1287,7 +1287,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 59
+      "lastWeekRank": 58
     },
     {
       "id": "34",
@@ -1801,7 +1801,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "48",
@@ -1830,7 +1830,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 63
     },
     {
       "id": "49",
@@ -1895,9 +1895,9 @@
       "name": "Ryan Huang",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1484,
+      "elo": 1465,
       "wins": 0,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1906,10 +1906,14 @@
         {
           "elo": 1484,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1465,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 51
+      "lastWeekRank": 68
     },
     {
       "id": "52",
@@ -1958,7 +1962,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "53",
@@ -2016,7 +2020,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 60
+      "lastWeekRank": 59
     },
     {
       "id": "55",
@@ -2134,7 +2138,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 5
     },
     {
       "id": "57",
@@ -2171,7 +2175,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 51
     },
     {
       "id": "58",
@@ -2192,7 +2196,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 67
     },
     {
       "id": "59",
@@ -2254,15 +2258,15 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 62
     },
     {
       "id": "61",
       "name": "Michael Shell",
       "countryCode": "us",
       "office": "NYC",
-      "elo": 1594,
-      "wins": 6,
+      "elo": 1613,
+      "wins": 7,
       "losses": 1,
       "eloHistory": [
         {
@@ -2296,10 +2300,14 @@
         {
           "elo": 1594,
           "timestamp": "2026-01-29T00:00:00.000Z"
+        },
+        {
+          "elo": 1613,
+          "timestamp": "2026-01-29T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 3
     },
     {
       "id": "62",
@@ -2320,7 +2328,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 52
     },
     {
       "id": "63",
@@ -2414,7 +2422,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "65",
@@ -2460,7 +2468,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "67",
@@ -2481,7 +2489,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 55
     },
     {
       "id": "68",
@@ -2539,7 +2547,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 56
     },
     {
       "id": "70",
@@ -2605,7 +2613,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 57
     },
     {
       "id": "72",
@@ -2745,10 +2753,23 @@
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 4
     }
   ],
   "matches": [
+    {
+      "id": "1770255199775",
+      "winnerId": "61",
+      "loserId": "51",
+      "winner": "Michael Shell",
+      "loser": "Ryan Huang",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 19,
+      "loserEloChange": -19,
+      "expectedWinProbability": 0.6532171672188698,
+      "timestamp": "2026-01-29T00:00:00.000Z"
+    },
     {
       "id": "1770255173419",
       "winnerId": "61",
@@ -5142,5 +5163,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-05T01:32:53.797Z"
+  "lastUpdated": "2026-02-05T01:33:20.125Z"
 }
