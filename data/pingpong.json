@@ -52,7 +52,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 38
+      "lastWeekRank": 21
     },
     {
       "id": "3",
@@ -135,7 +135,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 22
     },
     {
       "id": "6",
@@ -391,7 +391,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 60
+      "lastWeekRank": 59
     },
     {
       "id": "14",
@@ -465,7 +465,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 23
     },
     {
       "id": "16",
@@ -515,7 +515,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 36
     },
     {
       "id": "18",
@@ -830,9 +830,9 @@
       "name": "Chris Podgorney",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1498,
+      "elo": 1471,
       "wins": 1,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -845,10 +845,14 @@
         {
           "elo": 1498,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1471,
+          "timestamp": "2026-02-06T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 32
     },
     {
       "id": "23",
@@ -869,7 +873,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 60
     },
     {
       "id": "24",
@@ -1002,7 +1006,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 63
     },
     {
       "id": "25",
@@ -1088,7 +1092,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 24
     },
     {
       "id": "27",
@@ -1167,7 +1171,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 25
     },
     {
       "id": "30",
@@ -1295,7 +1299,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 57
     },
     {
       "id": "34",
@@ -1348,7 +1352,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 34
     },
     {
       "id": "35",
@@ -1369,7 +1373,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 37
     },
     {
       "id": "36",
@@ -1497,7 +1501,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 26
     },
     {
       "id": "40",
@@ -1522,7 +1526,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 48
+      "lastWeekRank": 66
     },
     {
       "id": "41",
@@ -1543,7 +1547,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 49
+      "lastWeekRank": 48
     },
     {
       "id": "42",
@@ -1593,7 +1597,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 38
     },
     {
       "id": "44",
@@ -1626,7 +1630,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 33
     },
     {
       "id": "45",
@@ -1809,7 +1813,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "48",
@@ -1838,7 +1842,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 62
     },
     {
       "id": "49",
@@ -1896,7 +1900,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 50
+      "lastWeekRank": 49
     },
     {
       "id": "51",
@@ -1970,7 +1974,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "53",
@@ -2028,7 +2032,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 59
+      "lastWeekRank": 58
     },
     {
       "id": "55",
@@ -2049,7 +2053,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 35
     },
     {
       "id": "56",
@@ -2183,7 +2187,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 51
+      "lastWeekRank": 50
     },
     {
       "id": "58",
@@ -2266,7 +2270,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 61
     },
     {
       "id": "61",
@@ -2336,7 +2340,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 51
     },
     {
       "id": "63",
@@ -2361,15 +2365,15 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 27
     },
     {
       "id": "64",
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1470,
-      "wins": 5,
+      "elo": 1497,
+      "wins": 6,
       "losses": 8,
       "eloHistory": [
         {
@@ -2427,10 +2431,14 @@
         {
           "elo": 1470,
           "timestamp": "2026-02-04T17:02:33.301Z"
+        },
+        {
+          "elo": 1497,
+          "timestamp": "2026-02-06T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 52
     },
     {
       "id": "65",
@@ -2455,7 +2463,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 28
     },
     {
       "id": "66",
@@ -2476,7 +2484,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "67",
@@ -2497,7 +2505,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "68",
@@ -2555,7 +2563,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 55
     },
     {
       "id": "70",
@@ -2621,7 +2629,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 56
     },
     {
       "id": "72",
@@ -2646,7 +2654,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 29
     },
     {
       "id": "73",
@@ -2663,7 +2671,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 30
     },
     {
       "id": "74",
@@ -2680,7 +2688,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 31
     },
     {
       "id": "1769273367436",
@@ -2765,6 +2773,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770374391194",
+      "winnerId": "64",
+      "loserId": "22",
+      "winner": "Tom Sellers",
+      "loser": "Chris Podgorney",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.45979177167625435,
+      "timestamp": "2026-02-06T00:00:00.000Z"
+    },
     {
       "id": "1770313663524",
       "winnerId": "11",
@@ -5184,5 +5205,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-05T17:47:44.926Z"
+  "lastUpdated": "2026-02-06T10:39:52.480Z"
 }
