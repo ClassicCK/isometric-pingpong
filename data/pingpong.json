@@ -440,7 +440,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 34
     },
     {
       "id": "15",
@@ -880,8 +880,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1568,
-      "wins": 15,
+      "elo": 1594,
+      "wins": 16,
       "losses": 14,
       "eloHistory": [
         {
@@ -1003,6 +1003,10 @@
         {
           "elo": 1568,
           "timestamp": "2026-02-04T18:13:45.309Z"
+        },
+        {
+          "elo": 1594,
+          "timestamp": "2026-02-06T12:38:50.031Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1051,7 +1055,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 72
     },
     {
       "id": "26",
@@ -1099,9 +1103,9 @@
       "name": "Mark Pullin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1537,
+      "elo": 1511,
       "wins": 3,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1122,6 +1126,10 @@
         {
           "elo": 1537,
           "timestamp": "2026-01-14T00:00:00.000Z"
+        },
+        {
+          "elo": 1511,
+          "timestamp": "2026-02-06T12:38:50.031Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1352,7 +1360,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 35
     },
     {
       "id": "35",
@@ -1447,7 +1455,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 72
+      "lastWeekRank": 71
     },
     {
       "id": "38",
@@ -1700,7 +1708,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "47",
@@ -2053,7 +2061,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 36
     },
     {
       "id": "56",
@@ -2781,6 +2789,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770381530047",
+      "winnerId": "24",
+      "loserId": "27",
+      "winner": "George Pool",
+      "loser": "Mark Pullin",
+      "winnerScore": 11,
+      "loserScore": 1,
+      "winnerEloChange": 26,
+      "loserEloChange": -26,
+      "expectedWinProbability": 0.544494573083008,
+      "timestamp": "2026-02-06T12:38:50.031Z"
+    },
     {
       "id": "1770380488545",
       "winnerId": "64",
@@ -5226,5 +5247,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-06T12:21:29.775Z"
+  "lastUpdated": "2026-02-06T12:38:51.679Z"
 }
