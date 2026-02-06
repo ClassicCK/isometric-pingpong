@@ -106,7 +106,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 39
+      "lastWeekRank": 40
     },
     {
       "id": "5",
@@ -160,7 +160,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 40
+      "lastWeekRank": 41
     },
     {
       "id": "7",
@@ -181,7 +181,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 41
+      "lastWeekRank": 42
     },
     {
       "id": "8",
@@ -235,7 +235,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "10",
@@ -440,7 +440,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 36
     },
     {
       "id": "15",
@@ -486,7 +486,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 42
+      "lastWeekRank": 43
     },
     {
       "id": "17",
@@ -515,7 +515,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 37
     },
     {
       "id": "18",
@@ -823,7 +823,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 43
+      "lastWeekRank": 44
     },
     {
       "id": "22",
@@ -1051,7 +1051,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 44
+      "lastWeekRank": 70
     },
     {
       "id": "26",
@@ -1373,7 +1373,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 38
     },
     {
       "id": "36",
@@ -1597,7 +1597,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 38
+      "lastWeekRank": 39
     },
     {
       "id": "44",
@@ -2372,8 +2372,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1497,
-      "wins": 6,
+      "elo": 1527,
+      "wins": 7,
       "losses": 8,
       "eloHistory": [
         {
@@ -2434,6 +2434,10 @@
         },
         {
           "elo": 1497,
+          "timestamp": "2026-02-06T00:00:00.000Z"
+        },
+        {
+          "elo": 1527,
           "timestamp": "2026-02-06T00:00:00.000Z"
         }
       ],
@@ -2570,9 +2574,9 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1563,
+      "elo": 1533,
       "wins": 5,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2605,6 +2609,10 @@
         {
           "elo": 1563,
           "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1533,
+          "timestamp": "2026-02-06T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2773,6 +2781,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770380488545",
+      "winnerId": "64",
+      "loserId": "70",
+      "winner": "Tom Sellers",
+      "loser": "Jamie Atkinson",
+      "winnerScore": 13,
+      "loserScore": 11,
+      "winnerEloChange": 30,
+      "loserEloChange": -30,
+      "expectedWinProbability": 0.4061446147638222,
+      "timestamp": "2026-02-06T00:00:00.000Z"
+    },
     {
       "id": "1770374391194",
       "winnerId": "64",
@@ -5205,5 +5226,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-06T10:39:52.480Z"
+  "lastUpdated": "2026-02-06T12:21:29.775Z"
 }
