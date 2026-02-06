@@ -1948,8 +1948,8 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "LON",
-      "elo": 1440,
-      "wins": 3,
+      "elo": 1464,
+      "wins": 4,
       "losses": 5,
       "eloHistory": [
         {
@@ -1987,6 +1987,10 @@
         {
           "elo": 1440,
           "timestamp": "2026-02-04T17:02:33.301Z"
+        },
+        {
+          "elo": 1464,
+          "timestamp": "2026-02-06T15:09:43.651Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2231,9 +2235,9 @@
       "name": "James Atkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1405,
+      "elo": 1381,
       "wins": 1,
-      "losses": 5,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2262,6 +2266,10 @@
         {
           "elo": 1405,
           "timestamp": "2026-01-30T17:19:01.484Z"
+        },
+        {
+          "elo": 1381,
+          "timestamp": "2026-02-06T15:09:43.651Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2797,6 +2805,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770390583657",
+      "winnerId": "52",
+      "loserId": "59",
+      "winner": "Saadat Nursultan",
+      "loser": "James Atkin",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 24,
+      "loserEloChange": -24,
+      "expectedWinProbability": 0.550199353253537,
+      "timestamp": "2026-02-06T15:09:43.651Z"
+    },
     {
       "id": "1770381564338",
       "winnerId": "24",
@@ -5268,5 +5289,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-06T12:39:25.287Z"
+  "lastUpdated": "2026-02-06T15:09:44.800Z"
 }
