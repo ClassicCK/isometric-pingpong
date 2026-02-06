@@ -700,8 +700,8 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1569,
-      "wins": 16,
+      "elo": 1597,
+      "wins": 17,
       "losses": 11,
       "eloHistory": [
         {
@@ -815,6 +815,10 @@
         {
           "elo": 1569,
           "timestamp": "2026-02-06T17:38:48.949Z"
+        },
+        {
+          "elo": 1597,
+          "timestamp": "2026-02-06T17:40:54.795Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -896,9 +900,9 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1605,
+      "elo": 1577,
       "wins": 17,
-      "losses": 14,
+      "losses": 15,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1027,6 +1031,10 @@
         {
           "elo": 1605,
           "timestamp": "2026-02-06T12:39:24.320Z"
+        },
+        {
+          "elo": 1577,
+          "timestamp": "2026-02-06T17:40:54.795Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2821,6 +2829,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770399654805",
+      "winnerId": "20",
+      "loserId": "24",
+      "winner": "Charlie Parkin",
+      "loser": "George Pool",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 28,
+      "loserEloChange": -28,
+      "expectedWinProbability": 0.4483764526890395,
+      "timestamp": "2026-02-06T17:40:54.795Z"
+    },
     {
       "id": "1770399528955",
       "winnerId": "11",
@@ -5331,5 +5352,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-06T17:40:28.131Z"
+  "lastUpdated": "2026-02-06T17:40:55.521Z"
 }
