@@ -880,8 +880,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1629,
-      "wins": 18,
+      "elo": 1647,
+      "wins": 19,
       "losses": 14,
       "eloHistory": [
         {
@@ -1015,6 +1015,10 @@
         {
           "elo": 1629,
           "timestamp": "2026-02-06T17:26:57.431Z"
+        },
+        {
+          "elo": 1647,
+          "timestamp": "2026-02-06T17:28:53.645Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2400,9 +2404,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1505,
+      "elo": 1487,
       "wins": 7,
-      "losses": 9,
+      "losses": 10,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2471,6 +2475,10 @@
         {
           "elo": 1505,
           "timestamp": "2026-02-06T17:26:57.431Z"
+        },
+        {
+          "elo": 1487,
+          "timestamp": "2026-02-06T17:28:53.645Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2813,6 +2821,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770398933656",
+      "winnerId": "24",
+      "loserId": "64",
+      "winner": "George Pool",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 18,
+      "loserEloChange": -18,
+      "expectedWinProbability": 0.6712405808158318,
+      "timestamp": "2026-02-06T17:28:53.645Z"
+    },
     {
       "id": "1770398817436",
       "winnerId": "24",
@@ -5310,5 +5331,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-06T17:26:59.019Z"
+  "lastUpdated": "2026-02-06T17:28:54.369Z"
 }
