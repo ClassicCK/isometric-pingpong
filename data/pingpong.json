@@ -271,8 +271,8 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1636,
-      "wins": 8,
+      "elo": 1663,
+      "wins": 9,
       "losses": 1,
       "eloHistory": [
         {
@@ -314,6 +314,10 @@
         {
           "elo": 1636,
           "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1663,
+          "timestamp": "2026-02-06T17:38:24.450Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -692,9 +696,9 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1618,
+      "elo": 1591,
       "wins": 16,
-      "losses": 9,
+      "losses": 10,
       "eloHistory": [
         {
           "elo": 1500,
@@ -799,6 +803,10 @@
         {
           "elo": 1618,
           "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1591,
+          "timestamp": "2026-02-06T17:38:24.450Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2805,6 +2813,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770399504461",
+      "winnerId": "11",
+      "loserId": "20",
+      "winner": "Paul Puget",
+      "loser": "Charlie Parkin",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.525880930891169,
+      "timestamp": "2026-02-06T17:38:24.450Z"
+    },
     {
       "id": "1770390583657",
       "winnerId": "52",
@@ -5289,5 +5310,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-06T17:37:47.906Z"
+  "lastUpdated": "2026-02-06T17:38:25.272Z"
 }
