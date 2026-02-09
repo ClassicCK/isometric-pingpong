@@ -1313,9 +1313,9 @@
       "name": "Madi Supreme",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1436,
+      "elo": 1413,
       "wins": 5,
-      "losses": 8,
+      "losses": 9,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1372,6 +1372,10 @@
         {
           "elo": 1436,
           "timestamp": "2026-02-09T18:15:33.916Z"
+        },
+        {
+          "elo": 1413,
+          "timestamp": "2026-02-09T18:15:42.984Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1382,8 +1386,8 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1501,
-      "wins": 5,
+      "elo": 1524,
+      "wins": 6,
       "losses": 6,
       "eloHistory": [
         {
@@ -1433,6 +1437,10 @@
         {
           "elo": 1501,
           "timestamp": "2026-02-09T18:15:33.916Z"
+        },
+        {
+          "elo": 1524,
+          "timestamp": "2026-02-09T18:15:42.984Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2933,6 +2941,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770660943013",
+      "winnerId": "34",
+      "loserId": "33",
+      "winner": "Tomek Paczkowski",
+      "loser": "Madi Supreme",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 23,
+      "loserEloChange": -23,
+      "expectedWinProbability": 0.5924662305843318,
+      "timestamp": "2026-02-09T18:15:42.984Z"
+    },
     {
       "id": "1770660933943",
       "winnerId": "34",
@@ -5625,5 +5646,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T18:15:33.943Z"
+  "lastUpdated": "2026-02-09T18:15:43.013Z"
 }
