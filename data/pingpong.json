@@ -426,9 +426,9 @@
       "name": "Christopher Kilner",
       "countryCode": "us-md",
       "office": "LON",
-      "elo": 1476,
+      "elo": 1461,
       "wins": 3,
-      "losses": 5,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -465,6 +465,10 @@
         {
           "elo": 1476,
           "timestamp": "2026-02-02T19:09:07.215Z"
+        },
+        {
+          "elo": 1461,
+          "timestamp": "2026-02-09T18:55:10.408Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2500,8 +2504,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1649,
-      "wins": 13,
+      "elo": 1664,
+      "wins": 14,
       "losses": 10,
       "eloHistory": [
         {
@@ -2599,6 +2603,10 @@
         {
           "elo": 1649,
           "timestamp": "2026-02-09T18:54:53.246Z"
+        },
+        {
+          "elo": 1664,
+          "timestamp": "2026-02-09T18:55:10.408Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2957,6 +2965,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770663310433",
+      "winnerId": "64",
+      "loserId": "14",
+      "winner": "Tom Sellers",
+      "loser": "Christopher Kilner",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 15,
+      "loserEloChange": -15,
+      "expectedWinProbability": 0.730245413297424,
+      "timestamp": "2026-02-09T18:55:10.408Z"
+    },
     {
       "id": "1770663293272",
       "winnerId": "64",
@@ -5688,5 +5709,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T18:54:53.272Z"
+  "lastUpdated": "2026-02-09T18:55:10.433Z"
 }
