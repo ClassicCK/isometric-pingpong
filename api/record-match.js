@@ -44,8 +44,11 @@ export default async function handler(req, res) {
         throw new Error('Selected players not found in current data');
       }
 
+      const winnerGamesPlayed = winner.wins + winner.losses;
+      const loserGamesPlayed = loser.wins + loser.losses;
+
       const { winnerNew, loserNew, expectedWinProbability } = calculateELO(
-        winner.elo, loser.elo, winnerScoreNum, loserScoreNum
+        winner.elo, loser.elo, winnerScoreNum, loserScoreNum, winnerGamesPlayed, loserGamesPlayed
       );
 
       const timestamp = matchDate ? new Date(matchDate).toISOString() : new Date().toISOString();
