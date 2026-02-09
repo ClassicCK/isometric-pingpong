@@ -408,7 +408,7 @@
     {
       "id": "14",
       "name": "Christopher Kilner",
-      "countryCode": "us",
+      "countryCode": "us-md",
       "office": "LON",
       "elo": 1476,
       "wins": 3,
@@ -5457,5 +5457,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T14:41:01.359Z"
+  "lastUpdated": "2026-02-09T15:14:23.402Z"
 }
