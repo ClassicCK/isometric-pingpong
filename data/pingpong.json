@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1504,
-      "wins": 2,
+      "elo": 1539,
+      "wins": 3,
       "losses": 2,
       "eloHistory": [
         {
@@ -27,6 +27,10 @@
         },
         {
           "elo": 1504,
+          "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1539,
           "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
@@ -2690,9 +2694,9 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1505,
+      "elo": 1470,
       "wins": 5,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2732,6 +2736,10 @@
         },
         {
           "elo": 1505,
+          "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1470,
           "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
@@ -2901,6 +2909,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770655688521",
+      "winnerId": "1",
+      "loserId": "70",
+      "winner": "David Lankes",
+      "loser": "Jamie Atkinson",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 35,
+      "loserEloChange": -35,
+      "expectedWinProbability": 0.4985608882908471,
+      "timestamp": "2026-02-09T00:00:00.000Z"
+    },
     {
       "id": "1770655240739",
       "winnerId": "64",
@@ -5541,5 +5562,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T16:40:40.740Z"
+  "lastUpdated": "2026-02-09T16:48:08.522Z"
 }
