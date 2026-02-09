@@ -2432,8 +2432,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1511,
-      "wins": 8,
+      "elo": 1538,
+      "wins": 9,
       "losses": 10,
       "eloHistory": [
         {
@@ -2511,6 +2511,10 @@
         {
           "elo": 1511,
           "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1538,
+          "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2521,9 +2525,9 @@
       "name": "Jay Kazazi",
       "countryCode": "it",
       "office": "LON",
-      "elo": 1500,
+      "elo": 1473,
       "wins": 1,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2536,6 +2540,10 @@
         {
           "elo": 1500,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1473,
+          "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2853,6 +2861,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770639751495",
+      "winnerId": "64",
+      "loserId": "65",
+      "winner": "Tom Sellers",
+      "loser": "Jay Kazazi",
+      "winnerScore": 11,
+      "loserScore": 0,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.515824985264735,
+      "timestamp": "2026-02-09T00:00:00.000Z"
+    },
     {
       "id": "1770639735330",
       "winnerId": "64",
@@ -5415,5 +5436,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T12:22:16.416Z"
+  "lastUpdated": "2026-02-09T12:22:31.915Z"
 }
