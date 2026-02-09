@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1471,
-      "wins": 1,
+      "elo": 1506,
+      "wins": 2,
       "losses": 2,
       "eloHistory": [
         {
@@ -23,6 +23,10 @@
         },
         {
           "elo": 1471,
+          "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1506,
           "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
@@ -2537,9 +2541,9 @@
       "name": "Jay Kazazi",
       "countryCode": "it",
       "office": "LON",
-      "elo": 1473,
+      "elo": 1438,
       "wins": 1,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2555,6 +2559,10 @@
         },
         {
           "elo": 1473,
+          "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1438,
           "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
@@ -2877,6 +2885,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770651849928",
+      "winnerId": "1",
+      "loserId": "65",
+      "winner": "David Lankes",
+      "loser": "Jay Kazazi",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 35,
+      "loserEloChange": -35,
+      "expectedWinProbability": 0.4971218004251891,
+      "timestamp": "2026-02-09T00:00:00.000Z"
+    },
     {
       "id": "1770651639000",
       "winnerId": "64",
@@ -5478,5 +5499,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T15:40:40.188Z"
+  "lastUpdated": "2026-02-09T15:44:09.929Z"
 }
