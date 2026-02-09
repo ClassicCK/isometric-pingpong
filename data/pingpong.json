@@ -408,7 +408,7 @@
     {
       "id": "14",
       "name": "Christopher Kilner",
-      "countryCode": "us-md",
+      "countryCode": "us",
       "office": "LON",
       "elo": 1476,
       "wins": 3,
@@ -1984,9 +1984,9 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "LON",
-      "elo": 1464,
+      "elo": 1444,
       "wins": 4,
-      "losses": 5,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2027,6 +2027,10 @@
         {
           "elo": 1464,
           "timestamp": "2026-02-06T15:09:43.651Z"
+        },
+        {
+          "elo": 1444,
+          "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2432,8 +2436,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1565,
-      "wins": 10,
+      "elo": 1585,
+      "wins": 11,
       "losses": 10,
       "eloHistory": [
         {
@@ -2518,6 +2522,10 @@
         },
         {
           "elo": 1565,
+          "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1585,
           "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
@@ -2869,6 +2877,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770651639000",
+      "winnerId": "64",
+      "loserId": "52",
+      "winner": "Tom Sellers",
+      "loser": "Saadat Nursultan",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 20,
+      "loserEloChange": -20,
+      "expectedWinProbability": 0.641390111955618,
+      "timestamp": "2026-02-09T00:00:00.000Z"
+    },
     {
       "id": "1770648059897",
       "winnerId": "64",
@@ -5457,5 +5478,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T15:14:23.402Z"
+  "lastUpdated": "2026-02-09T15:40:40.188Z"
 }
