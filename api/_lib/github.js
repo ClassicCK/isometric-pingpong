@@ -113,10 +113,21 @@ export async function atomicUpdate(applyFn, maxRetries = 3) {
   }
 }
 
+// K-factor based on games played — new players converge fast, veterans are stable
+export function getKFactor(gamesPlayed) {
+  if (gamesPlayed < 5) return 40;
+  if (gamesPlayed < 15) return 32;
+  if (gamesPlayed < 30) return 24;
+  return 20;
+}
+
 // ELO calculation — must be identical to the client-side version in App.jsx
-export function calculateELO(winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) {
+export function calculateELO(winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, winnerGamesPlayed = 0, loserGamesPlayed = 0) {
   const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
   const expectedLoser = 1 / (1 + Math.pow(10, (winnerELO - loserELO) / 400));
+
+  // Use the less experienced player's K-factor so new player matches have fair impact
+  const K = getKFactor(Math.min(winnerGamesPlayed, loserGamesPlayed));
 
   let adjustedK = K;
   if (winnerScoreVal !== null && loserScoreVal !== null) {

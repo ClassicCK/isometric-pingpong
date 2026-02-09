@@ -35,6 +35,8 @@ function RecentFormBar({ matches }) {
   );
 }
 
+const MIN_GAMES_FOR_QUALIFICATION = 5;
+
 // All countries with their ISO codes for flat flags
 const COUNTRIES = [
   { name: 'Afghanistan', code: 'af' }, { name: 'Albania', code: 'al' }, { name: 'Algeria', code: 'dz' },
@@ -383,7 +385,8 @@ export default function PingPongELO() {
     setProbsLoading(true);
     setTimeout(() => {
       try {
-        const probs = simulateSeasonPlusTournamentProbabilities(players, {
+        const eligiblePlayers = players.filter(p => (p.wins + p.losses) >= MIN_GAMES_FOR_QUALIFICATION);
+        const probs = simulateSeasonPlusTournamentProbabilities(eligiblePlayers, {
           numSimulations: 1000,
           seasonMatchesPerPlayer: 100,
           seasonK: 24,
@@ -423,9 +426,20 @@ export default function PingPongELO() {
   };
 
 
-  const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
+  // K-factor based on games played — new players converge fast, veterans are stable
+  const getKFactor = (gamesPlayed) => {
+    if (gamesPlayed < 5) return 40;
+    if (gamesPlayed < 15) return 32;
+    if (gamesPlayed < 30) return 24;
+    return 20;
+  };
+
+  const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, winnerGamesPlayed = 0, loserGamesPlayed = 0) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
     const expectedLoser = 1 / (1 + Math.pow(10, (winnerELO - loserELO) / 400));
+
+    // Use the less experienced player's K-factor so new player matches have fair impact
+    const K = getKFactor(Math.min(winnerGamesPlayed, loserGamesPlayed));
 
     let adjustedK = K;
     if (winnerScoreVal !== null && loserScoreVal !== null) {
@@ -697,8 +711,15 @@ export default function PingPongELO() {
     return [...playersWithData].sort((a, b) => {
       let compareA, compareB;
 
+      // When sorting by rank, push unqualified players (<MIN_GAMES games) below qualified ones
+      const aQualified = (a.wins + a.losses) >= MIN_GAMES_FOR_QUALIFICATION;
+      const bQualified = (b.wins + b.losses) >= MIN_GAMES_FOR_QUALIFICATION;
+
       switch (sortColumn) {
         case "rank":
+          if (aQualified !== bQualified) {
+            return aQualified ? -1 : 1;
+          }
           compareA = a.rank;
           compareB = b.rank;
           break;
@@ -1469,14 +1490,22 @@ export default function PingPongELO() {
                   </td>
                 </tr>
               ) : (
-                sortedPlayers.map((player) => {
+                (() => {
+                  // Find the rank of the 64th qualified player (≥MIN_GAMES games)
+                  const qualifiedByRank = sortedPlayers
+                    .filter(p => (p.wins + p.losses) >= MIN_GAMES_FOR_QUALIFICATION)
+                    .sort((a, b) => a.rank - b.rank);
+                  const cutoffPlayerId = qualifiedByRank.length >= 64 ? qualifiedByRank[63].id : null;
+
+                  return sortedPlayers.map((player) => {
                   const rankChange = player.lastWeekRank ? player.lastWeekRank - player.rank : 0;
                   const countryData = COUNTRIES.find((c) => c.code === player.countryCode);
-                  const isRank64 = player.rank === 64;
 
                   const totalMatches = player.wins + player.losses;
+                  const isQualified = totalMatches >= MIN_GAMES_FOR_QUALIFICATION;
+                  const isCutoffPlayer = player.id === cutoffPlayerId;
                   const winRate = totalMatches > 0 ? ((player.wins / totalMatches) * 100).toFixed(1) : '0.0';
-                  
+
                   const pointsDiff = player.pointsFor - player.pointsAgainst;
                   const pointsDiffStr = pointsDiff > 0 ? `+${pointsDiff}` : pointsDiff.toString();
 
@@ -1485,7 +1514,7 @@ export default function PingPongELO() {
 
                   return (
                     <React.Fragment key={player.id}>
-                      <tr className="border-b border-gray-200 hover:bg-gray-50 transition-colors group">
+                      <tr className={`border-b border-gray-200 hover:bg-gray-50 transition-colors group${!isQualified ? ' opacity-40' : ''}`}>
                         <td className="py-3 pr-6">
                           <div className="flex items-center gap-3">
                             <span className="text-xl font-normal text-gray-900 w-12">{player.rank}</span>
@@ -1578,7 +1607,7 @@ export default function PingPongELO() {
                         </td>
                       </tr>
 
-                      {isRank64 && (
+                      {isCutoffPlayer && (
                         <tr>
                           <td colSpan="8" className="p-0">
                             <div className="border-t-4 border-red-500 relative z-10">
@@ -1591,7 +1620,8 @@ export default function PingPongELO() {
                       )}
                     </React.Fragment>
                   );
-                })
+                });
+                })()
               )}
             </tbody>
           </table>
