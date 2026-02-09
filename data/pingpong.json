@@ -1386,8 +1386,8 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1473,
-      "wins": 5,
+      "elo": 1495,
+      "wins": 6,
       "losses": 7,
       "eloHistory": [
         {
@@ -1441,6 +1441,10 @@
         {
           "elo": 1473,
           "timestamp": "2026-02-09T18:18:32.510Z"
+        },
+        {
+          "elo": 1495,
+          "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2032,9 +2036,9 @@
       "name": "Saadat Nursultan",
       "countryCode": "kz",
       "office": "LON",
-      "elo": 1436,
+      "elo": 1414,
       "wins": 4,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2078,6 +2082,10 @@
         },
         {
           "elo": 1436,
+          "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1414,
           "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
@@ -2941,6 +2949,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770661572075",
+      "winnerId": "34",
+      "loserId": "52",
+      "winner": "Tomek Paczkowski",
+      "loser": "Saadat Nursultan",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 22,
+      "loserEloChange": -22,
+      "expectedWinProbability": 0.5530468951694625,
+      "timestamp": "2026-02-09T00:00:00.000Z"
+    },
     {
       "id": "1770661112560",
       "winnerId": "33",
@@ -5646,5 +5667,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T18:18:32.561Z"
+  "lastUpdated": "2026-02-09T18:26:12.076Z"
 }
