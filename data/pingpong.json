@@ -408,7 +408,7 @@
     {
       "id": "14",
       "name": "Christopher Kilner",
-      "countryCode": "us-md",
+      "countryCode": "us",
       "office": "LON",
       "elo": 1476,
       "wins": 3,
@@ -904,9 +904,9 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1581,
+      "elo": 1621,
       "wins": 19,
-      "losses": 16,
+      "losses": 15,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1047,10 +1047,6 @@
         {
           "elo": 1621,
           "timestamp": "2026-02-06T17:42:04.115Z"
-        },
-        {
-          "elo": 1581,
-          "timestamp": "2026-02-09T12:50:45.253Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1759,8 +1755,8 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1439,
-      "wins": 11,
+      "elo": 1399,
+      "wins": 10,
       "losses": 15,
       "eloHistory": [
         {
@@ -1866,10 +1862,6 @@
         {
           "elo": 1399,
           "timestamp": "2026-02-06T12:39:24.320Z"
-        },
-        {
-          "elo": 1439,
-          "timestamp": "2026-02-09T12:50:45.253Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2440,8 +2432,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1538,
-      "wins": 9,
+      "elo": 1565,
+      "wins": 10,
       "losses": 10,
       "eloHistory": [
         {
@@ -2522,6 +2514,10 @@
         },
         {
           "elo": 1538,
+          "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1565,
           "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
@@ -2662,9 +2658,9 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1531,
+      "elo": 1504,
       "wins": 5,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2701,6 +2697,10 @@
         {
           "elo": 1531,
           "timestamp": "2026-02-06T00:00:00.000Z"
+        },
+        {
+          "elo": 1504,
+          "timestamp": "2026-02-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2870,17 +2870,17 @@
   ],
   "matches": [
     {
-      "id": "1770641445274",
-      "winnerId": "47",
-      "loserId": "24",
-      "winner": "Joel 'The Soul Reaper' Robinson",
-      "loser": "George Pool",
+      "id": "1770648059897",
+      "winnerId": "64",
+      "loserId": "70",
+      "winner": "Tom Sellers",
+      "loser": "Jamie Atkinson",
       "winnerScore": 11,
-      "loserScore": 9,
-      "winnerEloChange": 40,
-      "loserEloChange": -40,
-      "expectedWinProbability": 0.2179019838686814,
-      "timestamp": "2026-02-09T12:50:45.253Z"
+      "loserScore": 6,
+      "winnerEloChange": 27,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.5100724469274385,
+      "timestamp": "2026-02-09T00:00:00.000Z"
     },
     {
       "id": "1770639751495",
@@ -5457,5 +5457,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T14:34:58.717Z"
+  "lastUpdated": "2026-02-09T14:41:01.359Z"
 }
