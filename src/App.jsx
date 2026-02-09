@@ -1491,11 +1491,12 @@ export default function PingPongELO() {
                 </tr>
               ) : (
                 (() => {
-                  // Find the rank of the 64th qualified player (≥MIN_GAMES games)
+                  // Find the last qualified player to render the cutoff after (64th, or last if fewer)
                   const qualifiedByRank = sortedPlayers
                     .filter(p => (p.wins + p.losses) >= MIN_GAMES_FOR_QUALIFICATION)
                     .sort((a, b) => a.rank - b.rank);
-                  const cutoffPlayerId = qualifiedByRank.length >= 64 ? qualifiedByRank[63].id : null;
+                  const cutoffIndex = Math.min(63, qualifiedByRank.length - 1);
+                  const cutoffPlayerId = cutoffIndex >= 0 ? qualifiedByRank[cutoffIndex].id : null;
 
                   return sortedPlayers.map((player) => {
                   const rankChange = player.lastWeekRank ? player.lastWeekRank - player.rank : 0;
