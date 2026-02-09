@@ -280,7 +280,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 15
     },
     {
       "id": "11",
@@ -588,7 +588,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 62
     },
     {
       "id": "19",
@@ -1066,7 +1066,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 14
     },
     {
       "id": "25",
@@ -1313,9 +1313,9 @@
       "name": "Madi Supreme",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1490,
+      "elo": 1459,
       "wins": 5,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1364,6 +1364,10 @@
         {
           "elo": 1490,
           "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1459,
+          "timestamp": "2026-02-09T18:15:22.022Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1374,8 +1378,8 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1447,
-      "wins": 3,
+      "elo": 1478,
+      "wins": 4,
       "losses": 6,
       "eloHistory": [
         {
@@ -1417,6 +1421,10 @@
         {
           "elo": 1447,
           "timestamp": "2026-02-04T18:08:08.999Z"
+        },
+        {
+          "elo": 1478,
+          "timestamp": "2026-02-09T18:15:22.022Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1594,7 +1602,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "41",
@@ -1889,7 +1897,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 66
     },
     {
       "id": "48",
@@ -2058,7 +2066,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 63
     },
     {
       "id": "53",
@@ -2292,7 +2300,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "59",
@@ -2917,6 +2925,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770660922086",
+      "winnerId": "34",
+      "loserId": "33",
+      "winner": "Tomek Paczkowski",
+      "loser": "Madi Supreme",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 31,
+      "loserEloChange": -31,
+      "expectedWinProbability": 0.43843206102635396,
+      "timestamp": "2026-02-09T18:15:22.022Z"
+    },
     {
       "id": "1770660092784",
       "winnerId": "1",
@@ -5583,5 +5604,5 @@
       "expectedWinProbability": 0.5
     }
   ],
-  "lastUpdated": "2026-02-09T18:01:32.784Z"
+  "lastUpdated": "2026-02-09T18:15:22.086Z"
 }
