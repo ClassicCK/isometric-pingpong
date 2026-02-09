@@ -349,6 +349,7 @@ export default function PingPongELO() {
   const [matchDate, setMatchDate] = useState("");
 
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [newPlayerName, setNewPlayerName] = useState("");
   const [newPlayerCountry, setNewPlayerCountry] = useState("");
   const [newPlayerOffice, setNewPlayerOffice] = useState("");
@@ -356,7 +357,6 @@ export default function PingPongELO() {
   const [activeTab, setActiveTab] = useState("match");
   const [sortColumn, setSortColumn] = useState("rank");
   const [sortDirection, setSortDirection] = useState("asc");
-  const [fileSha, setFileSha] = useState(null);
 
   const [editingPlayer, setEditingPlayer] = useState(null);
   const [editName, setEditName] = useState("");
@@ -397,34 +397,6 @@ export default function PingPongELO() {
     }, 0);
   }, [players]);
 
-  // Backfill expectedWinProbability for existing matches
-  useEffect(() => {
-    if (players.length === 0 || matches.length === 0) return;
-    
-    let needsUpdate = false;
-    const updatedMatches = matches.map(match => {
-      if (match.expectedWinProbability !== undefined) return match;
-      
-      needsUpdate = true;
-      const winner = players.find(p => p.id === match.winnerId);
-      const loser = players.find(p => p.id === match.loserId);
-      
-      if (!winner || !loser) return match;
-      
-      const winnerEloAtTime = winner.eloHistory.find(h => h.timestamp === match.timestamp)?.elo || winner.elo;
-      const loserEloAtTime = loser.eloHistory.find(h => h.timestamp === match.timestamp)?.elo || loser.elo;
-      
-      const expectedWinProbability = 1 / (1 + Math.pow(10, (loserEloAtTime - winnerEloAtTime) / 400));
-      
-      return { ...match, expectedWinProbability };
-    });
-    
-    if (needsUpdate) {
-      console.log('📊 Backfilling expectedWinProbability for', matches.length, 'matches');
-      setMatches(updatedMatches);
-      saveData(players, updatedMatches);
-    }
-  }, [players, matches]);
 
   const loadData = async () => {
     try {
@@ -435,7 +407,6 @@ export default function PingPongELO() {
 
       if (response.ok) {
         const data = await response.json();
-        if (data.sha) setFileSha(data.sha);
         setPlayers(data.players || []);
         setMatches(data.matches || []);
         console.log('✅ Loaded:', data.players?.length || 0, 'players');
@@ -451,33 +422,6 @@ export default function PingPongELO() {
     }
   };
 
-  const saveData = async (newPlayers, newMatches) => {
-    try {
-      console.log('💾 Saving to GitHub...');
-      
-      const response = await fetch('/api/save-data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ players: newPlayers, matches: newMatches })
-      });
-
-      const result = await response.json();
-      
-      if (response.ok) {
-        setFileSha(result.sha);
-        console.log('✅ SUCCESS: Saved to GitHub');
-        return true;
-      } else {
-        console.error('❌ GitHub save failed:', result);
-        alert(`Failed to save: ${result.error}`);
-        return false;
-      }
-    } catch (error) {
-      console.error('❌ Network error:', error);
-      alert(`Network error: ${error.message}`);
-      return false;
-    }
-  };
 
   const calculateELO = (winnerELO, loserELO, winnerScoreVal = null, loserScoreVal = null, K = 32) => {
     const expectedWinner = 1 / (1 + Math.pow(10, (loserELO - winnerELO) / 400));
@@ -519,15 +463,8 @@ export default function PingPongELO() {
     });
   };
 
-  const recordMatch = () => {
+  const recordMatch = async () => {
     if (!selectedWinner || !selectedLoser || selectedWinner === selectedLoser) return;
-
-    const winner = players.find((p) => p.id === selectedWinner);
-    const loser = players.find((p) => p.id === selectedLoser);
-    if (!winner || !loser) {
-      alert("Selected players not found");
-      return;
-    }
 
     const winnerScoreNum = winnerScore ? parseInt(winnerScore, 10) : null;
     const loserScoreNum = loserScore ? parseInt(loserScore, 10) : null;
@@ -537,42 +474,25 @@ export default function PingPongELO() {
       if (winnerScoreNum < 0 || loserScoreNum < 0) return alert("Scores must be positive numbers");
     }
 
-    const { winnerNew, loserNew, expectedWinProbability } = calculateELO(winner.elo, loser.elo, winnerScoreNum, loserScoreNum);
-    const timestamp = matchDate ? new Date(matchDate).toISOString() : new Date().toISOString();
+    setSaving(true);
+    try {
+      const response = await fetch('/api/record-match', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          winnerId: selectedWinner,
+          loserId: selectedLoser,
+          winnerScore: winnerScoreNum,
+          loserScore: loserScoreNum,
+          matchDate: matchDate || null,
+        }),
+      });
 
-    const updatedPlayers = players.map((p) => {
-      if (p.id === selectedWinner) {
-        return { ...p, elo: winnerNew, wins: p.wins + 1, eloHistory: [...p.eloHistory, { elo: winnerNew, timestamp }] };
-      }
-      if (p.id === selectedLoser) {
-        return { ...p, elo: loserNew, losses: p.losses + 1, eloHistory: [...p.eloHistory, { elo: loserNew, timestamp }] };
-      }
-      return { ...p };
-    });
+      const result = await response.json();
 
-    const playersWithRanks = calculateRankChanges(updatedPlayers);
-
-    const newMatch = {
-      id: Date.now().toString(),
-      winnerId: selectedWinner,
-      loserId: selectedLoser,
-      winner: winner.name,
-      loser: loser.name,
-      winnerScore: winnerScoreNum,
-      loserScore: loserScoreNum,
-      winnerEloChange: winnerNew - winner.elo,
-      loserEloChange: loserNew - loser.elo,
-      expectedWinProbability,
-      timestamp,
-    };
-
-    const updatedMatches = [newMatch, ...matches];
-    
-    setPlayers(playersWithRanks);
-    setMatches(updatedMatches);
-    
-    saveData(playersWithRanks, updatedMatches).then(success => {
-      if (success) {
+      if (response.ok) {
+        setPlayers(result.players);
+        setMatches(result.matches);
         setSelectedWinner("");
         setSelectedLoser("");
         setWinnerScore("");
@@ -580,35 +500,46 @@ export default function PingPongELO() {
         setMatchDate("");
         setSidebarOpen(false);
       } else {
-        setPlayers(players);
-        setMatches(matches);
+        alert(`Failed to record match: ${result.error}`);
       }
-    });
+    } catch (error) {
+      alert(`Network error: ${error.message}`);
+    } finally {
+      setSaving(false);
+    }
   };
 
-  const addPlayer = () => {
+  const addPlayer = async () => {
     if (!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice) return;
 
-    const newPlayer = {
-      id: Date.now().toString(),
-      name: newPlayerName.trim(),
-      countryCode: newPlayerCountry,
-      office: newPlayerOffice,
-      elo: 1500,
-      wins: 0,
-      losses: 0,
-      eloHistory: [{ elo: 1500, timestamp: new Date().toISOString() }],
-      joinedAt: new Date().toISOString(),
-      lastWeekRank: null,
-    };
+    setSaving(true);
+    try {
+      const response = await fetch('/api/add-player', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: newPlayerName.trim(),
+          countryCode: newPlayerCountry,
+          office: newPlayerOffice,
+        }),
+      });
 
-    const updatedPlayers = [...players, newPlayer];
-    setPlayers(updatedPlayers);
-    saveData(updatedPlayers, matches);
+      const result = await response.json();
 
-    setNewPlayerName("");
-    setNewPlayerCountry("");
-    setNewPlayerOffice("");
+      if (response.ok) {
+        setPlayers(result.players);
+        setMatches(result.matches);
+        setNewPlayerName("");
+        setNewPlayerCountry("");
+        setNewPlayerOffice("");
+      } else {
+        alert(`Failed to add player: ${result.error}`);
+      }
+    } catch (error) {
+      alert(`Network error: ${error.message}`);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const startEditPlayer = (player) => {
@@ -620,21 +551,40 @@ export default function PingPongELO() {
     setSidebarOpen(true);
   };
 
-  const saveEditPlayer = () => {
+  const saveEditPlayer = async () => {
     if (!editName.trim() || !editCountry || !editOffice) return;
 
-    const updatedPlayers = players.map((p) =>
-      p.id === editingPlayer ? { ...p, name: editName.trim(), countryCode: editCountry, office: editOffice } : p
-    );
+    setSaving(true);
+    try {
+      const response = await fetch('/api/edit-player', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          playerId: editingPlayer,
+          name: editName.trim(),
+          countryCode: editCountry,
+          office: editOffice,
+        }),
+      });
 
-    setPlayers(updatedPlayers);
-    saveData(updatedPlayers, matches);
+      const result = await response.json();
 
-    setEditingPlayer(null);
-    setEditName("");
-    setEditCountry("");
-    setEditOffice("");
-    setActiveTab("match");
+      if (response.ok) {
+        setPlayers(result.players);
+        setMatches(result.matches);
+        setEditingPlayer(null);
+        setEditName("");
+        setEditCountry("");
+        setEditOffice("");
+        setActiveTab("match");
+      } else {
+        alert(`Failed to edit player: ${result.error}`);
+      }
+    } catch (error) {
+      alert(`Network error: ${error.message}`);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const cancelEdit = () => {
@@ -645,55 +595,30 @@ export default function PingPongELO() {
     setActiveTab("match");
   };
 
-  const deleteMatch = (matchId) => {
+  const deleteMatch = async (matchId) => {
     if (!window.confirm("Delete this match? This will recalculate all ELO ratings.")) return;
 
-    const updatedMatches = matches.filter(m => m.id !== matchId);
-    const sortedMatches = [...updatedMatches].sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+    setSaving(true);
+    try {
+      const response = await fetch('/api/delete-match', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ matchId }),
+      });
 
-    const resetPlayers = players.map(p => ({
-      ...p,
-      elo: 1500,
-      wins: 0,
-      losses: 0,
-      eloHistory: [{ elo: 1500, timestamp: p.joinedAt }]
-    }));
+      const result = await response.json();
 
-    let recalculatedPlayers = resetPlayers;
-    sortedMatches.forEach(match => {
-      const winner = recalculatedPlayers.find(p => p.id === match.winnerId);
-      const loser = recalculatedPlayers.find(p => p.id === match.loserId);
-
-      if (winner && loser) {
-        const { winnerNew, loserNew, expectedWinProbability } = calculateELO(winner.elo, loser.elo, match.winnerScore, match.loserScore);
-        match.expectedWinProbability = expectedWinProbability;
-
-        recalculatedPlayers = recalculatedPlayers.map(p => {
-          if (p.id === match.winnerId) {
-            return {
-              ...p,
-              elo: winnerNew,
-              wins: p.wins + 1,
-              eloHistory: [...p.eloHistory, { elo: winnerNew, timestamp: match.timestamp }]
-            };
-          }
-          if (p.id === match.loserId) {
-            return {
-              ...p,
-              elo: loserNew,
-              losses: p.losses + 1,
-              eloHistory: [...p.eloHistory, { elo: loserNew, timestamp: match.timestamp }]
-            };
-          }
-          return p;
-        });
+      if (response.ok) {
+        setPlayers(result.players);
+        setMatches(result.matches);
+      } else {
+        alert(`Failed to delete match: ${result.error}`);
       }
-    });
-
-    const playersWithRanks = calculateRankChanges(recalculatedPlayers);
-    setPlayers(playersWithRanks);
-    setMatches(updatedMatches);
-    saveData(playersWithRanks, updatedMatches);
+    } catch (error) {
+      alert(`Network error: ${error.message}`);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleSort = (column) => {
@@ -1766,8 +1691,8 @@ export default function PingPongELO() {
                     <p className="text-xs text-gray-500 mt-2">Leave blank to use today's date.</p>
                   </div>
 
-                  <button onClick={recordMatch} disabled={!selectedWinner || !selectedLoser || selectedWinner === selectedLoser} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
-                    Record Match
+                  <button onClick={recordMatch} disabled={saving || !selectedWinner || !selectedLoser || selectedWinner === selectedLoser} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                    {saving ? 'Saving...' : 'Record Match'}
                   </button>
                 </div>
               ) : activeTab === "edit" ? (
@@ -1798,8 +1723,8 @@ export default function PingPongELO() {
                   </div>
 
                   <div className="flex gap-3">
-                    <button onClick={saveEditPlayer} disabled={!editName.trim() || !editCountry || !editOffice} className="flex-1 px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
-                      Save Changes
+                    <button onClick={saveEditPlayer} disabled={saving || !editName.trim() || !editCountry || !editOffice} className="flex-1 px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                      {saving ? 'Saving...' : 'Save Changes'}
                     </button>
                     <button onClick={cancelEdit} className="px-6 py-3 border-2 border-gray-300 font-semibold hover:bg-gray-100 transition-colors">
                       Cancel
@@ -1839,8 +1764,8 @@ export default function PingPongELO() {
                     </div>
                   </div>
 
-                  <button onClick={addPlayer} disabled={!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
-                    Add Player
+                  <button onClick={addPlayer} disabled={saving || !newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                    {saving ? 'Saving...' : 'Add Player'}
                   </button>
                 </div>
               )}
