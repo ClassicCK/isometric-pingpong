@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1604,
-      "wins": 7,
+      "elo": 1624,
+      "wins": 8,
       "losses": 4,
       "eloHistory": [
         {
@@ -55,6 +55,10 @@
         },
         {
           "elo": 1604,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1624,
           "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
@@ -582,9 +586,9 @@
       "name": "Alex Steene",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1482,
+      "elo": 1465,
       "wins": 3,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -624,6 +628,10 @@
         },
         {
           "elo": 1482,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1465,
           "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
@@ -3061,6 +3069,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770801838219",
+      "winnerId": "1",
+      "loserId": "18",
+      "winner": "David Lankes",
+      "loser": "Alex Steene",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 20,
+      "loserEloChange": -17,
+      "expectedWinProbability": 0.6686949563073317,
+      "timestamp": "2026-02-11T00:00:00.000Z"
+    },
     {
       "id": "1770801810583",
       "winnerId": "64",
@@ -5961,5 +5982,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-11T09:23:30.583Z"
+  "lastUpdated": "2026-02-11T09:23:58.219Z"
 }
