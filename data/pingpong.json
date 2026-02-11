@@ -1397,9 +1397,9 @@
       "name": "Madi Supreme",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1501,
+      "elo": 1476,
       "wins": 6,
-      "losses": 8,
+      "losses": 9,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1460,6 +1460,10 @@
         {
           "elo": 1501,
           "timestamp": "2026-02-09T18:18:32.510Z"
+        },
+        {
+          "elo": 1476,
+          "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2910,8 +2914,8 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1510,
-      "wins": 5,
+      "elo": 1540,
+      "wins": 6,
       "losses": 5,
       "eloHistory": [
         {
@@ -2957,6 +2961,10 @@
         {
           "elo": 1510,
           "timestamp": "2026-02-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1540,
+          "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3125,6 +3133,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770824680243",
+      "winnerId": "70",
+      "loserId": "33",
+      "winner": "Jamie Atkinson",
+      "loser": "Madi Supreme",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 30,
+      "loserEloChange": -25,
+      "expectedWinProbability": 0.5129491448928637,
+      "timestamp": "2026-02-11T00:00:00.000Z"
+    },
     {
       "id": "1770824163462",
       "winnerId": "11",
@@ -6129,5 +6150,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-11T15:36:03.462Z"
+  "lastUpdated": "2026-02-11T15:44:40.244Z"
 }
