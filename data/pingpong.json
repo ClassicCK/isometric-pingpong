@@ -5,9 +5,9 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1711,
+      "elo": 1677,
       "wins": 12,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -83,6 +83,10 @@
         },
         {
           "elo": 1711,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1677,
           "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
@@ -170,7 +174,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 45
+      "lastWeekRank": 44
     },
     {
       "id": "5",
@@ -253,7 +257,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 46
+      "lastWeekRank": 45
     },
     {
       "id": "8",
@@ -578,7 +582,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 47
+      "lastWeekRank": 46
     },
     {
       "id": "17",
@@ -935,7 +939,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 48
+      "lastWeekRank": 47
     },
     {
       "id": "22",
@@ -985,7 +989,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 60
+      "lastWeekRank": 58
     },
     {
       "id": "24",
@@ -1162,7 +1166,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 7
     },
     {
       "id": "25",
@@ -1310,7 +1314,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 49
+      "lastWeekRank": 48
     },
     {
       "id": "29",
@@ -1356,7 +1360,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 50
+      "lastWeekRank": 49
     },
     {
       "id": "31",
@@ -1406,7 +1410,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 51
+      "lastWeekRank": 50
     },
     {
       "id": "33",
@@ -1568,7 +1572,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 40
+      "lastWeekRank": 61
     },
     {
       "id": "35",
@@ -1589,7 +1593,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 44
+      "lastWeekRank": 43
     },
     {
       "id": "36",
@@ -1638,7 +1642,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 8
     },
     {
       "id": "37",
@@ -1763,7 +1767,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 51
     },
     {
       "id": "42",
@@ -1813,7 +1817,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 43
+      "lastWeekRank": 42
     },
     {
       "id": "44",
@@ -2049,7 +2053,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 62
     },
     {
       "id": "48",
@@ -2082,7 +2086,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 42
+      "lastWeekRank": 41
     },
     {
       "id": "49",
@@ -2140,7 +2144,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 52
     },
     {
       "id": "51",
@@ -2284,7 +2288,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 59
     },
     {
       "id": "55",
@@ -2305,7 +2309,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 41
+      "lastWeekRank": 40
     },
     {
       "id": "56",
@@ -2530,7 +2534,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 60
     },
     {
       "id": "61",
@@ -2600,7 +2604,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 53
     },
     {
       "id": "63",
@@ -2856,7 +2860,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 54
     },
     {
       "id": "67",
@@ -2877,15 +2881,15 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 55
     },
     {
       "id": "68",
       "name": "Peteris Bikis",
       "countryCode": "lv",
       "office": "LON",
-      "elo": 1522,
-      "wins": 4,
+      "elo": 1564,
+      "wins": 5,
       "losses": 5,
       "eloHistory": [
         {
@@ -2927,6 +2931,10 @@
         {
           "elo": 1522,
           "timestamp": "2026-02-10T00:00:00.000Z"
+        },
+        {
+          "elo": 1564,
+          "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2951,7 +2959,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 56
     },
     {
       "id": "70",
@@ -3037,7 +3045,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 59
+      "lastWeekRank": 57
     },
     {
       "id": "72",
@@ -3181,6 +3189,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770837516179",
+      "winnerId": "68",
+      "loserId": "1",
+      "winner": "Peteris Bikis",
+      "loser": "David Lankes",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 42,
+      "loserEloChange": -34,
+      "expectedWinProbability": 0.2520004588039456,
+      "timestamp": "2026-02-11T00:00:00.000Z"
+    },
     {
       "id": "1770832953364",
       "winnerId": "24",
@@ -6276,5 +6297,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-11T18:02:33.364Z"
+  "lastUpdated": "2026-02-11T19:18:36.179Z"
 }
