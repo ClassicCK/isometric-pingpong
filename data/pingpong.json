@@ -170,9 +170,9 @@
       "name": "Kelley MacDonald",
       "countryCode": "va",
       "office": "LON",
-      "elo": 1454,
+      "elo": 1426,
       "wins": 0,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -185,6 +185,10 @@
         {
           "elo": 1454,
           "timestamp": "2026-02-02T00:00:00.000Z"
+        },
+        {
+          "elo": 1426,
+          "timestamp": "2026-02-11T09:06:01.898Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -434,8 +438,8 @@
       "name": "Christopher Kilner",
       "countryCode": "us-md",
       "office": "LON",
-      "elo": 1488,
-      "wins": 3,
+      "elo": 1523,
+      "wins": 4,
       "losses": 6,
       "eloHistory": [
         {
@@ -477,6 +481,10 @@
         {
           "elo": 1488,
           "timestamp": "2026-02-09T18:55:10.408Z"
+        },
+        {
+          "elo": 1523,
+          "timestamp": "2026-02-11T09:06:01.898Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3021,6 +3029,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770800761943",
+      "winnerId": "14",
+      "loserId": "6",
+      "winner": "Christopher Kilner",
+      "loser": "Kelley MacDonald",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 35,
+      "loserEloChange": -28,
+      "expectedWinProbability": 0.5487743358597419,
+      "timestamp": "2026-02-11T09:06:01.898Z"
+    },
     {
       "id": "1769272093697",
       "winnerId": "17",
@@ -5856,5 +5877,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-11T08:29:48.703Z"
+  "lastUpdated": "2026-02-11T09:06:01.943Z"
 }
