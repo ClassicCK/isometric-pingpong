@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1688,
-      "wins": 11,
+      "elo": 1711,
+      "wins": 12,
       "losses": 6,
       "eloHistory": [
         {
@@ -79,6 +79,10 @@
         },
         {
           "elo": 1688,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1711,
           "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
@@ -2612,9 +2616,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1721,
+      "elo": 1703,
       "wins": 23,
-      "losses": 16,
+      "losses": 17,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2774,6 +2778,10 @@
         },
         {
           "elo": 1721,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1703,
           "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
@@ -3157,6 +3165,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770832676708",
+      "winnerId": "1",
+      "loserId": "64",
+      "winner": "David Lankes",
+      "loser": "Tom Sellers",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 23,
+      "loserEloChange": -18,
+      "expectedWinProbability": 0.45265148195413535,
+      "timestamp": "2026-02-11T00:00:00.000Z"
+    },
     {
       "id": "1770832019163",
       "winnerId": "1",
@@ -6213,5 +6234,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-11T17:46:59.163Z"
+  "lastUpdated": "2026-02-11T17:57:56.708Z"
 }
