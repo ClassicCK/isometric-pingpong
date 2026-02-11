@@ -162,7 +162,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 46
+      "lastWeekRank": 45
     },
     {
       "id": "5",
@@ -191,7 +191,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 63
     },
     {
       "id": "6",
@@ -245,7 +245,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 47
+      "lastWeekRank": 46
     },
     {
       "id": "8",
@@ -467,7 +467,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 35
     },
     {
       "id": "14",
@@ -570,7 +570,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 48
+      "lastWeekRank": 47
     },
     {
       "id": "17",
@@ -599,7 +599,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 38
     },
     {
       "id": "18",
@@ -927,7 +927,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 49
+      "lastWeekRank": 48
     },
     {
       "id": "22",
@@ -977,7 +977,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 61
+      "lastWeekRank": 60
     },
     {
       "id": "24",
@@ -1232,7 +1232,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 12
     },
     {
       "id": "27",
@@ -1273,7 +1273,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 13
     },
     {
       "id": "28",
@@ -1294,7 +1294,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 50
+      "lastWeekRank": 49
     },
     {
       "id": "29",
@@ -1340,7 +1340,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 51
+      "lastWeekRank": 50
     },
     {
       "id": "31",
@@ -1390,16 +1390,16 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 51
     },
     {
       "id": "33",
       "name": "Madi Supreme",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1476,
+      "elo": 1463,
       "wins": 6,
-      "losses": 9,
+      "losses": 10,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1464,6 +1464,10 @@
         {
           "elo": 1476,
           "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1463,
+          "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1474,8 +1478,8 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1555,
-      "wins": 7,
+      "elo": 1571,
+      "wins": 8,
       "losses": 8,
       "eloHistory": [
         {
@@ -1541,6 +1545,10 @@
         {
           "elo": 1555,
           "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1571,
+          "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1565,7 +1573,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 45
+      "lastWeekRank": 44
     },
     {
       "id": "36",
@@ -1718,7 +1726,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "41",
@@ -1739,7 +1747,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 52
     },
     {
       "id": "42",
@@ -1789,7 +1797,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 44
+      "lastWeekRank": 43
     },
     {
       "id": "44",
@@ -1822,7 +1830,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 36
     },
     {
       "id": "45",
@@ -2017,7 +2025,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "48",
@@ -2108,7 +2116,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "51",
@@ -2194,7 +2202,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 43
+      "lastWeekRank": 66
     },
     {
       "id": "53",
@@ -2252,7 +2260,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 61
     },
     {
       "id": "55",
@@ -2407,7 +2415,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 37
     },
     {
       "id": "58",
@@ -2428,7 +2436,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "59",
@@ -2498,7 +2506,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 62
     },
     {
       "id": "61",
@@ -2568,7 +2576,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 55
     },
     {
       "id": "63",
@@ -2762,7 +2770,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 38
+      "lastWeekRank": 32
     },
     {
       "id": "65",
@@ -2816,7 +2824,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 56
     },
     {
       "id": "67",
@@ -2837,7 +2845,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 57
     },
     {
       "id": "68",
@@ -2890,7 +2898,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 11
     },
     {
       "id": "69",
@@ -2911,7 +2919,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 59
+      "lastWeekRank": 58
     },
     {
       "id": "70",
@@ -2997,7 +3005,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 60
+      "lastWeekRank": 59
     },
     {
       "id": "72",
@@ -3039,7 +3047,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 33
     },
     {
       "id": "74",
@@ -3056,7 +3064,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 34
     },
     {
       "id": "1769273367436",
@@ -3141,6 +3149,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770831522467",
+      "winnerId": "34",
+      "loserId": "33",
+      "winner": "Tomek Paczkowski",
+      "loser": "Madi Supreme",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 16,
+      "loserEloChange": -13,
+      "expectedWinProbability": 0.6117705007810643,
+      "timestamp": "2026-02-11T00:00:00.000Z"
+    },
     {
       "id": "1770828385908",
       "winnerId": "64",
@@ -6171,5 +6192,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-11T16:46:25.909Z"
+  "lastUpdated": "2026-02-11T17:38:42.467Z"
 }
