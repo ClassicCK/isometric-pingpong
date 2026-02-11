@@ -138,9 +138,14 @@ export function calculateELO(winnerELO, loserELO, winnerScoreVal = null, loserSc
     adjustedK = Math.max(adjustedK, K * 0.5);
   }
 
+  // Asymmetric K: winners gain slightly more than losers drop (1.1x / 0.9x)
+  // Incentivises playing — top players aren't punished for taking on lower opponents
+  const winnerK = adjustedK * 1.1;
+  const loserK = adjustedK * 0.9;
+
   return {
-    winnerNew: Math.round(winnerELO + adjustedK * (1 - expectedWinner)),
-    loserNew: Math.round(loserELO + adjustedK * (0 - expectedLoser)),
+    winnerNew: Math.round(winnerELO + winnerK * (1 - expectedWinner)),
+    loserNew: Math.round(loserELO + loserK * (0 - expectedLoser)),
     kFactorUsed: adjustedK,
     expectedWinProbability: expectedWinner,
   };
