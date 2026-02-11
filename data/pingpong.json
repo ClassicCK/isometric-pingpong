@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1596,
-      "wins": 6,
+      "elo": 1617,
+      "wins": 7,
       "losses": 3,
       "eloHistory": [
         {
@@ -48,6 +48,10 @@
         {
           "elo": 1596,
           "timestamp": "2026-02-09T18:54:53.246Z"
+        },
+        {
+          "elo": 1617,
+          "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -170,9 +174,9 @@
       "name": "Kelley MacDonald",
       "countryCode": "va",
       "office": "LON",
-      "elo": 1426,
+      "elo": 1409,
       "wins": 0,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -189,6 +193,10 @@
         {
           "elo": 1426,
           "timestamp": "2026-02-11T09:06:01.898Z"
+        },
+        {
+          "elo": 1409,
+          "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3045,6 +3053,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770801809143",
+      "winnerId": "1",
+      "loserId": "6",
+      "winner": "David Lankes",
+      "loser": "Kelley MacDonald",
+      "winnerScore": 11,
+      "loserScore": 1,
+      "winnerEloChange": 21,
+      "loserEloChange": -17,
+      "expectedWinProbability": 0.726830072276731,
+      "timestamp": "2026-02-11T00:00:00.000Z"
+    },
     {
       "id": "1770801785193",
       "winnerId": "64",
@@ -5919,5 +5940,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-11T09:23:05.194Z"
+  "lastUpdated": "2026-02-11T09:23:29.143Z"
 }
