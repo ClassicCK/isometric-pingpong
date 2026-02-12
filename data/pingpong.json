@@ -1502,9 +1502,9 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1571,
+      "elo": 1549,
       "wins": 8,
-      "losses": 8,
+      "losses": 9,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1573,6 +1573,10 @@
         {
           "elo": 1571,
           "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1549,
+          "timestamp": "2026-02-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1931,8 +1935,8 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1508,
-      "wins": 12,
+      "elo": 1535,
+      "wins": 13,
       "losses": 17,
       "eloHistory": [
         {
@@ -2054,6 +2058,10 @@
         {
           "elo": 1508,
           "timestamp": "2026-02-11T18:02:33.341Z"
+        },
+        {
+          "elo": 1535,
+          "timestamp": "2026-02-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3197,6 +3205,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1770901111167",
+      "winnerId": "47",
+      "loserId": "34",
+      "winner": "Joel 'The Soul Reaper' Robinson",
+      "loser": "Tomek Paczkowski",
+      "winnerScore": 11,
+      "loserScore": 1,
+      "winnerEloChange": 27,
+      "loserEloChange": -22,
+      "expectedWinProbability": 0.41031649686004995,
+      "timestamp": "2026-02-12T00:00:00.000Z"
+    },
     {
       "id": "1770837528284",
       "winnerId": "1",
@@ -6318,5 +6339,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-11T19:18:48.284Z"
+  "lastUpdated": "2026-02-12T12:58:31.167Z"
 }
