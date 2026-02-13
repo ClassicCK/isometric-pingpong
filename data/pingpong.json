@@ -1656,8 +1656,8 @@
       "name": "Eamon Jubbawy",
       "countryCode": "iq",
       "office": "LON",
-      "elo": 1632,
-      "wins": 8,
+      "elo": 1659,
+      "wins": 9,
       "losses": 2,
       "eloHistory": [
         {
@@ -1702,6 +1702,10 @@
         },
         {
           "elo": 1632,
+          "timestamp": "2026-02-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1659,
           "timestamp": "2026-02-13T00:00:00.000Z"
         }
       ],
@@ -1991,9 +1995,9 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1590,
+      "elo": 1568,
       "wins": 16,
-      "losses": 20,
+      "losses": 21,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2141,6 +2145,10 @@
         },
         {
           "elo": 1590,
+          "timestamp": "2026-02-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1568,
           "timestamp": "2026-02-13T00:00:00.000Z"
         }
       ],
@@ -3301,6 +3309,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771005876844",
+      "winnerId": "36",
+      "loserId": "47",
+      "winner": "Eamon Jubbawy",
+      "loser": "Joel 'The Soul Reaper' Robinson",
+      "winnerScore": 11,
+      "loserScore": 1,
+      "winnerEloChange": 27,
+      "loserEloChange": -22,
+      "expectedWinProbability": 0.5601501452319029,
+      "timestamp": "2026-02-13T00:00:00.000Z"
+    },
     {
       "id": "1771005814116",
       "winnerId": "20",
@@ -6591,5 +6612,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-13T18:03:34.117Z"
+  "lastUpdated": "2026-02-13T18:04:36.844Z"
 }
