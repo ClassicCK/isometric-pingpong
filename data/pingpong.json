@@ -1020,9 +1020,9 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1656,
+      "elo": 1628,
       "wins": 25,
-      "losses": 20,
+      "losses": 21,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1207,6 +1207,10 @@
         {
           "elo": 1656,
           "timestamp": "2026-02-12T18:16:34.290Z"
+        },
+        {
+          "elo": 1628,
+          "timestamp": "2026-02-13T17:27:32.454Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1648,8 +1652,8 @@
       "name": "Eamon Jubbawy",
       "countryCode": "iq",
       "office": "LON",
-      "elo": 1623,
-      "wins": 7,
+      "elo": 1657,
+      "wins": 8,
       "losses": 1,
       "eloHistory": [
         {
@@ -1687,6 +1691,10 @@
         {
           "elo": 1623,
           "timestamp": "2026-01-15T00:00:00.000Z"
+        },
+        {
+          "elo": 1657,
+          "timestamp": "2026-02-13T17:27:32.454Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3285,6 +3293,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771003652510",
+      "winnerId": "36",
+      "loserId": "24",
+      "winner": "Eamon Jubbawy",
+      "loser": "George Pool",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 34,
+      "loserEloChange": -28,
+      "expectedWinProbability": 0.45265148195413535,
+      "timestamp": "2026-02-13T17:27:32.454Z"
+    },
     {
       "id": "1771002903890",
       "winnerId": "1",
@@ -6549,5 +6570,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-13T17:15:03.890Z"
+  "lastUpdated": "2026-02-13T17:27:32.510Z"
 }
