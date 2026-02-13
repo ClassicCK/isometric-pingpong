@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1712,
-      "wins": 16,
+      "elo": 1721,
+      "wins": 17,
       "losses": 8,
       "eloHistory": [
         {
@@ -107,6 +107,10 @@
         },
         {
           "elo": 1712,
+          "timestamp": "2026-02-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1721,
           "timestamp": "2026-02-13T00:00:00.000Z"
         }
       ],
@@ -1971,9 +1975,9 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1597,
+      "elo": 1590,
       "wins": 16,
-      "losses": 19,
+      "losses": 20,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2118,6 +2122,10 @@
         {
           "elo": 1597,
           "timestamp": "2026-02-12T18:16:34.290Z"
+        },
+        {
+          "elo": 1590,
+          "timestamp": "2026-02-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3277,6 +3285,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771002903890",
+      "winnerId": "1",
+      "loserId": "47",
+      "winner": "David Lankes",
+      "loser": "Joel 'The Soul Reaper' Robinson",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 9,
+      "loserEloChange": -7,
+      "expectedWinProbability": 0.6597079941447481,
+      "timestamp": "2026-02-13T00:00:00.000Z"
+    },
     {
       "id": "1771002885743",
       "winnerId": "1",
@@ -6528,5 +6549,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-13T17:14:45.743Z"
+  "lastUpdated": "2026-02-13T17:15:03.890Z"
 }
