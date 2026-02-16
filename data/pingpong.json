@@ -5,9 +5,9 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1743,
+      "elo": 1719,
       "wins": 19,
-      "losses": 8,
+      "losses": 9,
       "eloHistory": [
         {
           "elo": 1500,
@@ -119,6 +119,10 @@
         },
         {
           "elo": 1743,
+          "timestamp": "2026-02-16T00:00:00.000Z"
+        },
+        {
+          "elo": 1719,
           "timestamp": "2026-02-16T00:00:00.000Z"
         }
       ],
@@ -379,8 +383,8 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1764,
-      "wins": 11,
+      "elo": 1793,
+      "wins": 12,
       "losses": 1,
       "eloHistory": [
         {
@@ -434,6 +438,10 @@
         {
           "elo": 1764,
           "timestamp": "2026-02-11T15:36:03.403Z"
+        },
+        {
+          "elo": 1793,
+          "timestamp": "2026-02-16T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3333,6 +3341,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771254845664",
+      "winnerId": "11",
+      "loserId": "1",
+      "winner": "Paul Puget",
+      "loser": "David Lankes",
+      "winnerScore": 11,
+      "loserScore": 0,
+      "winnerEloChange": 29,
+      "loserEloChange": -24,
+      "expectedWinProbability": 0.5301846800039021,
+      "timestamp": "2026-02-16T00:00:00.000Z"
+    },
     {
       "id": "1771254793931",
       "winnerId": "1",
@@ -6675,5 +6696,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-16T15:13:13.932Z"
+  "lastUpdated": "2026-02-16T15:14:05.665Z"
 }
