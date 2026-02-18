@@ -5,9 +5,9 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1745,
+      "elo": 1717,
       "wins": 22,
-      "losses": 10,
+      "losses": 11,
       "eloHistory": [
         {
           "elo": 1500,
@@ -140,6 +140,10 @@
         {
           "elo": 1745,
           "timestamp": "2026-02-18T18:28:17.730Z"
+        },
+        {
+          "elo": 1717,
+          "timestamp": "2026-02-18T19:04:28.030Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3128,8 +3132,8 @@
       "name": "Peteris Bikis",
       "countryCode": "lv",
       "office": "LON",
-      "elo": 1565,
-      "wins": 7,
+      "elo": 1599,
+      "wins": 8,
       "losses": 10,
       "eloHistory": [
         {
@@ -3203,6 +3207,10 @@
         {
           "elo": 1565,
           "timestamp": "2026-02-18T17:27:33.270Z"
+        },
+        {
+          "elo": 1599,
+          "timestamp": "2026-02-18T19:04:28.030Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3477,6 +3485,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771441468083",
+      "winnerId": "68",
+      "loserId": "1",
+      "winner": "Peteris Bikis",
+      "loser": "David Lankes",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 34,
+      "loserEloChange": -28,
+      "expectedWinProbability": 0.2618909674595814,
+      "timestamp": "2026-02-18T19:04:28.030Z"
+    },
     {
       "id": "1771439297786",
       "winnerId": "24",
@@ -7053,5 +7074,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-18T18:28:17.786Z"
+  "lastUpdated": "2026-02-18T19:04:28.084Z"
 }
