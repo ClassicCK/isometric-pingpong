@@ -531,7 +531,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 33
     },
     {
       "id": "14",
@@ -617,7 +617,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 26
     },
     {
       "id": "16",
@@ -1250,7 +1250,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "25",
@@ -1377,7 +1377,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 25
     },
     {
       "id": "28",
@@ -1423,7 +1423,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 27
     },
     {
       "id": "30",
@@ -1582,9 +1582,9 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1549,
+      "elo": 1533,
       "wins": 8,
-      "losses": 9,
+      "losses": 10,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1657,6 +1657,10 @@
         {
           "elo": 1549,
           "timestamp": "2026-02-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1533,
+          "timestamp": "2026-02-18T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1796,7 +1800,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "39",
@@ -1821,7 +1825,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 28
     },
     {
       "id": "40",
@@ -1950,7 +1954,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 34
     },
     {
       "id": "45",
@@ -2027,8 +2031,8 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1568,
-      "wins": 16,
+      "elo": 1587,
+      "wins": 17,
       "losses": 21,
       "eloHistory": [
         {
@@ -2182,10 +2186,14 @@
         {
           "elo": 1568,
           "timestamp": "2026-02-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1587,
+          "timestamp": "2026-02-18T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 20
     },
     {
       "id": "48",
@@ -2538,7 +2546,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 6
     },
     {
       "id": "57",
@@ -2765,7 +2773,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 29
     },
     {
       "id": "64",
@@ -3246,7 +3254,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 30
     },
     {
       "id": "73",
@@ -3263,7 +3271,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 31
     },
     {
       "id": "74",
@@ -3280,7 +3288,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 32
     },
     {
       "id": "1769273367436",
@@ -3365,6 +3373,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771420011759",
+      "winnerId": "47",
+      "loserId": "34",
+      "winner": "Joel 'The Soul Reaper' Robinson",
+      "loser": "Tomek Paczkowski",
+      "winnerScore": 12,
+      "loserScore": 10,
+      "winnerEloChange": 19,
+      "loserEloChange": -16,
+      "expectedWinProbability": 0.527315973006493,
+      "timestamp": "2026-02-18T00:00:00.000Z"
+    },
     {
       "id": "1771416587138",
       "winnerId": "1",
@@ -6759,5 +6780,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-18T12:09:47.139Z"
+  "lastUpdated": "2026-02-18T13:06:51.772Z"
 }
