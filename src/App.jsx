@@ -213,6 +213,9 @@ function simulateSeason(players, { seasonMatchesPerPlayer = 10, K = 24, matchNoi
   return sims;
 }
 
+const SEED_PAIRS = [[0, 15], [7, 8], [4, 11], [3, 12], [5, 10], [2, 13], [6, 9], [1, 14]];
+const REGION_NAMES = ["East", "West", "South", "Midwest"];
+
 function simulateTournamentAndCollect(seededTop64, counters, { matchNoiseStd = 15 } = {}) {
   const simMatch = (p1, p2) => {
     if (!p1) return p2;
@@ -221,7 +224,7 @@ function simulateTournamentAndCollect(seededTop64, counters, { matchNoiseStd = 1
     return Math.random() < p ? p1 : p2;
   };
 
-  const seedPairs = [[0, 15], [7, 8], [4, 11], [3, 12], [5, 10], [2, 13], [6, 9], [1, 14]];
+  const seedPairs = SEED_PAIRS;
 
   const regions = [0, 1, 2, 3].map((ri) =>
     seededTop64.filter((p) => p.regionIndex === ri).sort((a, b) => a.seed - b.seed).slice(0, 16)
@@ -337,6 +340,187 @@ function simulateSeasonPlusTournamentProbabilities(allPlayers, opts = {}) {
   return probs;
 }
 
+function buildCurrentEloSeeding(players) {
+  const eligible = players
+    .filter(p => (p.wins + p.losses) >= MIN_GAMES_FOR_QUALIFICATION)
+    .sort((a, b) => b.elo - a.elo);
+
+  const top64 = eligible.slice(0, 64);
+  const seeded = top64.map((p, index) => ({
+    id: p.id,
+    name: p.name,
+    countryCode: p.countryCode,
+    office: p.office,
+    elo: p.elo,
+    seed: Math.floor(index / 4) + 1,
+    regionIndex: index % 4,
+  }));
+
+  return [0, 1, 2, 3].map(ri =>
+    seeded.filter(p => p.regionIndex === ri).sort((a, b) => a.seed - b.seed)
+  );
+}
+
+function MatchupCard({ playerA, playerB, probKey, seasonProbs }) {
+  const probA = playerA ? (seasonProbs[playerA.id]?.[probKey] ?? 0) : 0;
+  const probB = playerB ? (seasonProbs[playerB.id]?.[probKey] ?? 0) : 0;
+  const winnerIsA = probA >= probB;
+
+  const renderSlot = (player, prob, isWinner) => {
+    if (!player) {
+      return (
+        <div className="flex items-center gap-2 px-3 py-2 text-gray-300 italic text-xs">
+          BYE
+        </div>
+      );
+    }
+    return (
+      <div className={`flex items-center justify-between px-3 py-2 ${isWinner ? 'bg-gray-900 text-white' : 'bg-white text-gray-500'}`}>
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-xs w-4 flex-shrink-0 text-gray-400 font-mono">{player.seed}</span>
+          <img src={`https://flagcdn.com/w40/${player.countryCode}.png`} width="16" height="12" alt="" className="flex-shrink-0" />
+          <span className={`text-xs font-medium truncate ${isWinner ? 'text-white' : 'text-gray-600'}`}>
+            {player.name}
+          </span>
+        </div>
+        <span className={`text-xs font-mono ml-2 flex-shrink-0 ${isWinner ? 'text-green-400' : 'text-gray-400'}`}>
+          {prob}%
+        </span>
+      </div>
+    );
+  };
+
+  return (
+    <div className="border border-gray-200 rounded overflow-hidden" style={{ fontFamily: 'monospace' }}>
+      {renderSlot(playerA, probA, winnerIsA)}
+      <div className="border-t border-gray-200" />
+      {renderSlot(playerB, probB, !winnerIsA)}
+    </div>
+  );
+}
+
+function RegionBracket({ regionName, regionPlayers, seasonProbs }) {
+  const probKeys = ['round32', 'sweet16', 'elite8', 'final4'];
+  const roundLabels = ['Round of 64', 'Round of 32', 'Sweet 16', 'Elite 8'];
+
+  // Build R64 matchups using SEED_PAIRS order
+  const r64Matchups = SEED_PAIRS.map(([a, b]) => [
+    regionPlayers[a] ?? null,
+    regionPlayers[b] ?? null,
+  ]);
+
+  // Derive projected winner of a matchup by comparing probabilities for the next round
+  const projectedWinner = (p1, p2, probKey) => {
+    if (!p1) return p2;
+    if (!p2) return p1;
+    const prob1 = seasonProbs[p1.id]?.[probKey] ?? 0;
+    const prob2 = seasonProbs[p2.id]?.[probKey] ?? 0;
+    return prob1 >= prob2 ? p1 : p2;
+  };
+
+  // Build all rounds: each round's matchups are pairs of projected winners from the previous round
+  const allRounds = [r64Matchups];
+  for (let r = 0; r < 3; r++) {
+    const prev = allRounds[r];
+    const nextProbKey = probKeys[r + 1]; // key to use for projecting winners out of this round
+    const next = [];
+    for (let i = 0; i < prev.length; i += 2) {
+      const w1 = projectedWinner(prev[i][0], prev[i][1], nextProbKey);
+      const w2 = projectedWinner(prev[i + 1][0], prev[i + 1][1], nextProbKey);
+      next.push([w1, w2]);
+    }
+    allRounds.push(next);
+  }
+
+  // Card height in px (two slots + border)
+  const CARD_H = 60;
+  const GAP = 8;
+  const totalR64Height = r64Matchups.length * CARD_H + (r64Matchups.length - 1) * GAP;
+
+  return (
+    <div>
+      <h2 className="text-3xl font-black mb-6" style={{ fontFamily: 'Figtree, sans-serif' }}>{regionName} Region</h2>
+      <div className="flex gap-4 overflow-x-auto pb-4">
+        {allRounds.map((round, r) => {
+          const count = round.length;
+          return (
+            <div key={r} className="flex-shrink-0" style={{ width: 200 }}>
+              <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
+                {roundLabels[r]}
+              </div>
+              <div
+                className="flex flex-col"
+                style={{ height: totalR64Height, justifyContent: count === 1 ? 'center' : 'space-around' }}
+              >
+                {round.map(([playerA, playerB], matchIdx) => (
+                  <MatchupCard
+                    key={matchIdx}
+                    playerA={playerA}
+                    playerB={playerB}
+                    probKey={probKeys[r]}
+                    seasonProbs={seasonProbs}
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function FinalFourView({ regions, seasonProbs }) {
+  // Projected region champ = player with highest final4 probability in each region
+  const regionChamps = regions.map((regionPlayers, ri) => {
+    if (!regionPlayers || regionPlayers.length === 0) return null;
+    return [...regionPlayers].sort((a, b) =>
+      (seasonProbs[b.id]?.final4 ?? 0) - (seasonProbs[a.id]?.final4 ?? 0)
+    )[0] || null;
+  });
+
+  // Semifinal 1: East (0) vs West (1), Semifinal 2: South (2) vs Midwest (3)
+  const semi1 = [regionChamps[0], regionChamps[1]];
+  const semi2 = [regionChamps[2], regionChamps[3]];
+
+  const projectedWinner = (p1, p2, probKey) => {
+    if (!p1) return p2;
+    if (!p2) return p1;
+    return (seasonProbs[p1.id]?.[probKey] ?? 0) >= (seasonProbs[p2.id]?.[probKey] ?? 0) ? p1 : p2;
+  };
+
+  const finalist1 = projectedWinner(semi1[0], semi1[1], 'finals');
+  const finalist2 = projectedWinner(semi2[0], semi2[1], 'finals');
+
+  return (
+    <div className="max-w-2xl" style={{ fontFamily: 'monospace' }}>
+      <h2 className="text-3xl font-black mb-8" style={{ fontFamily: 'Figtree, sans-serif' }}>Final Four</h2>
+
+      <div className="grid grid-cols-2 gap-8 mb-10">
+        <div>
+          <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
+            Semifinal 1 · {REGION_NAMES[0]} vs {REGION_NAMES[1]}
+          </div>
+          <MatchupCard playerA={semi1[0]} playerB={semi1[1]} probKey="finals" seasonProbs={seasonProbs} />
+        </div>
+        <div>
+          <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
+            Semifinal 2 · {REGION_NAMES[2]} vs {REGION_NAMES[3]}
+          </div>
+          <MatchupCard playerA={semi2[0]} playerB={semi2[1]} probKey="finals" seasonProbs={seasonProbs} />
+        </div>
+      </div>
+
+      <div className="border-t border-gray-200 pt-8">
+        <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">Championship</div>
+        <div className="max-w-xs">
+          <MatchupCard playerA={finalist1} playerB={finalist2} probKey="win" seasonProbs={seasonProbs} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PingPongELO() {
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
@@ -357,6 +541,7 @@ export default function PingPongELO() {
   const [newPlayerOffice, setNewPlayerOffice] = useState("");
 
   const [activeTab, setActiveTab] = useState("match");
+  const [tournamentRegion, setTournamentRegion] = useState(0);
   const [sortColumn, setSortColumn] = useState("rank");
   const [sortDirection, setSortDirection] = useState("asc");
 
@@ -1360,6 +1545,58 @@ export default function PingPongELO() {
     );
   }
 
+  // TOURNAMENT VIEW
+  if (currentView === "tournament") {
+    const regions = buildCurrentEloSeeding(players);
+    const activeRegion = regions[tournamentRegion] ?? [];
+
+    return (
+      <div className="min-h-screen bg-white">
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+        <div className="border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <button onClick={() => setCurrentView("rankings")} className="text-gray-600 hover:text-black mb-6 flex items-center gap-2">
+              ← Back to Rankings
+            </button>
+            <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Tournament Bracket</h1>
+            <p className="text-xl text-gray-700" style={{ fontFamily: "monospace" }}>
+              Projected outcomes based on 1,000 Monte Carlo simulations. Seeded by current Elo.
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-8">
+          <div className="flex border-b border-gray-200 mb-8">
+            {[...REGION_NAMES, "Final Four"].map((name, i) => (
+              <button
+                key={name}
+                onClick={() => setTournamentRegion(i)}
+                className={`px-6 py-4 font-semibold transition-colors ${tournamentRegion === i ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'}`}
+                style={{ fontFamily: 'monospace' }}
+              >
+                {name}
+              </button>
+            ))}
+          </div>
+
+          {probsLoading ? (
+            <div className="text-center py-16 text-gray-400" style={{ fontFamily: 'monospace' }}>
+              Calculating simulation probabilities...
+            </div>
+          ) : tournamentRegion < 4 ? (
+            <RegionBracket
+              regionName={REGION_NAMES[tournamentRegion]}
+              regionPlayers={activeRegion}
+              seasonProbs={seasonProbs}
+            />
+          ) : (
+            <FinalFourView regions={regions} seasonProbs={seasonProbs} />
+          )}
+        </div>
+      </div>
+    );
+  }
+
   // MATCHES VIEW
   if (currentView === "matches") {
     return (
@@ -1452,6 +1689,9 @@ export default function PingPongELO() {
             </div>
 
             <div className="flex gap-3">
+              <button onClick={() => setCurrentView("tournament")} className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors">
+                Tournament
+              </button>
               <button onClick={() => setCurrentView("matches")} className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors">
                 View Matches
               </button>
