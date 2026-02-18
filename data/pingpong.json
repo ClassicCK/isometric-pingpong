@@ -2800,9 +2800,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1687,
+      "elo": 1660,
       "wins": 24,
-      "losses": 19,
+      "losses": 20,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2979,6 +2979,10 @@
         {
           "elo": 1687,
           "timestamp": "2026-02-18T16:55:36.669Z"
+        },
+        {
+          "elo": 1660,
+          "timestamp": "2026-02-18T17:27:33.270Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3068,8 +3072,8 @@
       "name": "Peteris Bikis",
       "countryCode": "lv",
       "office": "LON",
-      "elo": 1532,
-      "wins": 6,
+      "elo": 1565,
+      "wins": 7,
       "losses": 10,
       "eloHistory": [
         {
@@ -3139,6 +3143,10 @@
         {
           "elo": 1532,
           "timestamp": "2026-02-18T16:55:36.669Z"
+        },
+        {
+          "elo": 1565,
+          "timestamp": "2026-02-18T17:27:33.270Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3413,6 +3421,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771435653324",
+      "winnerId": "68",
+      "loserId": "64",
+      "winner": "Peteris Bikis",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 33,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.29064536940123664,
+      "timestamp": "2026-02-18T17:27:33.270Z"
+    },
     {
       "id": "1771433736728",
       "winnerId": "64",
@@ -6885,5 +6906,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-18T16:55:36.728Z"
+  "lastUpdated": "2026-02-18T17:27:33.324Z"
 }
