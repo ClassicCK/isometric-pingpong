@@ -139,7 +139,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 6
     },
     {
       "id": "2",
@@ -334,7 +334,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "9",
@@ -604,7 +604,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "15",
@@ -1068,8 +1068,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1645,
-      "wins": 26,
+      "elo": 1660,
+      "wins": 27,
       "losses": 21,
       "eloHistory": [
         {
@@ -1263,10 +1263,14 @@
         {
           "elo": 1645,
           "timestamp": "2026-02-18T14:30:16.297Z"
+        },
+        {
+          "elo": 1660,
+          "timestamp": "2026-02-18T18:21:56.925Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 5
     },
     {
       "id": "25",
@@ -1393,7 +1397,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 24
     },
     {
       "id": "28",
@@ -1489,7 +1493,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "32",
@@ -1920,7 +1924,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "43",
@@ -2051,9 +2055,9 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1587,
+      "elo": 1574,
       "wins": 17,
-      "losses": 21,
+      "losses": 22,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2210,10 +2214,14 @@
         {
           "elo": 1587,
           "timestamp": "2026-02-18T00:00:00.000Z"
+        },
+        {
+          "elo": 1574,
+          "timestamp": "2026-02-18T18:21:56.925Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 25
     },
     {
       "id": "48",
@@ -2566,7 +2574,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "57",
@@ -3244,7 +3252,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "71",
@@ -3421,6 +3429,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771438916991",
+      "winnerId": "24",
+      "loserId": "47",
+      "winner": "George Pool",
+      "loser": "Joel 'The Soul Reaper' Robinson",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 15,
+      "loserEloChange": -13,
+      "expectedWinProbability": 0.5827018849642301,
+      "timestamp": "2026-02-18T18:21:56.925Z"
+    },
     {
       "id": "1771435653324",
       "winnerId": "68",
@@ -6906,5 +6927,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-18T17:27:33.324Z"
+  "lastUpdated": "2026-02-18T18:21:56.991Z"
 }
