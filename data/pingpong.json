@@ -191,9 +191,9 @@
       "name": "George Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1529,
+      "elo": 1516,
       "wins": 3,
-      "losses": 2,
+      "losses": 3,
       "eloHistory": [
         {
           "elo": 1500,
@@ -217,6 +217,10 @@
         },
         {
           "elo": 1529,
+          "timestamp": "2026-02-18T00:00:00.000Z"
+        },
+        {
+          "elo": 1516,
           "timestamp": "2026-02-18T00:00:00.000Z"
         }
       ],
@@ -3415,8 +3419,8 @@
       "name": "Rishabh Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1706,
-      "wins": 13,
+      "elo": 1722,
+      "wins": 14,
       "losses": 7,
       "eloHistory": [
         {
@@ -3502,6 +3506,10 @@
         {
           "elo": 1706,
           "timestamp": "2026-02-18T00:00:00.000Z"
+        },
+        {
+          "elo": 1722,
+          "timestamp": "2026-02-18T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -3509,6 +3517,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771506610802",
+      "winnerId": "1769273367436",
+      "loserId": "3",
+      "winner": "Rishabh Chatterjee",
+      "loser": "George Robinson",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 16,
+      "loserEloChange": -13,
+      "expectedWinProbability": 0.7347570893165466,
+      "timestamp": "2026-02-18T00:00:00.000Z"
+    },
     {
       "id": "1771506594574",
       "winnerId": "1769273367436",
@@ -7137,5 +7158,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-19T13:09:54.575Z"
+  "lastUpdated": "2026-02-19T13:10:10.802Z"
 }
