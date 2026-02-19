@@ -2107,9 +2107,9 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1525,
+      "elo": 1516,
       "wins": 17,
-      "losses": 27,
+      "losses": 28,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2289,6 +2289,10 @@
         },
         {
           "elo": 1525,
+          "timestamp": "2026-02-19T00:00:00.000Z"
+        },
+        {
+          "elo": 1516,
           "timestamp": "2026-02-19T00:00:00.000Z"
         }
       ],
@@ -3423,8 +3427,8 @@
       "name": "Rishabh Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1732,
-      "wins": 15,
+      "elo": 1743,
+      "wins": 16,
       "losses": 7,
       "eloHistory": [
         {
@@ -3518,6 +3522,10 @@
         {
           "elo": 1732,
           "timestamp": "2026-02-19T00:00:00.000Z"
+        },
+        {
+          "elo": 1743,
+          "timestamp": "2026-02-19T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -3525,6 +3533,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771506663248",
+      "winnerId": "1769273367436",
+      "loserId": "47",
+      "winner": "Rishabh Chatterjee",
+      "loser": "Joel 'The Soul Reaper' Robinson",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 11,
+      "loserEloChange": -9,
+      "expectedWinProbability": 0.7670249181450214,
+      "timestamp": "2026-02-19T00:00:00.000Z"
+    },
     {
       "id": "1771506651645",
       "winnerId": "1769273367436",
@@ -7179,5 +7200,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-19T13:10:51.645Z"
+  "lastUpdated": "2026-02-19T13:11:03.248Z"
 }
