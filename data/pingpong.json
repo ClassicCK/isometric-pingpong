@@ -155,7 +155,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 4
     },
     {
       "id": "2",
@@ -358,7 +358,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 21
     },
     {
       "id": "9",
@@ -412,7 +412,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 18
     },
     {
       "id": "11",
@@ -632,7 +632,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 24
     },
     {
       "id": "15",
@@ -1018,7 +1018,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 6
     },
     {
       "id": "21",
@@ -1322,7 +1322,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 10
     },
     {
       "id": "25",
@@ -1545,7 +1545,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 22
     },
     {
       "id": "32",
@@ -1822,7 +1822,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 10
+      "lastWeekRank": 8
     },
     {
       "id": "37",
@@ -1876,7 +1876,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 19
     },
     {
       "id": "39",
@@ -1976,7 +1976,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 23
     },
     {
       "id": "43",
@@ -2107,8 +2107,8 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1516,
-      "wins": 17,
+      "elo": 1546,
+      "wins": 18,
       "losses": 28,
       "eloHistory": [
         {
@@ -2294,10 +2294,14 @@
         {
           "elo": 1516,
           "timestamp": "2026-02-19T00:00:00.000Z"
+        },
+        {
+          "elo": 1546,
+          "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 13
     },
     {
       "id": "48",
@@ -2560,9 +2564,9 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1681,
+      "elo": 1656,
       "wins": 14,
-      "losses": 6,
+      "losses": 7,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2647,6 +2651,10 @@
         {
           "elo": 1681,
           "timestamp": "2026-02-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1656,
+          "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3246,7 +3254,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 17
     },
     {
       "id": "69",
@@ -3340,7 +3348,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 20
     },
     {
       "id": "71",
@@ -3533,6 +3541,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771608763078",
+      "winnerId": "47",
+      "loserId": "56",
+      "winner": "Joel 'The Soul Reaper' Robinson",
+      "loser": "Jon Finerty",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 30,
+      "loserEloChange": -25,
+      "expectedWinProbability": 0.2789217568024399,
+      "timestamp": "2026-02-20T00:00:00.000Z"
+    },
     {
       "id": "1771506663248",
       "winnerId": "1769273367436",
@@ -7200,5 +7221,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-19T13:11:03.248Z"
+  "lastUpdated": "2026-02-20T17:32:43.078Z"
 }
