@@ -714,8 +714,8 @@
       "name": "Alex Steene",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1456,
-      "wins": 3,
+      "elo": 1497,
+      "wins": 4,
       "losses": 8,
       "eloHistory": [
         {
@@ -764,6 +764,10 @@
         },
         {
           "elo": 1456,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1497,
           "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
@@ -3180,9 +3184,9 @@
       "name": "Peteris Bikis",
       "countryCode": "lv",
       "office": "LON",
-      "elo": 1575,
+      "elo": 1541,
       "wins": 8,
-      "losses": 12,
+      "losses": 13,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3267,6 +3271,10 @@
         {
           "elo": 1575,
           "timestamp": "2026-02-18T19:04:48.281Z"
+        },
+        {
+          "elo": 1541,
+          "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3557,6 +3565,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771608977500",
+      "winnerId": "18",
+      "loserId": "68",
+      "winner": "Alex Steene",
+      "loser": "Peteris Bikis",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 41,
+      "loserEloChange": -34,
+      "expectedWinProbability": 0.3351420214452352,
+      "timestamp": "2026-02-20T00:00:00.000Z"
+    },
     {
       "id": "1771608818854",
       "winnerId": "56",
@@ -7263,5 +7284,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-20T17:33:38.854Z"
+  "lastUpdated": "2026-02-20T17:36:17.500Z"
 }
