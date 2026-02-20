@@ -2107,9 +2107,9 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1546,
+      "elo": 1535,
       "wins": 18,
-      "losses": 28,
+      "losses": 29,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2297,6 +2297,10 @@
         },
         {
           "elo": 1546,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1535,
           "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
@@ -2564,8 +2568,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1656,
-      "wins": 14,
+      "elo": 1670,
+      "wins": 15,
       "losses": 7,
       "eloHistory": [
         {
@@ -2654,6 +2658,10 @@
         },
         {
           "elo": 1656,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1670,
           "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
@@ -3541,6 +3549,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771608789625",
+      "winnerId": "56",
+      "loserId": "47",
+      "winner": "Jon Finerty",
+      "loser": "Joel 'The Soul Reaper' Robinson",
+      "winnerScore": 13,
+      "loserScore": 11,
+      "winnerEloChange": 14,
+      "loserEloChange": -11,
+      "expectedWinProbability": 0.6532171672188698,
+      "timestamp": "2026-02-20T00:00:00.000Z"
+    },
     {
       "id": "1771608763078",
       "winnerId": "47",
@@ -7221,5 +7242,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-20T17:32:43.078Z"
+  "lastUpdated": "2026-02-20T17:33:09.626Z"
 }
