@@ -358,7 +358,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "9",
@@ -636,7 +636,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "15",
@@ -783,9 +783,9 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1759,
+      "elo": 1738,
       "wins": 18,
-      "losses": 9,
+      "losses": 10,
       "eloHistory": [
         {
           "elo": 1500,
@@ -898,6 +898,10 @@
         {
           "elo": 1759,
           "timestamp": "2026-02-20T19:36:46.952Z"
+        },
+        {
+          "elo": 1738,
+          "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1084,7 +1088,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 58
+      "lastWeekRank": 57
     },
     {
       "id": "23",
@@ -1105,7 +1109,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 55
+      "lastWeekRank": 54
     },
     {
       "id": "24",
@@ -1465,7 +1469,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 24
     },
     {
       "id": "28",
@@ -1561,7 +1565,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "32",
@@ -1992,7 +1996,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "43",
@@ -2556,7 +2560,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 56
+      "lastWeekRank": 55
     },
     {
       "id": "55",
@@ -2584,8 +2588,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1682,
-      "wins": 16,
+      "elo": 1707,
+      "wins": 17,
       "losses": 7,
       "eloHistory": [
         {
@@ -2682,6 +2686,10 @@
         },
         {
           "elo": 1682,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1707,
           "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
@@ -2814,7 +2822,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 57
+      "lastWeekRank": 56
     },
     {
       "id": "61",
@@ -3185,7 +3193,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 58
     },
     {
       "id": "68",
@@ -3307,7 +3315,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 52
     },
     {
       "id": "70",
@@ -3380,7 +3388,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 25
     },
     {
       "id": "71",
@@ -3401,7 +3409,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "72",
@@ -3573,6 +3581,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771836379804",
+      "winnerId": "56",
+      "loserId": "19",
+      "winner": "Jon Finerty",
+      "loser": "Neil Hacker",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 25,
+      "loserEloChange": -21,
+      "expectedWinProbability": 0.39096739659576046,
+      "timestamp": "2026-02-20T00:00:00.000Z"
+    },
     {
       "id": "1771616207014",
       "winnerId": "19",
@@ -7305,5 +7326,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-20T19:36:47.014Z"
+  "lastUpdated": "2026-02-23T08:46:19.804Z"
 }
