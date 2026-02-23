@@ -783,9 +783,9 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1729,
+      "elo": 1711,
       "wins": 19,
-      "losses": 12,
+      "losses": 13,
       "eloHistory": [
         {
           "elo": 1500,
@@ -913,6 +913,10 @@
         },
         {
           "elo": 1729,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1711,
           "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
@@ -2600,8 +2604,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1728,
-      "wins": 19,
+      "elo": 1750,
+      "wins": 20,
       "losses": 8,
       "eloHistory": [
         {
@@ -2714,6 +2718,10 @@
         },
         {
           "elo": 1728,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1750,
           "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
@@ -3605,6 +3613,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1771836452026",
+      "winnerId": "56",
+      "loserId": "19",
+      "winner": "Jon Finerty",
+      "loser": "Neil Hacker",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 22,
+      "loserEloChange": -18,
+      "expectedWinProbability": 0.4985608882908471,
+      "timestamp": "2026-02-20T00:00:00.000Z"
+    },
     {
       "id": "1771836433422",
       "winnerId": "19",
@@ -7389,5 +7410,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-23T08:47:13.422Z"
+  "lastUpdated": "2026-02-23T08:47:32.027Z"
 }
