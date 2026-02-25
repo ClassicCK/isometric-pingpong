@@ -536,8 +536,8 @@
       "name": "Ewan Stephens",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1405,
-      "wins": 0,
+      "elo": 1454,
+      "wins": 1,
       "losses": 4,
       "eloHistory": [
         {
@@ -559,6 +559,10 @@
         {
           "elo": 1405,
           "timestamp": "2026-01-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1454,
+          "timestamp": "2026-02-25T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -569,9 +573,9 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "LON",
-      "elo": 1499,
+      "elo": 1459,
       "wins": 3,
-      "losses": 3,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -600,6 +604,10 @@
         {
           "elo": 1499,
           "timestamp": "2026-01-28T00:00:00.000Z"
+        },
+        {
+          "elo": 1459,
+          "timestamp": "2026-02-25T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3717,6 +3725,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772026525490",
+      "winnerId": "12",
+      "loserId": "13",
+      "winner": "Ewan Stephens",
+      "loser": "Adithya Pradeep",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 49,
+      "loserEloChange": -40,
+      "expectedWinProbability": 0.3679299878999264,
+      "timestamp": "2026-02-25T00:00:00.000Z"
+    },
     {
       "id": "1772026181740",
       "winnerId": "1",
@@ -7683,5 +7704,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-25T13:35:18.617Z"
+  "lastUpdated": "2026-02-25T13:35:25.491Z"
 }
