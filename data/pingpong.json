@@ -50,127 +50,127 @@
           "timestamp": "2026-02-09T18:54:53.246Z"
         },
         {
-          "elo": 1618,
+          "elo": 1610,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1605,
+          "elo": 1592,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1628,
+          "elo": 1566,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1615,
+          "elo": 1609,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1660,
+          "elo": 1633,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1616,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1636,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1624,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1645,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1674,
           "timestamp": "2026-02-11T15:29:46.620Z"
         },
         {
-          "elo": 1695,
+          "elo": 1697,
           "timestamp": "2026-02-11T15:30:03.858Z"
         },
         {
-          "elo": 1673,
+          "elo": 1675,
           "timestamp": "2026-02-11T15:36:03.403Z"
         },
         {
-          "elo": 1688,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1711,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1677,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1698,
+          "elo": 1696,
           "timestamp": "2026-02-11T19:18:48.256Z"
         },
         {
-          "elo": 1678,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1690,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1701,
+          "elo": 1705,
           "timestamp": "2026-02-13T00:00:00.000Z"
         },
         {
-          "elo": 1712,
+          "elo": 1715,
           "timestamp": "2026-02-13T00:00:00.000Z"
         },
         {
-          "elo": 1721,
+          "elo": 1724,
           "timestamp": "2026-02-13T00:00:00.000Z"
         },
         {
-          "elo": 1730,
+          "elo": 1732,
           "timestamp": "2026-02-16T00:00:00.000Z"
         },
         {
-          "elo": 1743,
+          "elo": 1709,
           "timestamp": "2026-02-16T00:00:00.000Z"
         },
         {
-          "elo": 1719,
+          "elo": 1722,
           "timestamp": "2026-02-16T00:00:00.000Z"
-        },
-        {
-          "elo": 1727,
-          "timestamp": "2026-02-16T00:00:00.000Z"
-        },
-        {
-          "elo": 1748,
-          "timestamp": "2026-02-18T00:00:00.000Z"
-        },
-        {
-          "elo": 1764,
-          "timestamp": "2026-02-18T00:00:00.000Z"
-        },
-        {
-          "elo": 1745,
-          "timestamp": "2026-02-18T18:28:17.730Z"
-        },
-        {
-          "elo": 1717,
-          "timestamp": "2026-02-18T19:04:28.030Z"
-        },
-        {
-          "elo": 1733,
-          "timestamp": "2026-02-18T19:04:40.052Z"
-        },
-        {
-          "elo": 1746,
-          "timestamp": "2026-02-18T19:04:48.281Z"
         },
         {
           "elo": 1731,
+          "timestamp": "2026-02-16T00:00:00.000Z"
+        },
+        {
+          "elo": 1753,
+          "timestamp": "2026-02-18T00:00:00.000Z"
+        },
+        {
+          "elo": 1768,
+          "timestamp": "2026-02-18T00:00:00.000Z"
+        },
+        {
+          "elo": 1749,
+          "timestamp": "2026-02-18T18:28:17.730Z"
+        },
+        {
+          "elo": 1721,
+          "timestamp": "2026-02-18T19:04:28.030Z"
+        },
+        {
+          "elo": 1736,
+          "timestamp": "2026-02-18T19:04:40.052Z"
+        },
+        {
+          "elo": 1748,
+          "timestamp": "2026-02-18T19:04:48.281Z"
+        },
+        {
+          "elo": 1722,
           "timestamp": "2026-02-24T00:00:00.000Z"
         },
         {
-          "elo": 1743,
+          "elo": 1733,
           "timestamp": "2026-02-24T00:00:00.000Z"
         },
         {
-          "elo": 1716,
+          "elo": 1718,
           "timestamp": "2026-02-24T00:00:00.000Z"
         },
         {
-          "elo": 1689,
+          "elo": 1732,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1699,
+          "elo": 1741,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
@@ -215,9 +215,9 @@
       "name": "George Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1495,
+      "elo": 1509,
       "wins": 3,
-      "losses": 5,
+      "losses": 4,
       "eloHistory": [
         {
           "elo": 1500,
@@ -240,20 +240,16 @@
           "timestamp": "2026-01-14T00:00:00.000Z"
         },
         {
-          "elo": 1529,
+          "elo": 1532,
           "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
-          "elo": 1516,
+          "elo": 1521,
           "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
-          "elo": 1505,
+          "elo": 1509,
           "timestamp": "2026-02-25T13:10:31.519Z"
-        },
-        {
-          "elo": 1495,
-          "timestamp": "2026-02-25T13:10:54.280Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -314,7 +310,7 @@
       "name": "Kelley MacDonald",
       "countryCode": "va",
       "office": "LON",
-      "elo": 1408,
+      "elo": 1410,
       "wins": 0,
       "losses": 4,
       "eloHistory": [
@@ -331,11 +327,11 @@
           "timestamp": "2026-02-02T00:00:00.000Z"
         },
         {
-          "elo": 1435,
+          "elo": 1437,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1408,
+          "elo": 1410,
           "timestamp": "2026-02-11T09:06:01.898Z"
         }
       ],
@@ -415,7 +411,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 67
+      "lastWeekRank": 66
     },
     {
       "id": "10",
@@ -444,14 +440,14 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 16
     },
     {
       "id": "11",
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1897,
+      "elo": 1899,
       "wins": 18,
       "losses": 1,
       "eloHistory": [
@@ -508,31 +504,31 @@
           "timestamp": "2026-02-11T15:36:03.403Z"
         },
         {
-          "elo": 1793,
+          "elo": 1792,
           "timestamp": "2026-02-16T00:00:00.000Z"
         },
         {
-          "elo": 1815,
-          "timestamp": "2026-02-18T15:36:18.715Z"
-        },
-        {
-          "elo": 1837,
+          "elo": 1820,
           "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
-          "elo": 1851,
+          "elo": 1841,
+          "timestamp": "2026-02-18T15:36:18.715Z"
+        },
+        {
+          "elo": 1856,
           "timestamp": "2026-02-18T16:14:52.260Z"
         },
         {
-          "elo": 1865,
+          "elo": 1870,
           "timestamp": "2026-02-18T18:23:45.419Z"
         },
         {
-          "elo": 1882,
+          "elo": 1885,
           "timestamp": "2026-02-25T13:11:10.120Z"
         },
         {
-          "elo": 1897,
+          "elo": 1899,
           "timestamp": "2026-02-25T13:11:26.093Z"
         }
       ],
@@ -618,7 +614,7 @@
       "name": "Christopher Kilner",
       "countryCode": "us-md",
       "office": "LON",
-      "elo": 1542,
+      "elo": 1539,
       "wins": 5,
       "losses": 7,
       "eloHistory": [
@@ -671,7 +667,7 @@
           "timestamp": "2026-02-16T13:29:48.731Z"
         },
         {
-          "elo": 1542,
+          "elo": 1539,
           "timestamp": "2026-02-20T19:36:46.952Z"
         }
       ],
@@ -799,15 +795,15 @@
           "timestamp": "2026-01-30T17:23:08.292Z"
         },
         {
-          "elo": 1473,
+          "elo": 1474,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1466,
+          "elo": 1465,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1456,
+          "elo": 1505,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
@@ -823,7 +819,7 @@
       "name": "Neil Hacker",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1717,
+      "elo": 1711,
       "wins": 20,
       "losses": 14,
       "eloHistory": [
@@ -936,36 +932,36 @@
           "timestamp": "2026-02-04T16:45:51.835Z"
         },
         {
-          "elo": 1759,
-          "timestamp": "2026-02-20T19:36:46.952Z"
-        },
-        {
-          "elo": 1738,
+          "elo": 1723,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1720,
+          "elo": 1742,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1704,
+          "elo": 1721,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1729,
+          "elo": 1743,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1724,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1707,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1692,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
           "elo": 1711,
-          "timestamp": "2026-02-20T00:00:00.000Z"
-        },
-        {
-          "elo": 1734,
-          "timestamp": "2026-02-20T00:00:00.000Z"
-        },
-        {
-          "elo": 1717,
-          "timestamp": "2026-02-20T00:00:00.000Z"
+          "timestamp": "2026-02-20T19:36:46.952Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -976,7 +972,7 @@
       "name": "Charlie Parkin",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1691,
+      "elo": 1690,
       "wins": 18,
       "losses": 11,
       "eloHistory": [
@@ -1097,7 +1093,7 @@
           "timestamp": "2026-02-06T17:40:54.795Z"
         },
         {
-          "elo": 1691,
+          "elo": 1690,
           "timestamp": "2026-02-13T00:00:00.000Z"
         }
       ],
@@ -1180,7 +1176,7 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1720,
+      "elo": 1722,
       "wins": 32,
       "losses": 22,
       "eloHistory": [
@@ -1329,11 +1325,11 @@
           "timestamp": "2026-02-09T00:00:00.000Z"
         },
         {
-          "elo": 1684,
+          "elo": 1683,
           "timestamp": "2026-02-11T09:16:14.784Z"
         },
         {
-          "elo": 1702,
+          "elo": 1701,
           "timestamp": "2026-02-11T12:31:55.096Z"
         },
         {
@@ -1369,39 +1365,39 @@
           "timestamp": "2026-02-12T18:16:34.290Z"
         },
         {
-          "elo": 1628,
+          "elo": 1629,
           "timestamp": "2026-02-13T17:27:32.454Z"
         },
         {
-          "elo": 1645,
+          "elo": 1646,
           "timestamp": "2026-02-18T14:30:16.297Z"
         },
         {
-          "elo": 1660,
+          "elo": 1661,
           "timestamp": "2026-02-18T18:21:56.925Z"
         },
         {
-          "elo": 1675,
+          "elo": 1676,
           "timestamp": "2026-02-18T18:22:19.364Z"
         },
         {
-          "elo": 1688,
+          "elo": 1689,
           "timestamp": "2026-02-18T18:22:41.290Z"
         },
         {
-          "elo": 1698,
+          "elo": 1699,
           "timestamp": "2026-02-18T18:23:01.970Z"
         },
         {
-          "elo": 1709,
+          "elo": 1710,
           "timestamp": "2026-02-18T18:23:15.313Z"
         },
         {
-          "elo": 1697,
+          "elo": 1699,
           "timestamp": "2026-02-18T18:23:45.419Z"
         },
         {
-          "elo": 1720,
+          "elo": 1722,
           "timestamp": "2026-02-18T18:28:17.730Z"
         }
       ],
@@ -1657,7 +1653,7 @@
       "name": "Madi Supreme",
       "countryCode": "us-in",
       "office": "LON",
-      "elo": 1463,
+      "elo": 1457,
       "wins": 6,
       "losses": 10,
       "eloHistory": [
@@ -1722,23 +1718,23 @@
           "timestamp": "2026-02-09T18:18:32.510Z"
         },
         {
-          "elo": 1476,
+          "elo": 1480,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1463,
+          "elo": 1457,
           "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 62
+      "lastWeekRank": 67
     },
     {
       "id": "34",
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1587,
+      "elo": 1590,
       "wins": 11,
       "losses": 13,
       "eloHistory": [
@@ -1803,48 +1799,48 @@
           "timestamp": "2026-02-10T00:00:00.000Z"
         },
         {
+          "elo": 1546,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1578,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
           "elo": 1555,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1571,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1549,
           "timestamp": "2026-02-12T00:00:00.000Z"
         },
         {
-          "elo": 1533,
+          "elo": 1539,
           "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
-          "elo": 1519,
+          "elo": 1525,
           "timestamp": "2026-02-18T14:30:16.297Z"
         },
         {
-          "elo": 1552,
+          "elo": 1546,
           "timestamp": "2026-02-24T00:00:00.000Z"
         },
         {
-          "elo": 1571,
+          "elo": 1578,
           "timestamp": "2026-02-24T00:00:00.000Z"
         },
         {
-          "elo": 1562,
+          "elo": 1611,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1554,
+          "elo": 1600,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1587,
+          "elo": 1590,
           "timestamp": "2026-02-25T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 17
     },
     {
       "id": "35",
@@ -1872,7 +1868,7 @@
       "name": "Eamon Jubbawy",
       "countryCode": "iq",
       "office": "LON",
-      "elo": 1659,
+      "elo": 1660,
       "wins": 9,
       "losses": 2,
       "eloHistory": [
@@ -1913,16 +1909,16 @@
           "timestamp": "2026-01-15T00:00:00.000Z"
         },
         {
-          "elo": 1657,
+          "elo": 1652,
+          "timestamp": "2026-02-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1627,
+          "timestamp": "2026-02-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1660,
           "timestamp": "2026-02-13T17:27:32.454Z"
-        },
-        {
-          "elo": 1632,
-          "timestamp": "2026-02-13T00:00:00.000Z"
-        },
-        {
-          "elo": 1659,
-          "timestamp": "2026-02-13T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2211,7 +2207,7 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1535,
+      "elo": 1545,
       "wins": 18,
       "losses": 29,
       "eloHistory": [
@@ -2336,31 +2332,31 @@
           "timestamp": "2026-02-11T18:02:33.341Z"
         },
         {
-          "elo": 1535,
+          "elo": 1536,
           "timestamp": "2026-02-12T00:00:00.000Z"
         },
         {
-          "elo": 1526,
+          "elo": 1527,
           "timestamp": "2026-02-12T13:09:31.077Z"
         },
         {
-          "elo": 1519,
+          "elo": 1520,
           "timestamp": "2026-02-12T13:09:46.984Z"
         },
         {
-          "elo": 1548,
+          "elo": 1549,
           "timestamp": "2026-02-12T16:27:01.876Z"
         },
         {
-          "elo": 1575,
+          "elo": 1576,
           "timestamp": "2026-02-12T18:16:15.290Z"
         },
         {
-          "elo": 1597,
+          "elo": 1598,
           "timestamp": "2026-02-12T18:16:34.290Z"
         },
         {
-          "elo": 1590,
+          "elo": 1575,
           "timestamp": "2026-02-13T00:00:00.000Z"
         },
         {
@@ -2368,31 +2364,31 @@
           "timestamp": "2026-02-13T00:00:00.000Z"
         },
         {
-          "elo": 1587,
+          "elo": 1588,
           "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
-          "elo": 1574,
+          "elo": 1575,
           "timestamp": "2026-02-18T18:21:56.925Z"
         },
         {
-          "elo": 1562,
+          "elo": 1563,
           "timestamp": "2026-02-18T18:22:19.364Z"
         },
         {
-          "elo": 1551,
+          "elo": 1552,
           "timestamp": "2026-02-18T18:22:41.290Z"
         },
         {
-          "elo": 1542,
+          "elo": 1543,
           "timestamp": "2026-02-18T18:23:01.970Z"
         },
         {
-          "elo": 1533,
+          "elo": 1534,
           "timestamp": "2026-02-18T18:23:15.313Z"
         },
         {
-          "elo": 1525,
+          "elo": 1524,
           "timestamp": "2026-02-19T00:00:00.000Z"
         },
         {
@@ -2400,11 +2396,11 @@
           "timestamp": "2026-02-19T00:00:00.000Z"
         },
         {
-          "elo": 1546,
+          "elo": 1510,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1535,
+          "elo": 1545,
           "timestamp": "2026-02-20T00:00:00.000Z"
         }
       ],
@@ -2416,7 +2412,7 @@
       "name": "Lawrence Holmes",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1458,
+      "elo": 1461,
       "wins": 1,
       "losses": 3,
       "eloHistory": [
@@ -2437,12 +2433,12 @@
           "timestamp": "2026-01-30T17:19:01.484Z"
         },
         {
-          "elo": 1458,
+          "elo": 1461,
           "timestamp": "2026-02-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 62
     },
     {
       "id": "49",
@@ -2672,7 +2668,7 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1792,
+      "elo": 1790,
       "wins": 24,
       "losses": 9,
       "eloHistory": [
@@ -2761,55 +2757,55 @@
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1656,
+          "elo": 1705,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1670,
+          "elo": 1689,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1682,
+          "elo": 1715,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1707,
+          "elo": 1697,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1729,
+          "elo": 1720,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1749,
+          "elo": 1741,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1728,
+          "elo": 1759,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1750,
+          "elo": 1769,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1731,
+          "elo": 1776,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1752,
+          "elo": 1747,
           "timestamp": "2026-02-20T00:00:00.000Z"
         },
         {
-          "elo": 1771,
+          "elo": 1765,
           "timestamp": "2026-02-24T00:00:00.000Z"
         },
         {
-          "elo": 1782,
+          "elo": 1778,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1792,
+          "elo": 1790,
           "timestamp": "2026-02-25T00:00:00.000Z"
         }
       ],
@@ -3048,7 +3044,7 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1640,
+      "elo": 1647,
       "wins": 24,
       "losses": 22,
       "eloHistory": [
@@ -3181,63 +3177,63 @@
           "timestamp": "2026-02-10T00:00:00.000Z"
         },
         {
-          "elo": 1782,
+          "elo": 1731,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1791,
+          "elo": 1712,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1769,
-          "timestamp": "2026-02-11T09:16:14.784Z"
-        },
-        {
-          "elo": 1785,
+          "elo": 1733,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
           "elo": 1748,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1759,
+          "timestamp": "2026-02-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1739,
+          "timestamp": "2026-02-11T09:16:14.784Z"
+        },
+        {
+          "elo": 1715,
           "timestamp": "2026-02-11T15:29:46.620Z"
         },
         {
-          "elo": 1720,
+          "elo": 1696,
           "timestamp": "2026-02-11T15:30:03.858Z"
         },
         {
-          "elo": 1734,
+          "elo": 1711,
           "timestamp": "2026-02-11T16:46:25.851Z"
         },
         {
-          "elo": 1721,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1703,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1686,
+          "elo": 1693,
           "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
-          "elo": 1673,
+          "elo": 1681,
           "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
-          "elo": 1687,
+          "elo": 1694,
           "timestamp": "2026-02-18T16:55:36.669Z"
         },
         {
-          "elo": 1660,
+          "elo": 1666,
           "timestamp": "2026-02-18T17:27:33.270Z"
         },
         {
-          "elo": 1652,
+          "elo": 1654,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1640,
+          "elo": 1647,
           "timestamp": "2026-02-25T00:00:00.000Z"
         }
       ],
@@ -3328,7 +3324,7 @@
       "name": "Peteris Bikis",
       "countryCode": "lv",
       "office": "LON",
-      "elo": 1516,
+      "elo": 1510,
       "wins": 8,
       "losses": 15,
       "eloHistory": [
@@ -3373,64 +3369,64 @@
           "timestamp": "2026-02-10T00:00:00.000Z"
         },
         {
-          "elo": 1564,
+          "elo": 1511,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1547,
-          "timestamp": "2026-02-11T19:18:48.256Z"
-        },
-        {
-          "elo": 1572,
+          "elo": 1533,
           "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1562,
-          "timestamp": "2026-02-11T00:00:00.000Z"
-        },
-        {
-          "elo": 1553,
-          "timestamp": "2026-02-13T00:00:00.000Z"
-        },
-        {
-          "elo": 1544,
-          "timestamp": "2026-02-13T00:00:00.000Z"
-        },
-        {
-          "elo": 1532,
-          "timestamp": "2026-02-18T16:55:36.669Z"
         },
         {
           "elo": 1565,
-          "timestamp": "2026-02-18T17:27:33.270Z"
+          "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1599,
-          "timestamp": "2026-02-18T19:04:28.030Z"
+          "elo": 1548,
+          "timestamp": "2026-02-11T19:18:48.256Z"
         },
         {
-          "elo": 1586,
-          "timestamp": "2026-02-18T19:04:40.052Z"
-        },
-        {
-          "elo": 1575,
-          "timestamp": "2026-02-18T19:04:48.281Z"
-        },
-        {
-          "elo": 1541,
-          "timestamp": "2026-02-20T00:00:00.000Z"
+          "elo": 1540,
+          "timestamp": "2026-02-13T00:00:00.000Z"
         },
         {
           "elo": 1532,
+          "timestamp": "2026-02-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1521,
+          "timestamp": "2026-02-18T16:55:36.669Z"
+        },
+        {
+          "elo": 1555,
+          "timestamp": "2026-02-18T17:27:33.270Z"
+        },
+        {
+          "elo": 1590,
+          "timestamp": "2026-02-18T19:04:28.030Z"
+        },
+        {
+          "elo": 1578,
+          "timestamp": "2026-02-18T19:04:40.052Z"
+        },
+        {
+          "elo": 1568,
+          "timestamp": "2026-02-18T19:04:48.281Z"
+        },
+        {
+          "elo": 1536,
+          "timestamp": "2026-02-20T00:00:00.000Z"
+        },
+        {
+          "elo": 1519,
           "timestamp": "2026-02-24T00:00:00.000Z"
         },
         {
-          "elo": 1516,
+          "elo": 1510,
           "timestamp": "2026-02-24T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 18
     },
     {
       "id": "69",
@@ -3458,7 +3454,7 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1512,
+      "elo": 1507,
       "wins": 6,
       "losses": 8,
       "eloHistory": [
@@ -3507,19 +3503,19 @@
           "timestamp": "2026-02-09T00:00:00.000Z"
         },
         {
-          "elo": 1540,
+          "elo": 1538,
           "timestamp": "2026-02-11T00:00:00.000Z"
         },
         {
-          "elo": 1529,
+          "elo": 1525,
           "timestamp": "2026-02-11T16:46:25.851Z"
         },
         {
-          "elo": 1519,
+          "elo": 1518,
           "timestamp": "2026-02-16T00:00:00.000Z"
         },
         {
-          "elo": 1512,
+          "elo": 1507,
           "timestamp": "2026-02-16T00:00:00.000Z"
         }
       ],
@@ -3611,8 +3607,8 @@
       "name": "Rish Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1742,
-      "wins": 18,
+      "elo": 1722,
+      "wins": 17,
       "losses": 9,
       "eloHistory": [
         {
@@ -3684,47 +3680,43 @@
           "timestamp": "2026-02-04T00:00:00.000Z"
         },
         {
-          "elo": 1710,
-          "timestamp": "2026-02-18T15:36:18.715Z"
-        },
-        {
-          "elo": 1692,
+          "elo": 1748,
           "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
-          "elo": 1681,
-          "timestamp": "2026-02-18T16:14:52.260Z"
+          "elo": 1762,
+          "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
-          "elo": 1706,
+          "elo": 1739,
           "timestamp": "2026-02-18T00:00:00.000Z"
         },
         {
           "elo": 1722,
-          "timestamp": "2026-02-18T00:00:00.000Z"
+          "timestamp": "2026-02-18T15:36:18.715Z"
         },
         {
-          "elo": 1732,
+          "elo": 1709,
+          "timestamp": "2026-02-18T16:14:52.260Z"
+        },
+        {
+          "elo": 1721,
           "timestamp": "2026-02-19T00:00:00.000Z"
         },
         {
-          "elo": 1743,
+          "elo": 1731,
           "timestamp": "2026-02-19T00:00:00.000Z"
         },
         {
-          "elo": 1756,
+          "elo": 1745,
           "timestamp": "2026-02-25T13:10:31.519Z"
         },
         {
-          "elo": 1768,
-          "timestamp": "2026-02-25T13:10:54.280Z"
-        },
-        {
-          "elo": 1754,
+          "elo": 1733,
           "timestamp": "2026-02-25T13:11:10.120Z"
         },
         {
-          "elo": 1742,
+          "elo": 1722,
           "timestamp": "2026-02-25T13:11:26.093Z"
         }
       ],
@@ -3743,7 +3735,7 @@
       "loserScore": 11,
       "winnerEloChange": 15,
       "loserEloChange": -12,
-      "expectedWinProbability": 0.5672288443429522,
+      "expectedWinProbability": 0.5742802036545245,
       "timestamp": "2026-02-25T00:00:00.000Z"
     },
     {
@@ -3756,7 +3748,7 @@
       "loserScore": null,
       "winnerEloChange": 10,
       "loserEloChange": -8,
-      "expectedWinProbability": 0.5416377027147634,
+      "expectedWinProbability": 0.6104024220946891,
       "timestamp": "2026-02-25T00:00:00.000Z"
     },
     {
@@ -3769,7 +3761,7 @@
       "loserScore": 4,
       "winnerEloChange": 15,
       "loserEloChange": -12,
-      "expectedWinProbability": 0.676301669492737,
+      "expectedWinProbability": 0.7057813597120025,
       "timestamp": "2026-02-25T13:11:26.093Z"
     },
     {
@@ -3782,21 +3774,8 @@
       "loserScore": 3,
       "winnerEloChange": 17,
       "loserEloChange": -14,
-      "expectedWinProbability": 0.6360768996878818,
+      "expectedWinProbability": 0.672509643334985,
       "timestamp": "2026-02-25T13:11:10.120Z"
-    },
-    {
-      "id": "1772025054312",
-      "winnerId": "1769273367436",
-      "loserId": "3",
-      "winner": "Rishabh Chatterjee",
-      "loser": "George Robinson",
-      "winnerScore": 11,
-      "loserScore": 6,
-      "winnerEloChange": 12,
-      "loserEloChange": -10,
-      "expectedWinProbability": 0.809207997485838,
-      "timestamp": "2026-02-25T13:10:54.280Z"
     },
     {
       "id": "1772025031591",
@@ -3808,7 +3787,7 @@
       "loserScore": 3,
       "winnerEloChange": 13,
       "loserEloChange": -11,
-      "expectedWinProbability": 0.7869632793894692,
+      "expectedWinProbability": 0.770096676660982,
       "timestamp": "2026-02-25T13:10:31.519Z"
     },
     {
@@ -3821,7 +3800,7 @@
       "loserScore": 8,
       "winnerEloChange": 33,
       "loserEloChange": -27,
-      "expectedWinProbability": 0.28240827680846853,
+      "expectedWinProbability": 0.2812431701012181,
       "timestamp": "2026-02-25T00:00:00.000Z"
     },
     {
@@ -3834,7 +3813,7 @@
       "loserScore": 4,
       "winnerEloChange": 10,
       "loserEloChange": -8,
-      "expectedWinProbability": 0.7801296039931584,
+      "expectedWinProbability": 0.7081663882812006,
       "timestamp": "2026-02-25T00:00:00.000Z"
     },
     {
@@ -3847,7 +3826,7 @@
       "loserScore": 4,
       "winnerEloChange": 11,
       "loserEloChange": -9,
-      "expectedWinProbability": 0.7597469266479578,
+      "expectedWinProbability": 0.7358774441014764,
       "timestamp": "2026-02-25T00:00:00.000Z"
     },
     {
@@ -3860,7 +3839,7 @@
       "loserScore": 11,
       "winnerEloChange": 19,
       "loserEloChange": -16,
-      "expectedWinProbability": 0.5287505638922686,
+      "expectedWinProbability": 0.4841750147352649,
       "timestamp": "2026-02-24T00:00:00.000Z"
     },
     {
@@ -3873,7 +3852,7 @@
       "loserScore": 9,
       "winnerEloChange": 33,
       "loserEloChange": -27,
-      "expectedWinProbability": 0.21594631611218493,
+      "expectedWinProbability": 0.238157890082064,
       "timestamp": "2026-02-24T00:00:00.000Z"
     },
     {
@@ -3886,7 +3865,7 @@
       "loserScore": 3,
       "winnerEloChange": 12,
       "loserEloChange": -9,
-      "expectedWinProbability": 0.7490830628775357,
+      "expectedWinProbability": 0.7628849803052542,
       "timestamp": "2026-02-24T00:00:00.000Z"
     },
     {
@@ -3899,7 +3878,7 @@
       "loserScore": 4,
       "winnerEloChange": 19,
       "loserEloChange": -15,
-      "expectedWinProbability": 0.5086338358210827,
+      "expectedWinProbability": 0.5201367220358165,
       "timestamp": "2026-02-24T00:00:00.000Z"
     },
     {
@@ -3912,7 +3891,7 @@
       "loserScore": 12,
       "winnerEloChange": 21,
       "loserEloChange": -17,
-      "expectedWinProbability": 0.49568276024494023,
+      "expectedWinProbability": 0.41171002813683716,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -3925,7 +3904,7 @@
       "loserScore": 9,
       "winnerEloChange": 23,
       "loserEloChange": -19,
-      "expectedWinProbability": 0.4441090388831469,
+      "expectedWinProbability": 0.525880930891169,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -3938,7 +3917,7 @@
       "loserScore": 8,
       "winnerEloChange": 22,
       "loserEloChange": -18,
-      "expectedWinProbability": 0.4985608882908471,
+      "expectedWinProbability": 0.4243130476235704,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -3951,7 +3930,7 @@
       "loserScore": 8,
       "winnerEloChange": 25,
       "loserEloChange": -21,
-      "expectedWinProbability": 0.4355995097595788,
+      "expectedWinProbability": 0.5086338358210827,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -3964,7 +3943,7 @@
       "loserScore": 9,
       "winnerEloChange": 20,
       "loserEloChange": -16,
-      "expectedWinProbability": 0.5129491448928637,
+      "expectedWinProbability": 0.43418479693076684,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -3977,7 +3956,7 @@
       "loserScore": 9,
       "winnerEloChange": 22,
       "loserEloChange": -18,
-      "expectedWinProbability": 0.4555054269169921,
+      "expectedWinProbability": 0.49424379158885506,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -3990,7 +3969,7 @@
       "loserScore": 9,
       "winnerEloChange": 25,
       "loserEloChange": -21,
-      "expectedWinProbability": 0.39096739659576046,
+      "expectedWinProbability": 0.5487743358597419,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -4003,7 +3982,7 @@
       "loserScore": 3,
       "winnerEloChange": 16,
       "loserEloChange": -13,
-      "expectedWinProbability": 0.7469129214289432,
+      "expectedWinProbability": 0.6875382482123418,
       "timestamp": "2026-02-20T19:36:46.952Z"
     },
     {
@@ -4016,7 +3995,7 @@
       "loserScore": 4,
       "winnerEloChange": 41,
       "loserEloChange": -34,
-      "expectedWinProbability": 0.3351420214452352,
+      "expectedWinProbability": 0.35596614617770733,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -4029,7 +4008,7 @@
       "loserScore": 9,
       "winnerEloChange": 12,
       "loserEloChange": -10,
-      "expectedWinProbability": 0.7639246991448386,
+      "expectedWinProbability": 0.8118599983337865,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -4042,7 +4021,7 @@
       "loserScore": 11,
       "winnerEloChange": 14,
       "loserEloChange": -11,
-      "expectedWinProbability": 0.6532171672188698,
+      "expectedWinProbability": 0.8109791581199478,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -4055,7 +4034,7 @@
       "loserScore": 9,
       "winnerEloChange": 30,
       "loserEloChange": -25,
-      "expectedWinProbability": 0.2789217568024399,
+      "expectedWinProbability": 0.17781538884649767,
       "timestamp": "2026-02-20T00:00:00.000Z"
     },
     {
@@ -4068,7 +4047,7 @@
       "loserScore": 6,
       "winnerEloChange": 11,
       "loserEloChange": -9,
-      "expectedWinProbability": 0.7670249181450214,
+      "expectedWinProbability": 0.7325072897556676,
       "timestamp": "2026-02-19T00:00:00.000Z"
     },
     {
@@ -4081,7 +4060,7 @@
       "loserScore": 9,
       "winnerEloChange": 10,
       "loserEloChange": -8,
-      "expectedWinProbability": 0.7479995411960544,
+      "expectedWinProbability": 0.7565805942950526,
       "timestamp": "2026-02-19T00:00:00.000Z"
     },
     {
@@ -4094,7 +4073,7 @@
       "loserScore": 7,
       "winnerEloChange": 16,
       "loserEloChange": -13,
-      "expectedWinProbability": 0.7347570893165466,
+      "expectedWinProbability": 0.7369947605406894,
       "timestamp": "2026-02-18T00:00:00.000Z"
     },
     {
@@ -4107,7 +4086,7 @@
       "loserScore": 6,
       "winnerEloChange": 25,
       "loserEloChange": -20,
-      "expectedWinProbability": 0.6813218351663937,
+      "expectedWinProbability": 0.7761545753418307,
       "timestamp": "2026-02-18T00:00:00.000Z"
     },
     {
@@ -4120,7 +4099,7 @@
       "loserScore": 8,
       "winnerEloChange": 13,
       "loserEloChange": -11,
-      "expectedWinProbability": 0.6997694032620582,
+      "expectedWinProbability": 0.7129021574054539,
       "timestamp": "2026-02-18T19:04:48.281Z"
     },
     {
@@ -4133,7 +4112,7 @@
       "loserScore": 6,
       "winnerEloChange": 16,
       "loserEloChange": -13,
-      "expectedWinProbability": 0.6635740980412955,
+      "expectedWinProbability": 0.6800706757372215,
       "timestamp": "2026-02-18T19:04:40.052Z"
     },
     {
@@ -4146,7 +4125,7 @@
       "loserScore": 8,
       "winnerEloChange": 34,
       "loserEloChange": -28,
-      "expectedWinProbability": 0.2618909674595814,
+      "expectedWinProbability": 0.24661392221438547,
       "timestamp": "2026-02-18T19:04:28.030Z"
     },
     {
@@ -4159,7 +4138,7 @@
       "loserScore": 1,
       "winnerEloChange": 23,
       "loserEloChange": -19,
-      "expectedWinProbability": 0.4047569603484281,
+      "expectedWinProbability": 0.4019862342306564,
       "timestamp": "2026-02-18T18:28:17.730Z"
     },
     {
@@ -4172,7 +4151,7 @@
       "loserScore": 6,
       "winnerEloChange": 14,
       "loserEloChange": -12,
-      "expectedWinProbability": 0.6936879164219654,
+      "expectedWinProbability": 0.698558626418023,
       "timestamp": "2026-02-18T18:23:45.419Z"
     },
     {
@@ -4250,7 +4229,7 @@
       "loserScore": 8,
       "winnerEloChange": 33,
       "loserEloChange": -27,
-      "expectedWinProbability": 0.29064536940123664,
+      "expectedWinProbability": 0.269754586702576,
       "timestamp": "2026-02-18T17:27:33.270Z"
     },
     {
@@ -4263,7 +4242,7 @@
       "loserScore": 8,
       "winnerEloChange": 14,
       "loserEloChange": -12,
-      "expectedWinProbability": 0.6775605800851006,
+      "expectedWinProbability": 0.7021826020905207,
       "timestamp": "2026-02-18T16:55:36.669Z"
     },
     {
@@ -4276,7 +4255,7 @@
       "loserScore": 3,
       "winnerEloChange": 14,
       "loserEloChange": -11,
-      "expectedWinProbability": 0.6973450785898532,
+      "expectedWinProbability": 0.6648579785547648,
       "timestamp": "2026-02-18T16:14:52.260Z"
     },
     {
@@ -4289,7 +4268,7 @@
       "loserScore": 4,
       "winnerEloChange": 22,
       "loserEloChange": -18,
-      "expectedWinProbability": 0.6466688423256146,
+      "expectedWinProbability": 0.5430664920222119,
       "timestamp": "2026-02-18T00:00:00.000Z"
     },
     {
@@ -4302,7 +4281,7 @@
       "loserScore": 9,
       "winnerEloChange": 22,
       "loserEloChange": -18,
-      "expectedWinProbability": 0.5924662305843318,
+      "expectedWinProbability": 0.6145013610085578,
       "timestamp": "2026-02-18T15:36:18.715Z"
     },
     {
@@ -4315,7 +4294,7 @@
       "loserScore": 4,
       "winnerEloChange": 17,
       "loserEloChange": -14,
-      "expectedWinProbability": 0.6334077000711676,
+      "expectedWinProbability": 0.626699081666732,
       "timestamp": "2026-02-18T14:30:16.297Z"
     },
     {
@@ -4328,7 +4307,7 @@
       "loserScore": 10,
       "winnerEloChange": 19,
       "loserEloChange": -16,
-      "expectedWinProbability": 0.527315973006493,
+      "expectedWinProbability": 0.5186997779295586,
       "timestamp": "2026-02-18T00:00:00.000Z"
     },
     {
@@ -4341,7 +4320,7 @@
       "loserScore": 3,
       "winnerEloChange": 16,
       "loserEloChange": -13,
-      "expectedWinProbability": 0.5882899718631628,
+      "expectedWinProbability": 0.5287505638922686,
       "timestamp": "2026-02-18T00:00:00.000Z"
     },
     {
@@ -4354,7 +4333,7 @@
       "loserScore": 8,
       "winnerEloChange": 21,
       "loserEloChange": -17,
-      "expectedWinProbability": 0.5344839447268315,
+      "expectedWinProbability": 0.5854986786718095,
       "timestamp": "2026-02-18T00:00:00.000Z"
     },
     {
@@ -4367,7 +4346,7 @@
       "loserScore": null,
       "winnerEloChange": 8,
       "loserEloChange": -7,
-      "expectedWinProbability": 0.7597469266479578,
+      "expectedWinProbability": 0.7586946201468556,
       "timestamp": "2026-02-16T00:00:00.000Z"
     },
     {
@@ -4380,7 +4359,7 @@
       "loserScore": 0,
       "winnerEloChange": 29,
       "loserEloChange": -24,
-      "expectedWinProbability": 0.5301846800039021,
+      "expectedWinProbability": 0.5459219227804837,
       "timestamp": "2026-02-16T00:00:00.000Z"
     },
     {
@@ -4393,7 +4372,7 @@
       "loserScore": 9,
       "winnerEloChange": 13,
       "loserEloChange": -10,
-      "expectedWinProbability": 0.7607960909891424,
+      "expectedWinProbability": 0.750163481828642,
       "timestamp": "2026-02-16T00:00:00.000Z"
     },
     {
@@ -4406,7 +4385,7 @@
       "loserScore": null,
       "winnerEloChange": 9,
       "loserEloChange": -7,
-      "expectedWinProbability": 0.7983147441549775,
+      "expectedWinProbability": 0.7992399910868982,
       "timestamp": "2026-02-16T00:00:00.000Z"
     },
     {
@@ -4432,7 +4411,7 @@
       "loserScore": 1,
       "winnerEloChange": 27,
       "loserEloChange": -22,
-      "expectedWinProbability": 0.5601501452319029,
+      "expectedWinProbability": 0.5359159269451023,
       "timestamp": "2026-02-13T00:00:00.000Z"
     },
     {
@@ -4445,7 +4424,7 @@
       "loserScore": 5,
       "winnerEloChange": 31,
       "loserEloChange": -25,
-      "expectedWinProbability": 0.5043172397550598,
+      "expectedWinProbability": 0.5115108912177917,
       "timestamp": "2026-02-13T00:00:00.000Z"
     },
     {
@@ -4458,7 +4437,7 @@
       "loserScore": 6,
       "winnerEloChange": 34,
       "loserEloChange": -28,
-      "expectedWinProbability": 0.45265148195413535,
+      "expectedWinProbability": 0.45836229728523653,
       "timestamp": "2026-02-13T17:27:32.454Z"
     },
     {
@@ -4471,7 +4450,7 @@
       "loserScore": null,
       "winnerEloChange": 9,
       "loserEloChange": -7,
-      "expectedWinProbability": 0.6597079941447481,
+      "expectedWinProbability": 0.667418421873223,
       "timestamp": "2026-02-13T00:00:00.000Z"
     },
     {
@@ -4484,7 +4463,7 @@
       "loserScore": null,
       "winnerEloChange": 11,
       "loserEloChange": -9,
-      "expectedWinProbability": 0.700977398610108,
+      "expectedWinProbability": 0.7117225243427553,
       "timestamp": "2026-02-13T00:00:00.000Z"
     },
     {
@@ -4497,7 +4476,7 @@
       "loserScore": null,
       "winnerEloChange": 11,
       "loserEloChange": -9,
-      "expectedWinProbability": 0.676301669492737,
+      "expectedWinProbability": 0.7325072897556676,
       "timestamp": "2026-02-13T00:00:00.000Z"
     },
     {
@@ -4510,7 +4489,7 @@
       "loserScore": null,
       "winnerEloChange": 12,
       "loserEloChange": -10,
-      "expectedWinProbability": 0.6479830132503057,
+      "expectedWinProbability": 0.6049129020079569,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4523,7 +4502,7 @@
       "loserScore": null,
       "winnerEloChange": 25,
       "loserEloChange": -20,
-      "expectedWinProbability": 0.29541540733727906,
+      "expectedWinProbability": 0.3612622508882752,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4536,7 +4515,7 @@
       "loserScore": 9,
       "winnerEloChange": 22,
       "loserEloChange": -18,
-      "expectedWinProbability": 0.3612622508882752,
+      "expectedWinProbability": 0.36259162325551547,
       "timestamp": "2026-02-12T18:16:34.290Z"
     },
     {
@@ -4549,7 +4528,7 @@
       "loserScore": 6,
       "winnerEloChange": 27,
       "loserEloChange": -22,
-      "expectedWinProbability": 0.29902260138989206,
+      "expectedWinProbability": 0.3002305967379419,
       "timestamp": "2026-02-12T18:16:15.290Z"
     },
     {
@@ -4562,7 +4541,7 @@
       "loserScore": 8,
       "winnerEloChange": 29,
       "loserEloChange": -24,
-      "expectedWinProbability": 0.23920390901085772,
+      "expectedWinProbability": 0.2402530733520421,
       "timestamp": "2026-02-12T16:27:01.876Z"
     },
     {
@@ -4575,7 +4554,7 @@
       "loserScore": 10,
       "winnerEloChange": 8,
       "loserEloChange": -7,
-      "expectedWinProbability": 0.7447304068650347,
+      "expectedWinProbability": 0.7436345220073278,
       "timestamp": "2026-02-12T13:09:46.984Z"
     },
     {
@@ -4588,7 +4567,7 @@
       "loserScore": 5,
       "winnerEloChange": 11,
       "loserEloChange": -9,
-      "expectedWinProbability": 0.7222345336491706,
+      "expectedWinProbability": 0.7210782431975601,
       "timestamp": "2026-02-12T13:09:31.077Z"
     },
     {
@@ -4601,7 +4580,7 @@
       "loserScore": 1,
       "winnerEloChange": 27,
       "loserEloChange": -22,
-      "expectedWinProbability": 0.41031649686004995,
+      "expectedWinProbability": 0.40060320329074317,
       "timestamp": "2026-02-12T00:00:00.000Z"
     },
     {
@@ -4614,7 +4593,7 @@
       "loserScore": 6,
       "winnerEloChange": 21,
       "loserEloChange": -17,
-      "expectedWinProbability": 0.6571186864870786,
+      "expectedWinProbability": 0.6532171672188698,
       "timestamp": "2026-02-11T19:18:48.256Z"
     },
     {
@@ -4627,7 +4606,7 @@
       "loserScore": 10,
       "winnerEloChange": 42,
       "loserEloChange": -34,
-      "expectedWinProbability": 0.2520004588039456,
+      "expectedWinProbability": 0.41589904118632204,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4666,7 +4645,7 @@
       "loserScore": 10,
       "winnerEloChange": 23,
       "loserEloChange": -18,
-      "expectedWinProbability": 0.45265148195413535,
+      "expectedWinProbability": 0.2402530733520421,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4679,7 +4658,7 @@
       "loserScore": null,
       "winnerEloChange": 15,
       "loserEloChange": -13,
-      "expectedWinProbability": 0.41310497662089996,
+      "expectedWinProbability": 0.33130504369266833,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4692,7 +4671,7 @@
       "loserScore": 9,
       "winnerEloChange": 16,
       "loserEloChange": -13,
-      "expectedWinProbability": 0.6117705007810643,
+      "expectedWinProbability": 0.527315973006493,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4705,7 +4684,7 @@
       "loserScore": 11,
       "winnerEloChange": 14,
       "loserEloChange": -11,
-      "expectedWinProbability": 0.7381090325404187,
+      "expectedWinProbability": 0.7129021574054539,
       "timestamp": "2026-02-11T16:46:25.851Z"
     },
     {
@@ -4718,7 +4697,7 @@
       "loserScore": 7,
       "winnerEloChange": 30,
       "loserEloChange": -25,
-      "expectedWinProbability": 0.5129491448928637,
+      "expectedWinProbability": 0.5430664920222119,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4731,7 +4710,7 @@
       "loserScore": 2,
       "winnerEloChange": 27,
       "loserEloChange": -22,
-      "expectedWinProbability": 0.5601501452319029,
+      "expectedWinProbability": 0.5573116337622928,
       "timestamp": "2026-02-11T15:36:03.403Z"
     },
     {
@@ -4744,7 +4723,7 @@
       "loserScore": 10,
       "winnerEloChange": 35,
       "loserEloChange": -28,
-      "expectedWinProbability": 0.37599824138233284,
+      "expectedWinProbability": 0.44126863067523897,
       "timestamp": "2026-02-11T15:30:03.858Z"
     },
     {
@@ -4757,7 +4736,7 @@
       "loserScore": 4,
       "winnerEloChange": 45,
       "loserEloChange": -37,
-      "expectedWinProbability": 0.27316992772326887,
+      "expectedWinProbability": 0.3679299878999264,
       "timestamp": "2026-02-11T15:29:46.620Z"
     },
     {
@@ -4770,7 +4749,7 @@
       "loserScore": 4,
       "winnerEloChange": 35,
       "loserEloChange": -29,
-      "expectedWinProbability": 0.5473485180458647,
+      "expectedWinProbability": 0.584100958813678,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4783,7 +4762,7 @@
       "loserScore": 11,
       "winnerEloChange": 16,
       "loserEloChange": -13,
-      "expectedWinProbability": 0.6924633925795177,
+      "expectedWinProbability": 0.6117705007810643,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4796,7 +4775,7 @@
       "loserScore": 9,
       "winnerEloChange": 32,
       "loserEloChange": -26,
-      "expectedWinProbability": 0.23503873644731077,
+      "expectedWinProbability": 0.23607530085516135,
       "timestamp": "2026-02-11T12:32:11.103Z"
     },
     {
@@ -4809,7 +4788,7 @@
       "loserScore": 4,
       "winnerEloChange": 18,
       "loserEloChange": -15,
-      "expectedWinProbability": 0.7081663882812006,
+      "expectedWinProbability": 0.7069752948085409,
       "timestamp": "2026-02-11T12:31:55.096Z"
     },
     {
@@ -4822,7 +4801,7 @@
       "loserScore": 5,
       "winnerEloChange": 20,
       "loserEloChange": -17,
-      "expectedWinProbability": 0.6466688423256146,
+      "expectedWinProbability": 0.672509643334985,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4835,7 +4814,7 @@
       "loserScore": 9,
       "winnerEloChange": 16,
       "loserEloChange": -13,
-      "expectedWinProbability": 0.700977398610108,
+      "expectedWinProbability": 0.6360768996878818,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4848,7 +4827,7 @@
       "loserScore": 1,
       "winnerEloChange": 21,
       "loserEloChange": -17,
-      "expectedWinProbability": 0.704584592662721,
+      "expectedWinProbability": 0.726830072276731,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4861,7 +4840,7 @@
       "loserScore": 6,
       "winnerEloChange": 12,
       "loserEloChange": -9,
-      "expectedWinProbability": 0.8555420748926974,
+      "expectedWinProbability": 0.8288176477542757,
       "timestamp": "2026-02-11T00:00:00.000Z"
     },
     {
@@ -4874,7 +4853,7 @@
       "loserScore": 7,
       "winnerEloChange": 25,
       "loserEloChange": -20,
-      "expectedWinProbability": 0.3174296145252281,
+      "expectedWinProbability": 0.35860988804438204,
       "timestamp": "2026-02-11T09:16:14.784Z"
     },
     {
@@ -4887,7 +4866,7 @@
       "loserScore": 7,
       "winnerEloChange": 35,
       "loserEloChange": -28,
-      "expectedWinProbability": 0.5756869523764296,
+      "expectedWinProbability": 0.5728722513945045,
       "timestamp": "2026-02-11T09:06:01.898Z"
     },
     {
@@ -7725,5 +7704,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-25T13:29:41.740Z"
+  "lastUpdated": "2026-02-25T13:35:15.091Z"
 }
