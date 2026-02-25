@@ -5,9 +5,9 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1675,
+      "elo": 1694,
       "wins": 27,
-      "losses": 16,
+      "losses": 15,
       "eloHistory": [
         {
           "elo": 1500,
@@ -166,24 +166,20 @@
           "timestamp": "2026-02-24T00:00:00.000Z"
         },
         {
-          "elo": 1732,
+          "elo": 1731,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1741,
+          "elo": 1739,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1714,
+          "elo": 1712,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1697,
+          "elo": 1694,
           "timestamp": "2026-02-25T15:10:18.802Z"
-        },
-        {
-          "elo": 1675,
-          "timestamp": "2026-02-25T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2235,8 +2231,8 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1572,
-      "wins": 19,
+      "elo": 1545,
+      "wins": 18,
       "losses": 29,
       "eloHistory": [
         {
@@ -2430,10 +2426,6 @@
         {
           "elo": 1545,
           "timestamp": "2026-02-20T00:00:00.000Z"
-        },
-        {
-          "elo": 1572,
-          "timestamp": "2026-02-25T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3076,7 +3068,7 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1635,
+      "elo": 1639,
       "wins": 25,
       "losses": 23,
       "eloHistory": [
@@ -3261,20 +3253,20 @@
           "timestamp": "2026-02-18T17:27:33.270Z"
         },
         {
-          "elo": 1654,
+          "elo": 1633,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1647,
+          "elo": 1623,
           "timestamp": "2026-02-25T00:00:00.000Z"
         },
         {
-          "elo": 1668,
+          "elo": 1617,
+          "timestamp": "2026-02-25T00:00:00.000Z"
+        },
+        {
+          "elo": 1639,
           "timestamp": "2026-02-25T15:10:18.802Z"
-        },
-        {
-          "elo": 1635,
-          "timestamp": "2026-02-25T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3782,19 +3774,6 @@
   ],
   "matches": [
     {
-      "id": "1772040625639",
-      "winnerId": "47",
-      "loserId": "1",
-      "winner": "Joel 'The Soul Reaper' Robinson",
-      "loser": "David Lankes",
-      "winnerScore": 11,
-      "loserScore": 0,
-      "winnerEloChange": 27,
-      "loserEloChange": -22,
-      "expectedWinProbability": 0.2942186402879975,
-      "timestamp": "2026-02-25T00:00:00.000Z"
-    },
-    {
       "id": "1772039506129",
       "winnerId": "70",
       "loserId": "64",
@@ -3804,7 +3783,7 @@
       "loserScore": 10,
       "winnerEloChange": 40,
       "loserEloChange": -33,
-      "expectedWinProbability": 0.28357630589706123,
+      "expectedWinProbability": 0.2859210974146497,
       "timestamp": "2026-02-25T00:00:00.000Z"
     },
     {
@@ -3843,7 +3822,7 @@
       "loserScore": 9,
       "winnerEloChange": 21,
       "loserEloChange": -17,
-      "expectedWinProbability": 0.4047569603484281,
+      "expectedWinProbability": 0.3665922999288324,
       "timestamp": "2026-02-25T15:10:18.802Z"
     },
     {
@@ -3895,7 +3874,7 @@
       "loserScore": 11,
       "winnerEloChange": 15,
       "loserEloChange": -12,
-      "expectedWinProbability": 0.5742802036545245,
+      "expectedWinProbability": 0.6199413590445233,
       "timestamp": "2026-02-25T00:00:00.000Z"
     },
     {
@@ -3908,7 +3887,7 @@
       "loserScore": null,
       "winnerEloChange": 10,
       "loserEloChange": -8,
-      "expectedWinProbability": 0.6104024220946891,
+      "expectedWinProbability": 0.6506046279338725,
       "timestamp": "2026-02-25T00:00:00.000Z"
     },
     {
@@ -3947,7 +3926,7 @@
       "loserScore": 8,
       "winnerEloChange": 33,
       "loserEloChange": -27,
-      "expectedWinProbability": 0.2812431701012181,
+      "expectedWinProbability": 0.28357630589706123,
       "timestamp": "2026-02-25T00:00:00.000Z"
     },
     {
@@ -7851,5 +7830,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-25T17:30:25.640Z"
+  "lastUpdated": "2026-02-25T17:31:16.143Z"
 }
