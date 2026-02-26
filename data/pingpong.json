@@ -220,7 +220,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 15
     },
     {
       "id": "3",
@@ -261,7 +261,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "4",
@@ -394,7 +394,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 18
     },
     {
       "id": "9",
@@ -448,7 +448,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 16
     },
     {
       "id": "11",
@@ -1114,7 +1114,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 6
     },
     {
       "id": "21",
@@ -1192,8 +1192,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1698,
-      "wins": 33,
+      "elo": 1722,
+      "wins": 34,
       "losses": 25,
       "eloHistory": [
         {
@@ -1431,10 +1431,14 @@
         {
           "elo": 1698,
           "timestamp": "2026-02-25T16:47:07.216Z"
+        },
+        {
+          "elo": 1722,
+          "timestamp": "2026-02-26T13:00:54.919Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 10
+      "lastWeekRank": 5
     },
     {
       "id": "25",
@@ -1520,7 +1524,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 12
     },
     {
       "id": "27",
@@ -1657,7 +1661,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "32",
@@ -1872,7 +1876,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "35",
@@ -1954,7 +1958,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 8
+      "lastWeekRank": 9
     },
     {
       "id": "37",
@@ -2008,7 +2012,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 17
     },
     {
       "id": "39",
@@ -2108,7 +2112,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "43",
@@ -2441,7 +2445,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 23
     },
     {
       "id": "48",
@@ -2846,7 +2850,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "57",
@@ -3023,7 +3027,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 9
+      "lastWeekRank": 10
     },
     {
       "id": "62",
@@ -3286,7 +3290,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 8
     },
     {
       "id": "65",
@@ -3474,7 +3478,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 13
     },
     {
       "id": "69",
@@ -3659,9 +3663,9 @@
       "name": "Rish Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1747,
+      "elo": 1728,
       "wins": 19,
-      "losses": 10,
+      "losses": 11,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3782,6 +3786,10 @@
         {
           "elo": 1747,
           "timestamp": "2026-02-25T16:47:07.216Z"
+        },
+        {
+          "elo": 1728,
+          "timestamp": "2026-02-26T13:00:54.919Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -3789,6 +3797,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772110854978",
+      "winnerId": "24",
+      "loserId": "1769273367436",
+      "winner": "George Pool",
+      "loser": "Rish Chatterjee",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 24,
+      "loserEloChange": -19,
+      "expectedWinProbability": 0.42994717641601177,
+      "timestamp": "2026-02-26T13:00:54.919Z"
+    },
     {
       "id": "1772041204500",
       "winnerId": "1",
@@ -7872,5 +7893,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-25T17:40:04.501Z"
+  "lastUpdated": "2026-02-26T13:00:54.979Z"
 }
