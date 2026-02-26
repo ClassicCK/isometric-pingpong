@@ -1192,8 +1192,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1722,
-      "wins": 34,
+      "elo": 1737,
+      "wins": 35,
       "losses": 25,
       "eloHistory": [
         {
@@ -1435,6 +1435,10 @@
         {
           "elo": 1722,
           "timestamp": "2026-02-26T13:00:54.919Z"
+        },
+        {
+          "elo": 1737,
+          "timestamp": "2026-02-26T13:01:22.504Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1770,9 +1774,9 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1590,
+      "elo": 1578,
       "wins": 11,
-      "losses": 13,
+      "losses": 14,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1873,6 +1877,10 @@
         {
           "elo": 1590,
           "timestamp": "2026-02-25T00:00:00.000Z"
+        },
+        {
+          "elo": 1578,
+          "timestamp": "2026-02-26T13:01:22.504Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3797,6 +3805,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772110882571",
+      "winnerId": "24",
+      "loserId": "34",
+      "winner": "George Pool",
+      "loser": "Tomek Paczkowski",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 15,
+      "loserEloChange": -12,
+      "expectedWinProbability": 0.6813218351663937,
+      "timestamp": "2026-02-26T13:01:22.504Z"
+    },
     {
       "id": "1772110854978",
       "winnerId": "24",
@@ -7893,5 +7914,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-26T13:00:54.979Z"
+  "lastUpdated": "2026-02-26T13:01:22.580Z"
 }
