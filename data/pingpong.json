@@ -1774,9 +1774,9 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1589,
+      "elo": 1576,
       "wins": 12,
-      "losses": 14,
+      "losses": 15,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1885,6 +1885,10 @@
         {
           "elo": 1589,
           "timestamp": "2026-02-26T13:46:25.076Z"
+        },
+        {
+          "elo": 1576,
+          "timestamp": "2026-02-26T13:46:31.457Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3388,8 +3392,8 @@
       "name": "Peteris Bikis",
       "countryCode": "lv",
       "office": "LON",
-      "elo": 1501,
-      "wins": 8,
+      "elo": 1517,
+      "wins": 9,
       "losses": 16,
       "eloHistory": [
         {
@@ -3491,6 +3495,10 @@
         {
           "elo": 1501,
           "timestamp": "2026-02-26T13:46:25.076Z"
+        },
+        {
+          "elo": 1517,
+          "timestamp": "2026-02-26T13:46:31.457Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3813,6 +3821,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772113591490",
+      "winnerId": "68",
+      "loserId": "34",
+      "winner": "Peteris Bikis",
+      "loser": "Tomek Paczkowski",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 16,
+      "loserEloChange": -13,
+      "expectedWinProbability": 0.37599824138233284,
+      "timestamp": "2026-02-26T13:46:31.457Z"
+    },
     {
       "id": "1772113585143",
       "winnerId": "34",
@@ -7935,5 +7956,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-26T13:46:25.144Z"
+  "lastUpdated": "2026-02-26T13:46:31.490Z"
 }
