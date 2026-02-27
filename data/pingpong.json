@@ -613,9 +613,9 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "LON",
-      "elo": 1476,
+      "elo": 1457,
       "wins": 4,
-      "losses": 5,
+      "losses": 6,
       "eloHistory": [
         {
           "elo": 1500,
@@ -655,6 +655,10 @@
         },
         {
           "elo": 1476,
+          "timestamp": "2026-02-27T00:00:00.000Z"
+        },
+        {
+          "elo": 1457,
           "timestamp": "2026-02-27T00:00:00.000Z"
         }
       ],
@@ -3650,8 +3654,8 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1570,
-      "wins": 8,
+      "elo": 1593,
+      "wins": 9,
       "losses": 8,
       "eloHistory": [
         {
@@ -3720,6 +3724,10 @@
         },
         {
           "elo": 1570,
+          "timestamp": "2026-02-27T00:00:00.000Z"
+        },
+        {
+          "elo": 1593,
           "timestamp": "2026-02-27T00:00:00.000Z"
         }
       ],
@@ -3957,6 +3965,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772217854728",
+      "winnerId": "70",
+      "loserId": "13",
+      "winner": "Jamie Atkinson",
+      "loser": "Adithya Pradeep",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 23,
+      "loserEloChange": -19,
+      "expectedWinProbability": 0.6320700121000735,
+      "timestamp": "2026-02-27T00:00:00.000Z"
+    },
     {
       "id": "1772217837928",
       "winnerId": "70",
@@ -8313,5 +8334,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-27T18:43:57.929Z"
+  "lastUpdated": "2026-02-27T18:44:14.728Z"
 }
