@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1671,
-      "wins": 30,
+      "elo": 1691,
+      "wins": 31,
       "losses": 18,
       "eloHistory": [
         {
@@ -204,6 +204,10 @@
         {
           "elo": 1671,
           "timestamp": "2026-02-27T17:57:34.546Z"
+        },
+        {
+          "elo": 1691,
+          "timestamp": "2026-02-27T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -646,9 +650,9 @@
       "name": "Christopher Kilner",
       "countryCode": "us-md",
       "office": "LON",
-      "elo": 1539,
+      "elo": 1523,
       "wins": 5,
-      "losses": 7,
+      "losses": 8,
       "eloHistory": [
         {
           "elo": 1500,
@@ -701,6 +705,10 @@
         {
           "elo": 1539,
           "timestamp": "2026-02-20T19:36:46.952Z"
+        },
+        {
+          "elo": 1523,
+          "timestamp": "2026-02-27T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3909,6 +3917,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772215162555",
+      "winnerId": "1",
+      "loserId": "14",
+      "winner": "David Lankes",
+      "loser": "Christopher Kilner",
+      "winnerScore": 11,
+      "loserScore": 2,
+      "winnerEloChange": 20,
+      "loserEloChange": -16,
+      "expectedWinProbability": 0.6813218351663937,
+      "timestamp": "2026-02-27T00:00:00.000Z"
+    },
     {
       "id": "1772215064880",
       "winnerId": "24",
@@ -8187,5 +8208,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-27T17:57:44.880Z"
+  "lastUpdated": "2026-02-27T17:59:22.556Z"
 }
