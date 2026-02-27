@@ -5,9 +5,9 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1686,
+      "elo": 1671,
       "wins": 30,
-      "losses": 17,
+      "losses": 18,
       "eloHistory": [
         {
           "elo": 1500,
@@ -200,6 +200,10 @@
         {
           "elo": 1686,
           "timestamp": "2026-02-27T17:21:01.522Z"
+        },
+        {
+          "elo": 1671,
+          "timestamp": "2026-02-27T17:57:34.546Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1204,8 +1208,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1710,
-      "wins": 36,
+      "elo": 1728,
+      "wins": 37,
       "losses": 28,
       "eloHistory": [
         {
@@ -1467,6 +1471,10 @@
         {
           "elo": 1710,
           "timestamp": "2026-02-26T17:57:26.788Z"
+        },
+        {
+          "elo": 1728,
+          "timestamp": "2026-02-27T17:57:34.546Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3893,6 +3901,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772215054611",
+      "winnerId": "24",
+      "loserId": "1",
+      "winner": "George Pool",
+      "loser": "David Lankes",
+      "winnerScore": 11,
+      "loserScore": 3,
+      "winnerEloChange": 18,
+      "loserEloChange": -15,
+      "expectedWinProbability": 0.5344839447268315,
+      "timestamp": "2026-02-27T17:57:34.546Z"
+    },
     {
       "id": "1772212861599",
       "winnerId": "64",
@@ -8145,5 +8166,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-27T17:21:01.599Z"
+  "lastUpdated": "2026-02-27T17:57:34.611Z"
 }
