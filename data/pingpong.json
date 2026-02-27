@@ -572,9 +572,9 @@
       "name": "Ewan Stephens",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1454,
+      "elo": 1439,
       "wins": 1,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -599,6 +599,10 @@
         {
           "elo": 1454,
           "timestamp": "2026-02-25T00:00:00.000Z"
+        },
+        {
+          "elo": 1439,
+          "timestamp": "2026-02-27T18:25:13.614Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3176,8 +3180,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1609,
-      "wins": 27,
+      "elo": 1627,
+      "wins": 28,
       "losses": 29,
       "eloHistory": [
         {
@@ -3407,6 +3411,10 @@
         {
           "elo": 1609,
           "timestamp": "2026-02-27T00:00:00.000Z"
+        },
+        {
+          "elo": 1627,
+          "timestamp": "2026-02-27T18:25:13.614Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3941,6 +3949,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772216713676",
+      "winnerId": "64",
+      "loserId": "12",
+      "winner": "Tom Sellers",
+      "loser": "Ewan Stephens",
+      "winnerScore": 11,
+      "loserScore": 5,
+      "winnerEloChange": 18,
+      "loserEloChange": -15,
+      "expectedWinProbability": 0.7093546305987634,
+      "timestamp": "2026-02-27T18:25:13.614Z"
+    },
     {
       "id": "1772216356460",
       "winnerId": "1",
@@ -8271,5 +8292,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-27T18:19:16.461Z"
+  "lastUpdated": "2026-02-27T18:25:13.676Z"
 }
