@@ -1518,8 +1518,8 @@
       "name": "Murtz Abidi",
       "countryCode": "ch",
       "office": "LON",
-      "elo": 1573,
-      "wins": 4,
+      "elo": 1604,
+      "wins": 5,
       "losses": 2,
       "eloHistory": [
         {
@@ -1549,6 +1549,10 @@
         {
           "elo": 1573,
           "timestamp": "2026-02-02T17:06:58.109Z"
+        },
+        {
+          "elo": 1604,
+          "timestamp": "2026-02-27T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3132,9 +3136,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1612,
+      "elo": 1587,
       "wins": 25,
-      "losses": 26,
+      "losses": 27,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3342,6 +3346,10 @@
         },
         {
           "elo": 1612,
+          "timestamp": "2026-02-27T00:00:00.000Z"
+        },
+        {
+          "elo": 1587,
           "timestamp": "2026-02-27T00:00:00.000Z"
         }
       ],
@@ -3877,6 +3885,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772212105812",
+      "winnerId": "26",
+      "loserId": "64",
+      "winner": "Murtz Abidi",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 31,
+      "loserEloChange": -25,
+      "expectedWinProbability": 0.4441090388831469,
+      "timestamp": "2026-02-27T00:00:00.000Z"
+    },
     {
       "id": "1772206319452",
       "winnerId": "1",
@@ -8103,5 +8124,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-27T15:31:59.452Z"
+  "lastUpdated": "2026-02-27T17:08:25.812Z"
 }
