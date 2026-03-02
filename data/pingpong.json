@@ -244,7 +244,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 13
     },
     {
       "id": "3",
@@ -450,9 +450,9 @@
       "name": "Cassie Beyfuss",
       "countryCode": "ca",
       "office": "LON",
-      "elo": 1539,
+      "elo": 1518,
       "wins": 2,
-      "losses": 1,
+      "losses": 2,
       "eloHistory": [
         {
           "elo": 1500,
@@ -469,10 +469,14 @@
         {
           "elo": 1539,
           "timestamp": "2026-01-13T00:00:00.000Z"
+        },
+        {
+          "elo": 1518,
+          "timestamp": "2026-03-02T11:39:06.754Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 15
     },
     {
       "id": "11",
@@ -736,7 +740,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 16
     },
     {
       "id": "15",
@@ -2549,7 +2553,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 14
     },
     {
       "id": "48",
@@ -3188,8 +3192,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1627,
-      "wins": 28,
+      "elo": 1652,
+      "wins": 29,
       "losses": 29,
       "eloHistory": [
         {
@@ -3423,6 +3427,10 @@
         {
           "elo": 1627,
           "timestamp": "2026-02-27T18:25:13.614Z"
+        },
+        {
+          "elo": 1652,
+          "timestamp": "2026-03-02T11:39:06.754Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3965,6 +3973,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772451546819",
+      "winnerId": "64",
+      "loserId": "10",
+      "winner": "Tom Sellers",
+      "loser": "Cassie Beyfuss",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 25,
+      "loserEloChange": -21,
+      "expectedWinProbability": 0.6240017586176672,
+      "timestamp": "2026-03-02T11:39:06.754Z"
+    },
     {
       "id": "1772217854728",
       "winnerId": "70",
@@ -8334,5 +8355,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-02-27T18:44:14.728Z"
+  "lastUpdated": "2026-03-02T11:39:06.819Z"
 }
