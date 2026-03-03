@@ -215,7 +215,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 2
+      "lastWeekRank": 5
     },
     {
       "id": "2",
@@ -244,7 +244,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 14
     },
     {
       "id": "3",
@@ -285,7 +285,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "4",
@@ -476,7 +476,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 16
     },
     {
       "id": "11",
@@ -740,7 +740,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 17
     },
     {
       "id": "15",
@@ -1526,7 +1526,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 4
     },
     {
       "id": "25",
@@ -1616,7 +1616,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 13
     },
     {
       "id": "27",
@@ -1657,7 +1657,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "28",
@@ -1862,9 +1862,9 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1551,
+      "elo": 1543,
       "wins": 12,
-      "losses": 17,
+      "losses": 18,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1985,10 +1985,14 @@
         {
           "elo": 1551,
           "timestamp": "2026-02-26T17:57:26.788Z"
+        },
+        {
+          "elo": 1543,
+          "timestamp": "2026-03-03T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 12
     },
     {
       "id": "35",
@@ -2224,7 +2228,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "43",
@@ -2561,7 +2565,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 15
     },
     {
       "id": "48",
@@ -2824,8 +2828,8 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1790,
-      "wins": 24,
+      "elo": 1799,
+      "wins": 25,
       "losses": 9,
       "eloHistory": [
         {
@@ -2963,10 +2967,14 @@
         {
           "elo": 1790,
           "timestamp": "2026-02-25T00:00:00.000Z"
+        },
+        {
+          "elo": 1799,
+          "timestamp": "2026-03-03T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 2
     },
     {
       "id": "57",
@@ -3654,7 +3662,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 24
     },
     {
       "id": "69",
@@ -3993,10 +4001,23 @@
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 3
     }
   ],
   "matches": [
+    {
+      "id": "1772541759342",
+      "winnerId": "56",
+      "loserId": "34",
+      "winner": "Jon Finerty",
+      "loser": "Tomek Paczkowski",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 9,
+      "loserEloChange": -8,
+      "expectedWinProbability": 0.7983147441549775,
+      "timestamp": "2026-03-03T00:00:00.000Z"
+    },
     {
       "id": "1772475097105",
       "winnerId": "64",
@@ -8418,5 +8439,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-02T18:11:37.106Z"
+  "lastUpdated": "2026-03-03T12:42:39.347Z"
 }
