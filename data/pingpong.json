@@ -1874,8 +1874,8 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1529,
-      "wins": 12,
+      "elo": 1557,
+      "wins": 13,
       "losses": 20,
       "eloHistory": [
         {
@@ -2009,6 +2009,10 @@
         {
           "elo": 1529,
           "timestamp": "2026-03-03T12:49:31.352Z"
+        },
+        {
+          "elo": 1557,
+          "timestamp": "2026-03-03T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3232,9 +3236,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1706,
+      "elo": 1683,
       "wins": 33,
-      "losses": 29,
+      "losses": 30,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3487,6 +3491,10 @@
         {
           "elo": 1706,
           "timestamp": "2026-03-03T18:22:42.522Z"
+        },
+        {
+          "elo": 1683,
+          "timestamp": "2026-03-03T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4045,6 +4053,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772562184286",
+      "winnerId": "34",
+      "loserId": "64",
+      "winner": "Tomek Paczkowski",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 28,
+      "loserEloChange": -23,
+      "expectedWinProbability": 0.26524291068345335,
+      "timestamp": "2026-03-03T00:00:00.000Z"
+    },
     {
       "id": "1772562162557",
       "winnerId": "64",
@@ -8544,5 +8565,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-03T18:22:42.557Z"
+  "lastUpdated": "2026-03-03T18:23:04.286Z"
 }
