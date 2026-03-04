@@ -264,7 +264,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 16
     },
     {
       "id": "3",
@@ -1276,8 +1276,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1756,
-      "wins": 44,
+      "elo": 1766,
+      "wins": 45,
       "losses": 30,
       "eloHistory": [
         {
@@ -1579,6 +1579,10 @@
         {
           "elo": 1756,
           "timestamp": "2026-03-04T12:45:22.030Z"
+        },
+        {
+          "elo": 1766,
+          "timestamp": "2026-03-04T18:29:08.894Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2443,9 +2447,9 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1574,
+      "elo": 1566,
       "wins": 20,
-      "losses": 33,
+      "losses": 34,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2662,10 +2666,14 @@
         {
           "elo": 1574,
           "timestamp": "2026-03-04T12:45:22.030Z"
+        },
+        {
+          "elo": 1566,
+          "timestamp": "2026-03-04T18:29:08.894Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 16
+      "lastWeekRank": 14
     },
     {
       "id": "48",
@@ -3956,7 +3964,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 15
     },
     {
       "id": "71",
@@ -4197,6 +4205,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772648948970",
+      "winnerId": "24",
+      "loserId": "47",
+      "winner": "George Pool",
+      "loser": "Joel 'The Soul Reaper' Robinson",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 10,
+      "loserEloChange": -8,
+      "expectedWinProbability": 0.7403284195148304,
+      "timestamp": "2026-03-04T18:29:08.894Z"
+    },
     {
       "id": "1772645372130",
       "winnerId": "64",
@@ -8943,5 +8964,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-04T17:29:32.130Z"
+  "lastUpdated": "2026-03-04T18:29:08.970Z"
 }
