@@ -235,7 +235,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "2",
@@ -1198,7 +1198,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 6
     },
     {
       "id": "21",
@@ -1582,7 +1582,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 5
     },
     {
       "id": "25",
@@ -3320,9 +3320,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1677,
+      "elo": 1653,
       "wins": 34,
-      "losses": 34,
+      "losses": 35,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3599,6 +3599,10 @@
         {
           "elo": 1677,
           "timestamp": "2026-03-04T12:54:46.549Z"
+        },
+        {
+          "elo": 1653,
+          "timestamp": "2026-03-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3850,8 +3854,8 @@
       "name": "Jamie Atkinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1580,
-      "wins": 9,
+      "elo": 1609,
+      "wins": 10,
       "losses": 9,
       "eloHistory": [
         {
@@ -3929,6 +3933,10 @@
         {
           "elo": 1580,
           "timestamp": "2026-03-02T18:11:37.042Z"
+        },
+        {
+          "elo": 1609,
+          "timestamp": "2026-03-04T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4173,6 +4181,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772645340915",
+      "winnerId": "70",
+      "loserId": "64",
+      "winner": "Jamie Atkinson",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 2,
+      "winnerEloChange": 29,
+      "loserEloChange": -24,
+      "expectedWinProbability": 0.36392310031211805,
+      "timestamp": "2026-03-04T00:00:00.000Z"
+    },
     {
       "id": "1772639214884",
       "winnerId": "56",
@@ -8880,5 +8901,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-04T15:46:54.884Z"
+  "lastUpdated": "2026-03-04T17:29:00.915Z"
 }
