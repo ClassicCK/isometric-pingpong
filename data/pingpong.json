@@ -2455,9 +2455,9 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1604,
+      "elo": 1598,
       "wins": 22,
-      "losses": 36,
+      "losses": 37,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2694,6 +2694,10 @@
         {
           "elo": 1604,
           "timestamp": "2026-03-05T15:32:23.831Z"
+        },
+        {
+          "elo": 1598,
+          "timestamp": "2026-03-05T15:32:36.791Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4075,8 +4079,8 @@
       "name": "Rish Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1815,
-      "wins": 25,
+      "elo": 1823,
+      "wins": 26,
       "losses": 12,
       "eloHistory": [
         {
@@ -4230,6 +4234,10 @@
         {
           "elo": 1815,
           "timestamp": "2026-03-05T15:32:23.831Z"
+        },
+        {
+          "elo": 1823,
+          "timestamp": "2026-03-05T15:32:36.791Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -4237,6 +4245,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772724756829",
+      "winnerId": "1769273367436",
+      "loserId": "47",
+      "winner": "Rish Chatterjee",
+      "loser": "Joel 'The Soul Reaper' Robinson",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 8,
+      "loserEloChange": -6,
+      "expectedWinProbability": 0.7711142606875975,
+      "timestamp": "2026-03-05T15:32:36.791Z"
+    },
     {
       "id": "1772724743897",
       "winnerId": "1769273367436",
@@ -9048,5 +9069,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-05T15:32:23.897Z"
+  "lastUpdated": "2026-03-05T15:32:36.829Z"
 }
