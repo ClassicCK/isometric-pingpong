@@ -1065,7 +1065,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 5
     },
     {
       "id": "20",
@@ -1594,7 +1594,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 3
     },
     {
       "id": "25",
@@ -2455,9 +2455,9 @@
       "name": "Joel 'The Soul Reaper' Robinson",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1620,
+      "elo": 1612,
       "wins": 22,
-      "losses": 34,
+      "losses": 35,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2686,6 +2686,10 @@
         {
           "elo": 1620,
           "timestamp": "2026-03-04T18:30:13.940Z"
+        },
+        {
+          "elo": 1612,
+          "timestamp": "2026-03-05T13:06:52.889Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4067,8 +4071,8 @@
       "name": "Rish Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1795,
-      "wins": 23,
+      "elo": 1805,
+      "wins": 24,
       "losses": 12,
       "eloHistory": [
         {
@@ -4214,13 +4218,30 @@
         {
           "elo": 1795,
           "timestamp": "2026-03-04T14:08:33.242Z"
+        },
+        {
+          "elo": 1805,
+          "timestamp": "2026-03-05T13:06:52.889Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 4
     }
   ],
   "matches": [
+    {
+      "id": "1772716012970",
+      "winnerId": "1769273367436",
+      "loserId": "47",
+      "winner": "Rish Chatterjee",
+      "loser": "Joel 'The Soul Reaper' Robinson",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 10,
+      "loserEloChange": -8,
+      "expectedWinProbability": 0.7325072897556676,
+      "timestamp": "2026-03-05T13:06:52.889Z"
+    },
     {
       "id": "1772649014036",
       "winnerId": "47",
@@ -9006,5 +9027,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-04T18:30:14.037Z"
+  "lastUpdated": "2026-03-05T13:06:52.970Z"
 }
