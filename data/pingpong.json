@@ -1065,7 +1065,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 4
     },
     {
       "id": "20",
@@ -1594,7 +1594,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 3
+      "lastWeekRank": 5
     },
     {
       "id": "25",
@@ -1930,8 +1930,8 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1577,
-      "wins": 15,
+      "elo": 1598,
+      "wins": 16,
       "losses": 22,
       "eloHistory": [
         {
@@ -2085,6 +2085,10 @@
         {
           "elo": 1577,
           "timestamp": "2026-03-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1598,
+          "timestamp": "2026-03-05T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3356,9 +3360,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1653,
+      "elo": 1636,
       "wins": 35,
-      "losses": 36,
+      "losses": 37,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3647,6 +3651,10 @@
         {
           "elo": 1653,
           "timestamp": "2026-03-04T00:00:00.000Z"
+        },
+        {
+          "elo": 1636,
+          "timestamp": "2026-03-05T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4241,10 +4249,23 @@
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
-      "lastWeekRank": 4
+      "lastWeekRank": 3
     }
   ],
   "matches": [
+    {
+      "id": "1772726457462",
+      "winnerId": "34",
+      "loserId": "64",
+      "winner": "Tomek Paczkowski",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 9,
+      "winnerEloChange": 21,
+      "loserEloChange": -17,
+      "expectedWinProbability": 0.39233893587318014,
+      "timestamp": "2026-03-05T00:00:00.000Z"
+    },
     {
       "id": "1772724756829",
       "winnerId": "1769273367436",
@@ -9069,5 +9090,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-05T15:32:36.829Z"
+  "lastUpdated": "2026-03-05T16:00:57.462Z"
 }
