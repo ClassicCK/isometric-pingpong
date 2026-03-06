@@ -235,7 +235,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 7
+      "lastWeekRank": 6
     },
     {
       "id": "2",
@@ -305,7 +305,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 23
     },
     {
       "id": "4",
@@ -438,7 +438,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "9",
@@ -463,7 +463,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 66
+      "lastWeekRank": 65
     },
     {
       "id": "10",
@@ -695,7 +695,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 63
+      "lastWeekRank": 66
     },
     {
       "id": "14",
@@ -768,7 +768,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 36
     },
     {
       "id": "15",
@@ -793,7 +793,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 25
     },
     {
       "id": "16",
@@ -843,7 +843,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 35
     },
     {
       "id": "18",
@@ -912,7 +912,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 33
     },
     {
       "id": "19",
@@ -1198,7 +1198,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 7
     },
     {
       "id": "21",
@@ -1276,8 +1276,8 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1722,
-      "wins": 45,
+      "elo": 1744,
+      "wins": 46,
       "losses": 32,
       "eloHistory": [
         {
@@ -1591,6 +1591,10 @@
         {
           "elo": 1722,
           "timestamp": "2026-03-04T18:30:13.940Z"
+        },
+        {
+          "elo": 1744,
+          "timestamp": "2026-03-06T12:49:43.634Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1684,7 +1688,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 11
     },
     {
       "id": "27",
@@ -1725,7 +1729,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 24
     },
     {
       "id": "28",
@@ -1771,7 +1775,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 27
+      "lastWeekRank": 26
     },
     {
       "id": "30",
@@ -1821,7 +1825,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "32",
@@ -2096,7 +2100,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 15
     },
     {
       "id": "35",
@@ -2232,7 +2236,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "39",
@@ -2257,7 +2261,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 28
+      "lastWeekRank": 27
     },
     {
       "id": "40",
@@ -2332,7 +2336,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "43",
@@ -2386,7 +2390,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 32
     },
     {
       "id": "45",
@@ -2456,7 +2460,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 65
+      "lastWeekRank": 64
     },
     {
       "id": "47",
@@ -2709,7 +2713,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 14
     },
     {
       "id": "48",
@@ -2779,7 +2783,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 12
     },
     {
       "id": "50",
@@ -2825,7 +2829,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 64
+      "lastWeekRank": 63
     },
     {
       "id": "52",
@@ -3167,7 +3171,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 34
     },
     {
       "id": "58",
@@ -3357,7 +3361,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 29
+      "lastWeekRank": 28
     },
     {
       "id": "64",
@@ -3902,7 +3906,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 18
     },
     {
       "id": "69",
@@ -4024,7 +4028,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 13
     },
     {
       "id": "71",
@@ -4070,7 +4074,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 30
+      "lastWeekRank": 29
     },
     {
       "id": "73",
@@ -4087,7 +4091,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 31
+      "lastWeekRank": 30
     },
     {
       "id": "74",
@@ -4104,16 +4108,16 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 32
+      "lastWeekRank": 31
     },
     {
       "id": "1769273367436",
       "name": "Rish Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1823,
+      "elo": 1805,
       "wins": 26,
-      "losses": 12,
+      "losses": 13,
       "eloHistory": [
         {
           "elo": 1500,
@@ -4270,6 +4274,10 @@
         {
           "elo": 1823,
           "timestamp": "2026-03-05T15:32:36.791Z"
+        },
+        {
+          "elo": 1805,
+          "timestamp": "2026-03-06T12:49:43.634Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -4277,6 +4285,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772801383714",
+      "winnerId": "24",
+      "loserId": "1769273367436",
+      "winner": "George Pool",
+      "loser": "Rish Chatterjee",
+      "winnerScore": 14,
+      "loserScore": 12,
+      "winnerEloChange": 22,
+      "loserEloChange": -18,
+      "expectedWinProbability": 0.35860988804438204,
+      "timestamp": "2026-03-06T12:49:43.634Z"
+    },
     {
       "id": "1772732894481",
       "winnerId": "64",
@@ -9153,5 +9174,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-05T17:48:14.482Z"
+  "lastUpdated": "2026-03-06T12:49:43.715Z"
 }
