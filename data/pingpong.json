@@ -503,8 +503,8 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1884,
-      "wins": 20,
+      "elo": 1900,
+      "wins": 21,
       "losses": 3,
       "eloHistory": [
         {
@@ -602,6 +602,10 @@
         {
           "elo": 1884,
           "timestamp": "2026-03-06T18:10:32.698Z"
+        },
+        {
+          "elo": 1900,
+          "timestamp": "2026-03-06T18:10:52.993Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1284,9 +1288,9 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1770,
+      "elo": 1757,
       "wins": 49,
-      "losses": 34,
+      "losses": 35,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1623,6 +1627,10 @@
         {
           "elo": 1770,
           "timestamp": "2026-03-06T18:10:32.698Z"
+        },
+        {
+          "elo": 1757,
+          "timestamp": "2026-03-06T18:10:52.993Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4325,6 +4333,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772820653067",
+      "winnerId": "11",
+      "loserId": "24",
+      "winner": "Paul Puget",
+      "loser": "George Pool",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 16,
+      "loserEloChange": -13,
+      "expectedWinProbability": 0.6584145209169125,
+      "timestamp": "2026-03-06T18:10:52.993Z"
+    },
     {
       "id": "1772820632773",
       "winnerId": "11",
@@ -9279,5 +9300,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-06T18:10:32.773Z"
+  "lastUpdated": "2026-03-06T18:10:53.067Z"
 }
