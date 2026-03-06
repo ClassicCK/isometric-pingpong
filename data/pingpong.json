@@ -326,7 +326,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 41
+      "lastWeekRank": 40
     },
     {
       "id": "5",
@@ -409,7 +409,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 42
+      "lastWeekRank": 41
     },
     {
       "id": "8",
@@ -657,8 +657,8 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "LON",
-      "elo": 1457,
-      "wins": 4,
+      "elo": 1491,
+      "wins": 5,
       "losses": 6,
       "eloHistory": [
         {
@@ -704,6 +704,10 @@
         {
           "elo": 1457,
           "timestamp": "2026-02-27T00:00:00.000Z"
+        },
+        {
+          "elo": 1491,
+          "timestamp": "2026-03-06T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -714,9 +718,9 @@
       "name": "Christopher Kilner",
       "countryCode": "us-md",
       "office": "LON",
-      "elo": 1493,
+      "elo": 1465,
       "wins": 5,
-      "losses": 9,
+      "losses": 10,
       "eloHistory": [
         {
           "elo": 1500,
@@ -777,10 +781,14 @@
         {
           "elo": 1493,
           "timestamp": "2026-02-27T00:00:00.000Z"
+        },
+        {
+          "elo": 1465,
+          "timestamp": "2026-03-06T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 36
+      "lastWeekRank": 35
     },
     {
       "id": "15",
@@ -826,7 +834,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 43
+      "lastWeekRank": 42
     },
     {
       "id": "17",
@@ -855,7 +863,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 35
+      "lastWeekRank": 34
     },
     {
       "id": "18",
@@ -924,7 +932,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 33
+      "lastWeekRank": 54
     },
     {
       "id": "19",
@@ -1231,7 +1239,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 44
+      "lastWeekRank": 43
     },
     {
       "id": "22",
@@ -1281,7 +1289,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 52
     },
     {
       "id": "24",
@@ -1786,7 +1794,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 45
+      "lastWeekRank": 44
     },
     {
       "id": "29",
@@ -1832,7 +1840,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 46
+      "lastWeekRank": 45
     },
     {
       "id": "31",
@@ -1882,7 +1890,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 47
+      "lastWeekRank": 46
     },
     {
       "id": "33",
@@ -2161,7 +2169,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 40
+      "lastWeekRank": 39
     },
     {
       "id": "36",
@@ -2347,7 +2355,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 48
+      "lastWeekRank": 47
     },
     {
       "id": "42",
@@ -2397,7 +2405,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 39
+      "lastWeekRank": 38
     },
     {
       "id": "44",
@@ -2848,7 +2856,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 49
+      "lastWeekRank": 48
     },
     {
       "id": "51",
@@ -2971,7 +2979,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 37
+      "lastWeekRank": 36
     },
     {
       "id": "54",
@@ -2992,7 +3000,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 54
+      "lastWeekRank": 53
     },
     {
       "id": "55",
@@ -3013,7 +3021,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 38
+      "lastWeekRank": 37
     },
     {
       "id": "56",
@@ -3219,7 +3227,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 34
+      "lastWeekRank": 33
     },
     {
       "id": "58",
@@ -3776,7 +3784,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 50
+      "lastWeekRank": 49
     },
     {
       "id": "67",
@@ -3975,7 +3983,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 51
+      "lastWeekRank": 50
     },
     {
       "id": "70",
@@ -4097,7 +4105,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 51
     },
     {
       "id": "72",
@@ -4333,6 +4341,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772821426552",
+      "winnerId": "13",
+      "loserId": "14",
+      "winner": "Adithya Pradeep",
+      "loser": "Christopher Kilner",
+      "winnerScore": 11,
+      "loserScore": 3,
+      "winnerEloChange": 34,
+      "loserEloChange": -28,
+      "expectedWinProbability": 0.4483764526890395,
+      "timestamp": "2026-03-06T00:00:00.000Z"
+    },
     {
       "id": "1772820653067",
       "winnerId": "11",
@@ -9300,5 +9321,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-06T18:10:53.067Z"
+  "lastUpdated": "2026-03-06T18:23:46.560Z"
 }
