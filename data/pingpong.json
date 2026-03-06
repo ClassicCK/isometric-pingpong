@@ -657,8 +657,8 @@
       "name": "Adithya Pradeep",
       "countryCode": "in",
       "office": "LON",
-      "elo": 1491,
-      "wins": 5,
+      "elo": 1519,
+      "wins": 6,
       "losses": 6,
       "eloHistory": [
         {
@@ -708,6 +708,10 @@
         {
           "elo": 1491,
           "timestamp": "2026-03-06T00:00:00.000Z"
+        },
+        {
+          "elo": 1519,
+          "timestamp": "2026-03-06T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -718,9 +722,9 @@
       "name": "Christopher Kilner",
       "countryCode": "us-md",
       "office": "LON",
-      "elo": 1465,
+      "elo": 1442,
       "wins": 5,
-      "losses": 10,
+      "losses": 11,
       "eloHistory": [
         {
           "elo": 1500,
@@ -784,6 +788,10 @@
         },
         {
           "elo": 1465,
+          "timestamp": "2026-03-06T00:00:00.000Z"
+        },
+        {
+          "elo": 1442,
           "timestamp": "2026-03-06T00:00:00.000Z"
         }
       ],
@@ -4341,6 +4349,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1772821442615",
+      "winnerId": "13",
+      "loserId": "14",
+      "winner": "Adithya Pradeep",
+      "loser": "Christopher Kilner",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 28,
+      "loserEloChange": -23,
+      "expectedWinProbability": 0.5373473171664928,
+      "timestamp": "2026-03-06T00:00:00.000Z"
+    },
     {
       "id": "1772821426552",
       "winnerId": "13",
@@ -9321,5 +9342,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-06T18:23:46.560Z"
+  "lastUpdated": "2026-03-06T18:24:02.615Z"
 }
