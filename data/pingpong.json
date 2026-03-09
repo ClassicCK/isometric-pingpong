@@ -235,7 +235,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 6
+      "lastWeekRank": 5
     },
     {
       "id": "2",
@@ -305,7 +305,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 22
     },
     {
       "id": "4",
@@ -438,7 +438,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "9",
@@ -496,7 +496,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 23
     },
     {
       "id": "11",
@@ -650,7 +650,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 71
     },
     {
       "id": "13",
@@ -1093,7 +1093,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 5
+      "lastWeekRank": 6
     },
     {
       "id": "20",
@@ -1877,7 +1877,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "32",
@@ -2263,7 +2263,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "38",
@@ -2292,7 +2292,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 18
     },
     {
       "id": "39",
@@ -2392,7 +2392,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "43",
@@ -2950,7 +2950,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "53",
@@ -3400,7 +3400,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "63",
@@ -3432,8 +3432,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1655,
-      "wins": 37,
+      "elo": 1664,
+      "wins": 38,
       "losses": 37,
       "eloHistory": [
         {
@@ -3735,6 +3735,10 @@
         {
           "elo": 1655,
           "timestamp": "2026-03-05T17:48:14.418Z"
+        },
+        {
+          "elo": 1664,
+          "timestamp": "2026-03-09T15:18:09.419Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3824,9 +3828,9 @@
       "name": "Peteris Bikis",
       "countryCode": "lv",
       "office": "LON",
-      "elo": 1449,
+      "elo": 1442,
       "wins": 10,
-      "losses": 24,
+      "losses": 25,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3967,10 +3971,14 @@
         {
           "elo": 1449,
           "timestamp": "2026-03-05T17:48:14.418Z"
+        },
+        {
+          "elo": 1442,
+          "timestamp": "2026-03-09T15:18:09.419Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 17
     },
     {
       "id": "69",
@@ -4349,6 +4357,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773069489496",
+      "winnerId": "64",
+      "loserId": "68",
+      "winner": "Tom Sellers",
+      "loser": "Peteris Bikis",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 9,
+      "loserEloChange": -7,
+      "expectedWinProbability": 0.7659946707664889,
+      "timestamp": "2026-03-09T15:18:09.419Z"
+    },
     {
       "id": "1772821442615",
       "winnerId": "13",
@@ -9342,5 +9363,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-06T18:24:02.615Z"
+  "lastUpdated": "2026-03-09T15:18:09.497Z"
 }
