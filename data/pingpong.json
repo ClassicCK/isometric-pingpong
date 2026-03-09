@@ -305,7 +305,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 21
     },
     {
       "id": "4",
@@ -438,7 +438,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 19
+      "lastWeekRank": 18
     },
     {
       "id": "9",
@@ -878,8 +878,8 @@
       "name": "Alex Steene",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1479,
-      "wins": 4,
+      "elo": 1522,
+      "wins": 5,
       "losses": 9,
       "eloHistory": [
         {
@@ -937,6 +937,10 @@
         {
           "elo": 1479,
           "timestamp": "2026-02-27T18:16:30.646Z"
+        },
+        {
+          "elo": 1522,
+          "timestamp": "2026-03-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1877,7 +1881,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 20
+      "lastWeekRank": 19
     },
     {
       "id": "32",
@@ -2292,7 +2296,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 18
+      "lastWeekRank": 17
     },
     {
       "id": "39",
@@ -2392,7 +2396,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 20
     },
     {
       "id": "43",
@@ -3432,9 +3436,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1679,
+      "elo": 1644,
       "wins": 40,
-      "losses": 37,
+      "losses": 38,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3747,6 +3751,10 @@
         {
           "elo": 1679,
           "timestamp": "2026-03-09T15:18:57.865Z"
+        },
+        {
+          "elo": 1644,
+          "timestamp": "2026-03-09T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3994,7 +4002,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 17
+      "lastWeekRank": 22
     },
     {
       "id": "69",
@@ -4373,6 +4381,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773077375515",
+      "winnerId": "18",
+      "loserId": "64",
+      "winner": "Alex Steene",
+      "loser": "Tom Sellers",
+      "winnerScore": 13,
+      "loserScore": 11,
+      "winnerEloChange": 43,
+      "loserEloChange": -35,
+      "expectedWinProbability": 0.2402530733520421,
+      "timestamp": "2026-03-09T00:00:00.000Z"
+    },
     {
       "id": "1773069537944",
       "winnerId": "64",
@@ -9405,5 +9426,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-09T15:18:57.944Z"
+  "lastUpdated": "2026-03-09T17:29:35.516Z"
 }
