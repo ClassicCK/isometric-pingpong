@@ -2200,8 +2200,8 @@
       "name": "Eamon Jubbawy",
       "countryCode": "iq",
       "office": "LON",
-      "elo": 1660,
-      "wins": 9,
+      "elo": 1693,
+      "wins": 10,
       "losses": 2,
       "eloHistory": [
         {
@@ -2251,6 +2251,10 @@
         {
           "elo": 1660,
           "timestamp": "2026-02-13T17:27:32.454Z"
+        },
+        {
+          "elo": 1693,
+          "timestamp": "2026-03-11T17:21:13.060Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3448,9 +3452,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1685,
+      "elo": 1658,
       "wins": 44,
-      "losses": 39,
+      "losses": 40,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3787,6 +3791,10 @@
         {
           "elo": 1685,
           "timestamp": "2026-03-11T17:18:21.101Z"
+        },
+        {
+          "elo": 1658,
+          "timestamp": "2026-03-11T17:21:13.060Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4429,6 +4437,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773249673127",
+      "winnerId": "36",
+      "loserId": "64",
+      "winner": "Eamon Jubbawy",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 33,
+      "loserEloChange": -27,
+      "expectedWinProbability": 0.4640840730548977,
+      "timestamp": "2026-03-11T17:21:13.060Z"
+    },
     {
       "id": "1773249501165",
       "winnerId": "64",
@@ -9552,5 +9573,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-11T17:18:21.165Z"
+  "lastUpdated": "2026-03-11T17:21:13.128Z"
 }
