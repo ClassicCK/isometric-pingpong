@@ -1744,7 +1744,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 12
     },
     {
       "id": "27",
@@ -2168,7 +2168,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 14
     },
     {
       "id": "35",
@@ -2855,7 +2855,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 13
     },
     {
       "id": "50",
@@ -3444,8 +3444,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1624,
-      "wins": 40,
+      "elo": 1633,
+      "wins": 41,
       "losses": 39,
       "eloHistory": [
         {
@@ -3767,6 +3767,10 @@
         {
           "elo": 1624,
           "timestamp": "2026-03-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1633,
+          "timestamp": "2026-03-11T11:28:49.073Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3856,9 +3860,9 @@
       "name": "Peteris Bikis",
       "countryCode": "lv",
       "office": "LON",
-      "elo": 1430,
+      "elo": 1422,
       "wins": 10,
-      "losses": 27,
+      "losses": 28,
       "eloHistory": [
         {
           "elo": 1500,
@@ -4011,6 +4015,10 @@
         {
           "elo": 1430,
           "timestamp": "2026-03-09T15:18:57.865Z"
+        },
+        {
+          "elo": 1422,
+          "timestamp": "2026-03-11T11:28:49.073Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4140,7 +4148,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 11
     },
     {
       "id": "71",
@@ -4397,6 +4405,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773228529170",
+      "winnerId": "64",
+      "loserId": "68",
+      "winner": "Tom Sellers",
+      "loser": "Peteris Bikis",
+      "winnerScore": 11,
+      "loserScore": 4,
+      "winnerEloChange": 9,
+      "loserEloChange": -8,
+      "expectedWinProbability": 0.7533860777856145,
+      "timestamp": "2026-03-11T11:28:49.073Z"
+    },
     {
       "id": "1773151056580",
       "winnerId": "34",
@@ -9468,5 +9489,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-10T13:57:36.580Z"
+  "lastUpdated": "2026-03-11T11:28:49.170Z"
 }
