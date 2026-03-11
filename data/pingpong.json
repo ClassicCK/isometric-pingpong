@@ -878,9 +878,9 @@
       "name": "Alex Steene",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1522,
+      "elo": 1505,
       "wins": 5,
-      "losses": 9,
+      "losses": 10,
       "eloHistory": [
         {
           "elo": 1500,
@@ -941,6 +941,10 @@
         {
           "elo": 1522,
           "timestamp": "2026-03-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1505,
+          "timestamp": "2026-03-11T14:08:56.185Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -3444,8 +3448,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1642,
-      "wins": 42,
+      "elo": 1663,
+      "wins": 43,
       "losses": 39,
       "eloHistory": [
         {
@@ -3775,6 +3779,10 @@
         {
           "elo": 1642,
           "timestamp": "2026-03-11T11:29:02.637Z"
+        },
+        {
+          "elo": 1663,
+          "timestamp": "2026-03-11T14:08:56.185Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4413,6 +4421,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773238136268",
+      "winnerId": "64",
+      "loserId": "18",
+      "winner": "Tom Sellers",
+      "loser": "Alex Steene",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 21,
+      "loserEloChange": -17,
+      "expectedWinProbability": 0.6661394245831221,
+      "timestamp": "2026-03-11T14:08:56.185Z"
+    },
     {
       "id": "1773228542682",
       "winnerId": "64",
@@ -9510,5 +9531,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-11T11:29:02.682Z"
+  "lastUpdated": "2026-03-11T14:08:56.268Z"
 }
