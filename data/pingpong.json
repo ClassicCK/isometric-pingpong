@@ -503,9 +503,9 @@
       "name": "Paul Puget",
       "countryCode": "fr",
       "office": "LON",
-      "elo": 1900,
+      "elo": 1880,
       "wins": 22,
-      "losses": 4,
+      "losses": 5,
       "eloHistory": [
         {
           "elo": 1500,
@@ -613,6 +613,10 @@
         },
         {
           "elo": 1900,
+          "timestamp": "2026-03-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1880,
           "timestamp": "2026-03-11T00:00:00.000Z"
         }
       ],
@@ -4287,8 +4291,8 @@
       "name": "Rish Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1828,
-      "wins": 29,
+      "elo": 1853,
+      "wins": 30,
       "losses": 15,
       "eloHistory": [
         {
@@ -4470,6 +4474,10 @@
         {
           "elo": 1828,
           "timestamp": "2026-03-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1853,
+          "timestamp": "2026-03-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -4477,6 +4485,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773310626619",
+      "winnerId": "1769273367436",
+      "loserId": "11",
+      "winner": "Rish Chatterjee",
+      "loser": "Paul Puget",
+      "winnerScore": 14,
+      "loserScore": 12,
+      "winnerEloChange": 25,
+      "loserEloChange": -20,
+      "expectedWinProbability": 0.39784190682528303,
+      "timestamp": "2026-03-11T00:00:00.000Z"
+    },
     {
       "id": "1773310613663",
       "winnerId": "11",
@@ -9678,5 +9699,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-12T10:16:53.663Z"
+  "lastUpdated": "2026-03-12T10:17:06.619Z"
 }
