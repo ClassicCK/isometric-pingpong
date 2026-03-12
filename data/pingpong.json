@@ -1312,9 +1312,9 @@
       "name": "George Pool",
       "countryCode": "jm",
       "office": "LON",
-      "elo": 1766,
+      "elo": 1752,
       "wins": 50,
-      "losses": 36,
+      "losses": 37,
       "eloHistory": [
         {
           "elo": 1500,
@@ -1662,6 +1662,10 @@
         },
         {
           "elo": 1766,
+          "timestamp": "2026-03-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1752,
           "timestamp": "2026-03-11T00:00:00.000Z"
         }
       ],
@@ -4275,8 +4279,8 @@
       "name": "Rish Chatterjee",
       "countryCode": "us",
       "office": "LON",
-      "elo": 1803,
-      "wins": 27,
+      "elo": 1820,
+      "wins": 28,
       "losses": 14,
       "eloHistory": [
         {
@@ -4446,6 +4450,10 @@
         {
           "elo": 1803,
           "timestamp": "2026-03-11T00:00:00.000Z"
+        },
+        {
+          "elo": 1820,
+          "timestamp": "2026-03-11T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-24T16:49:27.436Z",
@@ -4453,6 +4461,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773310579215",
+      "winnerId": "1769273367436",
+      "loserId": "24",
+      "winner": "Rish Chatterjee",
+      "loser": "George Pool",
+      "winnerScore": 11,
+      "loserScore": 8,
+      "winnerEloChange": 17,
+      "loserEloChange": -14,
+      "expectedWinProbability": 0.5530468951694625,
+      "timestamp": "2026-03-11T00:00:00.000Z"
+    },
     {
       "id": "1773310560585",
       "winnerId": "24",
@@ -9615,5 +9636,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-12T10:16:00.585Z"
+  "lastUpdated": "2026-03-12T10:16:19.215Z"
 }
