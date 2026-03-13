@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1715,
-      "wins": 39,
+      "elo": 1723,
+      "wins": 40,
       "losses": 22,
       "eloHistory": [
         {
@@ -256,6 +256,10 @@
         {
           "elo": 1715,
           "timestamp": "2026-03-13T14:23:32.830Z"
+        },
+        {
+          "elo": 1723,
+          "timestamp": "2026-03-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -2046,9 +2050,9 @@
       "name": "Tomek Paczkowski",
       "countryCode": "pl",
       "office": "LON",
-      "elo": 1627,
+      "elo": 1620,
       "wins": 18,
-      "losses": 23,
+      "losses": 24,
       "eloHistory": [
         {
           "elo": 1500,
@@ -2217,6 +2221,10 @@
         {
           "elo": 1627,
           "timestamp": "2026-03-09T00:00:00.000Z"
+        },
+        {
+          "elo": 1620,
+          "timestamp": "2026-03-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4533,6 +4541,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773412265053",
+      "winnerId": "1",
+      "loserId": "34",
+      "winner": "David Lankes",
+      "loser": "Tomek Paczkowski",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 8,
+      "loserEloChange": -7,
+      "expectedWinProbability": 0.6240017586176672,
+      "timestamp": "2026-03-12T00:00:00.000Z"
+    },
     {
       "id": "1773411812908",
       "winnerId": "64",
@@ -9825,5 +9846,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-13T14:23:32.908Z"
+  "lastUpdated": "2026-03-13T14:31:05.053Z"
 }
