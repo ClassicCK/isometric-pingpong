@@ -5,9 +5,9 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1738,
+      "elo": 1719,
       "wins": 38,
-      "losses": 20,
+      "losses": 21,
       "eloHistory": [
         {
           "elo": 1500,
@@ -244,6 +244,10 @@
         {
           "elo": 1738,
           "timestamp": "2026-03-13T11:34:27.202Z"
+        },
+        {
+          "elo": 1719,
+          "timestamp": "2026-03-13T14:23:08.018Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -1784,7 +1788,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 12
     },
     {
       "id": "27",
@@ -2208,7 +2212,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 13
     },
     {
       "id": "35",
@@ -2829,7 +2833,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 14
+      "lastWeekRank": 15
     },
     {
       "id": "48",
@@ -2899,7 +2903,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 15
+      "lastWeekRank": 14
     },
     {
       "id": "50",
@@ -3488,8 +3492,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1654,
-      "wins": 45,
+      "elo": 1678,
+      "wins": 46,
       "losses": 42,
       "eloHistory": [
         {
@@ -3843,6 +3847,10 @@
         {
           "elo": 1654,
           "timestamp": "2026-03-13T11:34:27.202Z"
+        },
+        {
+          "elo": 1678,
+          "timestamp": "2026-03-13T14:23:08.018Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4509,6 +4517,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773411788102",
+      "winnerId": "64",
+      "loserId": "1",
+      "winner": "Tom Sellers",
+      "loser": "David Lankes",
+      "winnerScore": 11,
+      "loserScore": 7,
+      "winnerEloChange": 24,
+      "loserEloChange": -19,
+      "expectedWinProbability": 0.38141587791096926,
+      "timestamp": "2026-03-13T14:23:08.018Z"
+    },
     {
       "id": "1773401667279",
       "winnerId": "1",
@@ -9762,5 +9783,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-13T11:34:27.279Z"
+  "lastUpdated": "2026-03-13T14:23:08.102Z"
 }
