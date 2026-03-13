@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1723,
-      "wins": 40,
+      "elo": 1738,
+      "wins": 41,
       "losses": 22,
       "eloHistory": [
         {
@@ -259,6 +259,10 @@
         },
         {
           "elo": 1723,
+          "timestamp": "2026-03-12T00:00:00.000Z"
+        },
+        {
+          "elo": 1738,
           "timestamp": "2026-03-12T00:00:00.000Z"
         }
       ],
@@ -3112,9 +3116,9 @@
       "name": "Jon Finerty",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1846,
+      "elo": 1834,
       "wins": 29,
-      "losses": 9,
+      "losses": 10,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3271,6 +3275,10 @@
         {
           "elo": 1846,
           "timestamp": "2026-03-06T00:00:00.000Z"
+        },
+        {
+          "elo": 1834,
+          "timestamp": "2026-03-12T00:00:00.000Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4541,6 +4549,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773412283695",
+      "winnerId": "1",
+      "loserId": "56",
+      "winner": "David Lankes",
+      "loser": "Jon Finerty",
+      "winnerScore": null,
+      "loserScore": null,
+      "winnerEloChange": 15,
+      "loserEloChange": -12,
+      "expectedWinProbability": 0.3300309860965169,
+      "timestamp": "2026-03-12T00:00:00.000Z"
+    },
     {
       "id": "1773412265053",
       "winnerId": "1",
@@ -9846,5 +9867,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-13T14:31:05.053Z"
+  "lastUpdated": "2026-03-13T14:31:23.695Z"
 }
