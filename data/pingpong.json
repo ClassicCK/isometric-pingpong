@@ -5,8 +5,8 @@
       "name": "David Lankes",
       "countryCode": "ni",
       "office": "LON",
-      "elo": 1741,
-      "wins": 42,
+      "elo": 1759,
+      "wins": 43,
       "losses": 22,
       "eloHistory": [
         {
@@ -268,6 +268,10 @@
         {
           "elo": 1741,
           "timestamp": "2026-03-10T00:00:00.000Z"
+        },
+        {
+          "elo": 1759,
+          "timestamp": "2026-03-16T16:48:27.558Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -341,7 +345,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 21
+      "lastWeekRank": 22
     },
     {
       "id": "4",
@@ -532,7 +536,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 23
+      "lastWeekRank": 24
     },
     {
       "id": "11",
@@ -698,7 +702,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 71
+      "lastWeekRank": 70
     },
     {
       "id": "13",
@@ -763,7 +767,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 22
+      "lastWeekRank": 23
     },
     {
       "id": "14",
@@ -844,7 +848,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 69
+      "lastWeekRank": 68
     },
     {
       "id": "15",
@@ -869,7 +873,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 25
+      "lastWeekRank": 26
     },
     {
       "id": "16",
@@ -996,7 +1000,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 53
+      "lastWeekRank": 21
     },
     {
       "id": "19",
@@ -1808,7 +1812,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 12
+      "lastWeekRank": 13
     },
     {
       "id": "27",
@@ -1849,7 +1853,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 24
+      "lastWeekRank": 25
     },
     {
       "id": "28",
@@ -1899,7 +1903,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 26
+      "lastWeekRank": 52
     },
     {
       "id": "30",
@@ -2236,7 +2240,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 13
+      "lastWeekRank": 11
     },
     {
       "id": "35",
@@ -3034,7 +3038,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 70
+      "lastWeekRank": 69
     },
     {
       "id": "53",
@@ -3092,7 +3096,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 52
+      "lastWeekRank": 53
     },
     {
       "id": "55",
@@ -3463,7 +3467,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 10
+      "lastWeekRank": 9
     },
     {
       "id": "62",
@@ -3520,9 +3524,9 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1722,
+      "elo": 1707,
       "wins": 49,
-      "losses": 43,
+      "losses": 44,
       "eloHistory": [
         {
           "elo": 1500,
@@ -3895,10 +3899,14 @@
         {
           "elo": 1722,
           "timestamp": "2026-03-13T18:46:32.785Z"
+        },
+        {
+          "elo": 1707,
+          "timestamp": "2026-03-16T16:48:27.558Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 9
+      "lastWeekRank": 12
     },
     {
       "id": "65",
@@ -4154,7 +4162,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 68
+      "lastWeekRank": 71
     },
     {
       "id": "69",
@@ -4292,7 +4300,7 @@
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
-      "lastWeekRank": 11
+      "lastWeekRank": 10
     },
     {
       "id": "71",
@@ -4573,6 +4581,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773679707638",
+      "winnerId": "1",
+      "loserId": "64",
+      "winner": "David Lankes",
+      "loser": "Tom Sellers",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 18,
+      "loserEloChange": -15,
+      "expectedWinProbability": 0.527315973006493,
+      "timestamp": "2026-03-16T16:48:27.558Z"
+    },
     {
       "id": "1773427592832",
       "winnerId": "64",
@@ -9930,5 +9951,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-13T18:46:32.832Z"
+  "lastUpdated": "2026-03-16T16:48:27.639Z"
 }
