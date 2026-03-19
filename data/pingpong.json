@@ -3572,8 +3572,8 @@
       "name": "Tom Sellers",
       "countryCode": "cz",
       "office": "LON",
-      "elo": 1737,
-      "wins": 57,
+      "elo": 1753,
+      "wins": 58,
       "losses": 53,
       "eloHistory": [
         {
@@ -4019,6 +4019,10 @@
         {
           "elo": 1737,
           "timestamp": "2026-03-19T18:12:09.413Z"
+        },
+        {
+          "elo": 1753,
+          "timestamp": "2026-03-19T18:13:11.498Z"
         }
       ],
       "joinedAt": "2026-01-13T00:00:00.000Z",
@@ -4720,13 +4724,17 @@
       "name": "Guy \"350Solutions\" Hardwick",
       "countryCode": "gb",
       "office": "LON",
-      "elo": 1500,
+      "elo": 1487,
       "wins": 0,
-      "losses": 0,
+      "losses": 1,
       "eloHistory": [
         {
           "elo": 1500,
           "timestamp": "2026-03-19T13:30:44.088Z"
+        },
+        {
+          "elo": 1487,
+          "timestamp": "2026-03-19T18:13:11.498Z"
         }
       ],
       "joinedAt": "2026-03-19T13:30:44.088Z",
@@ -4734,6 +4742,19 @@
     }
   ],
   "matches": [
+    {
+      "id": "1773943991563",
+      "winnerId": "64",
+      "loserId": "1773927044088",
+      "winner": "Tom Sellers",
+      "loser": "Guy \"350Solutions\" Hardwick",
+      "winnerScore": 11,
+      "loserScore": 6,
+      "winnerEloChange": 16,
+      "loserEloChange": -13,
+      "expectedWinProbability": 0.7964546997117258,
+      "timestamp": "2026-03-19T18:13:11.498Z"
+    },
     {
       "id": "1773943929457",
       "winnerId": "64",
@@ -10325,5 +10346,5 @@
       "timestamp": "2026-02-10T00:00:00.000Z"
     }
   ],
-  "lastUpdated": "2026-03-19T18:12:09.457Z"
+  "lastUpdated": "2026-03-19T18:13:11.563Z"
 }
