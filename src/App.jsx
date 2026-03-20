@@ -211,6 +211,13 @@ export default function PingPongELO() {
   const [claimOffice, setClaimOffice] = useState('');
   const [claimLoading, setClaimLoading] = useState(false);
 
+  // Admin state
+  const [adminUsers, setAdminUsers] = useState([]);
+  const [adminLoading, setAdminLoading] = useState(false);
+  const [editBalanceUserId, setEditBalanceUserId] = useState(null);
+  const [editBalanceValue, setEditBalanceValue] = useState('');
+  const [editBalanceReason, setEditBalanceReason] = useState('');
+
   // Auth helpers
   const getAuthHeaders = useCallback(() => {
     if (!session?.access_token) return { 'Content-Type': 'application/json' };
@@ -495,6 +502,56 @@ export default function PingPongELO() {
       alert(`Network error: ${err.message}`);
     } finally {
       setClaimLoading(false);
+    }
+  };
+
+  // Admin functions
+  const loadAdminUsers = async () => {
+    if (!session) return;
+    setAdminLoading(true);
+    try {
+      const response = await fetch('/api/admin/users', { headers: getAuthHeaders() });
+      if (response.ok) {
+        const data = await response.json();
+        setAdminUsers(data.users || []);
+      } else {
+        const err = await response.json();
+        alert(`Admin access denied: ${err.error}`);
+        setCurrentView('rankings');
+      }
+    } catch (err) {
+      console.error('Admin load error:', err);
+    } finally {
+      setAdminLoading(false);
+    }
+  };
+
+  const updateUserBalance = async (userId) => {
+    if (!editBalanceValue) return;
+    setSaving(true);
+    try {
+      const response = await fetch('/api/admin/update-balance', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          userId,
+          balance: parseFloat(editBalanceValue),
+          reason: editBalanceReason || 'Admin adjustment',
+        }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setEditBalanceUserId(null);
+        setEditBalanceValue('');
+        setEditBalanceReason('');
+        await loadAdminUsers();
+      } else {
+        alert(`Failed: ${result.error}`);
+      }
+    } catch (err) {
+      alert(`Network error: ${err.message}`);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -923,7 +980,7 @@ export default function PingPongELO() {
               <select
                 value={claimPlayerId}
                 onChange={(e) => setClaimPlayerId(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none"
               >
                 <option value="">Select your profile...</option>
                 {players
@@ -954,7 +1011,7 @@ export default function PingPongELO() {
                 value={claimName}
                 onChange={(e) => setClaimName(e.target.value)}
                 placeholder="Enter your name..."
-                className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none"
               />
             </div>
 
@@ -963,7 +1020,7 @@ export default function PingPongELO() {
               <select
                 value={claimCountry}
                 onChange={(e) => setClaimCountry(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none"
               >
                 <option value="">Select country...</option>
                 {COUNTRIES.map(c => (
@@ -977,7 +1034,7 @@ export default function PingPongELO() {
               <select
                 value={claimOffice}
                 onChange={(e) => setClaimOffice(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none"
               >
                 <option value="">Select office...</option>
                 {OFFICES.map(o => (
@@ -1631,7 +1688,7 @@ export default function PingPongELO() {
                     loadMarketDetail(market.id);
                     setCurrentView("market-detail");
                   }}
-                  className="w-full text-left border border-gray-200 rounded-lg p-6 hover:shadow-md hover:border-gray-300 transition-all bg-white"
+                  className="w-full text-left border border-gray-200 rounded-xl p-6 hover:shadow-md hover:border-gray-300 transition-all bg-white"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>
@@ -1768,7 +1825,7 @@ export default function PingPongELO() {
                   return (
                     <div
                       key={outcome.id}
-                      className={`border rounded-lg p-4 transition-all ${
+                      className={`border rounded-xl p-4 transition-all ${
                         isSelected ? 'border-black shadow-md' : 'border-gray-200 hover:border-gray-300'
                       } ${outcome.isWinner === true ? 'bg-green-50 border-green-300' : outcome.isWinner === false ? 'bg-gray-50 opacity-60' : ''}`}
                     >
@@ -1840,7 +1897,7 @@ export default function PingPongELO() {
               {/* Bet placement sidebar */}
               <div className="lg:col-span-1">
                 {md.market.status === 'open' && session ? (
-                  <div className="sticky top-8 border border-gray-200 rounded-lg p-6">
+                  <div className="sticky top-8 border border-gray-200 rounded-xl p-6">
                     <h3 className="font-bold text-gray-900 mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>Place a Bet</h3>
 
                     {selectedOutcome ? (
@@ -1863,7 +1920,7 @@ export default function PingPongELO() {
                             value={betAmount}
                             onChange={(e) => setBetAmount(e.target.value)}
                             placeholder="10"
-                            className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none"
                             style={{ fontFamily: 'monospace' }}
                           />
                           <p className="text-xs text-gray-400 mt-1">
@@ -1921,7 +1978,7 @@ export default function PingPongELO() {
 
                 {/* Recent activity */}
                 {md.recentBets && md.recentBets.length > 0 && (
-                  <div className="mt-6 border border-gray-200 rounded-lg p-6">
+                  <div className="mt-6 border border-gray-200 rounded-xl p-6">
                     <h3 className="font-bold text-gray-900 mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>Recent Activity</h3>
                     <div className="space-y-2">
                       {md.recentBets.slice(0, 10).map(bet => {
@@ -2010,7 +2067,7 @@ export default function PingPongELO() {
               {userPositions.map(pos => {
                 const pnl = pos.currentValue - pos.costBasis;
                 return (
-                  <div key={pos.id} className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow">
+                  <div key={pos.id} className="border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="text-xs text-gray-400 uppercase tracking-wider mb-1">{pos.marketTitle}</div>
@@ -2034,6 +2091,149 @@ export default function PingPongELO() {
             </div>
           )}
         </div>
+      </div>
+    );
+  }
+
+  // ADMIN VIEW
+  if (currentView === "admin" && authUser?.isAdmin) {
+    return (
+      <div className="min-h-screen bg-white">
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+        <div className="border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <button onClick={() => setCurrentView("rankings")} className="text-gray-600 hover:text-black mb-6 flex items-center gap-2 text-sm">
+              ← Back to Rankings
+            </button>
+            <h1 className="text-5xl font-black mb-2" style={{ fontFamily: "Figtree, sans-serif" }}>Admin Panel</h1>
+            <p className="text-lg text-gray-600" style={{ fontFamily: "monospace" }}>
+              Manage users, balances, and markets.
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-8">
+          {/* Users & Balances */}
+          <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Figtree, sans-serif' }}>Users & Balances</h2>
+
+          {adminLoading ? (
+            <div className="text-center py-12 text-gray-400" style={{ fontFamily: 'monospace' }}>Loading...</div>
+          ) : (
+            <div className="overflow-x-auto mb-12">
+              <table className="w-full border-collapse" style={{ fontFamily: 'monospace' }}>
+                <thead>
+                  <tr className="border-b-2 border-gray-200 text-left">
+                    <th className="py-3 pr-4 text-xs uppercase tracking-wider text-gray-400 font-semibold">User</th>
+                    <th className="py-3 px-4 text-xs uppercase tracking-wider text-gray-400 font-semibold">Player</th>
+                    <th className="py-3 px-4 text-xs uppercase tracking-wider text-gray-400 font-semibold text-right">Balance</th>
+                    <th className="py-3 px-4 text-xs uppercase tracking-wider text-gray-400 font-semibold text-right">Wagered</th>
+                    <th className="py-3 px-4 text-xs uppercase tracking-wider text-gray-400 font-semibold text-center">Admin</th>
+                    <th className="py-3 pl-4 text-xs uppercase tracking-wider text-gray-400 font-semibold">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {adminUsers.map(u => (
+                    <tr key={u.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                      <td className="py-3 pr-4">
+                        <div className="text-sm font-medium text-gray-900">{u.displayName}</div>
+                        <div className="text-xs text-gray-400">{u.email}</div>
+                      </td>
+                      <td className="py-3 px-4">
+                        {u.playerName ? (
+                          <div className="text-sm">
+                            <span className="text-gray-900">{u.playerName}</span>
+                            <span className="text-gray-400 ml-1">({u.playerElo})</span>
+                          </div>
+                        ) : (
+                          <span className="text-xs text-gray-300">Not linked</span>
+                        )}
+                      </td>
+                      <td className="py-3 px-4 text-right">
+                        {u.balance !== null ? (
+                          <span className="text-sm font-semibold text-gray-900">{u.balance.toFixed(0)}</span>
+                        ) : (
+                          <span className="text-xs text-gray-300">—</span>
+                        )}
+                      </td>
+                      <td className="py-3 px-4 text-right">
+                        <span className="text-sm text-gray-500">{u.totalWagered ? u.totalWagered.toFixed(0) : '0'}</span>
+                      </td>
+                      <td className="py-3 px-4 text-center">
+                        {u.isAdmin && <span className="text-xs bg-black text-white px-2 py-0.5 rounded-full">Admin</span>}
+                      </td>
+                      <td className="py-3 pl-4">
+                        {editBalanceUserId === u.id ? (
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="number"
+                              value={editBalanceValue}
+                              onChange={(e) => setEditBalanceValue(e.target.value)}
+                              placeholder="New balance"
+                              className="w-24 px-2 py-1 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                            />
+                            <input
+                              type="text"
+                              value={editBalanceReason}
+                              onChange={(e) => setEditBalanceReason(e.target.value)}
+                              placeholder="Reason"
+                              className="w-32 px-2 py-1 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                            />
+                            <button
+                              onClick={() => updateUserBalance(u.id)}
+                              disabled={saving}
+                              className="px-3 py-1 bg-black text-white text-xs font-semibold rounded-lg hover:bg-gray-800 disabled:bg-gray-300 transition-colors"
+                            >
+                              {saving ? '...' : 'Save'}
+                            </button>
+                            <button
+                              onClick={() => { setEditBalanceUserId(null); setEditBalanceValue(''); setEditBalanceReason(''); }}
+                              className="px-2 py-1 text-xs text-gray-400 hover:text-gray-700"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => { setEditBalanceUserId(u.id); setEditBalanceValue(u.balance?.toFixed(0) || '1000'); }}
+                            className="text-xs text-gray-500 hover:text-black font-medium transition-colors"
+                          >
+                            Edit Balance
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Markets Management */}
+          <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Figtree, sans-serif' }}>Markets</h2>
+          <div className="space-y-3">
+            {marketsData.map(market => (
+              <div key={market.id} className="border border-gray-200 rounded-xl p-5 hover:shadow-sm transition-shadow">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-semibold text-gray-900">{market.title}</h3>
+                    <div className="flex items-center gap-3 mt-1 text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                      <span>{market.outcomes.length} outcomes</span>
+                      <span>{market.volume.toFixed(0)} pts volume</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs px-2.5 py-1 rounded-full font-semibold ${
+                      market.status === 'open' ? 'bg-green-100 text-green-700' :
+                      market.status === 'resolved' ? 'bg-blue-100 text-blue-700' :
+                      'bg-gray-100 text-gray-600'
+                    }`}>{market.status}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {claimModal}
       </div>
     );
   }
@@ -2065,7 +2265,7 @@ export default function PingPongELO() {
                 const loser = players.find(p => p.id === match.loserId);
                 
                 return (
-                  <div key={match.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow bg-white group">
+                  <div key={match.id} className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow bg-white group">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
                         <div className="text-xs text-gray-500 mb-3 uppercase tracking-wide">
@@ -2138,29 +2338,37 @@ export default function PingPongELO() {
                   </button>
                 </div>
               ) : (
-                <button onClick={signInWithGoogle} className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors rounded">
+                <button onClick={signInWithGoogle} className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors rounded-lg">
                   <LogIn size={16} />
                   Sign in
                 </button>
               )}
-              <button onClick={() => { setCurrentView("markets"); loadMarkets(); }} className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors">
+              <button onClick={() => { setCurrentView("markets"); loadMarkets(); }} className="px-5 py-2 border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors rounded-lg">
                 Markets
               </button>
               {session && pointBalance !== null && (
                 <button
                   onClick={() => { setCurrentView("portfolio"); loadBalance(); }}
-                  className="px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-700 hover:bg-gray-200 transition-colors rounded"
+                  className="px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-700 hover:bg-gray-200 transition-colors rounded-lg"
                   style={{ fontFamily: 'monospace' }}
                 >
                   {pointBalance.toFixed(0)} pts
                 </button>
               )}
-              <button onClick={() => setCurrentView("matches")} className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors">
-                View Matches
+              <button onClick={() => setCurrentView("matches")} className="px-5 py-2 border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors rounded-lg">
+                Matches
               </button>
-              <button onClick={() => setSidebarOpen(!sidebarOpen)} className="px-5 py-2 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors">
+              <button onClick={() => setSidebarOpen(!sidebarOpen)} className="px-5 py-2 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors rounded-lg">
                 + Record Match
               </button>
+              {authUser?.isAdmin && (
+                <button
+                  onClick={() => { setCurrentView("admin"); loadAdminUsers(); loadMarkets('all'); }}
+                  className="px-4 py-2 bg-gray-900 text-white text-sm font-medium hover:bg-gray-700 transition-colors rounded-lg"
+                >
+                  Admin
+                </button>
+              )}
             </div>
           </div>
 
@@ -2367,7 +2575,7 @@ export default function PingPongELO() {
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Winner</label>
-                    <select value={selectedWinner} onChange={(e) => setSelectedWinner(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
+                    <select value={selectedWinner} onChange={(e) => setSelectedWinner(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select winner...</option>
                       {players.map((player) => (
                         <option key={player.id} value={player.id}>{player.name} ({player.office}) - ELO: {player.elo}</option>
@@ -2377,7 +2585,7 @@ export default function PingPongELO() {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Loser</label>
-                    <select value={selectedLoser} onChange={(e) => setSelectedLoser(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
+                    <select value={selectedLoser} onChange={(e) => setSelectedLoser(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select loser...</option>
                       {players.map((player) => (
                         <option key={player.id} value={player.id}>{player.name} ({player.office}) - ELO: {player.elo}</option>
@@ -2390,22 +2598,22 @@ export default function PingPongELO() {
                     <div className="grid grid-cols-2 gap-3">
                       <div>
                         <label className="block text-xs text-gray-500 mb-1">Winner Score</label>
-                        <input type="number" min="0" value={winnerScore} onChange={(e) => setWinnerScore(e.target.value)} placeholder="21" className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none" />
+                        <input type="number" min="0" value={winnerScore} onChange={(e) => setWinnerScore(e.target.value)} placeholder="21" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none" />
                       </div>
                       <div>
                         <label className="block text-xs text-gray-500 mb-1">Loser Score</label>
-                        <input type="number" min="0" value={loserScore} onChange={(e) => setLoserScore(e.target.value)} placeholder="19" className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none" />
+                        <input type="number" min="0" value={loserScore} onChange={(e) => setLoserScore(e.target.value)} placeholder="19" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none" />
                       </div>
                     </div>
                   </div>
 
                   <div className="border-t border-gray-200 pt-4">
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Match Date (Optional)</label>
-                    <input type="date" value={matchDate} onChange={(e) => setMatchDate(e.target.value)} max={new Date().toISOString().split("T")[0]} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none" />
+                    <input type="date" value={matchDate} onChange={(e) => setMatchDate(e.target.value)} max={new Date().toISOString().split("T")[0]} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none" />
                     <p className="text-xs text-gray-500 mt-2">Leave blank to use today's date.</p>
                   </div>
 
-                  <button onClick={recordMatch} disabled={saving || !selectedWinner || !selectedLoser || selectedWinner === selectedLoser} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                  <button onClick={recordMatch} disabled={saving || !selectedWinner || !selectedLoser || selectedWinner === selectedLoser} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-lg">
                     {saving ? 'Saving...' : 'Record Match'}
                   </button>
                 </div>
@@ -2413,12 +2621,12 @@ export default function PingPongELO() {
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Player Name</label>
-                    <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all" />
+                    <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all" />
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Country</label>
-                    <select value={editCountry} onChange={(e) => setEditCountry(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
+                    <select value={editCountry} onChange={(e) => setEditCountry(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select country...</option>
                       {COUNTRIES.map((country) => (
                         <option key={country.code} value={country.code}>{country.name}</option>
@@ -2428,7 +2636,7 @@ export default function PingPongELO() {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Office</label>
-                    <select value={editOffice} onChange={(e) => setEditOffice(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
+                    <select value={editOffice} onChange={(e) => setEditOffice(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select office...</option>
                       {OFFICES.map((office) => (
                         <option key={office} value={office}>{office}</option>
@@ -2440,7 +2648,7 @@ export default function PingPongELO() {
                     <button onClick={saveEditPlayer} disabled={saving || !editName.trim() || !editCountry || !editOffice} className="flex-1 px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                       {saving ? 'Saving...' : 'Save Changes'}
                     </button>
-                    <button onClick={cancelEdit} className="px-6 py-3 border-2 border-gray-300 font-semibold hover:bg-gray-100 transition-colors">
+                    <button onClick={cancelEdit} className="px-6 py-3 border-2 border-gray-300 font-semibold hover:bg-gray-100 transition-colors rounded-lg">
                       Cancel
                     </button>
                   </div>
@@ -2449,12 +2657,12 @@ export default function PingPongELO() {
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Player Name</label>
-                    <input type="text" value={newPlayerName} onChange={(e) => setNewPlayerName(e.target.value)} placeholder="Enter player name..." className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all" />
+                    <input type="text" value={newPlayerName} onChange={(e) => setNewPlayerName(e.target.value)} placeholder="Enter player name..." className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all" />
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Country</label>
-                    <select value={newPlayerCountry} onChange={(e) => setNewPlayerCountry(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
+                    <select value={newPlayerCountry} onChange={(e) => setNewPlayerCountry(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select country...</option>
                       {COUNTRIES.map((country) => (
                         <option key={country.code} value={country.code}>{country.name}</option>
@@ -2464,7 +2672,7 @@ export default function PingPongELO() {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Office</label>
-                    <select value={newPlayerOffice} onChange={(e) => setNewPlayerOffice(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
+                    <select value={newPlayerOffice} onChange={(e) => setNewPlayerOffice(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select office...</option>
                       {OFFICES.map((office) => (
                         <option key={office} value={office}>{office}</option>
@@ -2478,7 +2686,7 @@ export default function PingPongELO() {
                     </div>
                   </div>
 
-                  <button onClick={addPlayer} disabled={saving || !newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                  <button onClick={addPlayer} disabled={saving || !newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-lg">
                     {saving ? 'Saving...' : 'Add Player'}
                   </button>
                 </div>
