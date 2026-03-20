@@ -375,6 +375,16 @@ export default function PingPongELO() {
   // Achievements
   const [playerAchievements, setPlayerAchievements] = useState([]);
 
+  // Challenges
+  const [challenges, setChallenges] = useState([]);
+  const [challengeMessage, setChallengeMessage] = useState('');
+  const [challengeTarget, setChallengeTarget] = useState('');
+
+  // Comments
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState('');
+  const [commentsLoading, setCommentsLoading] = useState(false);
+
   // Limit orders
   const [userOrders, setUserOrders] = useState([]);
   const [showLimitOrder, setShowLimitOrder] = useState(false);
@@ -502,6 +512,7 @@ export default function PingPongELO() {
     loadData();
     loadFeaturedMarkets();
     loadActivityFeed();
+    loadChallenges();
   }, []);
 
   // Load markets data
@@ -656,6 +667,97 @@ export default function PingPongELO() {
     } catch (err) { console.error('Failed to load portfolio history:', err); }
   };
 
+  // Load challenges
+  const loadChallenges = async (scope = 'all') => {
+    try {
+      const headers = session ? getAuthHeaders() : { 'Content-Type': 'application/json' };
+      const res = await fetch(`/api/challenges/list?scope=${scope}`, { headers });
+      if (res.ok) { const data = await res.json(); setChallenges(data.challenges || []); }
+    } catch (err) { console.error('Failed to load challenges:', err); }
+  };
+
+  // Send a challenge
+  const sendChallenge = async (challengedPlayerId) => {
+    if (!session) return alert('Please sign in to challenge players.');
+    setSaving(true);
+    try {
+      const res = await fetch('/api/challenges/create', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ challengedPlayerId, message: challengeMessage.trim() || null }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setChallengeMessage('');
+        setChallengeTarget('');
+        loadChallenges();
+        alert('Challenge sent!');
+      } else {
+        alert(`Failed: ${data.error}`);
+      }
+    } catch (err) { alert(`Error: ${err.message}`); }
+    finally { setSaving(false); }
+  };
+
+  // Respond to a challenge
+  const respondToChallenge = async (challengeId, response) => {
+    if (!session) return;
+    try {
+      const res = await fetch('/api/challenges/respond', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ challengeId, response }),
+      });
+      if (res.ok) { loadChallenges(); }
+      else { const data = await res.json(); alert(`Failed: ${data.error}`); }
+    } catch (err) { alert(`Error: ${err.message}`); }
+  };
+
+  // Load comments for a target
+  const loadComments = async (targetType, targetId) => {
+    setCommentsLoading(true);
+    try {
+      const res = await fetch(`/api/comments/list?targetType=${targetType}&targetId=${targetId}`);
+      if (res.ok) { const data = await res.json(); setComments(data.comments || []); }
+    } catch (err) { console.error('Failed to load comments:', err); }
+    finally { setCommentsLoading(false); }
+  };
+
+  // Post a comment
+  const postComment = async (targetType, targetId) => {
+    if (!session || !commentText.trim()) return;
+    try {
+      const res = await fetch('/api/comments/create', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ targetType, targetId, content: commentText.trim() }),
+      });
+      if (res.ok) {
+        setCommentText('');
+        loadComments(targetType, targetId);
+      } else {
+        const data = await res.json();
+        alert(`Failed: ${data.error}`);
+      }
+    } catch (err) { alert(`Error: ${err.message}`); }
+  };
+
+  // Send weekly recap (admin)
+  const sendWeeklyRecap = async () => {
+    if (!session) return;
+    setSaving(true);
+    try {
+      const res = await fetch('/api/weekly-recap', { method: 'POST', headers: getAuthHeaders() });
+      const data = await res.json();
+      if (res.ok) {
+        alert(data.slackPosted ? 'Recap posted to Slack!' : 'Recap generated (no Slack webhook configured).\n\n' + (data.recap || '').substring(0, 500));
+      } else {
+        alert(`Failed: ${data.error}`);
+      }
+    } catch (err) { alert(`Error: ${err.message}`); }
+    finally { setSaving(false); }
+  };
+
   // Load point balance
   const loadBalance = async () => {
     if (!session) return;
@@ -691,6 +793,8 @@ export default function PingPongELO() {
         const data = await response.json();
         setMarketDetail(data);
       }
+      // Load comments for this market
+      loadComments('market', marketId);
     } catch (err) {
       console.error('Failed to load market detail:', err);
     }
@@ -2476,6 +2580,61 @@ export default function PingPongELO() {
                     </div>
                   </div>
                 )}
+
+                {/* Comments / Trash Talk */}
+                <div className="mt-6 border border-gray-200 rounded-xl p-6">
+                  <h3 className="font-bold text-gray-900 mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>
+                    Trash Talk {comments.length > 0 && <span className="text-gray-400 font-normal text-sm ml-1">({comments.length})</span>}
+                  </h3>
+
+                  {commentsLoading ? (
+                    <div className="text-xs text-gray-400 text-center py-4">Loading comments...</div>
+                  ) : comments.length === 0 ? (
+                    <p className="text-xs text-gray-400 text-center py-4">No comments yet. Be the first!</p>
+                  ) : (
+                    <div className="space-y-3 max-h-64 overflow-y-auto mb-4">
+                      {comments.map(c => (
+                        <div key={c.id} className="flex gap-2">
+                          <div className="w-7 h-7 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center text-xs font-bold text-gray-500">
+                            {(c.display_name || '?')[0].toUpperCase()}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-xs font-semibold text-gray-900">{c.display_name}</span>
+                              <span className="text-xs text-gray-300" style={{ fontFamily: 'monospace' }}>
+                                {new Date(c.created_at).toLocaleDateString()}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-700 break-words">{c.content}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {session ? (
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={commentText}
+                        onChange={e => setCommentText(e.target.value)}
+                        onKeyDown={e => { if (e.key === 'Enter' && commentText.trim()) postComment('market', md.market.id); }}
+                        placeholder="Drop some trash talk..."
+                        maxLength={500}
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                      />
+                      <button
+                        onClick={() => postComment('market', md.market.id)}
+                        disabled={!commentText.trim()}
+                        className="px-4 py-2 bg-black text-white text-sm font-semibold rounded-lg hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                      >
+                        Send
+                      </button>
+                    </div>
+                  ) : (
+                    <p className="text-xs text-gray-400 text-center">Sign in to comment</p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -2744,6 +2903,23 @@ export default function PingPongELO() {
               </table>
             </div>
           )}
+
+          {/* Weekly Recap */}
+          <div className="mb-12 border border-gray-200 rounded-xl p-6 bg-gray-50">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-bold" style={{ fontFamily: 'Figtree, sans-serif' }}>Weekly Recap</h2>
+                <p className="text-sm text-gray-500 mt-1">Generate and post the weekly recap to Slack. Runs automatically Fridays at 5:15 PM GMT.</p>
+              </div>
+              <button
+                onClick={sendWeeklyRecap}
+                disabled={saving}
+                className="px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+              >
+                {saving ? 'Sending...' : '📨 Send Recap Now'}
+              </button>
+            </div>
+          </div>
 
           {/* Markets Management */}
           <div className="flex items-center justify-between mb-6">
@@ -3320,6 +3496,39 @@ export default function PingPongELO() {
         </div>
       )}
 
+      {/* Open Challenges */}
+      {challenges.length > 0 && (
+        <div className="max-w-7xl mx-auto px-8 pt-6 pb-2">
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">⚔️ Open Challenges</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {challenges.filter(c => c.status === 'pending').slice(0, 6).map(c => (
+              <div key={c.id} className="border border-amber-200 bg-amber-50 rounded-xl p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-gray-900 text-sm">{c.challenger?.name}</span>
+                    <span className="text-xs text-gray-400">vs</span>
+                    <span className="font-semibold text-gray-900 text-sm">{c.challenged?.name}</span>
+                  </div>
+                  <span className="text-xs text-amber-600 font-semibold">Pending</span>
+                </div>
+                {c.message && <p className="text-xs text-gray-600 mb-2 italic">"{c.message}"</p>}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                    {c.challenger?.elo} vs {c.challenged?.elo} ELO
+                  </span>
+                  {authUser?.playerId === c.challenged?.id && (
+                    <div className="flex gap-2">
+                      <button onClick={() => respondToChallenge(c.id, 'accepted')} className="text-xs font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-lg hover:bg-green-200 transition-colors">Accept</button>
+                      <button onClick={() => respondToChallenge(c.id, 'declined')} className="text-xs font-semibold text-red-700 bg-red-100 px-2.5 py-1 rounded-lg hover:bg-red-200 transition-colors">Decline</button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Live Activity Feed */}
       {activityFeed.length > 0 && (
         <div className="max-w-7xl mx-auto px-8 pb-2 pt-4">
@@ -3364,7 +3573,7 @@ export default function PingPongELO() {
 
       {/* Quick links */}
       <div className="max-w-7xl mx-auto px-8 pt-4 pb-2">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <button
             onClick={() => { setCurrentView("h2h"); }}
             className="px-4 py-2 text-xs font-semibold border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all text-gray-600"
@@ -3377,6 +3586,35 @@ export default function PingPongELO() {
           >
             📈 Top Traders
           </button>
+          {authUser?.playerId && (
+            <div className="flex items-center gap-2 ml-auto">
+              <select
+                value={challengeTarget}
+                onChange={e => setChallengeTarget(e.target.value)}
+                className="text-xs px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-gray-400"
+              >
+                <option value="">Challenge someone...</option>
+                {players.filter(p => p.id !== authUser.playerId).map(p => (
+                  <option key={p.id} value={p.id}>{p.name} ({p.elo})</option>
+                ))}
+              </select>
+              <input
+                type="text"
+                value={challengeMessage}
+                onChange={e => setChallengeMessage(e.target.value)}
+                placeholder="Trash talk (optional)"
+                maxLength={200}
+                className="text-xs px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-gray-400 w-40"
+              />
+              <button
+                onClick={() => challengeTarget && sendChallenge(challengeTarget)}
+                disabled={!challengeTarget || saving}
+                className="px-4 py-2 text-xs font-semibold bg-amber-500 text-white rounded-lg hover:bg-amber-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              >
+                {saving ? '...' : '⚔️ Send'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
