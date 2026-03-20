@@ -5,7 +5,8 @@
       "name": "pingpong-dev",
       "runtimeExecutable": "/bin/bash",
       "runtimeArgs": ["-c", "export PATH=/Users/christopher.kilner/.nvm/versions/node/v20.20.0/bin:$PATH && cd /Users/christopher.kilner/Documents/GitHub/isometric-pingpong && npx vite --host"],
-      "port": 5173
+      "port": 5173,
+      "autoPort": true
     }
   ]
 }

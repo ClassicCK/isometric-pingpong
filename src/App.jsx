@@ -36,6 +36,71 @@ function RecentFormBar({ matches }) {
   );
 }
 
+// Mini sparkline chart component (Polymarket/Robinhood style)
+function MiniSparkline({ data, width = 120, height = 40, id = 'default' }) {
+  if (!data || data.length < 2) {
+    // Flat line for no data
+    return (
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
+        <line x1="0" y1={height / 2} x2={width} y2={height / 2} stroke="#d1d5db" strokeWidth="1.5" strokeDasharray="4 2" />
+      </svg>
+    );
+  }
+
+  const prices = data.map(d => d.price);
+  const minP = Math.min(...prices) - 0.02;
+  const maxP = Math.max(...prices) + 0.02;
+  const range = maxP - minP || 0.1;
+
+  const points = data.map((d, i) => {
+    const x = (i / (data.length - 1)) * width;
+    const y = height - ((d.price - minP) / range) * (height - 4) - 2;
+    return { x, y };
+  });
+
+  // Build smooth SVG path using cardinal spline
+  let pathD = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
+  if (points.length === 2) {
+    pathD += ` L ${points[1].x.toFixed(1)} ${points[1].y.toFixed(1)}`;
+  } else {
+    for (let i = 0; i < points.length - 1; i++) {
+      const p0 = points[Math.max(0, i - 1)];
+      const p1 = points[i];
+      const p2 = points[i + 1];
+      const p3 = points[Math.min(points.length - 1, i + 2)];
+      const tension = 0.3;
+      const cp1x = p1.x + (p2.x - p0.x) * tension;
+      const cp1y = p1.y + (p2.y - p0.y) * tension;
+      const cp2x = p2.x - (p3.x - p1.x) * tension;
+      const cp2y = p2.y - (p3.y - p1.y) * tension;
+      pathD += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+    }
+  }
+
+  // Gradient fill path (area under the curve)
+  const fillD = pathD + ` L ${width} ${height} L 0 ${height} Z`;
+
+  // Determine color based on price change
+  const priceChange = prices[prices.length - 1] - prices[0];
+  const lineColor = priceChange >= 0 ? '#10b981' : '#ef4444';
+  const gradId = `sparkgrad-${id}`;
+
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
+      <defs>
+        <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={lineColor} stopOpacity="0.2" />
+          <stop offset="100%" stopColor={lineColor} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={fillD} fill={`url(#${gradId})`} />
+      <path d={pathD} fill="none" stroke={lineColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      {/* End dot */}
+      <circle cx={points[points.length - 1].x} cy={points[points.length - 1].y} r="2.5" fill={lineColor} />
+    </svg>
+  );
+}
+
 const MIN_GAMES_FOR_QUALIFICATION = 5;
 
 // All countries with their ISO codes for flat flags
@@ -199,6 +264,7 @@ export default function PingPongELO() {
   const [userPositions, setUserPositions] = useState([]);
   const [marketsLoading, setMarketsLoading] = useState(false);
   const [marketFilter, setMarketFilter] = useState('open');
+  const [featuredMarkets, setFeaturedMarkets] = useState([]);
 
   // Auth state
   const [session, setSession] = useState(null);
@@ -316,6 +382,7 @@ export default function PingPongELO() {
 
   useEffect(() => {
     loadData();
+    loadFeaturedMarkets();
   }, []);
 
   // Load markets data
@@ -331,6 +398,19 @@ export default function PingPongELO() {
       console.error('Failed to load markets:', err);
     } finally {
       setMarketsLoading(false);
+    }
+  };
+
+  // Load featured markets for homepage preview
+  const loadFeaturedMarkets = async () => {
+    try {
+      const response = await fetch('/api/markets/featured');
+      if (response.ok) {
+        const data = await response.json();
+        setFeaturedMarkets(data.featured || []);
+      }
+    } catch (err) {
+      console.error('Failed to load featured markets:', err);
     }
   };
 
@@ -2554,6 +2634,101 @@ export default function PingPongELO() {
           </p>
         </div>
       </div>
+
+      {/* Featured Markets Preview */}
+      {featuredMarkets.length > 0 && (
+        <div className="max-w-7xl mx-auto px-8 pt-10 pb-2">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-gray-900" style={{ fontFamily: 'Figtree, sans-serif' }}>
+              Prediction Markets
+            </h2>
+            <button
+              onClick={() => { setCurrentView("markets"); loadMarkets(); }}
+              className="text-sm text-gray-500 hover:text-gray-900 transition-colors font-medium"
+              style={{ fontFamily: 'monospace' }}
+            >
+              View all →
+            </button>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {featuredMarkets.map(market => {
+              const priceChange = market.priceHistory.length >= 2
+                ? market.leadOutcome.price - market.priceHistory[0].price
+                : 0;
+              const changeColor = priceChange >= 0 ? 'text-green-600' : 'text-red-500';
+              const changeSign = priceChange >= 0 ? '+' : '';
+
+              return (
+                <button
+                  key={market.id}
+                  onClick={() => {
+                    setSelectedMarket(market.id);
+                    loadMarketDetail(market.id);
+                    setCurrentView("market-detail");
+                  }}
+                  className="text-left bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg hover:border-gray-300 transition-all group"
+                >
+                  {/* Market title */}
+                  <div className="flex items-start justify-between gap-2 mb-3">
+                    <h3 className="text-sm font-semibold text-gray-900 leading-tight line-clamp-2" style={{ fontFamily: 'Figtree, sans-serif' }}>
+                      {market.title}
+                    </h3>
+                    <span className="text-xs px-1.5 py-0.5 rounded bg-green-100 text-green-700 font-semibold uppercase flex-shrink-0" style={{ fontSize: '10px' }}>
+                      Live
+                    </span>
+                  </div>
+
+                  {/* Lead outcome + price */}
+                  <div className="flex items-end justify-between mb-2">
+                    <div>
+                      <p className="text-xs text-gray-500 mb-0.5" style={{ fontFamily: 'monospace' }}>
+                        {market.leadOutcome.label}
+                      </p>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
+                          {Math.round(market.leadOutcome.price * 100)}¢
+                        </span>
+                        <span className={`text-xs font-semibold ${changeColor}`} style={{ fontFamily: 'monospace' }}>
+                          {changeSign}{(priceChange * 100).toFixed(1)}¢
+                        </span>
+                      </div>
+                    </div>
+                    <MiniSparkline data={market.priceHistory} width={80} height={32} id={market.id} />
+                  </div>
+
+                  {/* Other top outcomes */}
+                  <div className="border-t border-gray-100 pt-2 mt-1 space-y-1">
+                    {market.outcomes.slice(0, 3).map(o => (
+                      <div key={o.id} className="flex items-center justify-between">
+                        <span className="text-xs text-gray-500 truncate mr-2" style={{ fontFamily: 'monospace' }}>
+                          {o.label}
+                        </span>
+                        <span className="text-xs font-semibold text-gray-700 flex-shrink-0" style={{ fontFamily: 'monospace' }}>
+                          {Math.round(o.price * 100)}¢
+                        </span>
+                      </div>
+                    ))}
+                    {market.totalOutcomes > 3 && (
+                      <p className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                        +{market.totalOutcomes - 3} more
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Volume */}
+                  {market.volume > 0 && (
+                    <div className="mt-2 pt-2 border-t border-gray-100">
+                      <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                        Vol: {market.volume.toFixed(0)} pts
+                      </span>
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-8 py-12">
         <div className="overflow-x-auto">
