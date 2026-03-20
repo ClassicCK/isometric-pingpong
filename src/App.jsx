@@ -217,6 +217,12 @@ export default function PingPongELO() {
   const [editBalanceUserId, setEditBalanceUserId] = useState(null);
   const [editBalanceValue, setEditBalanceValue] = useState('');
   const [editBalanceReason, setEditBalanceReason] = useState('');
+  const [showCreateMarket, setShowCreateMarket] = useState(false);
+  const [newMarketTitle, setNewMarketTitle] = useState('');
+  const [newMarketDesc, setNewMarketDesc] = useState('');
+  const [newMarketCategory, setNewMarketCategory] = useState('season');
+  const [newMarketResolution, setNewMarketResolution] = useState('');
+  const [newMarketOutcomes, setNewMarketOutcomes] = useState([{ label: '', playerId: '' }, { label: '', playerId: '' }]);
 
   // Auth helpers
   const getAuthHeaders = useCallback(() => {
@@ -545,6 +551,48 @@ export default function PingPongELO() {
         setEditBalanceValue('');
         setEditBalanceReason('');
         await loadAdminUsers();
+      } else {
+        alert(`Failed: ${result.error}`);
+      }
+    } catch (err) {
+      alert(`Network error: ${err.message}`);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const createMarket = async () => {
+    const validOutcomes = newMarketOutcomes.filter(o => o.label.trim());
+    if (!newMarketTitle.trim() || validOutcomes.length < 2) {
+      return alert('Title and at least 2 outcomes required.');
+    }
+
+    setSaving(true);
+    try {
+      const response = await fetch('/api/markets/create', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          title: newMarketTitle.trim(),
+          description: newMarketDesc.trim() || null,
+          category: newMarketCategory,
+          resolutionDate: newMarketResolution || null,
+          outcomes: validOutcomes.map(o => ({
+            label: o.label.trim(),
+            playerId: o.playerId || null,
+          })),
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setShowCreateMarket(false);
+        setNewMarketTitle('');
+        setNewMarketDesc('');
+        setNewMarketCategory('season');
+        setNewMarketResolution('');
+        setNewMarketOutcomes([{ label: '', playerId: '' }, { label: '', playerId: '' }]);
+        await loadMarkets('all');
       } else {
         alert(`Failed: ${result.error}`);
       }
@@ -2010,41 +2058,42 @@ export default function PingPongELO() {
     const totalInvested = userPositions.reduce((sum, p) => sum + p.costBasis, 0);
     const totalCurrentValue = userPositions.reduce((sum, p) => sum + p.currentValue, 0);
     const totalPnL = totalCurrentValue - totalInvested;
+    const fmtPts = (v) => v >= 10 ? v.toFixed(0) : v.toFixed(2);
 
     return (
       <div className="min-h-screen bg-white">
         <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
         <div className="border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-8 py-8">
-            <button onClick={() => setCurrentView("markets")} className="text-gray-600 hover:text-black mb-6 flex items-center gap-2">
+            <button onClick={() => setCurrentView("markets")} className="text-gray-600 hover:text-black mb-6 flex items-center gap-2 text-sm">
               ← Back to Markets
             </button>
-            <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Portfolio</h1>
+            <h1 className="text-5xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Portfolio</h1>
 
             {/* Balance summary */}
             <div className="grid grid-cols-4 gap-6 mt-6">
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-xl p-4">
                 <div className="text-xs uppercase tracking-wider text-gray-400 mb-1">Available</div>
                 <div className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
-                  {(pointBalance || 0).toFixed(0)}
+                  {fmtPts(pointBalance || 0)}
                 </div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-xl p-4">
                 <div className="text-xs uppercase tracking-wider text-gray-400 mb-1">Invested</div>
                 <div className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
-                  {totalInvested.toFixed(0)}
+                  {fmtPts(totalInvested)}
                 </div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-xl p-4">
                 <div className="text-xs uppercase tracking-wider text-gray-400 mb-1">Current Value</div>
                 <div className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
-                  {totalCurrentValue.toFixed(0)}
+                  {fmtPts(totalCurrentValue)}
                 </div>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-50 rounded-xl p-4">
                 <div className="text-xs uppercase tracking-wider text-gray-400 mb-1">P&L</div>
                 <div className={`text-2xl font-bold ${totalPnL >= 0 ? 'text-green-600' : 'text-red-600'}`} style={{ fontFamily: 'monospace' }}>
-                  {totalPnL >= 0 ? '+' : ''}{totalPnL.toFixed(0)}
+                  {totalPnL >= 0 ? '+' : ''}{fmtPts(totalPnL)}
                 </div>
               </div>
             </div>
@@ -2081,7 +2130,7 @@ export default function PingPongELO() {
                           <span className="text-gray-500">Now: {(pos.currentPrice * 100).toFixed(0)}¢</span>
                         </div>
                         <div className={`font-bold ${pnl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                          {pnl >= 0 ? '+' : ''}{pnl.toFixed(2)} pts
+                          {pnl >= 0 ? '+' : ''}{pnl >= 10 ? pnl.toFixed(0) : pnl.toFixed(2)} pts
                         </div>
                       </div>
                     </div>
@@ -2209,7 +2258,124 @@ export default function PingPongELO() {
           )}
 
           {/* Markets Management */}
-          <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Figtree, sans-serif' }}>Markets</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold" style={{ fontFamily: 'Figtree, sans-serif' }}>Markets</h2>
+            <button
+              onClick={() => setShowCreateMarket(!showCreateMarket)}
+              className="px-4 py-2 bg-black text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+            >
+              {showCreateMarket ? 'Cancel' : '+ Create Market'}
+            </button>
+          </div>
+
+          {showCreateMarket && (
+            <div className="border border-gray-200 rounded-xl p-6 mb-6 bg-gray-50">
+              <h3 className="font-semibold text-lg mb-4">New Market</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                  <input
+                    type="text"
+                    value={newMarketTitle}
+                    onChange={e => setNewMarketTitle(e.target.value)}
+                    placeholder="e.g. Who will be #1 ranked at year end?"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Description (optional)</label>
+                  <textarea
+                    value={newMarketDesc}
+                    onChange={e => setNewMarketDesc(e.target.value)}
+                    placeholder="Additional context about this market..."
+                    rows={2}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                    <select
+                      value={newMarketCategory}
+                      onChange={e => setNewMarketCategory(e.target.value)}
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white"
+                    >
+                      <option value="season">Season</option>
+                      <option value="match">Match</option>
+                      <option value="custom">Custom</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Resolution Date (optional)</label>
+                    <input
+                      type="date"
+                      value={newMarketResolution}
+                      onChange={e => setNewMarketResolution(e.target.value)}
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Outcomes</label>
+                  <div className="space-y-2">
+                    {newMarketOutcomes.map((outcome, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={outcome.label}
+                          onChange={e => {
+                            const updated = [...newMarketOutcomes];
+                            updated[i] = { ...updated[i], label: e.target.value };
+                            setNewMarketOutcomes(updated);
+                          }}
+                          placeholder={`Outcome ${i + 1}`}
+                          className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                        />
+                        <select
+                          value={outcome.playerId || ''}
+                          onChange={e => {
+                            const updated = [...newMarketOutcomes];
+                            updated[i] = { ...updated[i], playerId: e.target.value || null };
+                            setNewMarketOutcomes(updated);
+                          }}
+                          className="w-48 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white"
+                        >
+                          <option value="">Link player (optional)</option>
+                          {players.map(p => (
+                            <option key={p.id} value={p.id}>{p.name}</option>
+                          ))}
+                        </select>
+                        {newMarketOutcomes.length > 2 && (
+                          <button
+                            onClick={() => setNewMarketOutcomes(newMarketOutcomes.filter((_, j) => j !== i))}
+                            className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          >
+                            ✕
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => setNewMarketOutcomes([...newMarketOutcomes, { label: '', playerId: '' }])}
+                    className="mt-2 text-sm text-gray-500 hover:text-black font-medium transition-colors"
+                  >
+                    + Add Outcome
+                  </button>
+                </div>
+                <div className="flex justify-end pt-2">
+                  <button
+                    onClick={createMarket}
+                    disabled={saving}
+                    className="px-6 py-2.5 bg-black text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
+                  >
+                    {saving ? 'Creating...' : 'Create Market'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="space-y-3">
             {marketsData.map(market => (
               <div key={market.id} className="border border-gray-200 rounded-xl p-5 hover:shadow-sm transition-shadow">
@@ -2333,6 +2499,15 @@ export default function PingPongELO() {
               {authUser ? (
                 <div className="flex items-center gap-2 mr-2">
                   <span className="text-sm text-gray-600" style={{ fontFamily: "monospace" }}>{authUser.displayName}</span>
+                  {pointBalance !== null && (
+                    <button
+                      onClick={() => { setCurrentView("portfolio"); loadBalance(); }}
+                      className="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full hover:bg-gray-200 transition-colors"
+                      style={{ fontFamily: 'monospace' }}
+                    >
+                      {pointBalance.toFixed(0)} pts
+                    </button>
+                  )}
                   <button onClick={signOut} className="p-2 text-gray-400 hover:text-gray-700 transition-colors" title="Sign out">
                     <LogOut size={16} />
                   </button>
@@ -2346,15 +2521,6 @@ export default function PingPongELO() {
               <button onClick={() => { setCurrentView("markets"); loadMarkets(); }} className="px-5 py-2 border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors rounded-lg">
                 Markets
               </button>
-              {session && pointBalance !== null && (
-                <button
-                  onClick={() => { setCurrentView("portfolio"); loadBalance(); }}
-                  className="px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-700 hover:bg-gray-200 transition-colors rounded-lg"
-                  style={{ fontFamily: 'monospace' }}
-                >
-                  {pointBalance.toFixed(0)} pts
-                </button>
-              )}
               <button onClick={() => setCurrentView("matches")} className="px-5 py-2 border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors rounded-lg">
                 Matches
               </button>

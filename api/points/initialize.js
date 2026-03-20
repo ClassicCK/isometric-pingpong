@@ -38,24 +38,8 @@ export default async function handler(req, res) {
       .eq('id', user.id)
       .single();
 
-    let allocation = 1000; // Base allocation for everyone
-
-    if (userRow?.player_id) {
-      // Fetch all players sorted by ELO to determine rank
-      const { data: allPlayers } = await db
-        .from('players')
-        .select('id, elo')
-        .order('elo', { ascending: false });
-
-      if (allPlayers && allPlayers.length > 0) {
-        const rank = allPlayers.findIndex(p => p.id === userRow.player_id) + 1;
-        if (rank > 0) {
-          // Rank bonus: higher rank = more points
-          const rankBonus = (allPlayers.length - rank + 1) * 10;
-          allocation += rankBonus;
-        }
-      }
-    }
+    // Everyone starts at 0 — admins can grant points manually
+    let allocation = 0;
 
     // Create balance
     const { error: balanceError } = await db
