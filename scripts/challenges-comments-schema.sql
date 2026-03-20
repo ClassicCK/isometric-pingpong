@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS comments (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   display_name TEXT NOT NULL,
-  target_type TEXT NOT NULL CHECK (target_type IN ('market', 'match', 'player')),
+  target_type TEXT NOT NULL CHECK (target_type IN ('market', 'match', 'player', 'h2h')),
   target_id TEXT NOT NULL,
   content TEXT NOT NULL CHECK (length(content) <= 500),
   created_at TIMESTAMPTZ DEFAULT NOW()
