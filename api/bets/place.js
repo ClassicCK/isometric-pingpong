@@ -35,10 +35,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Market is not open for betting' });
     }
 
-    // Check user balance
+    // Check user balance (fetch all fields we need)
     const { data: balance } = await db
       .from('point_balances')
-      .select('balance')
+      .select('balance, total_wagered')
       .eq('user_id', user.id)
       .single();
 
@@ -124,29 +124,15 @@ export default async function handler(req, res) {
         });
     }
 
-    // Debit balance
-    const newBalance = parseFloat(balance.balance) - cost;
-    await db
-      .from('point_balances')
-      .update({
-        balance: Math.round(newBalance * 100) / 100,
-        total_wagered: parseFloat(balance.balance) - newBalance + (parseFloat(balance.total_wagered) || 0),
-        updated_at: new Date().toISOString(),
-      })
-      .eq('user_id', user.id);
-
-    // Actually let me fix the total_wagered calculation
-    const { data: updatedBal } = await db
-      .from('point_balances')
-      .select('total_wagered')
-      .eq('user_id', user.id)
-      .single();
+    // Debit balance — single clean update
+    const newBalance = Math.round((parseFloat(balance.balance) - cost) * 100) / 100;
+    const newTotalWagered = Math.round((parseFloat(balance.total_wagered || 0) + cost) * 100) / 100;
 
     await db
       .from('point_balances')
       .update({
-        balance: Math.round(newBalance * 100) / 100,
-        total_wagered: Math.round((parseFloat(updatedBal?.total_wagered || 0) + cost) * 100) / 100,
+        balance: newBalance,
+        total_wagered: newTotalWagered,
         updated_at: new Date().toISOString(),
       })
       .eq('user_id', user.id);
@@ -160,7 +146,7 @@ export default async function handler(req, res) {
         type: 'bet_purchase',
         description: `Bought ${sharesReceived.toFixed(2)} shares`,
         reference_id: outcomeId,
-        balance_after: Math.round(newBalance * 100) / 100,
+        balance_after: newBalance,
       });
 
     // Return new prices
@@ -175,7 +161,7 @@ export default async function handler(req, res) {
       sharesReceived: Math.round(sharesReceived * 10000) / 10000,
       cost,
       avgPrice: Math.round(avgPrice * 10000) / 10000,
-      newBalance: Math.round(newBalance * 100) / 100,
+      newBalance,
       outcomes: outcomePrices,
     });
   } catch (err) {
