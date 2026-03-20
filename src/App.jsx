@@ -2581,10 +2581,10 @@ export default function PingPongELO() {
                   </div>
                 )}
 
-                {/* Comments / Trash Talk */}
+                {/* Comments / Discussion */}
                 <div className="mt-6 border border-gray-200 rounded-xl p-6">
                   <h3 className="font-bold text-gray-900 mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>
-                    Trash Talk {comments.length > 0 && <span className="text-gray-400 font-normal text-sm ml-1">({comments.length})</span>}
+                    Discussion {comments.length > 0 && <span className="text-gray-400 font-normal text-sm ml-1">({comments.length})</span>}
                   </h3>
 
                   {commentsLoading ? (
@@ -2619,7 +2619,7 @@ export default function PingPongELO() {
                         value={commentText}
                         onChange={e => setCommentText(e.target.value)}
                         onKeyDown={e => { if (e.key === 'Enter' && commentText.trim()) postComment('market', md.market.id); }}
-                        placeholder="Drop some trash talk..."
+                        placeholder="Add a comment..."
                         maxLength={500}
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none"
                       />
@@ -3530,13 +3530,17 @@ export default function PingPongELO() {
       )}
 
       {/* Live Activity Feed */}
-      {activityFeed.length > 0 && (
-        <div className="max-w-7xl mx-auto px-8 pb-2 pt-4">
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Live Activity</span>
-            </div>
+      <div className="max-w-7xl mx-auto px-8 pb-2 pt-4">
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Live Activity</span>
+          </div>
+          {activityLoading ? (
+            <div className="text-xs text-gray-400 text-center py-3" style={{ fontFamily: 'monospace' }}>Loading activity...</div>
+          ) : activityFeed.length === 0 ? (
+            <div className="text-xs text-gray-400 text-center py-3" style={{ fontFamily: 'monospace' }}>No recent activity yet.</div>
+          ) : (
             <div className="space-y-1.5 max-h-40 overflow-y-auto">
               {activityFeed.slice(0, 8).map((evt, i) => (
                 <div key={i} className="flex items-center justify-between text-xs" style={{ fontFamily: 'monospace' }}>
@@ -3567,9 +3571,9 @@ export default function PingPongELO() {
                 </div>
               ))}
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </div>
 
       {/* Quick links */}
       <div className="max-w-7xl mx-auto px-8 pt-4 pb-2">
