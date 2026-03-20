@@ -134,392 +134,26 @@ const COUNTRIES = [
 
 const OFFICES = ["NYC", "LON"];
 
-// Convert probability to American betting odds
-function probabilityToOdds(probability) {
-  if (probability <= 0) return "+10000";
-  if (probability >= 100) return "-10000";
-  
-  const prob = probability / 100;
-  
-  if (prob >= 0.5) {
-    const odds = Math.round((prob / (1 - prob)) * 100);
-    return `-${odds}`;
-  } else {
-    const odds = Math.round(((1 - prob) / prob) * 100);
-    return `+${odds}`;
+
+// CPMM price calculation (client-side preview — server is authoritative)
+function cpmmGetPrices(pools) {
+  const inverses = pools.map(q => 1 / q);
+  const sumInv = inverses.reduce((a, b) => a + b, 0);
+  return inverses.map(inv => inv / sumInv);
+}
+
+function cpmmSharesForCost(pools, outcomeIndex, cost) {
+  if (cost <= 0) return 0;
+  const n = pools.length;
+  let k = 1;
+  for (let i = 0; i < n; i++) k *= pools[i];
+  let productOthers = 1;
+  for (let i = 0; i < n; i++) {
+    if (i === outcomeIndex) continue;
+    productOthers *= (pools[i] + cost);
   }
-}
-
-// Random number generator for simulations
-function randn() {
-  let u = 0, v = 0;
-  while (u === 0) u = Math.random();
-  while (v === 0) v = Math.random();
-  return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-}
-
-function eloWinProb(eloA, eloB, matchNoiseStd = 0) {
-  const a = eloA + randn() * matchNoiseStd;
-  const b = eloB + randn() * matchNoiseStd;
-  return 1 / (1 + Math.pow(10, (b - a) / 400));
-}
-
-function simulateSeason(players, { seasonMatchesPerPlayer = 10, K = 24, matchNoiseStd = 60 } = {}) {
-  const sims = players.map((p) => ({ ...p }));
-  const n = sims.length;
-  const totalMatches = Math.max(0, Math.round((n * seasonMatchesPerPlayer) / 2));
-
-  const games = new Map();
-  sims.forEach((p) => games.set(p.id, 0));
-
-  const pickIndex = () => {
-    const tries = 6;
-    let best = Math.floor(Math.random() * n);
-    let bestGames = games.get(sims[best].id) ?? 0;
-    for (let t = 0; t < tries; t++) {
-      const idx = Math.floor(Math.random() * n);
-      const g = games.get(sims[idx].id) ?? 0;
-      if (g < bestGames) {
-        best = idx;
-        bestGames = g;
-      }
-    }
-    return best;
-  };
-
-  for (let m = 0; m < totalMatches; m++) {
-    const i = pickIndex();
-    let j = pickIndex();
-    if (j === i) j = (j + 1 + Math.floor(Math.random() * (n - 1))) % n;
-
-    const a = sims[i];
-    const b = sims[j];
-
-    const pA = eloWinProb(a.elo, b.elo, matchNoiseStd);
-    const aWins = Math.random() < pA;
-
-    const winner = aWins ? a : b;
-    const loser = aWins ? b : a;
-
-    const expectedWinner = 1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
-    const expectedLoser = 1 - expectedWinner;
-
-    winner.elo = Math.round(winner.elo + K * (1 - expectedWinner));
-    loser.elo = Math.round(loser.elo + K * (0 - expectedLoser));
-
-    games.set(a.id, (games.get(a.id) ?? 0) + 1);
-    games.set(b.id, (games.get(b.id) ?? 0) + 1);
-  }
-
-  return sims;
-}
-
-const SEED_PAIRS = [[0, 15], [7, 8], [4, 11], [3, 12], [5, 10], [2, 13], [6, 9], [1, 14]];
-const REGION_NAMES = ["East", "West", "South", "Midwest"];
-
-function simulateTournamentAndCollect(seededTop64, counters, { matchNoiseStd = 15 } = {}) {
-  const simMatch = (p1, p2) => {
-    if (!p1) return p2;
-    if (!p2) return p1;
-    const p = eloWinProb(p1.elo, p2.elo, matchNoiseStd);
-    return Math.random() < p ? p1 : p2;
-  };
-
-  const seedPairs = SEED_PAIRS;
-
-  const regions = [0, 1, 2, 3].map((ri) =>
-    seededTop64.filter((p) => p.regionIndex === ri).sort((a, b) => a.seed - b.seed).slice(0, 16)
-  );
-
-  const regionChamps = [];
-
-  regions.forEach((region16) => {
-    const r64Ordered = [];
-    seedPairs.forEach(([a, b]) => {
-      r64Ordered.push(region16[a] || null);
-      r64Ordered.push(region16[b] || null);
-    });
-
-    const r32 = [];
-    for (let i = 0; i < r64Ordered.length; i += 2) r32.push(simMatch(r64Ordered[i], r64Ordered[i + 1]));
-    r32.forEach((p) => p && (counters[p.id].round32 += 1));
-
-    const s16 = [];
-    for (let i = 0; i < r32.length; i += 2) s16.push(simMatch(r32[i], r32[i + 1]));
-    s16.forEach((p) => p && (counters[p.id].sweet16 += 1));
-
-    const e8 = [];
-    for (let i = 0; i < s16.length; i += 2) e8.push(simMatch(s16[i], s16[i + 1]));
-    e8.forEach((p) => p && (counters[p.id].elite8 += 1));
-
-    const champ = simMatch(e8[0], e8[1]);
-    if (champ) regionChamps.push(champ);
-  });
-
-  regionChamps.forEach((p) => p && (counters[p.id].final4 += 1));
-
-  const f1 = simMatch(regionChamps[0], regionChamps[1]);
-  const f2 = simMatch(regionChamps[2], regionChamps[3]);
-  if (f1) counters[f1.id].finals += 1;
-  if (f2) counters[f2.id].finals += 1;
-
-  const champ = simMatch(f1, f2);
-  if (champ) counters[champ.id].win += 1;
-}
-
-function simulateSeasonPlusTournamentProbabilities(allPlayers, opts = {}) {
-  const {
-    numSimulations = 1000,
-    seasonMatchesPerPlayer = 10,
-    seasonK = 24,
-    seasonMatchNoiseStd = 60,
-    tournamentMatchNoiseStd = 15,
-  } = opts;
-
-  const counters = {};
-  allPlayers.forEach((p) => {
-    counters[p.id] = {
-      makeTournament: 0,
-      round64: 0,
-      round32: 0,
-      sweet16: 0,
-      elite8: 0,
-      final4: 0,
-      finals: 0,
-      win: 0,
-    };
-  });
-
-  const base = allPlayers.map((p) => ({
-    id: p.id,
-    name: p.name,
-    office: p.office,
-    countryCode: p.countryCode,
-    elo: p.elo,
-  }));
-
-  for (let sim = 0; sim < numSimulations; sim++) {
-    const postSeason = simulateSeason(base, {
-      seasonMatchesPerPlayer,
-      K: seasonK,
-      matchNoiseStd: seasonMatchNoiseStd,
-    });
-
-    const seededTop64 = [...postSeason]
-      .sort((a, b) => b.elo - a.elo)
-      .slice(0, 64)
-      .map((p, index) => ({
-        ...p,
-        seed: Math.floor(index / 4) + 1,
-        regionIndex: index % 4,
-      }));
-
-    seededTop64.forEach((p) => {
-      counters[p.id].makeTournament += 1;
-      counters[p.id].round64 += 1;
-    });
-
-    simulateTournamentAndCollect(seededTop64, counters, {
-      matchNoiseStd: tournamentMatchNoiseStd,
-    });
-  }
-
-  const probs = {};
-  Object.entries(counters).forEach(([id, c]) => {
-    probs[id] = {
-      makeTournament: Math.round((c.makeTournament / numSimulations) * 100),
-      round64: Math.round((c.round64 / numSimulations) * 100),
-      round32: Math.round((c.round32 / numSimulations) * 100),
-      sweet16: Math.round((c.sweet16 / numSimulations) * 100),
-      elite8: Math.round((c.elite8 / numSimulations) * 100),
-      final4: Math.round((c.final4 / numSimulations) * 100),
-      finals: Math.round((c.finals / numSimulations) * 100),
-      win: Math.round((c.win / numSimulations) * 100),
-    };
-  });
-
-  return probs;
-}
-
-function buildCurrentEloSeeding(players) {
-  const eligible = players
-    .filter(p => (p.wins + p.losses) >= MIN_GAMES_FOR_QUALIFICATION)
-    .sort((a, b) => b.elo - a.elo);
-
-  const top64 = eligible.slice(0, 64);
-  const seeded = top64.map((p, index) => ({
-    id: p.id,
-    name: p.name,
-    countryCode: p.countryCode,
-    office: p.office,
-    elo: p.elo,
-    seed: Math.floor(index / 4) + 1,
-    regionIndex: index % 4,
-  }));
-
-  return [0, 1, 2, 3].map(ri =>
-    seeded.filter(p => p.regionIndex === ri).sort((a, b) => a.seed - b.seed)
-  );
-}
-
-function MatchupCard({ playerA, playerB, probKey, seasonProbs }) {
-  const probA = playerA ? (seasonProbs[playerA.id]?.[probKey] ?? 0) : 0;
-  const probB = playerB ? (seasonProbs[playerB.id]?.[probKey] ?? 0) : 0;
-  const winnerIsA = probA >= probB;
-
-  const renderSlot = (player, prob, isWinner) => {
-    if (!player) {
-      return (
-        <div className="flex items-center gap-2 px-3 py-2 text-gray-300 italic text-xs">
-          BYE
-        </div>
-      );
-    }
-    return (
-      <div className={`flex items-center justify-between px-3 py-2 ${isWinner ? 'bg-gray-900 text-white' : 'bg-white text-gray-500'}`}>
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="text-xs w-4 flex-shrink-0 text-gray-400 font-mono">{player.seed}</span>
-          <img src={`https://flagcdn.com/w40/${player.countryCode}.png`} width="16" height="12" alt="" className="flex-shrink-0" />
-          <span className={`text-xs font-medium truncate ${isWinner ? 'text-white' : 'text-gray-600'}`}>
-            {player.name}
-          </span>
-        </div>
-        <span className={`text-xs font-mono ml-2 flex-shrink-0 ${isWinner ? 'text-green-400' : 'text-gray-400'}`}>
-          {prob}%
-        </span>
-      </div>
-    );
-  };
-
-  return (
-    <div className="border border-gray-200 rounded overflow-hidden" style={{ fontFamily: 'monospace' }}>
-      {renderSlot(playerA, probA, winnerIsA)}
-      <div className="border-t border-gray-200" />
-      {renderSlot(playerB, probB, !winnerIsA)}
-    </div>
-  );
-}
-
-function RegionBracket({ regionName, regionPlayers, seasonProbs }) {
-  const probKeys = ['round32', 'sweet16', 'elite8', 'final4'];
-  const roundLabels = ['Round of 64', 'Round of 32', 'Sweet 16', 'Elite 8'];
-
-  // Build R64 matchups using SEED_PAIRS order
-  const r64Matchups = SEED_PAIRS.map(([a, b]) => [
-    regionPlayers[a] ?? null,
-    regionPlayers[b] ?? null,
-  ]);
-
-  // Derive projected winner of a matchup by comparing probabilities for the next round
-  const projectedWinner = (p1, p2, probKey) => {
-    if (!p1) return p2;
-    if (!p2) return p1;
-    const prob1 = seasonProbs[p1.id]?.[probKey] ?? 0;
-    const prob2 = seasonProbs[p2.id]?.[probKey] ?? 0;
-    return prob1 >= prob2 ? p1 : p2;
-  };
-
-  // Build all rounds: each round's matchups are pairs of projected winners from the previous round
-  const allRounds = [r64Matchups];
-  for (let r = 0; r < 3; r++) {
-    const prev = allRounds[r];
-    const nextProbKey = probKeys[r + 1]; // key to use for projecting winners out of this round
-    const next = [];
-    for (let i = 0; i < prev.length; i += 2) {
-      const w1 = projectedWinner(prev[i][0], prev[i][1], nextProbKey);
-      const w2 = projectedWinner(prev[i + 1][0], prev[i + 1][1], nextProbKey);
-      next.push([w1, w2]);
-    }
-    allRounds.push(next);
-  }
-
-  // Card height in px (two slots + border)
-  const CARD_H = 60;
-  const GAP = 8;
-  const totalR64Height = r64Matchups.length * CARD_H + (r64Matchups.length - 1) * GAP;
-
-  return (
-    <div>
-      <h2 className="text-3xl font-black mb-6" style={{ fontFamily: 'Figtree, sans-serif' }}>{regionName} Region</h2>
-      <div className="flex gap-4 overflow-x-auto pb-4">
-        {allRounds.map((round, r) => {
-          const count = round.length;
-          return (
-            <div key={r} className="flex-shrink-0" style={{ width: 200 }}>
-              <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
-                {roundLabels[r]}
-              </div>
-              <div
-                className="flex flex-col"
-                style={{ height: totalR64Height, justifyContent: count === 1 ? 'center' : 'space-around' }}
-              >
-                {round.map(([playerA, playerB], matchIdx) => (
-                  <MatchupCard
-                    key={matchIdx}
-                    playerA={playerA}
-                    playerB={playerB}
-                    probKey={probKeys[r]}
-                    seasonProbs={seasonProbs}
-                  />
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function FinalFourView({ regions, seasonProbs }) {
-  // Projected region champ = player with highest final4 probability in each region
-  const regionChamps = regions.map((regionPlayers, ri) => {
-    if (!regionPlayers || regionPlayers.length === 0) return null;
-    return [...regionPlayers].sort((a, b) =>
-      (seasonProbs[b.id]?.final4 ?? 0) - (seasonProbs[a.id]?.final4 ?? 0)
-    )[0] || null;
-  });
-
-  // Semifinal 1: East (0) vs West (1), Semifinal 2: South (2) vs Midwest (3)
-  const semi1 = [regionChamps[0], regionChamps[1]];
-  const semi2 = [regionChamps[2], regionChamps[3]];
-
-  const projectedWinner = (p1, p2, probKey) => {
-    if (!p1) return p2;
-    if (!p2) return p1;
-    return (seasonProbs[p1.id]?.[probKey] ?? 0) >= (seasonProbs[p2.id]?.[probKey] ?? 0) ? p1 : p2;
-  };
-
-  const finalist1 = projectedWinner(semi1[0], semi1[1], 'finals');
-  const finalist2 = projectedWinner(semi2[0], semi2[1], 'finals');
-
-  return (
-    <div className="max-w-2xl" style={{ fontFamily: 'monospace' }}>
-      <h2 className="text-3xl font-black mb-8" style={{ fontFamily: 'Figtree, sans-serif' }}>Final Four</h2>
-
-      <div className="grid grid-cols-2 gap-8 mb-10">
-        <div>
-          <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
-            Semifinal 1 · {REGION_NAMES[0]} vs {REGION_NAMES[1]}
-          </div>
-          <MatchupCard playerA={semi1[0]} playerB={semi1[1]} probKey="finals" seasonProbs={seasonProbs} />
-        </div>
-        <div>
-          <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
-            Semifinal 2 · {REGION_NAMES[2]} vs {REGION_NAMES[3]}
-          </div>
-          <MatchupCard playerA={semi2[0]} playerB={semi2[1]} probKey="finals" seasonProbs={seasonProbs} />
-        </div>
-      </div>
-
-      <div className="border-t border-gray-200 pt-8">
-        <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">Championship</div>
-        <div className="max-w-xs">
-          <MatchupCard playerA={finalist1} playerB={finalist2} probKey="win" seasonProbs={seasonProbs} />
-        </div>
-      </div>
-    </div>
-  );
+  const newPool = k / productOthers;
+  return Math.max(0, pools[outcomeIndex] + cost - newPool);
 }
 
 export default function PingPongELO() {
@@ -542,7 +176,6 @@ export default function PingPongELO() {
   const [newPlayerOffice, setNewPlayerOffice] = useState("");
 
   const [activeTab, setActiveTab] = useState("match");
-  const [tournamentRegion, setTournamentRegion] = useState(0);
   const [sortColumn, setSortColumn] = useState("rank");
   const [sortDirection, setSortDirection] = useState("asc");
 
@@ -556,13 +189,27 @@ export default function PingPongELO() {
   const [hoveredPointElo, setHoveredPointElo] = useState(null);
   const [hoveredPointDate, setHoveredPointDate] = useState(null);
 
-  // Store tournament probabilities
-  const [seasonProbs, setSeasonProbs] = useState({});
-  const [probsLoading, setProbsLoading] = useState(false);
+  // Markets & betting state
+  const [marketsData, setMarketsData] = useState([]);
+  const [selectedMarket, setSelectedMarket] = useState(null);
+  const [marketDetail, setMarketDetail] = useState(null);
+  const [betAmount, setBetAmount] = useState('');
+  const [selectedOutcome, setSelectedOutcome] = useState(null);
+  const [pointBalance, setPointBalance] = useState(null);
+  const [userPositions, setUserPositions] = useState([]);
+  const [marketsLoading, setMarketsLoading] = useState(false);
+  const [marketFilter, setMarketFilter] = useState('open');
 
   // Auth state
   const [session, setSession] = useState(null);
   const [authUser, setAuthUser] = useState(null);
+  const [showClaimModal, setShowClaimModal] = useState(false);
+  const [claimMode, setClaimMode] = useState('existing'); // 'existing' or 'new'
+  const [claimPlayerId, setClaimPlayerId] = useState('');
+  const [claimName, setClaimName] = useState('');
+  const [claimCountry, setClaimCountry] = useState('');
+  const [claimOffice, setClaimOffice] = useState('');
+  const [claimLoading, setClaimLoading] = useState(false);
 
   // Auth helpers
   const getAuthHeaders = useCallback(() => {
@@ -587,6 +234,49 @@ export default function PingPongELO() {
     await supabase.auth.signOut();
     setSession(null);
     setAuthUser(null);
+    setShowClaimModal(false);
+  };
+
+  // Fetch full user profile from our API
+  const fetchUserProfile = async (s) => {
+    if (!s?.access_token) return;
+    try {
+      const res = await fetch('/api/auth/me', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${s.access_token}`,
+        },
+      });
+      if (res.ok) {
+        const profile = await res.json();
+        setAuthUser({
+          email: profile.email,
+          displayName: profile.displayName,
+          playerId: profile.playerId,
+          isAdmin: profile.isAdmin,
+        });
+        // Show claim modal if user has no linked player
+        if (!profile.playerId) {
+          setShowClaimModal(true);
+        }
+      } else {
+        // Fallback to basic info from session
+        setAuthUser({
+          email: s.user.email,
+          displayName: s.user.user_metadata?.full_name || s.user.email?.split('@')[0],
+          playerId: null,
+          isAdmin: false,
+        });
+        setShowClaimModal(true);
+      }
+    } catch {
+      setAuthUser({
+        email: s.user.email,
+        displayName: s.user.user_metadata?.full_name || s.user.email?.split('@')[0],
+        playerId: null,
+        isAdmin: false,
+      });
+    }
   };
 
   // Listen for auth state changes
@@ -594,22 +284,17 @@ export default function PingPongELO() {
     supabase.auth.getSession().then(({ data: { session: s } }) => {
       setSession(s);
       if (s?.user) {
-        setAuthUser({
-          email: s.user.email,
-          displayName: s.user.user_metadata?.full_name || s.user.email?.split('@')[0],
-        });
+        fetchUserProfile(s);
       }
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, s) => {
       setSession(s);
       if (s?.user) {
-        setAuthUser({
-          email: s.user.email,
-          displayName: s.user.user_metadata?.full_name || s.user.email?.split('@')[0],
-        });
+        fetchUserProfile(s);
       } else {
         setAuthUser(null);
+        setShowClaimModal(false);
       }
     });
 
@@ -620,27 +305,137 @@ export default function PingPongELO() {
     loadData();
   }, []);
 
-  // Simulate tournament probabilities
-  useEffect(() => {
-    if (!players || players.length === 0) return;
-
-    setProbsLoading(true);
-    setTimeout(() => {
-      try {
-        const eligiblePlayers = players.filter(p => (p.wins + p.losses) >= MIN_GAMES_FOR_QUALIFICATION);
-        const probs = simulateSeasonPlusTournamentProbabilities(eligiblePlayers, {
-          numSimulations: 1000,
-          seasonMatchesPerPlayer: 100,
-          seasonK: 24,
-          seasonMatchNoiseStd: 60,
-          tournamentMatchNoiseStd: 15,
-        });
-        setSeasonProbs(probs);
-      } finally {
-        setProbsLoading(false);
+  // Load markets data
+  const loadMarkets = async (filter) => {
+    setMarketsLoading(true);
+    try {
+      const response = await fetch(`/api/markets/list?status=${filter || marketFilter}`);
+      if (response.ok) {
+        const data = await response.json();
+        setMarketsData(data.markets || []);
       }
-    }, 0);
-  }, [players]);
+    } catch (err) {
+      console.error('Failed to load markets:', err);
+    } finally {
+      setMarketsLoading(false);
+    }
+  };
+
+  // Load point balance
+  const loadBalance = async () => {
+    if (!session) return;
+    try {
+      const response = await fetch('/api/points/balance', { headers: getAuthHeaders() });
+      if (response.ok) {
+        const data = await response.json();
+        if (!data.initialized) {
+          // Auto-initialize points
+          const initRes = await fetch('/api/points/initialize', {
+            method: 'POST',
+            headers: getAuthHeaders(),
+          });
+          if (initRes.ok) {
+            const initData = await initRes.json();
+            setPointBalance(initData.balance);
+          }
+        } else {
+          setPointBalance(data.balance);
+          setUserPositions(data.positions || []);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load balance:', err);
+    }
+  };
+
+  // Load market detail
+  const loadMarketDetail = async (marketId) => {
+    try {
+      const response = await fetch(`/api/markets/detail?id=${marketId}`, { headers: getAuthHeaders() });
+      if (response.ok) {
+        const data = await response.json();
+        setMarketDetail(data);
+      }
+    } catch (err) {
+      console.error('Failed to load market detail:', err);
+    }
+  };
+
+  // Place a bet
+  const placeBet = async () => {
+    if (!session) return alert('Please sign in to place a bet.');
+    if (!selectedOutcome || !betAmount || parseFloat(betAmount) <= 0) return;
+
+    setSaving(true);
+    try {
+      const response = await fetch('/api/bets/place', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          marketId: selectedMarket,
+          outcomeId: selectedOutcome,
+          amount: parseFloat(betAmount),
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setPointBalance(result.newBalance);
+        setBetAmount('');
+        setSelectedOutcome(null);
+        // Refresh market detail
+        await loadMarketDetail(selectedMarket);
+        await loadBalance();
+      } else {
+        alert(`Bet failed: ${result.error}`);
+      }
+    } catch (err) {
+      alert(`Network error: ${err.message}`);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // Sell shares
+  const sellShares = async (outcomeId, shares) => {
+    if (!session) return alert('Please sign in.');
+
+    setSaving(true);
+    try {
+      const response = await fetch('/api/bets/sell', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          marketId: selectedMarket,
+          outcomeId,
+          shares,
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setPointBalance(result.newBalance);
+        await loadMarketDetail(selectedMarket);
+        await loadBalance();
+      } else {
+        alert(`Sale failed: ${result.error}`);
+      }
+    } catch (err) {
+      alert(`Network error: ${err.message}`);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // Load balance when session changes
+  useEffect(() => {
+    if (session) {
+      loadBalance();
+    } else {
+      setPointBalance(null);
+      setUserPositions([]);
+    }
+  }, [session]);
 
 
   const loadData = async () => {
@@ -667,6 +462,41 @@ export default function PingPongELO() {
     }
   };
 
+  const claimPlayer = async () => {
+    if (!session) return;
+    setClaimLoading(true);
+    try {
+      const body = claimMode === 'new'
+        ? { createNew: true, name: claimName.trim(), countryCode: claimCountry, office: claimOffice }
+        : { playerId: claimPlayerId };
+
+      const response = await fetch('/api/auth/claim-player', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(body),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setAuthUser(prev => ({ ...prev, playerId: result.playerId }));
+        setShowClaimModal(false);
+        setClaimPlayerId('');
+        setClaimName('');
+        setClaimCountry('');
+        setClaimOffice('');
+        // Reload data to include new player if created
+        await loadData();
+        // Initialize points now that they have a player
+        await loadBalance();
+      } else {
+        alert(`Failed: ${result.error}`);
+      }
+    } catch (err) {
+      alert(`Network error: ${err.message}`);
+    } finally {
+      setClaimLoading(false);
+    }
+  };
 
   // K-factor based on games played — new players converge fast, veterans are stable
   const getKFactor = (gamesPlayed) => {
@@ -955,7 +785,7 @@ export default function PingPongELO() {
         expectedWins,
         pointsFor,
         pointsAgainst,
-        bettingOdds: probabilityToOdds((seasonProbs[player.id]?.win || 0)),
+        bettingOdds: null, // Removed tournament-based odds
       };
     });
 
@@ -1051,6 +881,134 @@ export default function PingPongELO() {
       </div>
     );
   }
+
+  // Compute which players are already claimed (for the claim modal)
+  const claimedPlayerIds = new Set(); // We'll filter on the server side, but show all in dropdown
+
+  // Claim modal — rendered as overlay on any view
+  const claimModal = showClaimModal && session && (
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-8">
+        <h2 className="text-2xl font-black mb-2" style={{ fontFamily: 'Figtree, sans-serif' }}>
+          Welcome to Isometric Ping Pong!
+        </h2>
+        <p className="text-gray-600 mb-6">
+          Link your account to your player profile to track stats, earn Hall of Fame points, and bet on prediction markets.
+        </p>
+
+        {/* Toggle between claim existing and create new */}
+        <div className="flex border-b border-gray-200 mb-6">
+          <button
+            onClick={() => setClaimMode('existing')}
+            className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+              claimMode === 'existing' ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'
+            }`}
+          >
+            I'm an existing player
+          </button>
+          <button
+            onClick={() => setClaimMode('new')}
+            className={`flex-1 px-4 py-3 text-sm font-semibold transition-colors ${
+              claimMode === 'new' ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'
+            }`}
+          >
+            I'm new here
+          </button>
+        </div>
+
+        {claimMode === 'existing' ? (
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Which player are you?</label>
+              <select
+                value={claimPlayerId}
+                onChange={(e) => setClaimPlayerId(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+              >
+                <option value="">Select your profile...</option>
+                {players
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map(p => (
+                    <option key={p.id} value={p.id}>
+                      {p.name} ({p.office}) — {p.elo} ELO
+                    </option>
+                  ))
+                }
+              </select>
+            </div>
+
+            <button
+              onClick={claimPlayer}
+              disabled={claimLoading || !claimPlayerId}
+              className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded"
+            >
+              {claimLoading ? 'Linking...' : 'That\'s me!'}
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Your Name</label>
+              <input
+                type="text"
+                value={claimName}
+                onChange={(e) => setClaimName(e.target.value)}
+                placeholder="Enter your name..."
+                className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Country</label>
+              <select
+                value={claimCountry}
+                onChange={(e) => setClaimCountry(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+              >
+                <option value="">Select country...</option>
+                {COUNTRIES.map(c => (
+                  <option key={c.code} value={c.code}>{c.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Office</label>
+              <select
+                value={claimOffice}
+                onChange={(e) => setClaimOffice(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+              >
+                <option value="">Select office...</option>
+                {OFFICES.map(o => (
+                  <option key={o} value={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="bg-gray-100 p-3 rounded text-sm text-gray-600">
+              You'll start with 1500 ELO and receive 1,000 Hall of Fame points.
+            </div>
+
+            <button
+              onClick={claimPlayer}
+              disabled={claimLoading || !claimName.trim() || !claimCountry || !claimOffice}
+              className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded"
+            >
+              {claimLoading ? 'Creating...' : 'Create my profile'}
+            </button>
+          </div>
+        )}
+
+        <button
+          onClick={() => setShowClaimModal(false)}
+          className="w-full mt-3 px-6 py-2 text-sm text-gray-400 hover:text-gray-700 transition-colors"
+        >
+          Skip for now
+        </button>
+      </div>
+    </div>
+  );
 
   // =========================
   // PLAYER DETAIL VIEW
@@ -1602,56 +1560,478 @@ export default function PingPongELO() {
             </div>
           </div>
         </div>
+        {claimModal}
       </div>
     );
   }
 
-  // TOURNAMENT VIEW
-  if (currentView === "tournament") {
-    const regions = buildCurrentEloSeeding(players);
-    const activeRegion = regions[tournamentRegion] ?? [];
+  // MARKETS LIST VIEW
+  if (currentView === "markets") {
+    return (
+      <div className="min-h-screen bg-white">
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+        <div className="border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <div className="flex items-start justify-between mb-6">
+              <button onClick={() => setCurrentView("rankings")} className="text-gray-600 hover:text-black flex items-center gap-2">
+                ← Back to Rankings
+              </button>
+              {session && pointBalance !== null && (
+                <button
+                  onClick={() => setCurrentView("portfolio")}
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded transition-colors"
+                  style={{ fontFamily: 'monospace' }}
+                >
+                  <span className="text-sm font-semibold">{pointBalance.toFixed(0)} pts</span>
+                  <span className="text-xs text-gray-500">Portfolio →</span>
+                </button>
+              )}
+            </div>
+            <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Prediction Markets</h1>
+            <p className="text-xl text-gray-700" style={{ fontFamily: "monospace" }}>
+              Buy and sell shares on ping pong outcomes. Shares pay 1 pt if the outcome happens.
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-8">
+          {/* Filter tabs */}
+          <div className="flex border-b border-gray-200 mb-8">
+            {[
+              { key: 'open', label: 'Open' },
+              { key: 'all', label: 'All' },
+              { key: 'resolved', label: 'Resolved' },
+            ].map(f => (
+              <button
+                key={f.key}
+                onClick={() => { setMarketFilter(f.key); loadMarkets(f.key); }}
+                className={`px-6 py-4 font-semibold transition-colors ${marketFilter === f.key ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'}`}
+                style={{ fontFamily: 'monospace' }}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+
+          {marketsLoading ? (
+            <div className="text-center py-16 text-gray-400" style={{ fontFamily: 'monospace' }}>
+              Loading markets...
+            </div>
+          ) : marketsData.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-gray-400 text-lg">No markets found.</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {marketsData.map(market => (
+                <button
+                  key={market.id}
+                  onClick={() => {
+                    setSelectedMarket(market.id);
+                    loadMarketDetail(market.id);
+                    setCurrentView("market-detail");
+                  }}
+                  className="w-full text-left border border-gray-200 rounded-lg p-6 hover:shadow-md hover:border-gray-300 transition-all bg-white"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900" style={{ fontFamily: 'Figtree, sans-serif' }}>
+                        {market.title}
+                      </h3>
+                      {market.description && (
+                        <p className="text-sm text-gray-500 mt-1">{market.description}</p>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className={`text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider ${
+                        market.status === 'open' ? 'bg-green-100 text-green-700' :
+                        market.status === 'resolved' ? 'bg-blue-100 text-blue-700' :
+                        market.status === 'closed' ? 'bg-yellow-100 text-yellow-700' :
+                        'bg-gray-100 text-gray-700'
+                      }`}>
+                        {market.status}
+                      </span>
+                      {market.volume > 0 && (
+                        <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                          {market.volume.toFixed(0)} pts vol
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Top outcomes preview */}
+                  <div className="space-y-2">
+                    {market.outcomes.slice(0, 5).map(outcome => (
+                      <div key={outcome.id} className="flex items-center gap-3">
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-sm font-medium text-gray-700" style={{ fontFamily: 'monospace' }}>
+                              {outcome.label}
+                            </span>
+                            <span className="text-sm font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
+                              {Math.round(outcome.price * 100)}¢
+                            </span>
+                          </div>
+                          <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div
+                              className="h-full rounded-full bg-gray-900"
+                              style={{ width: `${Math.min(100, outcome.price * 100)}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    {market.outcomes.length > 5 && (
+                      <p className="text-xs text-gray-400 mt-2">
+                        + {market.outcomes.length - 5} more outcomes
+                      </p>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // MARKET DETAIL VIEW
+  if (currentView === "market-detail" && selectedMarket) {
+    const md = marketDetail;
+
+    // Preview calculation
+    const previewShares = (() => {
+      if (!md || !selectedOutcome || !betAmount || parseFloat(betAmount) <= 0) return null;
+      const outcome = md.outcomes.find(o => o.id === selectedOutcome);
+      if (!outcome) return null;
+      const pools = md.outcomes.map(o => o.poolShares);
+      const idx = md.outcomes.findIndex(o => o.id === selectedOutcome);
+      const shares = cpmmSharesForCost(pools, idx, parseFloat(betAmount));
+      const avgPrice = shares > 0 ? parseFloat(betAmount) / shares : 0;
+      return { shares, avgPrice, potentialPayout: shares };
+    })();
 
     return (
       <div className="min-h-screen bg-white">
         <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
         <div className="border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-8 py-8">
-            <button onClick={() => setCurrentView("rankings")} className="text-gray-600 hover:text-black mb-6 flex items-center gap-2">
-              ← Back to Rankings
+            <div className="flex items-start justify-between mb-6">
+              <button onClick={() => { setCurrentView("markets"); setSelectedMarket(null); setMarketDetail(null); setSelectedOutcome(null); setBetAmount(''); }} className="text-gray-600 hover:text-black flex items-center gap-2">
+                ← Back to Markets
+              </button>
+              {session && pointBalance !== null && (
+                <div className="text-sm font-semibold text-gray-700" style={{ fontFamily: 'monospace' }}>
+                  Balance: {pointBalance.toFixed(0)} pts
+                </div>
+              )}
+            </div>
+
+            {md ? (
+              <>
+                <h1 className="text-5xl font-black mb-3" style={{ fontFamily: "Figtree, sans-serif" }}>
+                  {md.market.title}
+                </h1>
+                {md.market.description && (
+                  <p className="text-lg text-gray-600 mb-2">{md.market.description}</p>
+                )}
+                <div className="flex items-center gap-4 text-sm text-gray-500" style={{ fontFamily: 'monospace' }}>
+                  <span className={`px-2 py-1 rounded font-semibold uppercase text-xs ${
+                    md.market.status === 'open' ? 'bg-green-100 text-green-700' :
+                    md.market.status === 'resolved' ? 'bg-blue-100 text-blue-700' :
+                    'bg-gray-100 text-gray-700'
+                  }`}>{md.market.status}</span>
+                  <span>Volume: {md.market.volume.toFixed(0)} pts</span>
+                  {md.market.resolutionDate && (
+                    <span>Resolves: {new Date(md.market.resolutionDate).toLocaleDateString()}</span>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="text-gray-400">Loading...</div>
+            )}
+          </div>
+        </div>
+
+        {md && (
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Outcomes list */}
+              <div className="lg:col-span-2 space-y-3">
+                <h2 className="text-sm uppercase tracking-wider text-gray-400 font-semibold mb-4">Outcomes</h2>
+                {md.outcomes.map(outcome => {
+                  const isSelected = selectedOutcome === outcome.id;
+                  const pricePercent = Math.round(outcome.price * 100);
+                  const position = md.userPositions?.find(p => p.outcomeId === outcome.id);
+
+                  return (
+                    <div
+                      key={outcome.id}
+                      className={`border rounded-lg p-4 transition-all ${
+                        isSelected ? 'border-black shadow-md' : 'border-gray-200 hover:border-gray-300'
+                      } ${outcome.isWinner === true ? 'bg-green-50 border-green-300' : outcome.isWinner === false ? 'bg-gray-50 opacity-60' : ''}`}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-3">
+                          {outcome.player?.countryCode && (
+                            <img
+                              src={`https://flagcdn.com/24x18/${outcome.player.countryCode}.png`}
+                              width="24" height="18" alt="" className="flex-shrink-0"
+                            />
+                          )}
+                          <div>
+                            <span className="font-semibold text-gray-900">{outcome.label}</span>
+                            {outcome.player && (
+                              <span className="text-xs text-gray-400 ml-2">{outcome.player.office} · {outcome.player.elo} ELO</span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
+                            {pricePercent}¢
+                          </span>
+                          {md.market.status === 'open' && session && (
+                            <button
+                              onClick={() => setSelectedOutcome(isSelected ? null : outcome.id)}
+                              className={`px-4 py-2 text-sm font-semibold rounded transition-colors ${
+                                isSelected ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                              }`}
+                            >
+                              {isSelected ? 'Selected' : 'Buy'}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Price bar */}
+                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden mb-2">
+                        <div
+                          className={`h-full rounded-full transition-all ${outcome.isWinner === true ? 'bg-green-500' : 'bg-gray-900'}`}
+                          style={{ width: `${Math.min(100, pricePercent)}%` }}
+                        />
+                      </div>
+
+                      {/* User position */}
+                      {position && position.shares > 0 && (
+                        <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
+                          <span className="text-xs text-gray-500">
+                            You own {position.shares.toFixed(2)} shares (avg {(position.avgCostBasis * 100).toFixed(0)}¢)
+                          </span>
+                          {md.market.status === 'open' && (
+                            <button
+                              onClick={() => sellShares(outcome.id, position.shares)}
+                              className="text-xs text-red-600 hover:text-red-800 font-semibold"
+                            >
+                              Sell All
+                            </button>
+                          )}
+                        </div>
+                      )}
+
+                      {outcome.isWinner === true && (
+                        <div className="mt-2 text-sm font-bold text-green-700">✓ Winner</div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Bet placement sidebar */}
+              <div className="lg:col-span-1">
+                {md.market.status === 'open' && session ? (
+                  <div className="sticky top-8 border border-gray-200 rounded-lg p-6">
+                    <h3 className="font-bold text-gray-900 mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>Place a Bet</h3>
+
+                    {selectedOutcome ? (
+                      <div className="space-y-4">
+                        <div className="bg-gray-50 p-3 rounded">
+                          <span className="text-sm font-medium text-gray-700">
+                            {md.outcomes.find(o => o.id === selectedOutcome)?.label}
+                          </span>
+                          <span className="text-sm text-gray-500 ml-2">
+                            @ {Math.round((md.outcomes.find(o => o.id === selectedOutcome)?.price || 0) * 100)}¢
+                          </span>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Amount (pts)</label>
+                          <input
+                            type="number"
+                            min="1"
+                            step="1"
+                            value={betAmount}
+                            onChange={(e) => setBetAmount(e.target.value)}
+                            placeholder="10"
+                            className="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                            style={{ fontFamily: 'monospace' }}
+                          />
+                          <p className="text-xs text-gray-400 mt-1">
+                            Available: {pointBalance?.toFixed(0) || 0} pts
+                          </p>
+                        </div>
+
+                        {/* Preview */}
+                        {previewShares && (
+                          <div className="bg-gray-50 p-4 rounded space-y-2" style={{ fontFamily: 'monospace' }}>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-500">Shares</span>
+                              <span className="font-semibold">{previewShares.shares.toFixed(2)}</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-500">Avg Price</span>
+                              <span className="font-semibold">{(previewShares.avgPrice * 100).toFixed(1)}¢</span>
+                            </div>
+                            <div className="flex justify-between text-sm border-t border-gray-200 pt-2">
+                              <span className="text-gray-500">If YES, payout</span>
+                              <span className="font-bold text-green-700">{previewShares.potentialPayout.toFixed(2)} pts</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-500">Potential profit</span>
+                              <span className="font-bold text-green-700">+{(previewShares.potentialPayout - parseFloat(betAmount)).toFixed(2)} pts</span>
+                            </div>
+                          </div>
+                        )}
+
+                        <button
+                          onClick={placeBet}
+                          disabled={saving || !betAmount || parseFloat(betAmount) <= 0 || parseFloat(betAmount) > (pointBalance || 0)}
+                          className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded"
+                        >
+                          {saving ? 'Placing...' : `Buy for ${betAmount || '0'} pts`}
+                        </button>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-400">Select an outcome to place a bet.</p>
+                    )}
+                  </div>
+                ) : !session ? (
+                  <div className="border border-gray-200 rounded-lg p-6 text-center">
+                    <p className="text-gray-500 mb-4">Sign in to place bets</p>
+                    <button onClick={signInWithGoogle} className="px-6 py-2 bg-black text-white rounded font-semibold hover:bg-gray-800 transition-colors">
+                      Sign in with Google
+                    </button>
+                  </div>
+                ) : md.market.status === 'resolved' ? (
+                  <div className="border border-gray-200 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-blue-700">This market has been resolved.</p>
+                    <p className="text-xs text-gray-500 mt-2">Winning shares have been paid out at 1 pt each.</p>
+                  </div>
+                ) : null}
+
+                {/* Recent activity */}
+                {md.recentBets && md.recentBets.length > 0 && (
+                  <div className="mt-6 border border-gray-200 rounded-lg p-6">
+                    <h3 className="font-bold text-gray-900 mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>Recent Activity</h3>
+                    <div className="space-y-2">
+                      {md.recentBets.slice(0, 10).map(bet => {
+                        const outcome = md.outcomes.find(o => o.id === bet.outcomeId);
+                        return (
+                          <div key={bet.id} className="flex items-center justify-between text-xs" style={{ fontFamily: 'monospace' }}>
+                            <span className={bet.direction === 'buy' ? 'text-green-600' : 'text-red-600'}>
+                              {bet.direction === 'buy' ? 'BUY' : 'SELL'} {bet.shares.toFixed(1)} · {outcome?.label || '?'}
+                            </span>
+                            <span className="text-gray-400">
+                              {new Date(bet.createdAt).toLocaleDateString()}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // PORTFOLIO VIEW
+  if (currentView === "portfolio") {
+    const totalInvested = userPositions.reduce((sum, p) => sum + p.costBasis, 0);
+    const totalCurrentValue = userPositions.reduce((sum, p) => sum + p.currentValue, 0);
+    const totalPnL = totalCurrentValue - totalInvested;
+
+    return (
+      <div className="min-h-screen bg-white">
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+        <div className="border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <button onClick={() => setCurrentView("markets")} className="text-gray-600 hover:text-black mb-6 flex items-center gap-2">
+              ← Back to Markets
             </button>
-            <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Tournament Bracket</h1>
-            <p className="text-xl text-gray-700" style={{ fontFamily: "monospace" }}>
-              Projected outcomes based on 1,000 Monte Carlo simulations. Seeded by current Elo.
-            </p>
+            <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Portfolio</h1>
+
+            {/* Balance summary */}
+            <div className="grid grid-cols-4 gap-6 mt-6">
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="text-xs uppercase tracking-wider text-gray-400 mb-1">Available</div>
+                <div className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
+                  {(pointBalance || 0).toFixed(0)}
+                </div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="text-xs uppercase tracking-wider text-gray-400 mb-1">Invested</div>
+                <div className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
+                  {totalInvested.toFixed(0)}
+                </div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="text-xs uppercase tracking-wider text-gray-400 mb-1">Current Value</div>
+                <div className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
+                  {totalCurrentValue.toFixed(0)}
+                </div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="text-xs uppercase tracking-wider text-gray-400 mb-1">P&L</div>
+                <div className={`text-2xl font-bold ${totalPnL >= 0 ? 'text-green-600' : 'text-red-600'}`} style={{ fontFamily: 'monospace' }}>
+                  {totalPnL >= 0 ? '+' : ''}{totalPnL.toFixed(0)}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-8 py-8">
-          <div className="flex border-b border-gray-200 mb-8">
-            {[...REGION_NAMES, "Final Four"].map((name, i) => (
+          {userPositions.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-gray-400 text-lg mb-4">No positions yet.</p>
               <button
-                key={name}
-                onClick={() => setTournamentRegion(i)}
-                className={`px-6 py-4 font-semibold transition-colors ${tournamentRegion === i ? 'text-black border-b-2 border-black' : 'text-gray-400 hover:text-gray-700'}`}
-                style={{ fontFamily: 'monospace' }}
+                onClick={() => { setCurrentView("markets"); loadMarkets(); }}
+                className="px-6 py-3 bg-black text-white font-semibold rounded hover:bg-gray-800 transition-colors"
               >
-                {name}
+                Browse Markets
               </button>
-            ))}
-          </div>
-
-          {probsLoading ? (
-            <div className="text-center py-16 text-gray-400" style={{ fontFamily: 'monospace' }}>
-              Calculating simulation probabilities...
             </div>
-          ) : tournamentRegion < 4 ? (
-            <RegionBracket
-              regionName={REGION_NAMES[tournamentRegion]}
-              regionPlayers={activeRegion}
-              seasonProbs={seasonProbs}
-            />
           ) : (
-            <FinalFourView regions={regions} seasonProbs={seasonProbs} />
+            <div className="space-y-3">
+              {userPositions.map(pos => {
+                const pnl = pos.currentValue - pos.costBasis;
+                return (
+                  <div key={pos.id} className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-xs text-gray-400 uppercase tracking-wider mb-1">{pos.marketTitle}</div>
+                        <div className="font-semibold text-gray-900">{pos.outcomeLabel}</div>
+                      </div>
+                      <div className="text-right" style={{ fontFamily: 'monospace' }}>
+                        <div className="text-sm text-gray-500">{pos.shares.toFixed(2)} shares</div>
+                        <div className="text-sm">
+                          <span className="text-gray-500">Avg: {(pos.avgCostBasis * 100).toFixed(0)}¢</span>
+                          <span className="mx-2">·</span>
+                          <span className="text-gray-500">Now: {(pos.currentPrice * 100).toFixed(0)}¢</span>
+                        </div>
+                        <div className={`font-bold ${pnl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          {pnl >= 0 ? '+' : ''}{pnl.toFixed(2)} pts
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
       </div>
@@ -1763,9 +2143,18 @@ export default function PingPongELO() {
                   Sign in
                 </button>
               )}
-              <button onClick={() => setCurrentView("tournament")} className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors">
-                Tournament
+              <button onClick={() => { setCurrentView("markets"); loadMarkets(); }} className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors">
+                Markets
               </button>
+              {session && pointBalance !== null && (
+                <button
+                  onClick={() => { setCurrentView("portfolio"); loadBalance(); }}
+                  className="px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-700 hover:bg-gray-200 transition-colors rounded"
+                  style={{ fontFamily: 'monospace' }}
+                >
+                  {pointBalance.toFixed(0)} pts
+                </button>
+              )}
               <button onClick={() => setCurrentView("matches")} className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors">
                 View Matches
               </button>
@@ -1797,33 +2186,24 @@ export default function PingPongELO() {
                 <SortableHeader column="winRate" align="center">Win Rate</SortableHeader>
                 <SortableHeader column="efficiency" align="center">Efficiency</SortableHeader>
                 <SortableHeader column="pointsDiff" align="center">Points Diff</SortableHeader>
-                <SortableHeader column="bettingOdds" align="center">Odds</SortableHeader>
               </tr>
             </thead>
 
             <tbody>
               {sortedPlayers.length === 0 ? (
                 <tr>
-                  <td colSpan="8" className="text-center py-16 text-gray-400">
+                  <td colSpan="7" className="text-center py-16 text-gray-400">
                     No players registered yet. Add a player to get started.
                   </td>
                 </tr>
               ) : (
                 (() => {
-                  // Find the last qualified player to render the cutoff after (64th, or last if fewer)
-                  const qualifiedByRank = sortedPlayers
-                    .filter(p => (p.wins + p.losses) >= MIN_GAMES_FOR_QUALIFICATION)
-                    .sort((a, b) => a.rank - b.rank);
-                  const cutoffIndex = Math.min(63, qualifiedByRank.length - 1);
-                  const cutoffPlayerId = cutoffIndex >= 0 ? qualifiedByRank[cutoffIndex].id : null;
-
                   return sortedPlayers.map((player) => {
                   const rankChange = player.lastWeekRank ? player.lastWeekRank - player.rank : 0;
                   const countryData = COUNTRIES.find((c) => c.code === player.countryCode);
 
                   const totalMatches = player.wins + player.losses;
                   const isQualified = totalMatches >= MIN_GAMES_FOR_QUALIFICATION;
-                  const isCutoffPlayer = player.id === cutoffPlayerId;
                   const winRate = totalMatches > 0 ? ((player.wins / totalMatches) * 100).toFixed(1) : '0.0';
 
                   const pointsDiff = player.pointsFor - player.pointsAgainst;
@@ -1920,24 +2300,8 @@ export default function PingPongELO() {
                           </span>
                         </td>
 
-                        <td className="py-3 px-6 text-center">
-                          <span className="text-sm font-mono font-semibold text-gray-900">
-                            {player.bettingOdds || '+10000'}
-                          </span>
-                        </td>
                       </tr>
 
-                      {isCutoffPlayer && (
-                        <tr>
-                          <td colSpan="8" className="p-0">
-                            <div className="border-t-4 border-red-500 relative z-10">
-                              <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-4 py-1 border-2 border-red-500 rounded text-xs font-bold text-red-600 uppercase tracking-wider z-20">
-                                Tournament Cutoff
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      )}
                     </React.Fragment>
                   );
                 });
@@ -1965,10 +2329,10 @@ export default function PingPongELO() {
 
     <div>
       <h3 className="text-xl font-bold mb-3 text-gray-900" style={{ fontFamily: "Figtree, sans-serif" }}>
-        Odds
+        Prediction Markets
       </h3>
       <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-        Betting odds for winning the 64-player tournament based on 1,000 simulated seasons and tournaments. +2500 means a $100 bet wins $2500. -200 means you need to bet $200 to win $100.
+        Use your Hall of Fame points to buy shares on outcomes — who'll finish #1, who makes top 5, and more. Shares are priced 1¢–99¢ based on demand. If your outcome wins, each share pays 1 pt.
       </p>
     </div>
   </div>
@@ -2124,6 +2488,7 @@ export default function PingPongELO() {
         </div>
 
         {sidebarOpen && <div className="fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity" onClick={() => setSidebarOpen(false)} />}
+        {claimModal}
       </div>
     </div>
   );
