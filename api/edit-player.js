@@ -24,6 +24,18 @@ export default async function handler(req, res) {
   const { playerId, name, countryCode, office } = req.body;
 
   if (!playerId) return res.status(400).json({ error: 'Missing playerId' });
+
+  // Authorization: user can only edit their own linked player, or admin can edit any
+  const db0 = supabase();
+  const { data: userRow } = await db0
+    .from('users')
+    .select('player_id, is_admin')
+    .eq('id', user.id)
+    .single();
+
+  if (!userRow?.is_admin && userRow?.player_id !== playerId) {
+    return res.status(403).json({ error: 'You can only edit your own player profile.' });
+  }
   if (!name || !name.trim()) return res.status(400).json({ error: 'Missing player name' });
   if (!countryCode) return res.status(400).json({ error: 'Missing country code' });
   if (!office) return res.status(400).json({ error: 'Missing office' });

@@ -25,6 +25,20 @@ export default async function handler(req, res) {
 
   const { winnerId, loserId, winnerScore, loserScore, matchDate } = req.body;
 
+  // Authorization: user must be one of the players, or an admin
+  const db0 = supabase();
+  const { data: userRow } = await db0
+    .from('users')
+    .select('player_id, is_admin')
+    .eq('id', user.id)
+    .single();
+
+  if (!userRow?.is_admin) {
+    if (!userRow?.player_id || (userRow.player_id !== winnerId && userRow.player_id !== loserId)) {
+      return res.status(403).json({ error: 'You can only record matches you played in.' });
+    }
+  }
+
   if (!winnerId || !loserId) {
     return res.status(400).json({ error: 'Missing winnerId or loserId' });
   }
