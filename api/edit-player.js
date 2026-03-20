@@ -1,7 +1,10 @@
 // api/edit-player.js
-// Atomic player edit — fetches latest state, updates player, writes back with retry
+// Updates player metadata in Supabase
 
-import { atomicUpdate, setCorsHeaders, validateEnv } from './_lib/github.js';
+import {
+  supabase, fetchPlayersWithHistory, fetchMatches,
+  setCorsHeaders, validateEnv, getAuthUser,
+} from './_lib/supabase.js';
 
 export default async function handler(req, res) {
   setCorsHeaders(res);
@@ -13,41 +16,49 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
+  const user = await getAuthUser(req);
+  if (!user) {
+    return res.status(401).json({ error: 'Authentication required. Please sign in.' });
+  }
+
   const { playerId, name, countryCode, office } = req.body;
 
-  if (!playerId) {
-    return res.status(400).json({ error: 'Missing playerId' });
-  }
-  if (!name || !name.trim()) {
-    return res.status(400).json({ error: 'Missing player name' });
-  }
-  if (!countryCode) {
-    return res.status(400).json({ error: 'Missing country code' });
-  }
-  if (!office) {
-    return res.status(400).json({ error: 'Missing office' });
-  }
+  if (!playerId) return res.status(400).json({ error: 'Missing playerId' });
+  if (!name || !name.trim()) return res.status(400).json({ error: 'Missing player name' });
+  if (!countryCode) return res.status(400).json({ error: 'Missing country code' });
+  if (!office) return res.status(400).json({ error: 'Missing office' });
 
   try {
-    const result = await atomicUpdate(({ players, matches }) => {
-      const player = players.find(p => p.id === playerId);
-      if (!player) {
-        throw new Error('Player not found');
-      }
+    const db = supabase();
 
-      const updatedPlayers = players.map(p =>
-        p.id === playerId
-          ? { ...p, name: name.trim(), countryCode, office }
-          : p
-      );
+    const { error: updateError, count } = await db.from('players')
+      .update({
+        name: name.trim(),
+        country_code: countryCode,
+        office,
+      })
+      .eq('id', playerId);
 
-      return { players: updatedPlayers, matches };
-    });
+    if (updateError) throw new Error(`Failed to update player: ${updateError.message}`);
+
+    // Also update denormalized names in matches
+    const { error: winnerNameError } = await db.from('matches')
+      .update({ winner_name: name.trim() })
+      .eq('winner_id', playerId);
+    if (winnerNameError) console.warn('Failed to update winner names:', winnerNameError.message);
+
+    const { error: loserNameError } = await db.from('matches')
+      .update({ loser_name: name.trim() })
+      .eq('loser_id', playerId);
+    if (loserNameError) console.warn('Failed to update loser names:', loserNameError.message);
+
+    const players = await fetchPlayersWithHistory();
+    const matches = await fetchMatches();
 
     return res.status(200).json({
       success: true,
-      players: result.players,
-      matches: result.matches,
+      players,
+      matches,
     });
   } catch (error) {
     console.error('Error editing player:', error);

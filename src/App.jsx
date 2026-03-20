@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { X, ChevronUp, ChevronDown, Edit2, Trash2 } from 'lucide-react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { X, ChevronUp, ChevronDown, Edit2, Trash2, LogIn, LogOut } from 'lucide-react';
+import { supabase } from './lib/supabase.js';
 
 // Component for Recent Form visualization
 function RecentFormBar({ matches }) {
@@ -559,6 +560,62 @@ export default function PingPongELO() {
   const [seasonProbs, setSeasonProbs] = useState({});
   const [probsLoading, setProbsLoading] = useState(false);
 
+  // Auth state
+  const [session, setSession] = useState(null);
+  const [authUser, setAuthUser] = useState(null);
+
+  // Auth helpers
+  const getAuthHeaders = useCallback(() => {
+    if (!session?.access_token) return { 'Content-Type': 'application/json' };
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.access_token}`,
+    };
+  }, [session]);
+
+  const signInWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+    if (error) alert(`Sign in failed: ${error.message}`);
+  };
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    setSession(null);
+    setAuthUser(null);
+  };
+
+  // Listen for auth state changes
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session: s } }) => {
+      setSession(s);
+      if (s?.user) {
+        setAuthUser({
+          email: s.user.email,
+          displayName: s.user.user_metadata?.full_name || s.user.email?.split('@')[0],
+        });
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, s) => {
+      setSession(s);
+      if (s?.user) {
+        setAuthUser({
+          email: s.user.email,
+          displayName: s.user.user_metadata?.full_name || s.user.email?.split('@')[0],
+        });
+      } else {
+        setAuthUser(null);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   useEffect(() => {
     loadData();
   }, []);
@@ -589,7 +646,7 @@ export default function PingPongELO() {
   const loadData = async () => {
     try {
       setLoading(true);
-      console.log('📡 Loading data from GitHub...');
+      console.log('Loading data...');
 
       const response = await fetch('/api/load-data');
 
@@ -668,6 +725,7 @@ export default function PingPongELO() {
   };
 
   const recordMatch = async () => {
+    if (!session) return alert("Please sign in to record a match.");
     if (!selectedWinner || !selectedLoser || selectedWinner === selectedLoser) return;
 
     const winnerScoreNum = winnerScore ? parseInt(winnerScore, 10) : null;
@@ -682,7 +740,7 @@ export default function PingPongELO() {
     try {
       const response = await fetch('/api/record-match', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify({
           winnerId: selectedWinner,
           loserId: selectedLoser,
@@ -714,13 +772,14 @@ export default function PingPongELO() {
   };
 
   const addPlayer = async () => {
+    if (!session) return alert("Please sign in to add a player.");
     if (!newPlayerName.trim() || !newPlayerCountry || !newPlayerOffice) return;
 
     setSaving(true);
     try {
       const response = await fetch('/api/add-player', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify({
           name: newPlayerName.trim(),
           countryCode: newPlayerCountry,
@@ -756,13 +815,14 @@ export default function PingPongELO() {
   };
 
   const saveEditPlayer = async () => {
+    if (!session) return alert("Please sign in to edit a player.");
     if (!editName.trim() || !editCountry || !editOffice) return;
 
     setSaving(true);
     try {
       const response = await fetch('/api/edit-player', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify({
           playerId: editingPlayer,
           name: editName.trim(),
@@ -800,13 +860,14 @@ export default function PingPongELO() {
   };
 
   const deleteMatch = async (matchId) => {
+    if (!session) return alert("Please sign in to delete a match.");
     if (!window.confirm("Delete this match? This will recalculate all ELO ratings.")) return;
 
     setSaving(true);
     try {
       const response = await fetch('/api/delete-match', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify({ matchId }),
       });
 
@@ -1688,7 +1749,20 @@ export default function PingPongELO() {
               UPDATED {formatDate(new Date().toISOString())}, AT {formatTime(new Date().toISOString())}
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
+              {authUser ? (
+                <div className="flex items-center gap-2 mr-2">
+                  <span className="text-sm text-gray-600" style={{ fontFamily: "monospace" }}>{authUser.displayName}</span>
+                  <button onClick={signOut} className="p-2 text-gray-400 hover:text-gray-700 transition-colors" title="Sign out">
+                    <LogOut size={16} />
+                  </button>
+                </div>
+              ) : (
+                <button onClick={signInWithGoogle} className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors rounded">
+                  <LogIn size={16} />
+                  Sign in
+                </button>
+              )}
               <button onClick={() => setCurrentView("tournament")} className="px-5 py-2 border border-black text-black text-sm font-medium hover:bg-gray-100 transition-colors">
                 Tournament
               </button>

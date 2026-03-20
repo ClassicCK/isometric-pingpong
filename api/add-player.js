@@ -1,7 +1,10 @@
 // api/add-player.js
-// Atomic player addition — fetches latest state, adds player, writes back with retry
+// Adds a new player to Supabase
 
-import { atomicUpdate, calculateRankChanges, setCorsHeaders, validateEnv } from './_lib/github.js';
+import {
+  supabase, calculateRankChanges, fetchPlayersWithHistory, fetchMatches,
+  setCorsHeaders, validateEnv, getAuthUser,
+} from './_lib/supabase.js';
 
 export default async function handler(req, res) {
   setCorsHeaders(res);
@@ -11,6 +14,11 @@ export default async function handler(req, res) {
 
   if (!validateEnv()) {
     return res.status(500).json({ error: 'Server configuration error' });
+  }
+
+  const user = await getAuthUser(req);
+  if (!user) {
+    return res.status(401).json({ error: 'Authentication required. Please sign in.' });
   }
 
   const { name, countryCode, office } = req.body;
@@ -26,36 +34,53 @@ export default async function handler(req, res) {
   }
 
   try {
-    const result = await atomicUpdate(({ players, matches }) => {
-      // Check for duplicate names
-      const trimmedName = name.trim();
-      const duplicate = players.find(p => p.name.toLowerCase() === trimmedName.toLowerCase());
-      if (duplicate) {
-        throw new Error(`A player named "${duplicate.name}" already exists`);
-      }
+    const db = supabase();
+    const trimmedName = name.trim();
+    const now = new Date().toISOString();
+    const playerId = Date.now().toString();
 
-      const newPlayer = {
-        id: Date.now().toString(),
-        name: trimmedName,
-        countryCode,
-        office,
-        elo: 1500,
-        wins: 0,
-        losses: 0,
-        eloHistory: [{ elo: 1500, timestamp: new Date().toISOString() }],
-        joinedAt: new Date().toISOString(),
-        lastWeekRank: null,
-      };
+    // Check for duplicate names
+    const { data: existing } = await db
+      .from('players')
+      .select('name')
+      .ilike('name', trimmedName)
+      .limit(1);
 
-      const updatedPlayers = calculateRankChanges([...players, newPlayer]);
+    if (existing && existing.length > 0) {
+      return res.status(409).json({ error: `A player named "${existing[0].name}" already exists` });
+    }
 
-      return { players: updatedPlayers, matches };
+    // Insert player
+    const { error: insertError } = await db.from('players').insert({
+      id: playerId,
+      name: trimmedName,
+      country_code: countryCode,
+      office,
+      elo: 1500,
+      wins: 0,
+      losses: 0,
+      joined_at: now,
+      last_week_rank: null,
     });
+    if (insertError) throw new Error(`Failed to add player: ${insertError.message}`);
+
+    // Insert initial elo_history entry
+    const { error: historyError } = await db.from('elo_history').insert({
+      player_id: playerId,
+      elo: 1500,
+      recorded_at: now,
+    });
+    if (historyError) throw new Error(`Failed to insert elo_history: ${historyError.message}`);
+
+    // Fetch updated data and calculate ranks
+    const players = await fetchPlayersWithHistory();
+    const playersWithRanks = calculateRankChanges(players);
+    const matches = await fetchMatches();
 
     return res.status(200).json({
       success: true,
-      players: result.players,
-      matches: result.matches,
+      players: playersWithRanks,
+      matches,
     });
   } catch (error) {
     console.error('Error adding player:', error);
