@@ -1903,72 +1903,99 @@ export default function PingPongELO() {
             </div>
           ) : (
             <div className="space-y-4">
-              {marketsData.map(market => (
-                <button
-                  key={market.id}
-                  onClick={() => {
-                    setSelectedMarket(market.id);
-                    loadMarketDetail(market.id);
-                    setCurrentView("market-detail");
-                  }}
-                  className="w-full text-left border border-gray-200 rounded-xl p-6 hover:shadow-md hover:border-gray-300 transition-all bg-white"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-lg font-bold text-gray-900" style={{ fontFamily: 'Figtree, sans-serif' }}>
-                        {market.title}
-                      </h3>
-                      {market.description && (
-                        <p className="text-sm text-gray-500 mt-1">{market.description}</p>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className={`text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider ${
-                        market.status === 'open' ? 'bg-green-100 text-green-700' :
-                        market.status === 'resolved' ? 'bg-blue-100 text-blue-700' :
-                        market.status === 'closed' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-gray-100 text-gray-700'
-                      }`}>
-                        {market.status}
-                      </span>
-                      {market.volume > 0 && (
-                        <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
-                          {market.volume.toFixed(0)} pts vol
+              {marketsData.map(market => {
+                const histories = market.priceHistories || [];
+                return (
+                  <button
+                    key={market.id}
+                    onClick={() => {
+                      setSelectedMarket(market.id);
+                      loadMarketDetail(market.id);
+                      setCurrentView("market-detail");
+                    }}
+                    className="w-full text-left border border-gray-200 rounded-xl p-6 hover:shadow-md hover:border-gray-300 transition-all bg-white"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900" style={{ fontFamily: 'Figtree, sans-serif' }}>
+                          {market.title}
+                        </h3>
+                        {market.description && (
+                          <p className="text-sm text-gray-500 mt-1">{market.description}</p>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className={`text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider ${
+                          market.status === 'open' ? 'bg-green-100 text-green-700' :
+                          market.status === 'resolved' ? 'bg-blue-100 text-blue-700' :
+                          market.status === 'closed' ? 'bg-yellow-100 text-yellow-700' :
+                          'bg-gray-100 text-gray-700'
+                        }`}>
+                          {market.status}
                         </span>
-                      )}
+                        {market.volume > 0 && (
+                          <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                            {market.volume.toFixed(0)} pts vol
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Top outcomes preview */}
-                  <div className="space-y-2">
-                    {market.outcomes.slice(0, 5).map(outcome => (
-                      <div key={outcome.id} className="flex items-center gap-3">
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-sm font-medium text-gray-700" style={{ fontFamily: 'monospace' }}>
-                              {outcome.label}
-                            </span>
-                            <span className="text-sm font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
-                              {Math.round(outcome.price * 100)}¢
-                            </span>
-                          </div>
-                          <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                            <div
-                              className="h-full rounded-full bg-gray-900"
-                              style={{ width: `${Math.min(100, outcome.price * 100)}%` }}
-                            />
+                    {/* Price chart + outcomes side by side */}
+                    <div className="flex gap-6">
+                      {/* Chart */}
+                      {histories.length > 0 && (
+                        <div className="flex-shrink-0" style={{ width: 240 }}>
+                          <MiniSparkline series={histories.slice(0, 5)} width={240} height={80} id={`list-${market.id}`} />
+                          {/* Legend */}
+                          <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1.5">
+                            {histories.slice(0, 5).map((s, si) => (
+                              <div key={s.id} className="flex items-center gap-1">
+                                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: CHART_COLORS[si % CHART_COLORS.length] }} />
+                                <span className="text-xs text-gray-400 truncate" style={{ fontFamily: 'monospace', maxWidth: 80, fontSize: '10px' }}>
+                                  {s.label}
+                                </span>
+                              </div>
+                            ))}
                           </div>
                         </div>
+                      )}
+
+                      {/* Top outcomes */}
+                      <div className="flex-1 space-y-2 min-w-0">
+                        {market.outcomes.slice(0, 5).map((outcome, oi) => (
+                          <div key={outcome.id} className="flex items-center gap-3">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="flex items-center gap-1.5 min-w-0">
+                                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: CHART_COLORS[oi % CHART_COLORS.length] }} />
+                                  <span className="text-sm font-medium text-gray-700 truncate" style={{ fontFamily: 'monospace' }}>
+                                    {outcome.label}
+                                  </span>
+                                </div>
+                                <span className="text-sm font-bold text-gray-900 flex-shrink-0 ml-2" style={{ fontFamily: 'monospace' }}>
+                                  {Math.round(outcome.price * 100)}¢
+                                </span>
+                              </div>
+                              <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full rounded-full"
+                                  style={{ width: `${Math.min(100, outcome.price * 100)}%`, backgroundColor: CHART_COLORS[oi % CHART_COLORS.length] }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                        {market.outcomes.length > 5 && (
+                          <p className="text-xs text-gray-400 mt-2 pl-3.5">
+                            + {market.outcomes.length - 5} more outcomes
+                          </p>
+                        )}
                       </div>
-                    ))}
-                    {market.outcomes.length > 5 && (
-                      <p className="text-xs text-gray-400 mt-2">
-                        + {market.outcomes.length - 5} more outcomes
-                      </p>
-                    )}
-                  </div>
-                </button>
-              ))}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>
@@ -2027,6 +2054,13 @@ export default function PingPongELO() {
                     <span>Resolves: {new Date(md.market.resolutionDate).toLocaleDateString()}</span>
                   )}
                 </div>
+
+                {/* Price history chart */}
+                {md.priceHistories && md.priceHistories.length > 0 && (
+                  <div className="mt-6 bg-white border border-gray-200 rounded-xl p-5">
+                    <PriceChart series={md.priceHistories.slice(0, 8)} width={700} height={260} id={`detail-${md.market.id}`} />
+                  </div>
+                )}
               </>
             ) : (
               <div className="text-gray-400">Loading...</div>
@@ -2744,9 +2778,11 @@ export default function PingPongELO() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {featuredMarkets.map(market => {
-              const priceChange = market.priceHistory.length >= 2
-                ? market.leadOutcome.price - market.priceHistory[0].price
-                : 0;
+              const histories = market.priceHistories || [];
+              const lead = histories[0];
+              const leadPrice = lead ? (lead.currentPrice || lead.points?.[lead.points.length - 1]?.price || 0) : 0;
+              const leadInitial = lead?.points?.[0]?.price || leadPrice;
+              const priceChange = leadPrice - leadInitial;
               const changeColor = priceChange >= 0 ? 'text-green-600' : 'text-red-500';
               const changeSign = priceChange >= 0 ? '+' : '';
 
@@ -2761,7 +2797,7 @@ export default function PingPongELO() {
                   className="text-left bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg hover:border-gray-300 transition-all group"
                 >
                   {/* Market title */}
-                  <div className="flex items-start justify-between gap-2 mb-3">
+                  <div className="flex items-start justify-between gap-2 mb-2">
                     <h3 className="text-sm font-semibold text-gray-900 leading-tight line-clamp-2" style={{ fontFamily: 'Figtree, sans-serif' }}>
                       {market.title}
                     </h3>
@@ -2770,39 +2806,32 @@ export default function PingPongELO() {
                     </span>
                   </div>
 
-                  {/* Lead outcome + price */}
-                  <div className="flex items-end justify-between mb-2">
-                    <div>
-                      <p className="text-xs text-gray-500 mb-0.5" style={{ fontFamily: 'monospace' }}>
-                        {market.leadOutcome.label}
-                      </p>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'monospace' }}>
-                          {Math.round(market.leadOutcome.price * 100)}¢
-                        </span>
-                        <span className={`text-xs font-semibold ${changeColor}`} style={{ fontFamily: 'monospace' }}>
-                          {changeSign}{(priceChange * 100).toFixed(1)}¢
-                        </span>
-                      </div>
-                    </div>
-                    <MiniSparkline data={market.priceHistory} width={80} height={32} id={market.id} />
+                  {/* Multi-line sparkline chart */}
+                  <div className="mb-2">
+                    <MiniSparkline series={histories.slice(0, 5)} width={260} height={48} id={market.id} />
                   </div>
 
-                  {/* Other top outcomes */}
-                  <div className="border-t border-gray-100 pt-2 mt-1 space-y-1">
-                    {market.outcomes.slice(0, 3).map(o => (
-                      <div key={o.id} className="flex items-center justify-between">
-                        <span className="text-xs text-gray-500 truncate mr-2" style={{ fontFamily: 'monospace' }}>
-                          {o.label}
-                        </span>
-                        <span className="text-xs font-semibold text-gray-700 flex-shrink-0" style={{ fontFamily: 'monospace' }}>
-                          {Math.round(o.price * 100)}¢
-                        </span>
-                      </div>
-                    ))}
-                    {market.totalOutcomes > 3 && (
-                      <p className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
-                        +{market.totalOutcomes - 3} more
+                  {/* Top outcomes with color dots */}
+                  <div className="space-y-1">
+                    {histories.slice(0, 4).map((s, si) => {
+                      const price = s.currentPrice || s.points?.[s.points.length - 1]?.price || 0;
+                      return (
+                        <div key={s.id} className="flex items-center justify-between">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: CHART_COLORS[si % CHART_COLORS.length] }} />
+                            <span className="text-xs text-gray-600 truncate" style={{ fontFamily: 'monospace' }}>
+                              {s.label}
+                            </span>
+                          </div>
+                          <span className="text-xs font-bold text-gray-900 flex-shrink-0 ml-2" style={{ fontFamily: 'monospace' }}>
+                            {Math.round(price * 100)}¢
+                          </span>
+                        </div>
+                      );
+                    })}
+                    {market.totalOutcomes > 4 && (
+                      <p className="text-xs text-gray-400 pl-3.5" style={{ fontFamily: 'monospace' }}>
+                        +{market.totalOutcomes - 4} more
                       </p>
                     )}
                   </div>
