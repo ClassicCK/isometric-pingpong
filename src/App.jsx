@@ -36,68 +36,160 @@ function RecentFormBar({ matches }) {
   );
 }
 
-// Mini sparkline chart component (Polymarket/Robinhood style)
-function MiniSparkline({ data, width = 120, height = 40, id = 'default' }) {
-  if (!data || data.length < 2) {
-    // Flat line for no data
-    return (
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
-        <line x1="0" y1={height / 2} x2={width} y2={height / 2} stroke="#d1d5db" strokeWidth="1.5" strokeDasharray="4 2" />
-      </svg>
-    );
-  }
+// Chart color palette (Polymarket-inspired)
+const CHART_COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
 
-  const prices = data.map(d => d.price);
-  const minP = Math.min(...prices) - 0.02;
-  const maxP = Math.max(...prices) + 0.02;
-  const range = maxP - minP || 0.1;
-
-  const points = data.map((d, i) => {
-    const x = (i / (data.length - 1)) * width;
-    const y = height - ((d.price - minP) / range) * (height - 4) - 2;
-    return { x, y };
-  });
-
-  // Build smooth SVG path using cardinal spline
-  let pathD = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
+// Build a smooth SVG path from points using cardinal spline interpolation
+function buildSmoothPath(points) {
+  if (points.length === 0) return '';
+  let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
   if (points.length === 2) {
-    pathD += ` L ${points[1].x.toFixed(1)} ${points[1].y.toFixed(1)}`;
+    d += ` L ${points[1].x.toFixed(1)} ${points[1].y.toFixed(1)}`;
   } else {
     for (let i = 0; i < points.length - 1; i++) {
       const p0 = points[Math.max(0, i - 1)];
       const p1 = points[i];
       const p2 = points[i + 1];
       const p3 = points[Math.min(points.length - 1, i + 2)];
-      const tension = 0.3;
-      const cp1x = p1.x + (p2.x - p0.x) * tension;
-      const cp1y = p1.y + (p2.y - p0.y) * tension;
-      const cp2x = p2.x - (p3.x - p1.x) * tension;
-      const cp2y = p2.y - (p3.y - p1.y) * tension;
-      pathD += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      const t = 0.3;
+      d += ` C ${(p1.x + (p2.x - p0.x) * t).toFixed(1)} ${(p1.y + (p2.y - p0.y) * t).toFixed(1)}, ${(p2.x - (p3.x - p1.x) * t).toFixed(1)} ${(p2.y - (p3.y - p1.y) * t).toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
     }
   }
+  return d;
+}
 
-  // Gradient fill path (area under the curve)
-  const fillD = pathD + ` L ${width} ${height} L 0 ${height} Z`;
+// Multi-line mini sparkline for homepage preview cards
+function MiniSparkline({ series, width = 120, height = 40, id = 'default' }) {
+  if (!series || series.length === 0) {
+    return (
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+        <line x1="0" y1={height / 2} x2={width} y2={height / 2} stroke="#d1d5db" strokeWidth="1.5" strokeDasharray="4 2" />
+      </svg>
+    );
+  }
 
-  // Determine color based on price change
-  const priceChange = prices[prices.length - 1] - prices[0];
-  const lineColor = priceChange >= 0 ? '#10b981' : '#ef4444';
-  const gradId = `sparkgrad-${id}`;
+  // Find global min/max across all series
+  let allPrices = [];
+  series.forEach(s => { if (s.points) s.points.forEach(p => allPrices.push(p.price)); });
+  if (allPrices.length === 0) allPrices = [0, 1];
+  const minP = Math.min(...allPrices) - 0.02;
+  const maxP = Math.max(...allPrices) + 0.02;
+  const range = maxP - minP || 0.1;
 
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
-      <defs>
-        <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={lineColor} stopOpacity="0.2" />
-          <stop offset="100%" stopColor={lineColor} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={fillD} fill={`url(#${gradId})`} />
-      <path d={pathD} fill="none" stroke={lineColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      {/* End dot */}
-      <circle cx={points[points.length - 1].x} cy={points[points.length - 1].y} r="2.5" fill={lineColor} />
+      {series.map((s, si) => {
+        if (!s.points || s.points.length < 2) return null;
+        const color = CHART_COLORS[si % CHART_COLORS.length];
+        const pts = s.points.map((p, i) => ({
+          x: (i / (s.points.length - 1)) * width,
+          y: height - ((p.price - minP) / range) * (height - 4) - 2,
+        }));
+        const pathD = buildSmoothPath(pts);
+        const last = pts[pts.length - 1];
+        return (
+          <g key={s.id || si}>
+            <path d={pathD} fill="none" stroke={color} strokeWidth={si === 0 ? 1.5 : 1} strokeLinecap="round" strokeLinejoin="round" opacity={si === 0 ? 1 : 0.5} />
+            <circle cx={last.x} cy={last.y} r={si === 0 ? 2.5 : 1.5} fill={color} opacity={si === 0 ? 1 : 0.6} />
+          </g>
+        );
+      })}
     </svg>
+  );
+}
+
+// Larger multi-line price chart with axes, grid, and legend
+function PriceChart({ series, width = 600, height = 280, id = 'chart' }) {
+  const padding = { top: 16, right: 16, bottom: 28, left: 44 };
+  const chartW = width - padding.left - padding.right;
+  const chartH = height - padding.top - padding.bottom;
+
+  if (!series || series.length === 0) {
+    return (
+      <div className="flex items-center justify-center bg-gray-50 rounded-xl" style={{ width, height }}>
+        <span className="text-sm text-gray-400" style={{ fontFamily: 'monospace' }}>No price data</span>
+      </div>
+    );
+  }
+
+  // Global min/max
+  let allPrices = [];
+  series.forEach(s => { if (s.points) s.points.forEach(p => allPrices.push(p.price)); });
+  if (allPrices.length === 0) allPrices = [0, 1];
+  const rawMin = Math.min(...allPrices);
+  const rawMax = Math.max(...allPrices);
+  const buffer = Math.max(0.05, (rawMax - rawMin) * 0.15);
+  const minP = Math.max(0, rawMin - buffer);
+  const maxP = Math.min(1, rawMax + buffer);
+  const range = maxP - minP || 0.1;
+
+  // Y-axis ticks
+  const yTicks = [];
+  const step = range <= 0.2 ? 0.05 : range <= 0.5 ? 0.1 : 0.2;
+  for (let v = Math.ceil(minP / step) * step; v <= maxP; v += step) {
+    yTicks.push(Math.round(v * 100) / 100);
+  }
+
+  const toX = (i, len) => padding.left + (i / Math.max(1, len - 1)) * chartW;
+  const toY = (price) => padding.top + chartH - ((price - minP) / range) * chartH;
+
+  return (
+    <div className="w-full">
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full" style={{ maxHeight: height }}>
+        {/* Grid lines */}
+        {yTicks.map((v, i) => (
+          <g key={i}>
+            <line x1={padding.left} y1={toY(v)} x2={width - padding.right} y2={toY(v)} stroke="#f3f4f6" strokeWidth="1" />
+            <text x={padding.left - 6} y={toY(v) + 4} textAnchor="end" fill="#9ca3af" fontSize="10" fontFamily="monospace">
+              {Math.round(v * 100)}¢
+            </text>
+          </g>
+        ))}
+
+        {/* Series lines */}
+        {series.map((s, si) => {
+          if (!s.points || s.points.length < 2) return null;
+          const color = CHART_COLORS[si % CHART_COLORS.length];
+          const pts = s.points.map((p, i) => ({
+            x: toX(i, s.points.length),
+            y: toY(p.price),
+          }));
+          const pathD = buildSmoothPath(pts);
+          const gradId = `${id}-grad-${si}`;
+          const fillD = pathD + ` L ${pts[pts.length - 1].x} ${padding.top + chartH} L ${pts[0].x} ${padding.top + chartH} Z`;
+          const last = pts[pts.length - 1];
+
+          return (
+            <g key={s.id || si}>
+              <defs>
+                <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor={color} stopOpacity={si === 0 ? 0.12 : 0.05} />
+                  <stop offset="100%" stopColor={color} stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              {si === 0 && <path d={fillD} fill={`url(#${gradId})`} />}
+              <path d={pathD} fill="none" stroke={color} strokeWidth={si === 0 ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round" opacity={si < 3 ? 1 : 0.6} />
+              <circle cx={last.x} cy={last.y} r={si === 0 ? 3.5 : 2.5} fill="white" stroke={color} strokeWidth="2" />
+            </g>
+          );
+        })}
+
+        {/* Bottom axis line */}
+        <line x1={padding.left} y1={padding.top + chartH} x2={width - padding.right} y2={padding.top + chartH} stroke="#e5e7eb" strokeWidth="1" />
+      </svg>
+
+      {/* Legend */}
+      <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 px-1">
+        {series.slice(0, 8).map((s, si) => (
+          <div key={s.id || si} className="flex items-center gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: CHART_COLORS[si % CHART_COLORS.length] }} />
+            <span className="text-xs text-gray-600 truncate" style={{ fontFamily: 'monospace', maxWidth: 140 }}>
+              {s.label} <span className="font-semibold text-gray-900">{Math.round((s.currentPrice || s.points?.[s.points.length - 1]?.price || 0) * 100)}¢</span>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
