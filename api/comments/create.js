@@ -1,5 +1,5 @@
 // api/comments/create.js
-// Post a comment/trash talk on a target. Requires auth.
+// Post a comment on a target. Requires auth.
 
 import { supabase, setCorsHeaders, getAuthUser } from '../_lib/supabase.js';
 

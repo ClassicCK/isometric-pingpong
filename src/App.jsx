@@ -2596,13 +2596,13 @@ export default function PingPongELO() {
                       {comments.map(c => (
                         <div key={c.id} className="flex gap-2">
                           <div className="w-7 h-7 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center text-xs font-bold text-gray-500">
-                            {(c.display_name || '?')[0].toUpperCase()}
+                            {((c.displayName || c.display_name || '?')[0]).toUpperCase()}
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-baseline gap-2">
-                              <span className="text-xs font-semibold text-gray-900">{c.display_name}</span>
+                              <span className="text-xs font-semibold text-gray-900">{c.displayName || c.display_name}</span>
                               <span className="text-xs text-gray-300" style={{ fontFamily: 'monospace' }}>
-                                {new Date(c.created_at).toLocaleDateString()}
+                                {new Date(c.createdAt || c.created_at).toLocaleDateString()}
                               </span>
                             </div>
                             <p className="text-sm text-gray-700 break-words">{c.content}</p>
@@ -2810,7 +2810,31 @@ export default function PingPongELO() {
 
         <div className="max-w-7xl mx-auto px-8 py-8">
           {/* Users & Balances */}
-          <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: 'Figtree, sans-serif' }}>Users & Balances</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold" style={{ fontFamily: 'Figtree, sans-serif' }}>Users & Balances</h2>
+            <button
+              onClick={async () => {
+                if (!confirm('Reset ALL user balances to 100? This cannot be undone.')) return;
+                setSaving(true);
+                try {
+                  for (const u of adminUsers) {
+                    await fetch('/api/admin/update-balance', {
+                      method: 'POST',
+                      headers: getAuthHeaders(),
+                      body: JSON.stringify({ userId: u.id, balance: 100, reason: 'Reset all balances to 100' }),
+                    });
+                  }
+                  alert('All balances reset to 100!');
+                  loadAdminUsers();
+                } catch (err) { alert('Error: ' + err.message); }
+                finally { setSaving(false); }
+              }}
+              disabled={saving}
+              className="px-4 py-2 text-xs font-semibold border border-amber-300 text-amber-700 bg-amber-50 rounded-lg hover:bg-amber-100 disabled:opacity-50 transition-colors"
+            >
+              {saving ? 'Resetting...' : '🔄 Reset All to $100'}
+            </button>
+          </div>
 
           {adminLoading ? (
             <div className="text-center py-12 text-gray-400" style={{ fontFamily: 'monospace' }}>Loading...</div>
@@ -3179,6 +3203,36 @@ export default function PingPongELO() {
                   );
                 })}
               </div>
+            )}
+
+            {/* Challenge History */}
+            {h2hData.challenges && h2hData.challenges.length > 0 && (
+              <>
+                <h2 className="text-xl font-bold mb-4 mt-10" style={{ fontFamily: 'Figtree, sans-serif' }}>Challenge History</h2>
+                <div className="space-y-2">
+                  {h2hData.challenges.map((c, i) => {
+                    const isP1Challenger = c.challengerId === h2hData.player1.id;
+                    const challengerName = isP1Challenger ? h2hData.player1.name : h2hData.player2.name;
+                    const challengedName = isP1Challenger ? h2hData.player2.name : h2hData.player1.name;
+                    return (
+                      <div key={c.id || i} className="flex items-center justify-between border border-gray-200 rounded-xl p-4 hover:shadow-sm transition-shadow">
+                        <div className="flex items-center gap-3">
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded ${c.status === 'accepted' ? 'bg-green-100 text-green-700' : c.status === 'declined' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
+                            {c.status === 'accepted' ? 'Accepted' : c.status === 'declined' ? 'Declined' : 'Pending'}
+                          </span>
+                          <span className="text-sm text-gray-700">
+                            <span className="font-semibold">{challengerName}</span> challenged <span className="font-semibold">{challengedName}</span>
+                          </span>
+                          {c.message && <span className="text-xs text-gray-400 italic ml-2">"{c.message}"</span>}
+                        </div>
+                        <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                          {new Date(c.createdAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
             )}
           </div>
         )}
@@ -3606,7 +3660,7 @@ export default function PingPongELO() {
                 type="text"
                 value={challengeMessage}
                 onChange={e => setChallengeMessage(e.target.value)}
-                placeholder="Trash talk (optional)"
+                placeholder="Add a message (optional)"
                 maxLength={200}
                 className="text-xs px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-gray-400 w-40"
               />
