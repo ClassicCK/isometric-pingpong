@@ -1,5 +1,5 @@
 // api/comments/list.js
-// List comments/trash talk for a given target. Public endpoint.
+// List comments for a given target. Public endpoint.
 
 import { supabase, setCorsHeaders } from '../_lib/supabase.js';
 

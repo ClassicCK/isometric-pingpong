@@ -38,8 +38,8 @@ export default async function handler(req, res) {
       .eq('id', user.id)
       .single();
 
-    // Everyone starts at 0 — admins can grant points manually
-    let allocation = 0;
+    // Everyone starts with 100 points
+    let allocation = 100;
 
     // Create balance
     const { error: balanceError } = await db

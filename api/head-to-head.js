@@ -138,6 +138,32 @@ export default async function handler(req, res) {
     const p1AvgMargin = p1Wins > 0 ? Math.round((p1TotalMargin / p1Wins) * 100) / 100 : 0;
     const p2AvgMargin = p2Wins > 0 ? Math.round((p2TotalMargin / p2Wins) * 100) / 100 : 0;
 
+    // 5. Fetch challenges between these two players
+    let challengesFormatted = [];
+    try {
+      const { data: challenges } = await db
+        .from('challenges')
+        .select('id, challenger_id, challenged_id, message, status, created_at, responded_at')
+        .or(
+          `and(challenger_id.eq.${player1},challenged_id.eq.${player2}),and(challenger_id.eq.${player2},challenged_id.eq.${player1})`
+        )
+        .order('created_at', { ascending: false })
+        .limit(20);
+
+      challengesFormatted = (challenges || []).map(c => ({
+        id: c.id,
+        challengerId: c.challenger_id,
+        challengedId: c.challenged_id,
+        message: c.message,
+        status: c.status,
+        createdAt: c.created_at,
+        respondedAt: c.responded_at,
+      }));
+    } catch (e) {
+      // challenges table might not exist yet — gracefully skip
+      console.error('Failed to fetch challenges for H2H:', e);
+    }
+
     return res.status(200).json({
       player1: {
         id: p1.id,
@@ -165,6 +191,7 @@ export default async function handler(req, res) {
         p1AvgMargin,
         p2AvgMargin,
       },
+      challenges: challengesFormatted,
     });
   } catch (error) {
     console.error('Error fetching head-to-head data:', error);
