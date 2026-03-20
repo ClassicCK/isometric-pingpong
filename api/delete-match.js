@@ -34,11 +34,24 @@ export default async function handler(req, res) {
     // Verify match exists
     const { data: existingMatch, error: fetchError } = await db
       .from('matches')
-      .select('id')
+      .select('id, winner_id, loser_id')
       .eq('id', matchId)
       .single();
     if (fetchError || !existingMatch) {
       return res.status(404).json({ error: 'Match not found' });
+    }
+
+    // Authorization: user must be one of the players in the match, or an admin
+    const { data: userRow } = await db
+      .from('users')
+      .select('player_id, is_admin')
+      .eq('id', user.id)
+      .single();
+
+    if (!userRow?.is_admin) {
+      if (!userRow?.player_id || (userRow.player_id !== existingMatch.winner_id && userRow.player_id !== existingMatch.loser_id)) {
+        return res.status(403).json({ error: 'You can only delete matches you played in.' });
+      }
     }
 
     // Delete the match

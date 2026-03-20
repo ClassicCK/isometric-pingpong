@@ -662,6 +662,9 @@ export default function PingPongELO() {
   const recordMatch = async () => {
     if (!session) return alert("Please sign in to record a match.");
     if (!selectedWinner || !selectedLoser || selectedWinner === selectedLoser) return;
+    if (!authUser?.isAdmin && authUser?.playerId !== selectedWinner && authUser?.playerId !== selectedLoser) {
+      return alert("You can only record matches you played in.");
+    }
 
     const winnerScoreNum = winnerScore ? parseInt(winnerScore, 10) : null;
     const loserScoreNum = loserScore ? parseInt(loserScore, 10) : null;
@@ -2469,9 +2472,11 @@ export default function PingPongELO() {
                         </div>
                       </div>
 
-                      <button onClick={() => deleteMatch(match.id)} className="ml-6 p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors opacity-0 group-hover:opacity-100" title="Delete match">
-                        <Trash2 size={18} />
-                      </button>
+                      {(authUser?.isAdmin || authUser?.playerId === match.winnerId || authUser?.playerId === match.loserId) && (
+                        <button onClick={() => deleteMatch(match.id)} className="ml-6 p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors opacity-0 group-hover:opacity-100" title="Delete match">
+                          <Trash2 size={18} />
+                        </button>
+                      )}
                     </div>
                   </div>
                 );
@@ -2524,9 +2529,11 @@ export default function PingPongELO() {
               <button onClick={() => setCurrentView("matches")} className="px-5 py-2 border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-400 transition-colors rounded-lg">
                 Matches
               </button>
-              <button onClick={() => setSidebarOpen(!sidebarOpen)} className="px-5 py-2 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors rounded-lg">
-                + Record Match
-              </button>
+              {(authUser?.playerId || authUser?.isAdmin) && (
+                <button onClick={() => setSidebarOpen(!sidebarOpen)} className="px-5 py-2 bg-black text-white text-sm font-medium hover:bg-gray-800 transition-colors rounded-lg">
+                  + Record Match
+                </button>
+              )}
               {authUser?.isAdmin && (
                 <button
                   onClick={() => { setCurrentView("admin"); loadAdminUsers(); loadMarkets('all'); }}
@@ -2631,13 +2638,15 @@ export default function PingPongELO() {
     {player.office}
   </span>
 </div>
-                            <button
-                              onClick={() => startEditPlayer(player)}
-                              className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-200 rounded"
-                              title="Edit player"
-                            >
-                              <Edit2 size={14} className="text-gray-500" />
-                            </button>
+                            {(authUser?.isAdmin || authUser?.playerId === player.id) && (
+                              <button
+                                onClick={() => startEditPlayer(player)}
+                                className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-200 rounded"
+                                title="Edit player"
+                              >
+                                <Edit2 size={14} className="text-gray-500" />
+                              </button>
+                            )}
                           </div>
                         </td>
 
@@ -2779,7 +2788,10 @@ export default function PingPongELO() {
                     <p className="text-xs text-gray-500 mt-2">Leave blank to use today's date.</p>
                   </div>
 
-                  <button onClick={recordMatch} disabled={saving || !selectedWinner || !selectedLoser || selectedWinner === selectedLoser} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-lg">
+                  {!authUser?.isAdmin && authUser?.playerId && selectedWinner && selectedLoser && authUser.playerId !== selectedWinner && authUser.playerId !== selectedLoser && (
+                    <p className="text-xs text-amber-600 bg-amber-50 px-3 py-2 rounded-lg">You can only record matches you played in.</p>
+                  )}
+                  <button onClick={recordMatch} disabled={saving || !selectedWinner || !selectedLoser || selectedWinner === selectedLoser || (!authUser?.isAdmin && authUser?.playerId !== selectedWinner && authUser?.playerId !== selectedLoser)} className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-lg">
                     {saving ? 'Saving...' : 'Record Match'}
                   </button>
                 </div>
