@@ -106,7 +106,7 @@ export default async function handler(req, res) {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              from: 'Isometric Ping Pong <noreply@isometric.com>',
+              from: 'Isometric Ping Pong <onboarding@resend.dev>',
               to: [challengerEmail],
               subject: `${challengedName} ${response} your ping pong challenge`,
               html: `
