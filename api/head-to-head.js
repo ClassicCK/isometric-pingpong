@@ -143,7 +143,7 @@ export default async function handler(req, res) {
     try {
       const { data: challenges } = await db
         .from('challenges')
-        .select('id, challenger_id, challenged_id, message, status, created_at, responded_at')
+        .select('id, challenger_id, challenged_id, message, status, created_at, responded_at, market_id')
         .or(
           `and(challenger_id.eq.${player1},challenged_id.eq.${player2}),and(challenger_id.eq.${player2},challenged_id.eq.${player1})`
         )
@@ -158,6 +158,7 @@ export default async function handler(req, res) {
         status: c.status,
         createdAt: c.created_at,
         respondedAt: c.responded_at,
+        marketId: c.market_id || null,
       }));
     } catch (e) {
       // challenges table might not exist yet — gracefully skip

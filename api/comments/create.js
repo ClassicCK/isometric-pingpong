@@ -3,7 +3,7 @@
 
 import { supabase, setCorsHeaders, getAuthUser } from '../_lib/supabase.js';
 
-const VALID_TARGET_TYPES = ['market', 'match', 'player'];
+const VALID_TARGET_TYPES = ['market', 'match', 'player', 'h2h'];
 
 export default async function handler(req, res) {
   setCorsHeaders(res);

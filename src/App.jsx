@@ -367,6 +367,7 @@ export default function PingPongELO() {
   // Activity feed
   const [activityFeed, setActivityFeed] = useState([]);
   const [activityLoading, setActivityLoading] = useState(false);
+  const [activityExpanded, setActivityExpanded] = useState(false);
 
   // Traders leaderboard
   const [tradersData, setTradersData] = useState([]);
@@ -561,6 +562,9 @@ export default function PingPongELO() {
     try {
       const res = await fetch(`/api/head-to-head?player1=${p1}&player2=${p2}`);
       if (res.ok) { const data = await res.json(); setH2hData(data); }
+      // Load chat for this H2H pair (use sorted IDs as composite key)
+      const h2hKey = [p1, p2].sort().join('_');
+      loadComments('h2h', h2hKey);
     } catch (err) { console.error('Failed to load H2H:', err); }
     finally { setH2hLoading(false); }
   };
@@ -1383,6 +1387,12 @@ export default function PingPongELO() {
 
   const sortedPlayers = getSortedPlayers();
 
+  // Players sorted alphabetically for dropdowns
+  const alphabeticalPlayers = useMemo(() =>
+    [...players].sort((a, b) => a.name.localeCompare(b.name)),
+    [players]
+  );
+
   // Sort matches by date (most recent first)
   const sortedMatches = [...matches].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
@@ -1427,7 +1437,7 @@ export default function PingPongELO() {
           Welcome to Isometric Ping Pong!
         </h2>
         <p className="text-gray-600 mb-6">
-          Link your account to your player profile to track stats, earn Hall of Fame points, and bet on prediction markets.
+          Link your account to your player profile to track stats, earn dollars, and bet on prediction markets.
         </p>
 
         {/* Toggle between claim existing and create new */}
@@ -1521,7 +1531,7 @@ export default function PingPongELO() {
             </div>
 
             <div className="bg-gray-100 p-3 rounded text-sm text-gray-600">
-              You'll start with 1500 ELO and receive 1,000 Hall of Fame points.
+              You'll start with 1500 ELO and receive $100 to bet with.
             </div>
 
             <button
@@ -2134,14 +2144,14 @@ export default function PingPongELO() {
                   className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded transition-colors"
                   style={{ fontFamily: 'monospace' }}
                 >
-                  <span className="text-sm font-semibold">{pointBalance.toFixed(0)} pts</span>
+                  <span className="text-sm font-semibold">${pointBalance.toFixed(0)}</span>
                   <span className="text-xs text-gray-500">Portfolio →</span>
                 </button>
               )}
             </div>
             <h1 className="text-6xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Prediction Markets</h1>
             <p className="text-xl text-gray-700" style={{ fontFamily: "monospace" }}>
-              Buy and sell shares on ping pong outcomes. Shares pay 1 pt if the outcome happens.
+              Buy and sell shares on ping pong outcomes. Shares pay $1 if the outcome happens.
             </p>
           </div>
         </div>
@@ -2216,7 +2226,7 @@ export default function PingPongELO() {
                         </span>
                         {market.volume > 0 && (
                           <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
-                            {market.volume.toFixed(0)} pts vol
+                            {market.volume.toFixed(0)} vol
                           </span>
                         )}
                       </div>
@@ -2311,7 +2321,7 @@ export default function PingPongELO() {
               </button>
               {session && pointBalance !== null && (
                 <div className="text-sm font-semibold text-gray-700" style={{ fontFamily: 'monospace' }}>
-                  Balance: {pointBalance.toFixed(0)} pts
+                  Balance: ${pointBalance.toFixed(0)}
                 </div>
               )}
             </div>
@@ -2330,7 +2340,7 @@ export default function PingPongELO() {
                     md.market.status === 'resolved' ? 'bg-blue-100 text-blue-700' :
                     'bg-gray-100 text-gray-700'
                   }`}>{md.market.status}</span>
-                  <span>Volume: {md.market.volume.toFixed(0)} pts</span>
+                  <span>Volume: ${md.market.volume.toFixed(0)}</span>
                   {md.market.resolutionDate && (
                     <span>Resolves: {new Date(md.market.resolutionDate).toLocaleDateString()}</span>
                   )}
@@ -2450,7 +2460,7 @@ export default function PingPongELO() {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">Amount (pts)</label>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Amount ($)</label>
                           <input
                             type="number"
                             min="1"
@@ -2462,7 +2472,7 @@ export default function PingPongELO() {
                             style={{ fontFamily: 'monospace' }}
                           />
                           <p className="text-xs text-gray-400 mt-1">
-                            Available: {pointBalance?.toFixed(0) || 0} pts
+                            Available: ${pointBalance?.toFixed(0) || 0}
                           </p>
                         </div>
 
@@ -2479,11 +2489,11 @@ export default function PingPongELO() {
                             </div>
                             <div className="flex justify-between text-sm border-t border-gray-200 pt-2">
                               <span className="text-gray-500">If YES, payout</span>
-                              <span className="font-bold text-green-700">{previewShares.potentialPayout.toFixed(2)} pts</span>
+                              <span className="font-bold text-green-700">${previewShares.potentialPayout.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between text-sm">
                               <span className="text-gray-500">Potential profit</span>
-                              <span className="font-bold text-green-700">+{(previewShares.potentialPayout - parseFloat(betAmount)).toFixed(2)} pts</span>
+                              <span className="font-bold text-green-700">+${(previewShares.potentialPayout - parseFloat(betAmount)).toFixed(2)}</span>
                             </div>
                           </div>
                         )}
@@ -2493,7 +2503,7 @@ export default function PingPongELO() {
                           disabled={saving || !betAmount || parseFloat(betAmount) <= 0 || parseFloat(betAmount) > (pointBalance || 0)}
                           className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-lg"
                         >
-                          {saving ? 'Placing...' : `Buy for ${betAmount || '0'} pts`}
+                          {saving ? 'Placing...' : `Buy for $${betAmount || '0'}`}
                         </button>
 
                         {/* Limit order toggle */}
@@ -2519,7 +2529,7 @@ export default function PingPongELO() {
                                 />
                               </div>
                               <div>
-                                <label className="block text-xs font-semibold text-gray-600 mb-1">Amount (pts)</label>
+                                <label className="block text-xs font-semibold text-gray-600 mb-1">Amount ($)</label>
                                 <input
                                   type="number" min="1" step="1"
                                   value={limitAmount}
@@ -2555,7 +2565,7 @@ export default function PingPongELO() {
                 ) : md.market.status === 'resolved' ? (
                   <div className="border border-gray-200 rounded-lg p-6">
                     <p className="text-sm font-semibold text-blue-700">This market has been resolved.</p>
-                    <p className="text-xs text-gray-500 mt-2">Winning shares have been paid out at 1 pt each.</p>
+                    <p className="text-xs text-gray-500 mt-2">Winning shares have been paid out at $1 each.</p>
                   </div>
                 ) : null}
 
@@ -2664,10 +2674,10 @@ export default function PingPongELO() {
             {portfolioHistory && (
               <div className="mb-2">
                 <div className="text-4xl font-black text-gray-900" style={{ fontFamily: 'monospace' }}>
-                  {fmtPts(portfolioHistory.currentTotalValue || (pointBalance || 0) + totalCurrentValue)} pts
+                  ${fmtPts(portfolioHistory.currentTotalValue || (pointBalance || 0) + totalCurrentValue)}
                 </div>
                 <div className={`text-sm font-semibold ${(portfolioHistory.totalProfit || totalPnL) >= 0 ? 'text-green-600' : 'text-red-600'}`} style={{ fontFamily: 'monospace' }}>
-                  {(portfolioHistory.totalProfit || totalPnL) >= 0 ? '+' : ''}{fmtPts(portfolioHistory.totalProfit || totalPnL)} pts all time
+                  {(portfolioHistory.totalProfit || totalPnL) >= 0 ? '+$' : '-$'}{fmtPts(Math.abs(portfolioHistory.totalProfit || totalPnL))} all time
                 </div>
               </div>
             )}
@@ -2734,7 +2744,7 @@ export default function PingPongELO() {
                         {' '}{order.outcomeLabel} @ {Math.round(order.targetPrice * 100)}¢
                       </div>
                       <div className="text-xs text-gray-500" style={{ fontFamily: 'monospace' }}>
-                        Amount: {order.amount} pts · Filled: {order.filledAmount}
+                        Amount: ${order.amount} · Filled: ${order.filledAmount}
                       </div>
                     </div>
                     <button
@@ -2777,7 +2787,7 @@ export default function PingPongELO() {
                           <span className="text-gray-500">Now: {(pos.currentPrice * 100).toFixed(0)}¢</span>
                         </div>
                         <div className={`font-bold ${pnl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                          {pnl >= 0 ? '+' : ''}{pnl >= 10 ? pnl.toFixed(0) : pnl.toFixed(2)} pts
+                          {pnl >= 0 ? '+$' : '-$'}{pnl >= 10 ? Math.abs(pnl).toFixed(0) : Math.abs(pnl).toFixed(2)}
                         </div>
                       </div>
                     </div>
@@ -3029,7 +3039,7 @@ export default function PingPongELO() {
                           className="w-48 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white"
                         >
                           <option value="">Link player (optional)</option>
-                          {players.map(p => (
+                          {alphabeticalPlayers.map(p => (
                             <option key={p.id} value={p.id}>{p.name}</option>
                           ))}
                         </select>
@@ -3072,7 +3082,7 @@ export default function PingPongELO() {
                     <h3 className="font-semibold text-gray-900">{market.title}</h3>
                     <div className="flex items-center gap-3 mt-1 text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
                       <span>{market.outcomes.length} outcomes</span>
-                      <span>{market.volume.toFixed(0)} pts volume</span>
+                      <span>${market.volume.toFixed(0)} volume</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -3111,12 +3121,12 @@ export default function PingPongELO() {
             <div className="flex items-center gap-4 mt-6">
               <select value={h2hPlayer1} onChange={e => setH2hPlayer1(e.target.value)} className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none flex-1">
                 <option value="">Select Player 1...</option>
-                {players.map(p => <option key={p.id} value={p.id}>{p.name} ({p.office})</option>)}
+                {alphabeticalPlayers.map(p => <option key={p.id} value={p.id}>{p.name} ({p.office})</option>)}
               </select>
               <span className="text-2xl font-black text-gray-300">VS</span>
               <select value={h2hPlayer2} onChange={e => setH2hPlayer2(e.target.value)} className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none flex-1">
                 <option value="">Select Player 2...</option>
-                {players.map(p => <option key={p.id} value={p.id}>{p.name} ({p.office})</option>)}
+                {alphabeticalPlayers.map(p => <option key={p.id} value={p.id}>{p.name} ({p.office})</option>)}
               </select>
               <button
                 onClick={() => loadH2H(h2hPlayer1, h2hPlayer2)}
@@ -3225,15 +3235,124 @@ export default function PingPongELO() {
                           </span>
                           {c.message && <span className="text-xs text-gray-400 italic ml-2">"{c.message}"</span>}
                         </div>
-                        <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
-                          {new Date(c.createdAt).toLocaleDateString()}
-                        </span>
+                        <div className="flex items-center gap-3 flex-shrink-0">
+                          {c.status === 'accepted' && !c.marketId && session && (
+                            <button
+                              onClick={async () => {
+                                try {
+                                  const res = await fetch('/api/challenges/create-market', {
+                                    method: 'POST',
+                                    headers: getAuthHeaders(),
+                                    body: JSON.stringify({ challengeId: c.id }),
+                                  });
+                                  const data = await res.json();
+                                  if (res.ok) {
+                                    alert(`Market created! "${data.market.title}"`);
+                                    loadH2H(h2hPlayer1, h2hPlayer2);
+                                  } else {
+                                    if (data.marketId) {
+                                      setSelectedMarket(data.marketId);
+                                      loadMarketDetail(data.marketId);
+                                      setCurrentView('market-detail');
+                                    } else {
+                                      alert(`Failed: ${data.error}`);
+                                    }
+                                  }
+                                } catch (err) { alert(`Error: ${err.message}`); }
+                              }}
+                              className="text-xs font-semibold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-lg hover:bg-blue-200 transition-colors"
+                            >
+                              📊 Create Bet
+                            </button>
+                          )}
+                          {c.marketId && (
+                            <button
+                              onClick={() => { setSelectedMarket(c.marketId); loadMarketDetail(c.marketId); setCurrentView('market-detail'); }}
+                              className="text-xs font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-lg hover:bg-green-200 transition-colors"
+                            >
+                              📊 View Bet
+                            </button>
+                          )}
+                          <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                            {new Date(c.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
                       </div>
                     );
                   })}
                 </div>
               </>
             )}
+
+            {/* H2H Chat */}
+            <div className="mt-10 border border-gray-200 rounded-xl p-6">
+              <h2 className="font-bold text-gray-900 mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>
+                Chat {comments.length > 0 && <span className="text-gray-400 font-normal text-sm ml-1">({comments.length})</span>}
+              </h2>
+
+              {commentsLoading ? (
+                <div className="text-xs text-gray-400 text-center py-4">Loading chat...</div>
+              ) : comments.length === 0 ? (
+                <p className="text-xs text-gray-400 text-center py-4">No messages yet. Start the conversation!</p>
+              ) : (
+                <div className="space-y-3 max-h-72 overflow-y-auto mb-4">
+                  {comments.map(c => (
+                    <div key={c.id} className="flex gap-2">
+                      <div className="w-7 h-7 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center text-xs font-bold text-gray-500">
+                        {((c.displayName || c.display_name || '?')[0]).toUpperCase()}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-xs font-semibold text-gray-900">{c.displayName || c.display_name}</span>
+                          <span className="text-xs text-gray-300" style={{ fontFamily: 'monospace' }}>
+                            {(() => {
+                              const d = new Date(c.createdAt || c.created_at);
+                              const diff = Date.now() - d.getTime();
+                              if (diff < 60000) return 'just now';
+                              if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+                              if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+                              return d.toLocaleDateString();
+                            })()}
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-700 break-words">{c.content}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {session ? (
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={commentText}
+                    onChange={e => setCommentText(e.target.value)}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter' && commentText.trim()) {
+                        const h2hKey = [h2hPlayer1, h2hPlayer2].sort().join('_');
+                        postComment('h2h', h2hKey);
+                      }
+                    }}
+                    placeholder={`Say something about ${h2hData.player1.name} vs ${h2hData.player2.name}...`}
+                    maxLength={500}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                  />
+                  <button
+                    onClick={() => {
+                      const h2hKey = [h2hPlayer1, h2hPlayer2].sort().join('_');
+                      postComment('h2h', h2hKey);
+                    }}
+                    disabled={!commentText.trim()}
+                    className="px-4 py-2 bg-black text-white text-sm font-semibold rounded-lg hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Send
+                  </button>
+                </div>
+              ) : (
+                <p className="text-xs text-gray-400 text-center">Sign in to chat</p>
+              )}
+            </div>
           </div>
         )}
         {claimModal}
@@ -3415,7 +3534,7 @@ export default function PingPongELO() {
                       className="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full hover:bg-gray-200 transition-colors"
                       style={{ fontFamily: 'monospace' }}
                     >
-                      {pointBalance.toFixed(0)} pts
+                      ${pointBalance.toFixed(0)}
                     </button>
                   )}
                   <button onClick={signOut} className="p-2 text-gray-400 hover:text-gray-700 transition-colors" title="Sign out">
@@ -3539,7 +3658,7 @@ export default function PingPongELO() {
                   {market.volume > 0 && (
                     <div className="mt-2 pt-2 border-t border-gray-100">
                       <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
-                        Vol: {market.volume.toFixed(0)} pts
+                        Vol: ${market.volume.toFixed(0)}
                       </span>
                     </div>
                   )}
@@ -3553,32 +3672,76 @@ export default function PingPongELO() {
       {/* Open Challenges */}
       {challenges.length > 0 && (
         <div className="max-w-7xl mx-auto px-8 pt-6 pb-2">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">⚔️ Open Challenges</h2>
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">⚔️ Challenges</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {challenges.filter(c => c.status === 'pending').slice(0, 6).map(c => (
-              <div key={c.id} className="border border-amber-200 bg-amber-50 rounded-xl p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-gray-900 text-sm">{c.challenger?.name}</span>
-                    <span className="text-xs text-gray-400">vs</span>
-                    <span className="font-semibold text-gray-900 text-sm">{c.challenged?.name}</span>
-                  </div>
-                  <span className="text-xs text-amber-600 font-semibold">Pending</span>
-                </div>
-                {c.message && <p className="text-xs text-gray-600 mb-2 italic">"{c.message}"</p>}
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
-                    {c.challenger?.elo} vs {c.challenged?.elo} ELO
-                  </span>
-                  {authUser?.playerId === c.challenged?.id && (
-                    <div className="flex gap-2">
-                      <button onClick={() => respondToChallenge(c.id, 'accepted')} className="text-xs font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-lg hover:bg-green-200 transition-colors">Accept</button>
-                      <button onClick={() => respondToChallenge(c.id, 'declined')} className="text-xs font-semibold text-red-700 bg-red-100 px-2.5 py-1 rounded-lg hover:bg-red-200 transition-colors">Decline</button>
+            {challenges.filter(c => c.status === 'pending' || c.status === 'accepted').slice(0, 6).map(c => {
+              const isPending = c.status === 'pending';
+              return (
+                <div key={c.id} className={`border rounded-xl p-4 ${isPending ? 'border-amber-200 bg-amber-50' : 'border-green-200 bg-green-50'}`}>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-gray-900 text-sm">{c.challenger?.name}</span>
+                      <span className="text-xs text-gray-400">vs</span>
+                      <span className="font-semibold text-gray-900 text-sm">{c.challenged?.name}</span>
                     </div>
-                  )}
+                    <span className={`text-xs font-semibold ${isPending ? 'text-amber-600' : 'text-green-600'}`}>
+                      {isPending ? 'Pending' : 'Accepted'}
+                    </span>
+                  </div>
+                  {c.message && <p className="text-xs text-gray-600 mb-2 italic">"{c.message}"</p>}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                      {c.challenger?.elo} vs {c.challenged?.elo} ELO
+                    </span>
+                    <div className="flex gap-2">
+                      {isPending && authUser?.playerId === c.challenged?.id && (
+                        <>
+                          <button onClick={() => respondToChallenge(c.id, 'accepted')} className="text-xs font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-lg hover:bg-green-200 transition-colors">Accept</button>
+                          <button onClick={() => respondToChallenge(c.id, 'declined')} className="text-xs font-semibold text-red-700 bg-red-100 px-2.5 py-1 rounded-lg hover:bg-red-200 transition-colors">Decline</button>
+                        </>
+                      )}
+                      {!isPending && c.marketId && (
+                        <button
+                          onClick={() => { setSelectedMarket(c.marketId); loadMarketDetail(c.marketId); setCurrentView('market-detail'); }}
+                          className="text-xs font-semibold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-lg hover:bg-blue-200 transition-colors"
+                        >
+                          📊 Bet Now
+                        </button>
+                      )}
+                      {!isPending && !c.marketId && session && (
+                        <button
+                          onClick={async () => {
+                            try {
+                              const res = await fetch('/api/challenges/create-market', {
+                                method: 'POST',
+                                headers: getAuthHeaders(),
+                                body: JSON.stringify({ challengeId: c.id }),
+                              });
+                              const data = await res.json();
+                              if (res.ok) {
+                                alert(`Market created! "${data.market.title}"`);
+                                loadChallenges();
+                              } else { alert(`Failed: ${data.error}`); }
+                            } catch (err) { alert(`Error: ${err.message}`); }
+                          }}
+                          className="text-xs font-semibold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-lg hover:bg-blue-200 transition-colors"
+                        >
+                          📊 Create Bet
+                        </button>
+                      )}
+                      {c.challenger?.id && c.challenged?.id && (
+                        <button
+                          onClick={() => { setH2hPlayer1(c.challenger.id); setH2hPlayer2(c.challenged.id); loadH2H(c.challenger.id, c.challenged.id); setCurrentView('h2h'); }}
+                          className="text-xs font-semibold text-gray-600 bg-gray-100 px-2.5 py-1 rounded-lg hover:bg-gray-200 transition-colors"
+                        >
+                          ⚔️ H2H
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -3595,36 +3758,46 @@ export default function PingPongELO() {
           ) : activityFeed.length === 0 ? (
             <div className="text-xs text-gray-400 text-center py-3" style={{ fontFamily: 'monospace' }}>No recent activity yet.</div>
           ) : (
-            <div className="space-y-1.5 max-h-40 overflow-y-auto">
-              {activityFeed.slice(0, 8).map((evt, i) => (
-                <div key={i} className="flex items-center justify-between text-xs" style={{ fontFamily: 'monospace' }}>
-                  <span className="text-gray-700">
-                    {evt.type === 'match' && (
-                      <>🏓 <span className="font-semibold">{evt.data.winnerName}</span> beat <span className="font-semibold">{evt.data.loserName}</span>{evt.data.winnerScore != null ? ` ${evt.data.winnerScore}-${evt.data.loserScore}` : ''} <span className="text-gray-400">({evt.data.winnerEloChange > 0 ? '+' : ''}{evt.data.winnerEloChange?.toFixed?.(0) || evt.data.winnerEloChange} ELO)</span></>
-                    )}
-                    {evt.type === 'bet' && (
-                      <>💰 <span className="font-semibold">{evt.data.userName}</span> {evt.data.direction === 'buy' ? 'bought' : 'sold'} {evt.data.shares?.toFixed?.(1) || evt.data.shares} shares of <span className="font-semibold">{evt.data.outcomeLabel}</span> <span className="text-gray-400">in {evt.data.marketTitle}</span></>
-                    )}
-                    {evt.type === 'market_created' && (
-                      <>📊 New market: <span className="font-semibold">{evt.data.title}</span></>
-                    )}
-                    {evt.type === 'market_resolved' && (
-                      <>✅ Market resolved: <span className="font-semibold">{evt.data.title}</span></>
-                    )}
-                  </span>
-                  <span className="text-gray-400 flex-shrink-0 ml-3">
-                    {(() => {
-                      const d = new Date(evt.timestamp);
-                      const diff = Date.now() - d.getTime();
-                      if (diff < 60000) return 'just now';
-                      if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
-                      if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
-                      return d.toLocaleDateString();
-                    })()}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <>
+              <div className="space-y-1.5">
+                {activityFeed.slice(0, activityExpanded ? 20 : 5).map((evt, i) => (
+                  <div key={i} className="flex items-center justify-between text-xs" style={{ fontFamily: 'monospace' }}>
+                    <span className="text-gray-700 truncate">
+                      {evt.type === 'match' && (
+                        <>🏓 <span className="font-semibold">{evt.data.winnerName}</span> beat <span className="font-semibold">{evt.data.loserName}</span>{evt.data.winnerScore != null ? ` ${evt.data.winnerScore}-${evt.data.loserScore}` : ''} <span className="text-gray-400">({evt.data.winnerEloChange > 0 ? '+' : ''}{evt.data.winnerEloChange?.toFixed?.(0) || evt.data.winnerEloChange} ELO)</span></>
+                      )}
+                      {evt.type === 'bet' && (
+                        <>💰 <span className="font-semibold">{evt.data.userName}</span> {evt.data.direction === 'buy' ? 'bought' : 'sold'} {evt.data.shares?.toFixed?.(1) || evt.data.shares} shares of <span className="font-semibold">{evt.data.outcomeLabel}</span> <span className="text-gray-400">in {evt.data.marketTitle}</span></>
+                      )}
+                      {evt.type === 'market_created' && (
+                        <>📊 New market: <span className="font-semibold">{evt.data.title}</span></>
+                      )}
+                      {evt.type === 'market_resolved' && (
+                        <>✅ Market resolved: <span className="font-semibold">{evt.data.title}</span></>
+                      )}
+                    </span>
+                    <span className="text-gray-400 flex-shrink-0 ml-3">
+                      {(() => {
+                        const d = new Date(evt.timestamp);
+                        const diff = Date.now() - d.getTime();
+                        if (diff < 60000) return 'just now';
+                        if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+                        if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+                        return d.toLocaleDateString();
+                      })()}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              {activityFeed.length > 5 && (
+                <button
+                  onClick={() => setActivityExpanded(!activityExpanded)}
+                  className="text-xs text-gray-400 hover:text-gray-600 font-medium mt-2 transition-colors"
+                >
+                  {activityExpanded ? '▴ Show less' : `▾ Show more (${activityFeed.length - 5} more)`}
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>
@@ -3652,7 +3825,7 @@ export default function PingPongELO() {
                 className="text-xs px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-gray-400"
               >
                 <option value="">Challenge someone...</option>
-                {players.filter(p => p.id !== authUser.playerId).map(p => (
+                {alphabeticalPlayers.filter(p => p.id !== authUser.playerId).map(p => (
                   <option key={p.id} value={p.id}>{p.name} ({p.elo})</option>
                 ))}
               </select>
@@ -3837,7 +4010,7 @@ export default function PingPongELO() {
         Prediction Markets
       </h3>
       <p className="text-gray-700 leading-relaxed" style={{ fontFamily: "sans-serif" }}>
-        Use your Hall of Fame points to buy shares on outcomes — who'll finish #1, who makes top 5, and more. Shares are priced 1¢–99¢ based on demand. If your outcome wins, each share pays 1 pt.
+        Use your dollars to buy shares on outcomes — who'll finish #1, who makes top 5, and more. Shares are priced 1¢–99¢ based on demand. If your outcome wins, each share pays $1.
       </p>
     </div>
   </div>
@@ -3874,7 +4047,7 @@ export default function PingPongELO() {
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Winner</label>
                     <select value={selectedWinner} onChange={(e) => setSelectedWinner(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select winner...</option>
-                      {players.map((player) => (
+                      {alphabeticalPlayers.map((player) => (
                         <option key={player.id} value={player.id}>{player.name} ({player.office}) - ELO: {player.elo}</option>
                       ))}
                     </select>
@@ -3884,7 +4057,7 @@ export default function PingPongELO() {
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Loser</label>
                     <select value={selectedLoser} onChange={(e) => setSelectedLoser(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all">
                       <option value="">Select loser...</option>
-                      {players.map((player) => (
+                      {alphabeticalPlayers.map((player) => (
                         <option key={player.id} value={player.id}>{player.name} ({player.office}) - ELO: {player.elo}</option>
                       ))}
                     </select>

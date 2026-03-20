@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       const { data, error } = await db
         .from('challenges')
         .select(`
-          id, challenger_id, challenged_id, message, status, created_at, expires_at,
+          id, challenger_id, challenged_id, message, status, created_at, expires_at, market_id,
           challenger:players!challenges_challenger_id_fkey(id, name, office, elo),
           challenged:players!challenges_challenged_id_fkey(id, name, office, elo)
         `)
@@ -33,15 +33,15 @@ export default async function handler(req, res) {
       if (error) throw error;
       challenges = data;
     } else {
-      // Public: all pending challenges
+      // Public: all pending + accepted challenges
       const { data, error } = await db
         .from('challenges')
         .select(`
-          id, challenger_id, challenged_id, message, status, created_at, expires_at,
+          id, challenger_id, challenged_id, message, status, created_at, expires_at, market_id,
           challenger:players!challenges_challenger_id_fkey(id, name, office, elo),
           challenged:players!challenges_challenged_id_fkey(id, name, office, elo)
         `)
-        .eq('status', 'pending')
+        .in('status', ['pending', 'accepted'])
         .order('created_at', { ascending: false })
         .limit(20);
 
@@ -68,6 +68,7 @@ export default async function handler(req, res) {
       status: c.status,
       createdAt: c.created_at,
       expiresAt: c.expires_at,
+      marketId: c.market_id || null,
     }));
 
     return res.status(200).json({ challenges: formatted });
