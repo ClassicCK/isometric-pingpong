@@ -358,6 +358,32 @@ export default function PingPongELO() {
   const [marketFilter, setMarketFilter] = useState('open');
   const [featuredMarkets, setFeaturedMarkets] = useState([]);
 
+  // Head-to-head state
+  const [h2hPlayer1, setH2hPlayer1] = useState('');
+  const [h2hPlayer2, setH2hPlayer2] = useState('');
+  const [h2hData, setH2hData] = useState(null);
+  const [h2hLoading, setH2hLoading] = useState(false);
+
+  // Activity feed
+  const [activityFeed, setActivityFeed] = useState([]);
+  const [activityLoading, setActivityLoading] = useState(false);
+
+  // Traders leaderboard
+  const [tradersData, setTradersData] = useState([]);
+  const [tradersLoading, setTradersLoading] = useState(false);
+
+  // Achievements
+  const [playerAchievements, setPlayerAchievements] = useState([]);
+
+  // Limit orders
+  const [userOrders, setUserOrders] = useState([]);
+  const [showLimitOrder, setShowLimitOrder] = useState(false);
+  const [limitTargetPrice, setLimitTargetPrice] = useState('');
+  const [limitAmount, setLimitAmount] = useState('');
+
+  // Portfolio history
+  const [portfolioHistory, setPortfolioHistory] = useState(null);
+
   // Auth state
   const [session, setSession] = useState(null);
   const [authUser, setAuthUser] = useState(null);
@@ -475,6 +501,7 @@ export default function PingPongELO() {
   useEffect(() => {
     loadData();
     loadFeaturedMarkets();
+    loadActivityFeed();
   }, []);
 
   // Load markets data
@@ -504,6 +531,129 @@ export default function PingPongELO() {
     } catch (err) {
       console.error('Failed to load featured markets:', err);
     }
+  };
+
+  // Load activity feed
+  const loadActivityFeed = async () => {
+    setActivityLoading(true);
+    try {
+      const res = await fetch('/api/activity/feed');
+      if (res.ok) { const data = await res.json(); setActivityFeed(data.events || []); }
+    } catch (err) { console.error('Failed to load activity feed:', err); }
+    finally { setActivityLoading(false); }
+  };
+
+  // Load head-to-head data
+  const loadH2H = async (p1, p2) => {
+    if (!p1 || !p2 || p1 === p2) return;
+    setH2hLoading(true);
+    try {
+      const res = await fetch(`/api/head-to-head?player1=${p1}&player2=${p2}`);
+      if (res.ok) { const data = await res.json(); setH2hData(data); }
+    } catch (err) { console.error('Failed to load H2H:', err); }
+    finally { setH2hLoading(false); }
+  };
+
+  // Load traders leaderboard
+  const loadTraders = async () => {
+    setTradersLoading(true);
+    try {
+      const res = await fetch('/api/leaderboard/traders');
+      if (res.ok) { const data = await res.json(); setTradersData(data.traders || []); }
+    } catch (err) { console.error('Failed to load traders:', err); }
+    finally { setTradersLoading(false); }
+  };
+
+  // Load achievements for a player
+  const loadAchievements = async (playerId) => {
+    try {
+      const url = playerId ? `/api/achievements/list?playerId=${playerId}` : '/api/achievements/list';
+      const res = await fetch(url, { headers: getAuthHeaders() });
+      if (res.ok) { const data = await res.json(); setPlayerAchievements(data.achievements || []); }
+    } catch (err) { console.error('Failed to load achievements:', err); }
+  };
+
+  // Check achievements for current user
+  const checkAchievements = async () => {
+    if (!session) return;
+    try {
+      const res = await fetch('/api/achievements/check', { method: 'POST', headers: getAuthHeaders() });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.newAchievements?.length > 0) {
+          // Could show a toast here
+          console.log('New achievements:', data.newAchievements);
+        }
+      }
+    } catch (err) { console.error('Failed to check achievements:', err); }
+  };
+
+  // Load user's limit orders
+  const loadOrders = async (status = 'open') => {
+    if (!session) return;
+    try {
+      const res = await fetch(`/api/orders/list?status=${status}`, { headers: getAuthHeaders() });
+      if (res.ok) { const data = await res.json(); setUserOrders(data.orders || []); }
+    } catch (err) { console.error('Failed to load orders:', err); }
+  };
+
+  // Place limit order
+  const placeLimitOrder = async (marketId, outcomeId, direction) => {
+    if (!session || !limitTargetPrice || !limitAmount) return;
+    setSaving(true);
+    try {
+      const res = await fetch('/api/orders/place', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          marketId,
+          outcomeId,
+          direction,
+          targetPrice: parseFloat(limitTargetPrice) / 100, // convert from cents
+          amount: parseFloat(limitAmount),
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setShowLimitOrder(false);
+        setLimitTargetPrice('');
+        setLimitAmount('');
+        if (data.filled) {
+          alert('Order filled immediately!');
+          loadBalance();
+          loadMarketDetail(marketId);
+        } else {
+          alert('Limit order placed!');
+        }
+        loadOrders();
+      } else {
+        alert(`Order failed: ${data.error}`);
+      }
+    } catch (err) { alert(`Error: ${err.message}`); }
+    finally { setSaving(false); }
+  };
+
+  // Cancel limit order
+  const cancelOrder = async (orderId) => {
+    if (!session || !window.confirm('Cancel this order?')) return;
+    try {
+      const res = await fetch('/api/orders/cancel', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ orderId }),
+      });
+      if (res.ok) { loadOrders(); loadBalance(); }
+      else { const data = await res.json(); alert(`Failed: ${data.error}`); }
+    } catch (err) { alert(`Error: ${err.message}`); }
+  };
+
+  // Load portfolio history
+  const loadPortfolioHistory = async () => {
+    if (!session) return;
+    try {
+      const res = await fetch('/api/portfolio/history', { headers: getAuthHeaders() });
+      if (res.ok) { const data = await res.json(); setPortfolioHistory(data); }
+    } catch (err) { console.error('Failed to load portfolio history:', err); }
   };
 
   // Load point balance
@@ -1722,6 +1872,24 @@ export default function PingPongELO() {
             </div>
           </div>
 
+          {/* Achievements */}
+          {playerAchievements.length > 0 && (
+            <div className="mb-10">
+              <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>Achievements</h2>
+              <div className="flex flex-wrap gap-3">
+                {playerAchievements.map(a => (
+                  <div key={a.key} className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 hover:shadow-sm transition-shadow" title={a.description}>
+                    <span className="text-xl">{a.icon}</span>
+                    <div>
+                      <div className="text-sm font-semibold text-gray-900">{a.name}</div>
+                      <div className="text-xs text-gray-400">{a.description}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <h2 className="text-3xl font-bold mb-6" style={{ fontFamily: "Figtree, sans-serif" }}>
             Match History ({playerMatches.length} matches)
           </h2>
@@ -1858,7 +2026,7 @@ export default function PingPongELO() {
               </button>
               {session && pointBalance !== null && (
                 <button
-                  onClick={() => setCurrentView("portfolio")}
+                  onClick={() => { setCurrentView("portfolio"); loadBalance(); loadPortfolioHistory(); loadOrders(); }}
                   className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded transition-colors"
                   style={{ fontFamily: 'monospace' }}
                 >
@@ -1875,8 +2043,9 @@ export default function PingPongELO() {
         </div>
 
         <div className="max-w-7xl mx-auto px-8 py-8">
-          {/* Filter tabs */}
-          <div className="flex border-b border-gray-200 mb-8">
+          {/* Filter tabs + leaderboard link */}
+          <div className="flex items-center justify-between border-b border-gray-200 mb-8">
+            <div className="flex">
             {[
               { key: 'open', label: 'Open' },
               { key: 'all', label: 'All' },
@@ -1891,6 +2060,14 @@ export default function PingPongELO() {
                 {f.label}
               </button>
             ))}
+            </div>
+            <button
+              onClick={() => { setCurrentView("leaderboard"); loadTraders(); }}
+              className="text-sm text-gray-500 hover:text-gray-900 font-medium mb-1 transition-colors"
+              style={{ fontFamily: 'monospace' }}
+            >
+              📈 Top Traders
+            </button>
           </div>
 
           {marketsLoading ? (
@@ -2210,10 +2387,55 @@ export default function PingPongELO() {
                         <button
                           onClick={placeBet}
                           disabled={saving || !betAmount || parseFloat(betAmount) <= 0 || parseFloat(betAmount) > (pointBalance || 0)}
-                          className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded"
+                          className="w-full px-6 py-3 bg-black text-white font-semibold hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-lg"
                         >
                           {saving ? 'Placing...' : `Buy for ${betAmount || '0'} pts`}
                         </button>
+
+                        {/* Limit order toggle */}
+                        <div className="border-t border-gray-200 pt-3 mt-1">
+                          <button
+                            onClick={() => setShowLimitOrder(!showLimitOrder)}
+                            className="text-xs text-gray-500 hover:text-gray-800 font-medium transition-colors"
+                          >
+                            {showLimitOrder ? '▾ Hide limit order' : '▸ Set a limit order'}
+                          </button>
+
+                          {showLimitOrder && (
+                            <div className="mt-3 p-3 bg-gray-50 rounded-lg space-y-3">
+                              <div>
+                                <label className="block text-xs font-semibold text-gray-600 mb-1">Target Price (¢)</label>
+                                <input
+                                  type="number" min="1" max="99" step="1"
+                                  value={limitTargetPrice}
+                                  onChange={e => setLimitTargetPrice(e.target.value)}
+                                  placeholder={`e.g. ${Math.max(1, Math.round((md.outcomes.find(o => o.id === selectedOutcome)?.price || 0.5) * 80))}¢`}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                                  style={{ fontFamily: 'monospace' }}
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-xs font-semibold text-gray-600 mb-1">Amount (pts)</label>
+                                <input
+                                  type="number" min="1" step="1"
+                                  value={limitAmount}
+                                  onChange={e => setLimitAmount(e.target.value)}
+                                  placeholder="10"
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                                  style={{ fontFamily: 'monospace' }}
+                                />
+                              </div>
+                              <button
+                                onClick={() => placeLimitOrder(md.market.id, selectedOutcome, 'buy')}
+                                disabled={saving || !limitTargetPrice || !limitAmount || parseFloat(limitAmount) <= 0}
+                                className="w-full px-4 py-2 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                              >
+                                {saving ? 'Placing...' : `Limit Buy @ ${limitTargetPrice || '—'}¢`}
+                              </button>
+                              <p className="text-xs text-gray-400">Order fills when price drops to your target.</p>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     ) : (
                       <p className="text-sm text-gray-400">Select an outcome to place a bet.</p>
@@ -2279,6 +2501,35 @@ export default function PingPongELO() {
             </button>
             <h1 className="text-5xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Portfolio</h1>
 
+            {/* Total value headline */}
+            {portfolioHistory && (
+              <div className="mb-2">
+                <div className="text-4xl font-black text-gray-900" style={{ fontFamily: 'monospace' }}>
+                  {fmtPts(portfolioHistory.currentTotalValue || (pointBalance || 0) + totalCurrentValue)} pts
+                </div>
+                <div className={`text-sm font-semibold ${(portfolioHistory.totalProfit || totalPnL) >= 0 ? 'text-green-600' : 'text-red-600'}`} style={{ fontFamily: 'monospace' }}>
+                  {(portfolioHistory.totalProfit || totalPnL) >= 0 ? '+' : ''}{fmtPts(portfolioHistory.totalProfit || totalPnL)} pts all time
+                </div>
+              </div>
+            )}
+
+            {/* Portfolio performance chart */}
+            {portfolioHistory?.history && portfolioHistory.history.length >= 2 && (
+              <div className="mt-4 mb-2 bg-white border border-gray-200 rounded-xl p-5">
+                <PriceChart
+                  series={[{
+                    id: 'portfolio',
+                    label: 'Total Value',
+                    currentPrice: (portfolioHistory.currentTotalValue || 0) / 100,
+                    points: portfolioHistory.history.map(h => ({ time: h.time, price: h.totalValue / Math.max(1, portfolioHistory.totalDeposited || 100) })),
+                  }]}
+                  width={700}
+                  height={200}
+                  id="portfolio-chart"
+                />
+              </div>
+            )}
+
             {/* Balance summary */}
             <div className="grid grid-cols-4 gap-6 mt-6">
               <div className="bg-gray-50 rounded-xl p-4">
@@ -2310,6 +2561,34 @@ export default function PingPongELO() {
         </div>
 
         <div className="max-w-7xl mx-auto px-8 py-8">
+          {/* Limit Orders */}
+          {userOrders.length > 0 && (
+            <div className="mb-8">
+              <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>Open Orders</h2>
+              <div className="space-y-2">
+                {userOrders.map(order => (
+                  <div key={order.id} className="flex items-center justify-between border border-gray-200 rounded-xl p-4">
+                    <div>
+                      <div className="text-xs text-gray-400 uppercase tracking-wider">{order.marketTitle}</div>
+                      <div className="font-semibold text-gray-900">
+                        <span className={order.direction === 'buy' ? 'text-green-600' : 'text-red-600'}>{order.direction.toUpperCase()}</span>
+                        {' '}{order.outcomeLabel} @ {Math.round(order.targetPrice * 100)}¢
+                      </div>
+                      <div className="text-xs text-gray-500" style={{ fontFamily: 'monospace' }}>
+                        Amount: {order.amount} pts · Filled: {order.filledAmount}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => cancelOrder(order.id)}
+                      className="text-xs text-red-600 hover:text-red-800 font-semibold px-3 py-1 border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           {userPositions.length === 0 ? (
             <div className="text-center py-16">
               <p className="text-gray-400 text-lg mb-4">No positions yet.</p>
@@ -2613,6 +2892,196 @@ export default function PingPongELO() {
     );
   }
 
+  // =========================
+  // HEAD-TO-HEAD VIEW
+  // =========================
+  if (currentView === "h2h") {
+    return (
+      <div className="min-h-screen bg-white">
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+        <div className="border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <button onClick={() => setCurrentView("rankings")} className="text-gray-600 hover:text-black mb-6 flex items-center gap-2 text-sm">
+              ← Back to Rankings
+            </button>
+            <h1 className="text-5xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Head to Head</h1>
+            <p className="text-lg text-gray-600">Compare any two players' rivalry history.</p>
+
+            {/* Player selectors */}
+            <div className="flex items-center gap-4 mt-6">
+              <select value={h2hPlayer1} onChange={e => setH2hPlayer1(e.target.value)} className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none flex-1">
+                <option value="">Select Player 1...</option>
+                {players.map(p => <option key={p.id} value={p.id}>{p.name} ({p.office})</option>)}
+              </select>
+              <span className="text-2xl font-black text-gray-300">VS</span>
+              <select value={h2hPlayer2} onChange={e => setH2hPlayer2(e.target.value)} className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none flex-1">
+                <option value="">Select Player 2...</option>
+                {players.map(p => <option key={p.id} value={p.id}>{p.name} ({p.office})</option>)}
+              </select>
+              <button
+                onClick={() => loadH2H(h2hPlayer1, h2hPlayer2)}
+                disabled={!h2hPlayer1 || !h2hPlayer2 || h2hPlayer1 === h2hPlayer2 || h2hLoading}
+                className="px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              >
+                {h2hLoading ? 'Loading...' : 'Compare'}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {h2hData && (
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            {/* Score summary */}
+            <div className="grid grid-cols-3 gap-6 mb-10">
+              <div className="text-center bg-gray-50 rounded-xl p-6">
+                <div className="text-sm text-gray-500 mb-1">{h2hData.player1.name}</div>
+                <div className="text-5xl font-black text-gray-900">{h2hData.h2h.p1Wins}</div>
+                <div className="text-xs text-gray-400 mt-1">{h2hData.player1.elo} ELO · {h2hData.player1.office}</div>
+              </div>
+              <div className="text-center flex flex-col items-center justify-center">
+                <div className="text-sm text-gray-400 mb-2">Total Matches</div>
+                <div className="text-3xl font-bold text-gray-900">{h2hData.h2h.p1Wins + h2hData.h2h.p2Wins}</div>
+                {h2hData.h2h.currentStreak && h2hData.h2h.currentStreak.count >= 2 && (
+                  <div className="mt-3 px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">
+                    🔥 {h2hData.h2h.currentStreak.count}-match streak
+                  </div>
+                )}
+              </div>
+              <div className="text-center bg-gray-50 rounded-xl p-6">
+                <div className="text-sm text-gray-500 mb-1">{h2hData.player2.name}</div>
+                <div className="text-5xl font-black text-gray-900">{h2hData.h2h.p2Wins}</div>
+                <div className="text-xs text-gray-400 mt-1">{h2hData.player2.elo} ELO · {h2hData.player2.office}</div>
+              </div>
+            </div>
+
+            {/* Win bar */}
+            {(h2hData.h2h.p1Wins + h2hData.h2h.p2Wins > 0) && (
+              <div className="mb-10">
+                <div className="h-4 bg-gray-100 rounded-full overflow-hidden flex">
+                  <div className="bg-green-500 transition-all" style={{ width: `${(h2hData.h2h.p1Wins / (h2hData.h2h.p1Wins + h2hData.h2h.p2Wins)) * 100}%` }} />
+                  <div className="bg-blue-500 transition-all" style={{ width: `${(h2hData.h2h.p2Wins / (h2hData.h2h.p1Wins + h2hData.h2h.p2Wins)) * 100}%` }} />
+                </div>
+                <div className="flex justify-between mt-2 text-xs text-gray-500" style={{ fontFamily: 'monospace' }}>
+                  <span>Avg margin: {h2hData.h2h.p1AvgMargin?.toFixed(1) || '—'} pts</span>
+                  <span>Avg margin: {h2hData.h2h.p2AvgMargin?.toFixed(1) || '—'} pts</span>
+                </div>
+              </div>
+            )}
+
+            {/* Match history */}
+            <h2 className="text-xl font-bold mb-4" style={{ fontFamily: 'Figtree, sans-serif' }}>Match History</h2>
+            {h2hData.h2h.matches.length === 0 ? (
+              <p className="text-gray-400 py-8 text-center">These players haven't faced each other yet.</p>
+            ) : (
+              <div className="space-y-2">
+                {[...h2hData.h2h.matches].reverse().map((m, i) => {
+                  const isP1Winner = m.winnerId === h2hData.player1.id;
+                  return (
+                    <div key={m.id || i} className="flex items-center justify-between border border-gray-200 rounded-xl p-4 hover:shadow-sm transition-shadow">
+                      <div className="flex items-center gap-3">
+                        <span className={`text-sm font-bold px-2 py-0.5 rounded ${isP1Winner ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                          {isP1Winner ? 'W' : 'L'}
+                        </span>
+                        <span className="font-semibold text-gray-900">{h2hData.player1.name}</span>
+                        {m.winnerScore != null && (
+                          <span className="text-sm text-gray-500" style={{ fontFamily: 'monospace' }}>
+                            {isP1Winner ? m.winnerScore : m.loserScore} - {isP1Winner ? m.loserScore : m.winnerScore}
+                          </span>
+                        )}
+                        <span className="font-semibold text-gray-900">{h2hData.player2.name}</span>
+                        <span className={`text-sm font-bold px-2 py-0.5 rounded ${!isP1Winner ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                          {!isP1Winner ? 'W' : 'L'}
+                        </span>
+                      </div>
+                      <div className="text-right text-xs text-gray-400" style={{ fontFamily: 'monospace' }}>
+                        <div>{new Date(m.recordedAt).toLocaleDateString()}</div>
+                        {m.p1Elo && m.p2Elo && (
+                          <div className="text-gray-300">ELO: {m.p1Elo} vs {m.p2Elo}</div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+        {claimModal}
+      </div>
+    );
+  }
+
+  // =========================
+  // TRADERS LEADERBOARD VIEW
+  // =========================
+  if (currentView === "leaderboard") {
+    return (
+      <div className="min-h-screen bg-white">
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700;900&display=swap" rel="stylesheet" />
+        <div className="border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-8 py-8">
+            <button onClick={() => setCurrentView("markets")} className="text-gray-600 hover:text-black mb-6 flex items-center gap-2 text-sm">
+              ← Back to Markets
+            </button>
+            <h1 className="text-5xl font-black mb-4" style={{ fontFamily: "Figtree, sans-serif" }}>Top Traders</h1>
+            <p className="text-lg text-gray-600">Who's making the best predictions?</p>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 py-8">
+          {tradersLoading ? (
+            <div className="text-center py-16 text-gray-400">Loading...</div>
+          ) : tradersData.length === 0 ? (
+            <div className="text-center py-16 text-gray-400">No trading activity yet.</div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full" style={{ fontFamily: 'monospace' }}>
+                <thead>
+                  <tr className="border-b border-gray-300 text-xs uppercase tracking-wider text-gray-400">
+                    <th className="text-left py-3 pr-4">Rank</th>
+                    <th className="text-left py-3 px-4">Trader</th>
+                    <th className="text-right py-3 px-4">Profit</th>
+                    <th className="text-right py-3 px-4">ROI</th>
+                    <th className="text-right py-3 px-4">Invested</th>
+                    <th className="text-right py-3 px-4">Current Val</th>
+                    <th className="text-right py-3 px-4">Trades</th>
+                    <th className="text-right py-3 pl-4">Markets</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tradersData.map((t, i) => (
+                    <tr key={t.userId} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                      <td className="py-3 pr-4">
+                        <span className={`text-lg font-bold ${i === 0 ? 'text-amber-500' : i === 1 ? 'text-gray-400' : i === 2 ? 'text-amber-700' : 'text-gray-900'}`}>
+                          {i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="font-semibold text-gray-900">{t.displayName}</div>
+                        {t.playerName && <div className="text-xs text-gray-400">{t.playerName}</div>}
+                      </td>
+                      <td className={`py-3 px-4 text-right font-bold ${t.totalProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        {t.totalProfit >= 0 ? '+' : ''}{t.totalProfit.toFixed(1)}
+                      </td>
+                      <td className={`py-3 px-4 text-right ${t.roi >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        {t.roi >= 0 ? '+' : ''}{t.roi.toFixed(0)}%
+                      </td>
+                      <td className="py-3 px-4 text-right text-gray-600">{t.totalInvested.toFixed(0)}</td>
+                      <td className="py-3 px-4 text-right text-gray-600">{t.currentValue.toFixed(0)}</td>
+                      <td className="py-3 px-4 text-right text-gray-600">{t.tradesCount}</td>
+                      <td className="py-3 pl-4 text-right text-gray-600">{t.marketsTraded}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+        {claimModal}
+      </div>
+    );
+  }
+
   // MATCHES VIEW
   if (currentView === "matches") {
     return (
@@ -2712,7 +3181,7 @@ export default function PingPongELO() {
                   <span className="text-sm text-gray-600" style={{ fontFamily: "monospace" }}>{authUser.displayName}</span>
                   {pointBalance !== null && (
                     <button
-                      onClick={() => { setCurrentView("portfolio"); loadBalance(); }}
+                      onClick={() => { setCurrentView("portfolio"); loadBalance(); loadPortfolioHistory(); loadOrders(); }}
                       className="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full hover:bg-gray-200 transition-colors"
                       style={{ fontFamily: 'monospace' }}
                     >
@@ -2851,6 +3320,66 @@ export default function PingPongELO() {
         </div>
       )}
 
+      {/* Live Activity Feed */}
+      {activityFeed.length > 0 && (
+        <div className="max-w-7xl mx-auto px-8 pb-2 pt-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Live Activity</span>
+            </div>
+            <div className="space-y-1.5 max-h-40 overflow-y-auto">
+              {activityFeed.slice(0, 8).map((evt, i) => (
+                <div key={i} className="flex items-center justify-between text-xs" style={{ fontFamily: 'monospace' }}>
+                  <span className="text-gray-700">
+                    {evt.type === 'match' && (
+                      <>🏓 <span className="font-semibold">{evt.data.winnerName}</span> beat <span className="font-semibold">{evt.data.loserName}</span>{evt.data.winnerScore != null ? ` ${evt.data.winnerScore}-${evt.data.loserScore}` : ''} <span className="text-gray-400">({evt.data.winnerEloChange > 0 ? '+' : ''}{evt.data.winnerEloChange?.toFixed?.(0) || evt.data.winnerEloChange} ELO)</span></>
+                    )}
+                    {evt.type === 'bet' && (
+                      <>💰 <span className="font-semibold">{evt.data.userName}</span> {evt.data.direction === 'buy' ? 'bought' : 'sold'} {evt.data.shares?.toFixed?.(1) || evt.data.shares} shares of <span className="font-semibold">{evt.data.outcomeLabel}</span> <span className="text-gray-400">in {evt.data.marketTitle}</span></>
+                    )}
+                    {evt.type === 'market_created' && (
+                      <>📊 New market: <span className="font-semibold">{evt.data.title}</span></>
+                    )}
+                    {evt.type === 'market_resolved' && (
+                      <>✅ Market resolved: <span className="font-semibold">{evt.data.title}</span></>
+                    )}
+                  </span>
+                  <span className="text-gray-400 flex-shrink-0 ml-3">
+                    {(() => {
+                      const d = new Date(evt.timestamp);
+                      const diff = Date.now() - d.getTime();
+                      if (diff < 60000) return 'just now';
+                      if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+                      if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+                      return d.toLocaleDateString();
+                    })()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Quick links */}
+      <div className="max-w-7xl mx-auto px-8 pt-4 pb-2">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => { setCurrentView("h2h"); }}
+            className="px-4 py-2 text-xs font-semibold border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all text-gray-600"
+          >
+            ⚔️ Head to Head
+          </button>
+          <button
+            onClick={() => { setCurrentView("leaderboard"); loadTraders(); }}
+            className="px-4 py-2 text-xs font-semibold border border-gray-200 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all text-gray-600"
+          >
+            📈 Top Traders
+          </button>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-8 py-12">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse" style={{ fontFamily: "monospace" }}>
@@ -2925,6 +3454,7 @@ export default function PingPongELO() {
     onClick={() => {
       setSelectedPlayerId(player.id);
       setCurrentView("player");
+      loadAchievements(player.id);
     }}
     className="text-sm text-gray-900 whitespace-nowrap hover:text-pink-600 hover:underline transition-colors"
   >
